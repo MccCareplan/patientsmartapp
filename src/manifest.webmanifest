@@ -1,6 +1,6 @@
 {
-  "name": "patientsmartapp1",
-  "short_name": "patientsmartapp1",
+  "name": "patientsmartapp",
+  "short_name": "patientsmartapp",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

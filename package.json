@@ -5,8 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "start:prod": "ng build --prod && cd dist && http-server -c-1 -P http://localhost:9000 .",
-    "start:prod2": "ng build --prod && cd dist && http-server -c-1 -o",
+    "start:pwa": "ng build --prod && cd dist && http-server -c-1 -o",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

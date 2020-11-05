@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "patientsmartapp1": {
+    "patientsmartapp": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/patientsmartapp1",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "patientsmartapp1:build"
+            "browserTarget": "patientsmartapp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "patientsmartapp1:build:production"
+              "browserTarget": "patientsmartapp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "patientsmartapp1:build"
+            "browserTarget": "patientsmartapp:build"
           }
         },
         "test": {
@@ -116,16 +116,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "patientsmartapp1:serve"
+            "devServerTarget": "patientsmartapp:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "patientsmartapp1:serve:production"
+              "devServerTarget": "patientsmartapp:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "patientsmartapp1"
+  "defaultProject": "patientsmartapp"
 }
