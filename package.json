@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "start:prod": "ng build --prod && cd dist && http-server -c-1 -P http://localhost:9000 .",
+    "start:prod2": "ng build --prod && cd dist && http-server -c-1 -o",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -21,6 +23,7 @@
     "@angular/platform-browser": "~10.2.2",
     "@angular/platform-browser-dynamic": "~10.2.2",
     "@angular/router": "~10.2.2",
+    "@angular/service-worker": "~10.2.2",
     "express": "^4.17.1",
     "node": "^15.0.1",
     "rxjs": "~6.6.0",
