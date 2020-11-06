@@ -29,7 +29,7 @@ export const appRouting = RouterModule.forRoot(routes, {enableTracing: false});
         CommonModule
     ],
     exports: [RouterModule],
-
 })
 export class AppRoutingModule {
 }
+

@@ -20,7 +20,6 @@ import { GoalsComponent } from './main/goals/goals.component';
 import { HealthComponent } from './main/health/health.component';
 import { CareteamComponent } from './main/careteam/careteam.component';
 
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -33,7 +32,8 @@ import { CareteamComponent } from './main/careteam/careteam.component';
         InterventionComponent,
         GoalsComponent,
         HealthComponent,
-        CareteamComponent
+        CareteamComponent,
+        SidenavComponent
     ],
     imports: [
         BrowserModule,
