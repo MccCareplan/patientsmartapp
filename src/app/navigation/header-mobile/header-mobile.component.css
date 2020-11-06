@@ -1,0 +1,21 @@
+.fill-space {
+    flex: 1 1 auto; /*Fill space between two icons*/
+}
+
+.toolbar-icon {
+    display: inline-flex;   /*Proper verticle alignment*/
+    line-height: 0;     /*Set to zero or will affect spacing between icon and text*/
+    align-items: center;
+}
+
+.toolbar-icon-text {
+    line-height: 1.0;   /*Proper spacing between icon and text*/
+    font-size: 60%;     /*Smaller text size for proper display under icon*/
+    text-align: center;
+}
+.grey-button {
+    color: #A9A9A9;
+}
+.active-menu-item {
+    color: blue;
+}
