@@ -14,7 +14,11 @@ import {AppRoutingModule} from './app-routing.module';
 import { HeaderMobileComponent } from './navigation/header-mobile/header-mobile.component';
 import { FooterMobileComponent } from './navigation/footer-mobile/footer-mobile.component';
 import { SidenavComponent } from './navigation/sidenav/sidenav.component';
-
+import { StatusComponent } from './main/status/status.component';
+import { InterventionComponent } from './main/intervention/intervention.component';
+import { GoalsComponent } from './main/goals/goals.component';
+import { HealthComponent } from './main/health/health.component';
+import { CareteamComponent } from './main/careteam/careteam.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +27,12 @@ import { SidenavComponent } from './navigation/sidenav/sidenav.component';
         LaunchComponent,
         HeaderMobileComponent,
         FooterMobileComponent,
+        SidenavComponent,
+        StatusComponent,
+        InterventionComponent,
+        GoalsComponent,
+        HealthComponent,
+        CareteamComponent,
         SidenavComponent
     ],
     imports: [
