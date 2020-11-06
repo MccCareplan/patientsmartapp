@@ -1,0 +1,124 @@
+@import "~@angular/material/theming";
+@include mat-core();
+
+// Custom Blue
+$custom-blue: (
+        50: #e2e5ec,
+        100: #b6bdd0,
+        200: #8692b0,
+        300: #556690,
+        400: #304579,
+        500: #0c2461,
+        600: #0a2059,
+        700: #081b4f,
+        800: #061645,
+        900: #030d33,
+        A100: #6b80ff,
+        A200: #3854ff,
+        A400: #0528ff,
+        A700: #0021eb,
+        contrast: (
+                50: #000000,
+                100: #000000,
+                200: #000000,
+                300: #ffffff,
+                400: #ffffff,
+                500: #ffffff,
+                600: #ffffff,
+                700: #ffffff,
+                800: #ffffff,
+                900: #ffffff,
+                A100: #000000,
+                A200: #ffffff,
+                A400: #ffffff,
+                A700: #ffffff,
+        ),
+);
+
+// Custom Green
+$custom-green: (
+        50: #e7faf6,
+        100: #c2f4e8,
+        200: #99ecd9,
+        300: #70e4c9,
+        400: #52dfbe,
+        500: #33d9b2,
+        600: #2ed5ab,
+        700: #27cfa2,
+        800: #20ca99,
+        900: #14c08a,
+        A100: #f1fffa,
+        A200: #beffe9,
+        A400: #8bffd7,
+        A700: #72ffce,
+        contrast: (
+                50: #000000,
+                100: #000000,
+                200: #000000,
+                300: #000000,
+                400: #000000,
+                500: #000000,
+                600: #000000,
+                700: #000000,
+                800: #000000,
+                900: #000000,
+                A100: #000000,
+                A200: #000000,
+                A400: #000000,
+                A700: #000000,
+        ),
+);
+
+// Custom Red
+$custom-red: (
+        50: #f6e3e8,
+        100: #e9b9c6,
+        200: #db8aa0,
+        300: #cd5b79,
+        400: #c2385d,
+        500: #b71540,
+        600: #b0123a,
+        700: #a70f32,
+        800: #9f0c2a,
+        900: #90061c,
+        A100: #ffbdc4,
+        A200: #ff8a97,
+        A400: #ff576a,
+        A700: #ff3d53,
+        contrast: (
+                50: #000000,
+                100: #000000,
+                200: #000000,
+                300: #000000,
+                400: #ffffff,
+                500: #ffffff,
+                600: #ffffff,
+                700: #ffffff,
+                800: #ffffff,
+                900: #ffffff,
+                A100: #000000,
+                A200: #000000,
+                A400: #000000,
+                A700: #ffffff,
+        ),
+);
+
+// Custom theme
+
+$custom-theme-accent: mat-palette($custom-blue, 500);
+$custom-theme-primary: mat-palette($custom-blue, A200);
+$custom-theme-warn: mat-palette($custom-red, 500);
+$custom-theme: mat-light-theme(
+                $custom-theme-primary,
+                $custom-theme-accent,
+                $custom-theme-warn
+);
+@include angular-material-theme($custom-theme);
+
+// Changing some palette properties of a theme and applying it to a component
+$background: map-get($custom-theme, background);
+$bg-color: #ECEFF1;
+$background: map_merge($background, (background: $bg-color, app-bar: $bg-color));
+$custom-light-theme: map_merge($custom-theme, (background: $background));
+@include mat-toolbar-theme($custom-light-theme);
+
