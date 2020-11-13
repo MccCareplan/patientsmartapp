@@ -8,7 +8,8 @@
     "start:pwa": "ng build --prod && cd dist && http-server -c-1 -o",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "generate": "openapi -i https://mcc-niddk-backend.wl.r.appspot.com/api-docs -o ./src/app/generated-data-api"
   },
   "private": true,
   "dependencies": {
