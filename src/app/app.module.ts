@@ -19,6 +19,10 @@ import { InterventionComponent } from './main/intervention/intervention.componen
 import { GoalsComponent } from './main/goals/goals.component';
 import { HealthComponent } from './main/health/health.component';
 import { CareteamComponent } from './main/careteam/careteam.component';
+import {StoreModule, Store} from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducer } from './reducers';
+
 
 @NgModule({
     declarations: [
@@ -41,7 +45,10 @@ import { CareteamComponent } from './main/careteam/careteam.component';
         AppMaterialModule,
         FlexLayoutModule,
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-        AppRoutingModule
+        AppRoutingModule,
+        StoreModule.forRoot({topLevel: reducer}),
+        StoreDevtoolsModule.instrument(),
+
     ],
     providers: [],
     exports: [RouterModule],
