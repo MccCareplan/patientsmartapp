@@ -22,6 +22,8 @@ import { CareteamComponent } from './main/careteam/careteam.component';
 import {StoreModule, Store} from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducer } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { PatientEffects } from './effects/patient.effects';
 
 
 @NgModule({
@@ -48,6 +50,7 @@ import { reducer } from './reducers';
         AppRoutingModule,
         StoreModule.forRoot({topLevel: reducer}),
         StoreDevtoolsModule.instrument(),
+        EffectsModule.forFeature([PatientEffects]),
 
     ],
     providers: [],

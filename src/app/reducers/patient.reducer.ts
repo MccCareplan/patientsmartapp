@@ -20,15 +20,16 @@ export const initialState: State = {
 
 export const reducer = createReducer(
     initialState,
-    on(patient.LoadAllSuccessAction, (state, {payload}) =>
+    // tslint:disable-next-line:variable-name
+    on(patient.LoadAllSuccessAction, (state, {data: payload }) =>
         ({
             ...state,
-            patients: payload.value
+            patients: payload
         })),
-    on(patient.LoadPatientSuccessAction, (state, {payload}) =>
+    on(patient.LoadPatientSuccessAction, (state, {data: payload}) =>
         ({
             ...state,
-            patient: payload.value,
+            patient: payload,
             failure: false
         })),
     on(patient.LoadPatientFailAction, (state) =>
