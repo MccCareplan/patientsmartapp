@@ -15,7 +15,7 @@ export const LoadAllAction = createAction(
 );
 
 export const LoadAllSuccessAction = createAction(
-    '[Patient] Load All Success',
+    LOAD_ALL_SUCCESS,
     props<{ data: string[] }>()
 );
 

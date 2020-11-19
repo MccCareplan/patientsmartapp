@@ -40,29 +40,27 @@ export class PatientEffects {
     load$: Observable<Action> = this.actions$.pipe(
         ofType(patient.SELECT),
         startWith(patient.selectAction({data: 'Patricia'}))
-        , map(toPayload)
-        , switchMap(payload => {
-            return this.service.getPatientProfile(payload).pipe(
+        // , map(toPayload)
+        , switchMap((action) => {
+            return this.service.getPatientProfile(action.data).pipe(
                 switchMap(profile => [
                     patient.LoadPatientSuccessAction({data: profile}),
                     // new group.LoadAction(profile.userId)
                 ]),
-                    catchError((error) => of(new user.LoadProfileFailAction(error))));
+                    catchError((error) => of(patient.LoadPatientFailAction(error))));
         }));
 
     loadEffect$: any = createEffect((): any => this.actions$.pipe(
         ofType(patient.SELECT),
         startWith(patient.selectAction({data: 'Patricia'}))
-        , map(toPayload)
-        , switchMap(payload => {
-            return this.service.getPatientProfile(payload).pipe(
+        // , map(toPayload)
+        , switchMap((action) => {
+            return this.service.getPatientProfile(action.data).pipe(
                 switchMap(profile => [
-                    new user.LoadProfileSuccessAction(profile),
+                    patient.LoadPatientSuccessAction({data: profile}),
                     // new group.LoadAction(profile.userId)
                 ]),
-                    catchError((error) => of(new user.LoadProfileFailAction(error))));
-
-
+                catchError((error) => of(patient.LoadPatientFailAction(error))));
         })));
 
 

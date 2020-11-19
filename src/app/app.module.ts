@@ -42,7 +42,7 @@ import { PatientEffects } from './effects/patient.effects';
         SidenavComponent
     ],
     imports: [
-        BrowserModule,
+        BrowserModule
         BrowserAnimationsModule,
         AppMaterialModule,
         FlexLayoutModule,
@@ -51,7 +51,6 @@ import { PatientEffects } from './effects/patient.effects';
         StoreModule.forRoot({topLevel: reducer}),
         StoreDevtoolsModule.instrument(),
         EffectsModule.forFeature([PatientEffects]),
-
     ],
     providers: [],
     exports: [RouterModule],
