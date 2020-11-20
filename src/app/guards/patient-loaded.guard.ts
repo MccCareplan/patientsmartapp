@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {Observable} from 'rxjs';
-import {take, map, filter} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+import {take, tap, filter, switchMap, catchError} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
 import * as patient from '../actions/patient.actions';
 import * as fromRoot from '../reducers';
@@ -18,24 +18,32 @@ export class PatientLoadedGuard implements CanActivate {
     canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        const isLoaded$ = this.store.select(fromRoot.getPatients).pipe(
-            map(patients => patients.length > 0));
 
-        patient.LoadAllAction({data: null});    // todo: remove after testing...
+        return this.getFromStoreOrAPI().pipe(
+            switchMap(() => of(true))
+            , catchError((error) => of(false)));
 
-        this.store.dispatch(patient.LoadAllAction({data: null}));
+    }
 
-        isLoaded$.pipe(
-            take(1)
-            , filter(loaded => !loaded)
-            , map(() => patient.LoadAllAction({data: null})))
-            .subscribe(this.store);
+    getFromStoreOrAPI(): Observable<any> {
+        console.log('[patient-loaded.guard.ts] getFromStoreorAPI()');
+        this.store.dispatch(patient.LoadAllAction({data: null}));   // todo: remove after testing...
+        return of(true);                                            // todo: remove after testing...
 
-        return isLoaded$.pipe(
-            filter(loaded => loaded)
+        // todo:  get working below..
+
+        /*
+        return this.store
+            .select(fromRoot.getPatients).pipe(
+             tap((data: any) => {
+                 console.log('[patient-loaded.guard.ts] getFromStoreorAPI() getPatients, data: ', data);
+                 if (!data.length) {
+                    this.store.dispatch(patient.LoadAllAction({data: null}));
+                }
+            })
+            , filter((data: any) => data.length)
             , take(1));
-
-
+        */
     }
 
 }

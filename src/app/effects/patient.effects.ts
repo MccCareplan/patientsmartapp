@@ -53,7 +53,7 @@ export class PatientEffects {
 
     loadEffect$: any = createEffect((): any => this.actions$.pipe(
         ofType(patient.SELECT),
-        startWith(patient.selectAction({data: 'Patricia'}))
+        startWith(patient.selectAction({data: 'Betsy'}))
         // , map(toPayload)
         , switchMap((action) => {
             return this.service.getPatientProfile(action.data).pipe(

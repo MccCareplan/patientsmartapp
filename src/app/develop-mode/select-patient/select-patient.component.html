@@ -1,4 +1,10 @@
+<h2>Developer Mode</h2>
+
 <h4>Select Patient</h4>
 <select (change)="select($event.target.value)">
     <option *ngFor="let patient of patients$ | async">{{patient}}</option>
 </select>
+<br/><br/>
+<label><strong>Name:</strong> {{patientName$ | async}}</label>
+<br/><br/>
+<label><strong>FhrId:</strong> {{patientFhrId$ | async}}</label>

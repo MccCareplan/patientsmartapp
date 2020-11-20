@@ -1,5 +1,5 @@
 import { compose } from '@ngrx/core/compose';
-import { createSelector } from '@ngrx/store';
+import { createSelector } from 'reselect';
 import { combineReducers } from '@ngrx/store';
 import * as fromPatient from './patient.reducer';
 
@@ -16,6 +16,7 @@ const reducers = {
 
 const combinedReducer = combineReducers(reducers);
 
+// tslint:disable-next-line:typedef
 export function reducer(state: any, action: any) {
     return combinedReducer(state, action);
 }
