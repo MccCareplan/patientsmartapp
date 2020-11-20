@@ -8,23 +8,17 @@ import { request as __request } from '../core/request';
 export class GoalControllerService {
 
     /**
-     * @param subject
-     * @param careplan
+     * @param id
      * @result any OK
      * @throws ApiError
      */
-    public static async getGoalSummary(
-        subject: string,
-        careplan?: string,
+    public static async getGoal(
+        id: string,
     ): Promise<any> {
 
         const result = await __request({
             method: 'get',
-            path: `/goalsummary`,
-            query: {
-                'subject': subject,
-                'careplan': careplan,
-            },
+            path: `/goal/${id}`,
         });
 
         catchGenericError(result);
@@ -55,17 +49,23 @@ export class GoalControllerService {
     }
 
     /**
-     * @param id
+     * @param subject
+     * @param careplan
      * @result any OK
      * @throws ApiError
      */
-    public static async getGoal(
-        id: string,
+    public static async getGoalSummary(
+        subject: string,
+        careplan?: string,
     ): Promise<any> {
 
         const result = await __request({
             method: 'get',
-            path: `/goal/${id}`,
+            path: `/goalsummary`,
+            query: {
+                'subject': subject,
+                'careplan': careplan,
+            },
         });
 
         catchGenericError(result);
