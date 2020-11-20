@@ -10,7 +10,7 @@ export interface State {
 }
 
 const reducers = {
-    user: fromPatient.reducer,
+    patient: fromPatient.reducer,
     // group: fromGroup.reducer,
 };
 

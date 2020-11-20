@@ -1,0 +1,4 @@
+<h4>Select Patient</h4>
+<select (change)="select($event.target.value)">
+    <option *ngFor="let patient of patients$ | async">{{patient}}</option>
+</select>

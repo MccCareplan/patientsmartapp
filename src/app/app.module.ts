@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppMaterialModule} from './app-material/app-material.module';
@@ -19,11 +18,14 @@ import { InterventionComponent } from './main/intervention/intervention.componen
 import { GoalsComponent } from './main/goals/goals.component';
 import { HealthComponent } from './main/health/health.component';
 import { CareteamComponent } from './main/careteam/careteam.component';
-import {StoreModule, Store} from '@ngrx/store';
+import {StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducer } from './reducers';
-import { EffectsModule } from '@ngrx/effects';
+import {EffectsModule} from '@ngrx/effects';
 import { PatientEffects } from './effects/patient.effects';
+import { SelectPatientComponent } from './develop-mode/select-patient/select-patient.component';
+import { PatientLoadedGuard } from './guards/patient-loaded.guard';
+import { DataService} from './services/data.service';
 
 
 @NgModule({
@@ -39,10 +41,11 @@ import { PatientEffects } from './effects/patient.effects';
         GoalsComponent,
         HealthComponent,
         CareteamComponent,
-        SidenavComponent
+        SidenavComponent,
+        SelectPatientComponent
     ],
     imports: [
-        BrowserModule
+        BrowserModule,
         BrowserAnimationsModule,
         AppMaterialModule,
         FlexLayoutModule,
@@ -50,9 +53,9 @@ import { PatientEffects } from './effects/patient.effects';
         AppRoutingModule,
         StoreModule.forRoot({topLevel: reducer}),
         StoreDevtoolsModule.instrument(),
-        EffectsModule.forFeature([PatientEffects]),
-    ],
-    providers: [],
+        EffectsModule.forRoot([]),
+        EffectsModule.forFeature([PatientEffects])    ],
+    providers: [PatientLoadedGuard, DataService],
     exports: [RouterModule],
     bootstrap: [AppComponent]
 })

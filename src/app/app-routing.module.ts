@@ -8,6 +8,8 @@ import {InterventionComponent} from './main/intervention/intervention.component'
 import {GoalsComponent} from './main/goals/goals.component';
 import {HealthComponent} from './main/health/health.component';
 import {CareteamComponent} from './main/careteam/careteam.component';
+import {PatientLoadedGuard} from './guards/patient-loaded.guard';
+import {SelectPatientComponent} from './develop-mode/select-patient/select-patient.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'status', pathMatch: 'full'},
@@ -17,7 +19,8 @@ const routes: Routes = [
     {path: 'intervention', component: InterventionComponent},
     {path: 'goals', component: GoalsComponent},
     {path: 'health', component: HealthComponent},
-    {path: 'careteam', component: CareteamComponent}
+    {path: 'careteam', component: CareteamComponent},
+    {path: 'devmode', component: SelectPatientComponent, canActivate: [PatientLoadedGuard]}
 ];
 
 export const appRouting = RouterModule.forRoot(routes, {enableTracing: false});

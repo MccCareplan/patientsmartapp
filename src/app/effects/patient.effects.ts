@@ -11,44 +11,45 @@ import {Action} from '@ngrx/store';
 @Injectable()
 export class PatientEffects {
 
-    @Effect()
-    loadAll$: Observable<Action> = this.actions$.pipe(
-        ofType(patient.LOAD_ALL),
-        switchMap(() => {
-            return this.service.getAll()
-                .pipe(
-                    map(patients => patient.LoadAllSuccessAction({data: patients}),
-                        catchError(error => of(patient.LoadAllFailAction(error)))));
-        }));
+    // @Effect()
+    // loadAll$: Observable<Action> = this.actions$.pipe(
+    //     ofType(patient.LOAD_ALL),
+    //     switchMap(() => {
+    //         return this.service.getAll()
+    //             .pipe(
+    //                 map(patients => patient.LoadAllSuccessAction({data: patients}),
+    //                     catchError(error => of(patient.LoadAllFailAction(error)))));
+    //     }));
 
     loadAllEffect$: any = createEffect((): any => this.actions$.pipe(
         ofType(patient.LOAD_ALL),
-        concatMap(action =>
-            this.service
-                .getAll()
-                .pipe(
-                    map(patients => patient.LoadAllSuccessAction({data: patients})),
-                    catchError(error =>
-                        of(patient.LoadAllFailAction({error}))
-                    )
-                )
+        switchMap(action => {
+                return this.service
+                    .getAll()
+                    .pipe(
+                        map(patients => patient.LoadAllSuccessAction({data: patients})),
+                        catchError(error =>
+                            of(patient.LoadAllFailAction({error}))
+                        )
+                    );
+            }
         )
         )
     );
 
-    @Effect()
-    load$: Observable<Action> = this.actions$.pipe(
-        ofType(patient.SELECT),
-        startWith(patient.selectAction({data: 'Patricia'}))
-        // , map(toPayload)
-        , switchMap((action) => {
-            return this.service.getPatientProfile(action.data).pipe(
-                switchMap(profile => [
-                    patient.LoadPatientSuccessAction({data: profile}),
-                    // new group.LoadAction(profile.userId)
-                ]),
-                    catchError((error) => of(patient.LoadPatientFailAction(error))));
-        }));
+    // @Effect()
+    // load$: Observable<Action> = this.actions$.pipe(
+    //     ofType(patient.SELECT),
+    //     startWith(patient.selectAction({data: 'Patricia'}))
+    //     // , map(toPayload)
+    //     , switchMap((action) => {
+    //         return this.service.getPatientProfile(action.data).pipe(
+    //             switchMap(profile => [
+    //                 patient.LoadPatientSuccessAction({data: profile}),
+    //                 // new group.LoadAction(profile.userId)
+    //             ]),
+    //                 catchError((error) => of(patient.LoadPatientFailAction(error))));
+    //     }));
 
     loadEffect$: any = createEffect((): any => this.actions$.pipe(
         ofType(patient.SELECT),

@@ -2,7 +2,6 @@ import {createReducer, on} from '@ngrx/store';
 import {MccPatient} from '../generated-data-api';
 import * as patient from '../actions/patient.actions';
 
-
 export const patientFeatureKey = 'patient';
 
 export interface State {
@@ -21,7 +20,7 @@ export const initialState: State = {
 export const reducer = createReducer(
     initialState,
     // tslint:disable-next-line:variable-name
-    on(patient.LoadAllSuccessAction, (state, {data: payload }) =>
+    on(patient.LoadAllSuccessAction, (state, {data: payload}) =>
         ({
             ...state,
             patients: payload
@@ -29,7 +28,7 @@ export const reducer = createReducer(
     on(patient.LoadPatientSuccessAction, (state, {data: payload}) =>
         ({
             ...state,
-            patient: payload,
+            profile: payload,
             failure: false
         })),
     on(patient.LoadPatientFailAction, (state) =>
@@ -40,5 +39,6 @@ export const reducer = createReducer(
 );
 
 export const getPatients = (state: State) => state.patients;
+
 export const getProfile = (state: State) => state.profile;
 
