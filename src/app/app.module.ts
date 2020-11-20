@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppMaterialModule} from './app-material/app-material.module';
@@ -19,6 +18,15 @@ import { InterventionComponent } from './main/intervention/intervention.componen
 import { GoalsComponent } from './main/goals/goals.component';
 import { HealthComponent } from './main/health/health.component';
 import { CareteamComponent } from './main/careteam/careteam.component';
+import {StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducer } from './reducers';
+import {EffectsModule} from '@ngrx/effects';
+import { PatientEffects } from './effects/patient.effects';
+import { SelectPatientComponent } from './develop-mode/select-patient/select-patient.component';
+import { PatientLoadedGuard } from './guards/patient-loaded.guard';
+import { DataService} from './services/data.service';
+
 
 @NgModule({
     declarations: [
@@ -33,7 +41,8 @@ import { CareteamComponent } from './main/careteam/careteam.component';
         GoalsComponent,
         HealthComponent,
         CareteamComponent,
-        SidenavComponent
+        SidenavComponent,
+        SelectPatientComponent
     ],
     imports: [
         BrowserModule,
@@ -41,9 +50,12 @@ import { CareteamComponent } from './main/careteam/careteam.component';
         AppMaterialModule,
         FlexLayoutModule,
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-        AppRoutingModule
-    ],
-    providers: [],
+        AppRoutingModule,
+        StoreModule.forRoot({topLevel: reducer}),
+        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+        EffectsModule.forRoot([]),
+        EffectsModule.forFeature([PatientEffects])    ],
+    providers: [PatientLoadedGuard, DataService],
     exports: [RouterModule],
     bootstrap: [AppComponent]
 })
