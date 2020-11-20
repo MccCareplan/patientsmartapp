@@ -5,22 +5,31 @@
 import { catchGenericError } from '../core/ApiError';
 import { request as __request } from '../core/request';
 
-export class ConditionControllerService {
+export class ObservationControllerService {
 
     /**
      * @param subject
+     * @param code
+     * @param max
+     * @param sort
      * @result any OK
      * @throws ApiError
      */
-    public static async getConditions(
+    public static async getObservation(
         subject: string,
+        code: string,
+        max: number = 100,
+        sort: string = 'ascending',
     ): Promise<any> {
 
         const result = await __request({
             method: 'get',
-            path: `/condition`,
+            path: `/observations`,
             query: {
                 'subject': subject,
+                'code': code,
+                'max': max,
+                'sort': sort,
             },
         });
 
@@ -30,17 +39,23 @@ export class ConditionControllerService {
     }
 
     /**
-     * @param id
+     * @param subject
+     * @param code
      * @result any OK
      * @throws ApiError
      */
-    public static async getCodition(
-        id: string,
+    public static async getLatestObservation(
+        subject: string,
+        code: string,
     ): Promise<any> {
 
         const result = await __request({
             method: 'get',
-            path: `/condition/${id}`,
+            path: `/find/latest/observation`,
+            query: {
+                'subject': subject,
+                'code': code,
+            },
         });
 
         catchGenericError(result);
@@ -50,21 +65,27 @@ export class ConditionControllerService {
 
     /**
      * @param subject
-     * @param careplan
+     * @param valueset
+     * @param max
+     * @param sort
      * @result any OK
      * @throws ApiError
      */
-    public static async getConditionSummary1(
+    public static async getObservationsByValueSet(
         subject: string,
-        careplan?: string,
+        valueset: string,
+        max: number = 100,
+        sort: string = 'ascending',
     ): Promise<any> {
 
         const result = await __request({
             method: 'get',
-            path: `/conditionsummary`,
+            path: `/observationsbyvalueset`,
             query: {
                 'subject': subject,
-                'careplan': careplan,
+                'valueset': valueset,
+                'max': max,
+                'sort': sort,
             },
         });
 

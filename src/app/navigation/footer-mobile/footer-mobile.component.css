@@ -16,7 +16,8 @@ footer {
     font-size: 70%;     /*Smaller text size for proper display under icon*/
 }
 
+.active-menu-item {
+    color: blue;
+}
 
-/*.active-menu-item {*/
-/*    color: blue;*/
-/*}*/
+

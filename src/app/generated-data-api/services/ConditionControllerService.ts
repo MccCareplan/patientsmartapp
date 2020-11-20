@@ -5,31 +5,25 @@
 import { catchGenericError } from '../core/ApiError';
 import { request as __request } from '../core/request';
 
-export class ObservationControllerService {
+export class ConditionControllerService {
 
     /**
      * @param subject
-     * @param valueset
-     * @param max
-     * @param sort
+     * @param careplan
      * @result any OK
      * @throws ApiError
      */
-    public static async getObservationsByValueSet(
+    public static async getConditionSummary1(
         subject: string,
-        valueset: string,
-        max: number = 100,
-        sort: string = 'ascending',
+        careplan?: string,
     ): Promise<any> {
 
         const result = await __request({
             method: 'get',
-            path: `/observationsbyvalueset`,
+            path: `/conditionsummary`,
             query: {
                 'subject': subject,
-                'valueset': valueset,
-                'max': max,
-                'sort': sort,
+                'careplan': careplan,
             },
         });
 
@@ -40,27 +34,18 @@ export class ObservationControllerService {
 
     /**
      * @param subject
-     * @param code
-     * @param max
-     * @param sort
      * @result any OK
      * @throws ApiError
      */
-    public static async getObservation(
+    public static async getConditions(
         subject: string,
-        code: string,
-        max: number = 100,
-        sort: string = 'ascending',
     ): Promise<any> {
 
         const result = await __request({
             method: 'get',
-            path: `/observations`,
+            path: `/condition`,
             query: {
                 'subject': subject,
-                'code': code,
-                'max': max,
-                'sort': sort,
             },
         });
 
@@ -70,23 +55,17 @@ export class ObservationControllerService {
     }
 
     /**
-     * @param subject
-     * @param code
+     * @param id
      * @result any OK
      * @throws ApiError
      */
-    public static async getLatestObservation(
-        subject: string,
-        code: string,
+    public static async getCodition(
+        id: string,
     ): Promise<any> {
 
         const result = await __request({
             method: 'get',
-            path: `/find/latest/observation`,
-            query: {
-                'subject': subject,
-                'code': code,
-            },
+            path: `/condition/${id}`,
         });
 
         catchGenericError(result);
