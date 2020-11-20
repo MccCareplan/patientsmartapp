@@ -31,12 +31,12 @@ export class DataService {
     }
 
     getAll(): Observable<string[]> {
-        console.log('in DataService: getAll()');  // todo : remove after testing
+        // console.log('in DataService: getAll()');  // todo : remove after testing
         return of(['Betsy', 'Patricia']);
     }
 
     getPatientProfile(id: string): Observable<MccPatient> {
-        console.log('in DataService: getPatientProfile() id:', id);  // todo : remove after testing
+        // console.log('in DataService: getPatientProfile() id:', id);  // todo : remove after testing
         return of(this.patients[id]);
     }
 

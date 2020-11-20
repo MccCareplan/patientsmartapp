@@ -12,7 +12,7 @@ import * as fromRoot from '../reducers';
 
 export class PatientLoadedGuard implements CanActivate {
     constructor(private store: Store<fromRoot.State>) {
-        console.log('in PatientLoadedGuard store:', store); // todo: remove after testing..
+        // console.log('in PatientLoadedGuard store:', store); // todo: remove after testing..
     }
 
     canActivate(
@@ -26,8 +26,8 @@ export class PatientLoadedGuard implements CanActivate {
     }
 
     getFromStoreOrAPI(): Observable<any> {
-        console.log('[patient-loaded.guard.ts] getFromStoreorAPI()');
-        this.store.dispatch(patient.LoadAllAction({data: null}));   // todo: remove after testing...
+        // console.log('[patient-loaded.guard.ts] getFromStoreorAPI()'); // todo: remove after testing..
+        this.store.dispatch(patient.LoadAllAction({data: null}));  // todo: remove after testing...
         return of(true);                                            // todo: remove after testing...
 
         // todo:  get working below..

@@ -52,7 +52,7 @@ import { DataService} from './services/data.service';
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
         AppRoutingModule,
         StoreModule.forRoot({topLevel: reducer}),
-        StoreDevtoolsModule.instrument(),
+        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
         EffectsModule.forRoot([]),
         EffectsModule.forFeature([PatientEffects])    ],
     providers: [PatientLoadedGuard, DataService],

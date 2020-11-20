@@ -1,10 +1,38 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import * as devmode from '../app/actions/dev-mode.actions';
+import * as fromRoot from '../app/reducers';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'Patient Smart App';
+export class AppComponent implements OnInit {
+    title = 'Patient Smart App';
+
+    constructor(private route: ActivatedRoute, private store: Store<fromRoot.State>) {
+    }
+
+    devmode = false;
+    currentSubjectId = '';
+
+
+    ngOnInit(): void {
+
+        this.route.queryParams.subscribe(params => {
+            // console.log('[app.component.ts] params:', params);  // todo: remove after testing..
+            const dev = params.devmode;
+            this.devmode = (dev === 'true');
+            // console.log('[app.component.ts] Development Mode: ' + this.devmode); // todo: remove after testing..
+            this.store.dispatch(devmode.EditAction({data: this.devmode}));
+            if (params.subject != null) {
+                this.currentSubjectId = params.subject;
+            }
+        });
+
+
+    }
+
 }

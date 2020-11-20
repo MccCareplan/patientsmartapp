@@ -13,27 +13,28 @@ import {MccPatient} from '../../generated-data-api';
 export class SelectPatientComponent implements OnInit {
 
     patients$: Observable<string[]>;
-    patientName$: Observable<string>;
-    patientFhrId$: Observable<string>;
+    patient$: Observable<MccPatient>;
+    patient: MccPatient;
 
     constructor(private store: Store<fromRoot.State>) {
     }
 
     select(patientId: string): void {
-        console.log('in select-patient component, select');
-        this.store.dispatch(patient.selectAction({data: patientId}));
+        // console.log('in select-patient component, select'); // todo: remove after testing..
+        this.store.dispatch(patient.SelectAction({data: patientId}));
     }
 
     ngOnInit(): void {
-        console.log('in select-patient component, ngOnInit');
-        // this.patients$ = this.store.select(fromRoot.getPatients);
-        // todo: fix above selector.   It is returning null. then, replace below with selectors.
+        // console.log('in select-patient component, ngOnInit'); // todo: remove after testing..
+        this.patients$ = this.store.select(fromRoot.getPatients);
+        this.patient$ = this.store.select(fromRoot.getPatientProfile);
+        this.patient$.subscribe(p => this.patient = p);
         // @ts-ignore
-        this.patients$ = this.store.select(appState => appState.topLevel.patient.patients);
+        // this.patients$ = this.store.select(appState => appState.topLevel.patient.patients);
         // @ts-ignore
-        this.patientName$ = this.store.select( appState => appState.topLevel.patient.profile.name);
+        // this.patientName$ = this.store.select( appState => appState.topLevel.patient.profile.name);
         // @ts-ignore
-        this.patientFhrId$ = this.store.select(appState => appState.topLevel.patient.profile.fhirid);
-   }
+        // this.patientFhrId$ = this.store.select(appState => appState.topLevel.patient.profile.fhirid);
+    }
 
 }

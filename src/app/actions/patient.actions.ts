@@ -24,7 +24,7 @@ export const LoadAllFailAction = createAction(
     props<{ error: any }>()
 );
 
-export const selectAction = createAction(
+export const SelectAction = createAction(
     SELECT,
     props<{ data: string }>()
 );

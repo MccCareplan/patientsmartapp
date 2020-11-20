@@ -2,27 +2,27 @@
 <!--    <mat-toolbar class="footer" color="primary">-->
     <mat-toolbar class="footer" color="background">
         <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-            <button mat-button  routerLink="/add" routerLinkActive="active-menu-item">
+            <button mat-button  routerLink="/add" routerLinkActive="active-menu-item" queryParamsHandling="merge">
                 <div class="toolbar-icon">
                     <mat-icon>add</mat-icon>
                 </div>
             </button>
-            <button mat-button routerLink="/edit" routerLinkActive="active-menu-item">
+            <button mat-button routerLink="/edit" routerLinkActive="active-menu-item" queryParamsHandling="merge">
                 <div class="toolbar-icon">
                     <mat-icon>add_to_home_screen</mat-icon>
                 </div>
             </button>
-            <button mat-button  routerLink="/edit" routerLinkActive="active-menu-item">
+            <button mat-button  routerLink="/edit" routerLinkActive="active-menu-item" queryParamsHandling="merge">
                 <div class="toolbar-icon">
                     <mat-icon>edit</mat-icon>
                 </div>
             </button>
-            <button mat-button  routerLink="/delete" routerLinkActive="active-menu-item">
+            <button mat-button  routerLink="/delete" routerLinkActive="active-menu-item" queryParamsHandling="merge">
                 <div class="toolbar-icon">
                     <mat-icon>delete_outline</mat-icon>
                 </div>
             </button>
-            <button mat-button  routerLink="/devmode" routerLinkActive="active-menu-item">
+            <button *ngIf="devmode$ | async" mat-button routerLink="/devmode" routerLinkActive="active-menu-item" queryParamsHandling="merge">
                 <div class="toolbar-icon">
                     <mat-icon>code</mat-icon>
                 </div>

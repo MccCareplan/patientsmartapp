@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-
+import {Store} from '@ngrx/store';
+import * as fromRoot from '../../reducers';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-footer-mobile',
@@ -8,9 +10,16 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class FooterMobileComponent implements OnInit {
   @Output() public sidenavToggle = new EventEmitter();
-  constructor() { }
+  devmode$: Observable<boolean>;
+
+
+  constructor(private store: Store<fromRoot.State>) { }
 
   ngOnInit(): void {
+    // @ts-ignore
+    this.devmode$ = this.store.select(fromRoot.getDevModeFlag);
+    // this.devmode$.subscribe((d: boolean) => console.log('[footer-mobile.component.ts devmode$ ', d));  // todo; remove after testing..
+
   }
   onToggleSidenav = () => {
     this.sidenavToggle.emit();

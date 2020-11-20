@@ -5,6 +5,6 @@
     <option *ngFor="let patient of patients$ | async">{{patient}}</option>
 </select>
 <br/><br/>
-<label><strong>Name:</strong> {{patientName$ | async}}</label>
+<label><strong>Name:</strong> {{patient.name}}</label>
 <br/><br/>
-<label><strong>FhrId:</strong> {{patientFhrId$ | async}}</label>
+<label><strong>FhrId:</strong> {{patient.fhirid}}</label>

@@ -38,8 +38,9 @@ export const reducer = createReducer(
         })),
 );
 
+
 export const getPatients = (state: State) => {
-    console.log('[patient.reducer.ts] getPatients state ', state);
+    // console.log('[patient.reducer.ts] getPatients state ', state);  // todo: remove after testing..
     return state.patients; };
 
 export const getProfile = (state: State) => state.profile;

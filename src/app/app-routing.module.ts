@@ -10,17 +10,18 @@ import {HealthComponent} from './main/health/health.component';
 import {CareteamComponent} from './main/careteam/careteam.component';
 import {PatientLoadedGuard} from './guards/patient-loaded.guard';
 import {SelectPatientComponent} from './develop-mode/select-patient/select-patient.component';
+import {DevModeGuard} from './guards/dev-mode.guard';
 
 const routes: Routes = [
     {path: '', redirectTo: 'status', pathMatch: 'full'},
     {path: 'main', component: MainComponent},
     {path: 'launch', component: LaunchComponent},
-    {path: 'status', component: StatusComponent},
+    {path: 'status', component: StatusComponent, canActivate: [PatientLoadedGuard]},
     {path: 'intervention', component: InterventionComponent},
     {path: 'goals', component: GoalsComponent},
     {path: 'health', component: HealthComponent},
     {path: 'careteam', component: CareteamComponent},
-    {path: 'devmode', component: SelectPatientComponent, canActivate: [PatientLoadedGuard]}
+    {path: 'devmode', component: SelectPatientComponent, canActivate: [DevModeGuard]}
 ];
 
 export const appRouting = RouterModule.forRoot(routes, {enableTracing: false});
