@@ -31,7 +31,6 @@ export const getPatientState = (state: State) => {
 };
 
 export const getDevModeState = (state: State) => state.topLevel.devmode;
-
 export const getPatientProfile = createSelector(getPatientState, fromPatient.getProfile);
 export const getPatients = createSelector(getPatientState, fromPatient.getPatients);
 export const getDevModeObject = createSelector(getDevModeState, fromDevMode.getDevMode);

@@ -3,8 +3,8 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree} from 
 import {Observable, of} from 'rxjs';
 import {take, tap, filter, switchMap, catchError} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
-import * as patient from '../actions/patient.actions';
-import * as fromRoot from '../reducers';
+import * as patient from '../ngrx/actions/patient.actions';
+import * as fromRoot from '../ngrx/reducers';
 
 @Injectable({
     providedIn: 'root'

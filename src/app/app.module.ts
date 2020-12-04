@@ -20,12 +20,13 @@ import { HealthComponent } from './main/health/health.component';
 import { CareteamComponent } from './main/careteam/careteam.component';
 import {StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { reducer } from './reducers';
+import { reducer } from './ngrx/reducers';
 import {EffectsModule} from '@ngrx/effects';
-import { PatientEffects } from './effects/patient.effects';
+import { PatientEffects } from './ngrx/effects/patient.effects';
 import { SelectPatientComponent } from './develop-mode/select-patient/select-patient.component';
 import { PatientLoadedGuard } from './guards/patient-loaded.guard';
-import { DataService} from './services/data.service';
+import { SubjectDataServiceService} from './services/subject-data-service.service';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -54,8 +55,10 @@ import { DataService} from './services/data.service';
         StoreModule.forRoot({topLevel: reducer}),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
         EffectsModule.forRoot([]),
-        EffectsModule.forFeature([PatientEffects])    ],
-    providers: [PatientLoadedGuard, DataService],
+        EffectsModule.forFeature([PatientEffects]),
+        HttpClientModule
+    ],
+    providers: [PatientLoadedGuard, SubjectDataServiceService],
     exports: [RouterModule],
     bootstrap: [AppComponent]
 })

@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType, Effect} from '@ngrx/effects';
 import {EMPTY, Observable, of} from 'rxjs';
-
-import {DataService} from '../services/data.service';
+import {SubjectDataServiceService} from '../../services/subject-data-service.service';
 import * as patient from '../actions/patient.actions';
 import {map, mergeMap, catchError, startWith, concatMap, switchMap} from 'rxjs/operators';
 import {Action} from '@ngrx/store';
+import {environment} from '../../../environments/environment';
 
 
 @Injectable()
@@ -53,7 +53,7 @@ export class PatientEffects {
 
     loadEffect$: any = createEffect((): any => this.actions$.pipe(
         ofType(patient.SELECT),
-        startWith(patient.SelectAction({data: 'Betsy'}))
+        startWith(patient.SelectAction({data: environment.testPatients[0]}))
         // , map(toPayload)
         , switchMap((action) => {
             return this.service.getPatientProfile(action.data).pipe(
@@ -67,7 +67,7 @@ export class PatientEffects {
 
     constructor(
         private actions$: Actions,
-        private service: DataService
+        private service: SubjectDataServiceService
     ) {
     }
 
