@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
-import * as devmode from '../app/actions/dev-mode.actions';
-import * as fromRoot from '../app/reducers';
+import * as devmode from './ngrx/actions/dev-mode.actions';
+import * as fromRoot from './ngrx/reducers';
+import * as patient from './ngrx/actions/patient.actions';
 
 @Component({
     selector: 'app-root',
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit {
             this.store.dispatch(devmode.EditAction({data: this.devmode}));
             if (params.subject != null) {
                 this.currentSubjectId = params.subject;
+                this.store.dispatch(patient.SelectAction({data: this.currentSubjectId}));
             }
         });
 

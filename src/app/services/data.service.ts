@@ -1,43 +1,59 @@
-import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {MccPatient} from '../generated-data-api';
-
+import { Injectable } from '@angular/core';
+import { BadInput } from './../common/bad-input.error';
+import { NotFound } from './../common/not-found.error';
+import { AppError } from '../common/app.error';
+import { HttpClient} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import {catchError, finalize, tap} from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class DataService {
-    patients: { [key: string]: MccPatient } = {};
 
-    constructor() {
-        this.patients.Betsy = {
-            name: 'Betsy Johnson',
-            dateOfBirth: '2020-01-01',
-            ethnicity: 'white',
-            gender: 'female',
-            id: 'Betsy',
-            race: 'white',
-            fhirid: 'cc-pat-betsy'
-        };
-        this.patients.Patricia = {
-            name: 'Patricia Noelle',
-            dateOfBirth: '2020-01-01',
-            ethnicity: 'white',
-            gender: 'female',
-            id: 'Patricia',
-            race: 'white',
-            fhirid: 'cc-pat-pnoelle'
-        };
+  constructor(private url: string, private http: HttpClient) {
+  }
+
+  get(): Observable<any> {
+    return this.http.get(this.url)
+        .pipe(
+        catchError(this.handleError));
+  }
+
+  getById(id: string): Observable<any> {
+    return this.http.get(`${this.url}\\${id}`)
+        .pipe(catchError(this.handleError));
+  }
+
+  create(resource): Observable<any> {
+    return this.http.post(this.url, JSON.stringify(resource))
+        .pipe(
+         catchError(this.handleError));
+  }
+
+  update(resource): Observable<any> {
+    return this.http.patch(this.url + '/' + resource.id, JSON.stringify({isRead: true}))
+        .pipe(
+        catchError(this.handleError));
+  }
+
+  delete(id): Observable<any> {
+    return this.http.delete(this.url + '/' + id)
+        .pipe(
+       catchError(this.handleError));
+  }
+
+  private handleError(error: Response) {
+    if (error.status === 400) {
+      return throwError(new BadInput(error.json()));
     }
 
-    getAll(): Observable<string[]> {
-        // console.log('in DataService: getAll()');  // todo : remove after testing
-        return of(['Betsy', 'Patricia']);
+    if (error.status === 404) {
+      return throwError(new NotFound());
     }
 
-    getPatientProfile(id: string): Observable<MccPatient> {
-        // console.log('in DataService: getPatientProfile() id:', id);  // todo : remove after testing
-        return of(this.patients[id]);
-    }
+    return throwError(new AppError(error));
+
+  }
 
 }

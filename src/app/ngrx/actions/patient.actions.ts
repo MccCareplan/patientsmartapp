@@ -1,5 +1,5 @@
 import {createAction, props} from '@ngrx/store';
-import {MccPatient} from '../generated-data-api';
+import {MccPatient} from '../../generated-data-api';
 
 export const SELECT = '[Patient] Select';
 export const LOAD_ALL = '[Patient] Load All';

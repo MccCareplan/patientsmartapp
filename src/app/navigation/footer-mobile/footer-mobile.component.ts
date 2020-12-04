@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {Store} from '@ngrx/store';
-import * as fromRoot from '../../reducers';
+import * as fromRoot from '../../ngrx/reducers';
 import {Observable} from 'rxjs';
 
 @Component({

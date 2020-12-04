@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {from, Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
-import * as patient from '../../actions/patient.actions';
-import * as fromRoot from '../../reducers';
+import * as patient from '../../ngrx/actions/patient.actions';
+import * as fromRoot from '../../ngrx/reducers';
 import {MccPatient} from '../../generated-data-api';
 
 @Component({
