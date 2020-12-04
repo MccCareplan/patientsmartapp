@@ -1,23 +1,30 @@
 <mat-sidenav-container fullscreen>
 
-  <mat-sidenav #sidenav role="navigation" mode="push">
-    <app-sidenav (sideNavClosed)="sidenav.close()"></app-sidenav>
-  </mat-sidenav>
+    <mat-sidenav #sidenav role="navigation" mode="push">
+        <app-sidenav (sideNavClosed)="sidenav.close()"></app-sidenav>
+    </mat-sidenav>
 
-  <mat-sidenav-content fxLayout="column">
+    <mat-sidenav-content fxLayout="column">
 
-    <div class="header">
-      <app-header-mobile fxHide fxShow.lt-sm>
-      </app-header-mobile>
-    </div>
+        <div class="header">
+            <app-header-mobile fxHide fxShow.lt-md>
+            </app-header-mobile>
+        </div>
 
-    <main class="container mat-app-background">
-      <router-outlet></router-outlet>
-    </main>
+        <div class="center mat-app-background" fxHide.lt-md>
+            <div class="mobile-only-message">
+                <h1>Patient Smart App</h1>
+                <p>Please resize the screen to Mobile</p>
+            </div>
+        </div>
 
-    <app-footer-mobile (sidenavToggle)="sidenav.toggle()"  fxHide fxShow.lt-sm>
-    </app-footer-mobile>
+        <main class="container mat-app-background" fxHide fxShow.lt-md>
+            <router-outlet ></router-outlet>
+        </main>
 
-  </mat-sidenav-content>
+        <app-footer-mobile (sidenavToggle)="sidenav.toggle()" fxHide fxShow.lt-md>
+        </app-footer-mobile>
+
+    </mat-sidenav-content>
 
 </mat-sidenav-container>

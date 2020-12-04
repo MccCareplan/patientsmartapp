@@ -28,7 +28,6 @@ import { PatientLoadedGuard } from './guards/patient-loaded.guard';
 import { SubjectDataServiceService} from './services/subject-data-service.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 
-
 @NgModule({
     declarations: [
         AppComponent,

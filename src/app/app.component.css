@@ -1,19 +1,38 @@
 mat-sidenav-container, mat-sidenav-content, mat-sidenav {
-    height: 100vh;          /*Component content fills entire verticle space*/
+    height: 100vh; /*Component content fills entire verticle space*/
 }
 
 mat-sidenav {
-    width: 40vw;            /*Width sidenav takes up when open*/
+    width: 40vw; /*Width sidenav takes up when open*/
 }
 
 .header {
-    margin-bottom: 8px;    /*Leave space at bottom of toolbar so elevation shadow effect will show*/
+    margin-bottom: 8px; /*Leave space at bottom of toolbar so elevation shadow effect will show*/
 }
 
 /*component content area*/
 .container {
-    height: 100vh;          /*Component content fills entire verticle*/
-    overflow: auto;         /*Keeps header from scrolling away*/
-    padding: 10px;          /*Component content padding around edges*/
-    margin-bottom: 50px;    /*Matches height of footer so can see all content when scrolling to bottom*/
+    height: 100vh; /*Component content fills entire verticle*/
+    overflow: auto; /*Keeps header from scrolling away*/
+    padding: 10px; /*Component content padding around edges*/
+    margin-bottom: 50px; /*Matches height of footer so can see all content when scrolling to bottom*/
+}
+
+.center {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    border: 5px solid #5F85DB;
+    padding: 10px;
+}
+
+.mobile-only-message {
+    text-align: center;
+    width: 400px;
+    padding: 10px;
+    background: #5F85DB;
+    color: #fff;
+    font-weight: bold;
+    font-family: Tahoma;
 }
