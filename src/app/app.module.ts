@@ -27,6 +27,7 @@ import { SelectPatientComponent } from './develop-mode/select-patient/select-pat
 import { PatientLoadedGuard } from './guards/patient-loaded.guard';
 import { SubjectDataServiceService} from './services/subject-data-service.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {CustomIconService} from './services/custom-icon.service';
 
 @NgModule({
     declarations: [
@@ -57,7 +58,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
         EffectsModule.forFeature([PatientEffects]),
         HttpClientModule
     ],
-    providers: [PatientLoadedGuard, SubjectDataServiceService],
+    providers: [PatientLoadedGuard, SubjectDataServiceService, CustomIconService],
     exports: [RouterModule],
     bootstrap: [AppComponent]
 })

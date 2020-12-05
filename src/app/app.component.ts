@@ -4,6 +4,8 @@ import {Store} from '@ngrx/store';
 import * as devmode from './ngrx/actions/dev-mode.actions';
 import * as fromRoot from './ngrx/reducers';
 import * as patient from './ngrx/actions/patient.actions';
+import {CustomIconService} from './services/custom-icon.service';
+
 
 @Component({
     selector: 'app-root',
@@ -13,7 +15,9 @@ import * as patient from './ngrx/actions/patient.actions';
 export class AppComponent implements OnInit {
     title = 'Patient Smart App';
 
-    constructor(private route: ActivatedRoute, private store: Store<fromRoot.State>) {
+    constructor(private customIconService: CustomIconService,
+                private route: ActivatedRoute,
+                private store: Store<fromRoot.State>) {
     }
 
     devmode = false;
@@ -34,6 +38,7 @@ export class AppComponent implements OnInit {
             }
         });
 
+        this.customIconService.registerIcons();
 
     }
 
