@@ -13,12 +13,12 @@ import * as patient from './ngrx/actions/patient.actions';
 export class AppComponent implements OnInit {
     title = 'Patient Smart App';
 
-    constructor(private route: ActivatedRoute, private store: Store<fromRoot.State>) {
+    constructor(private route: ActivatedRoute,
+                private store: Store<fromRoot.State>) {
     }
 
     devmode = false;
     currentSubjectId = '';
-
 
     ngOnInit(): void {
 
@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
                 this.store.dispatch(patient.SelectAction({data: this.currentSubjectId}));
             }
         });
-
 
     }
 
