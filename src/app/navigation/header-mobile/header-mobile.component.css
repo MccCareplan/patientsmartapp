@@ -19,3 +19,9 @@
 .active-menu-item {
     color: blue;
 }
+.btn-icon:hover {
+    fill: blue;
+}
+.active .mat-icon{
+    color: inherit;
+}

@@ -27,7 +27,8 @@ import { SelectPatientComponent } from './develop-mode/select-patient/select-pat
 import { PatientLoadedGuard } from './guards/patient-loaded.guard';
 import { SubjectDataServiceService} from './services/subject-data-service.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {CustomIconService} from './services/custom-icon.service';
+import {IconsModule} from './common/icons.module';
+
 
 @NgModule({
     declarations: [
@@ -56,9 +57,10 @@ import {CustomIconService} from './services/custom-icon.service';
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
         EffectsModule.forRoot([]),
         EffectsModule.forFeature([PatientEffects]),
-        HttpClientModule
+        HttpClientModule,
+        IconsModule
     ],
-    providers: [PatientLoadedGuard, SubjectDataServiceService, CustomIconService],
+    providers: [PatientLoadedGuard, SubjectDataServiceService],
     exports: [RouterModule],
     bootstrap: [AppComponent]
 })
