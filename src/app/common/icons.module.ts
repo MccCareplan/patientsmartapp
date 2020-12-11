@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {AppMaterialModule} from '../app-material/app-material.module';
-import {MatIconRegistry} from '@angular/material/icon';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AppMaterialModule } from '../app-material/app-material.module';
+import { MatIconRegistry } from '@angular/material/icon';
 
 
 @NgModule({
@@ -30,6 +30,7 @@ export class IconsModule {
             gear_ltgrey = 'gear_ltgrey',
             gear_blue = 'gear_blue',
             gear = 'gear',
+            stethscope = "stethscope",
             target = 'target',
             target_blue = 'target_blue',
             target_ltgrey = 'target_ltgrey',

@@ -1,3 +1,56 @@
+#health-status-title, #health-status-link-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #health-status-icon {
     padding-right: 5px;
+}
+
+#health-status-link-box button {
+    flex-grow: 1;
+    background-color: rgb(72, 161, 255);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#key-information-and-buttons {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: top;
+    justify-content: flex-start;
+}
+
+#key-information {
+    flex: 2;
+}
+
+#key-information ul {
+    list-style: none;
+    padding-top: 10px;
+    max-height: 500px;
+    overflow: auto;
+    background-color: rgba(162, 207, 255, 0.561);
+    margin-right: 35px;
+}
+
+#key-information li {
+    padding: 10px 0;
+}
+
+#buttons {
+    flex: 1;
+}
+
+#buttons ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#buttons li button {
+    background-color: rgba(162, 207, 255, 0.561);
+    border: 1px solid black;
+    border-radius: 5px;
 }
