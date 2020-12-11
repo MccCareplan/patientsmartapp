@@ -1,14 +1,13 @@
-<div class="container">
-    <div fxLayout="column" fxLayoutGap="20px">
-        <div fxLayoutAlign="center">
-            <table>
-                <tr>
-                    <td>
-                        <mat-icon svgIcon="icons:clipboard_blue" class="md-48"></mat-icon>
-                    </td>
-                    <td><h2>Health Status</h2></td>
-                </tr>
-            </table>
-        </div>
-    </div>
+<!-- Health Status Icon and Title-->
+<div>
+    <h2 id="health-status-title" fxLayout="row" fxLayoutAlign="center">
+        <mat-icon id="health-status-icon" svgIcon="icons:clipboard_blue" class="md-48"></mat-icon>
+        <span>Health Status</span>
+    </h2>
+</div>
+<!-- Health Status Blue Link Box (Diabetes etc.)-->
+<div>
+    <mat-button color="primary" aria-label="Link to Chronic Condition Hub">
+        Diabetes
+    </mat-button>
 </div>

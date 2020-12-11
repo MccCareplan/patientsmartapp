@@ -1,15 +1,15 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {AppMaterialModule} from './app-material/app-material.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppMaterialModule } from './app-material/app-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { MainComponent } from './main/main.component';
 import { LaunchComponent } from './launch/launch.component';
-import {RouterModule} from '@angular/router';
-import {AppRoutingModule} from './app-routing.module';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
 import { HeaderMobileComponent } from './navigation/header-mobile/header-mobile.component';
 import { FooterMobileComponent } from './navigation/footer-mobile/footer-mobile.component';
 import { SidenavComponent } from './navigation/sidenav/sidenav.component';
@@ -18,16 +18,16 @@ import { InterventionComponent } from './main/intervention/intervention.componen
 import { GoalsComponent } from './main/goals/goals.component';
 import { HealthComponent } from './main/health/health.component';
 import { CareteamComponent } from './main/careteam/careteam.component';
-import {StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducer } from './ngrx/reducers';
-import {EffectsModule} from '@ngrx/effects';
+import { EffectsModule } from '@ngrx/effects';
 import { PatientEffects } from './ngrx/effects/patient.effects';
 import { SelectPatientComponent } from './develop-mode/select-patient/select-patient.component';
 import { PatientLoadedGuard } from './guards/patient-loaded.guard';
-import { SubjectDataServiceService} from './services/subject-data-service.service';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {IconsModule} from './common/icons.module';
+import { SubjectDataServiceService } from './services/subject-data-service.service';
+import { HttpClientModule } from '@angular/common/http';
+import { IconsModule } from './common/icons.module';
 
 
 @NgModule({
@@ -51,9 +51,9 @@ import {IconsModule} from './common/icons.module';
         BrowserAnimationsModule,
         AppMaterialModule,
         FlexLayoutModule,
-        ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
         AppRoutingModule,
-        StoreModule.forRoot({topLevel: reducer}),
+        StoreModule.forRoot({ topLevel: reducer }),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
         EffectsModule.forRoot([]),
         EffectsModule.forFeature([PatientEffects]),
