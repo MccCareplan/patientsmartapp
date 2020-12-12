@@ -1,0 +1,14 @@
+<div class="content"
+     fxLayout="row"
+     fxFlexFill>
+    <div fxFlex="90" class="main" style="padding: 50px;">
+        Item Selected: {{selectedCharacter}}
+    </div>
+    <div fxFlex="10" class="select">
+        <mat-list>
+            <mat-list-item [ngClass]="{selected: charCode === this.selectedCharCode}" *ngFor="let charCode of charCodes" (click)="onSelect(charCode)">
+                <span fxLayoutAlign="right"> {{ charCode | char }}</span>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>

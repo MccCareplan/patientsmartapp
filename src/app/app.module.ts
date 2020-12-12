@@ -27,7 +27,8 @@ import { SelectPatientComponent } from './develop-mode/select-patient/select-pat
 import { PatientLoadedGuard } from './guards/patient-loaded.guard';
 import { SubjectDataServiceService} from './services/subject-data-service.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {IconsModule} from './common/icons.module';
+import {SharedModule} from './common/shared.module';
+import { CareteamCaretabComponent } from './main/careteam/careteam.caretab/careteam.caretab.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import {IconsModule} from './common/icons.module';
         HealthComponent,
         CareteamComponent,
         SidenavComponent,
-        SelectPatientComponent
+        SelectPatientComponent,
+        CareteamCaretabComponent
     ],
     imports: [
         BrowserModule,
@@ -58,7 +60,7 @@ import {IconsModule} from './common/icons.module';
         EffectsModule.forRoot([]),
         EffectsModule.forFeature([PatientEffects]),
         HttpClientModule,
-        IconsModule
+        SharedModule
     ],
     providers: [PatientLoadedGuard, SubjectDataServiceService],
     exports: [RouterModule],

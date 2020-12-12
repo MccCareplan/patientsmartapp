@@ -1,0 +1,12 @@
+.main {
+    color:blue;
+}
+
+.select .mat-list .mat-list-item {
+    height: 25px; /* default is 72px */
+    color: lightblue;
+}
+
+.select .selected {
+    color: blue !important;
+}

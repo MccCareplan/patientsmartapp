@@ -3,19 +3,22 @@ import {CommonModule} from '@angular/common';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {AppMaterialModule} from '../app-material/app-material.module';
 import {MatIconRegistry} from '@angular/material/icon';
+import { CharPipe } from './char.pipe';
 
 
 @NgModule({
-    declarations: [],
+    declarations: [ CharPipe],
     imports: [
         CommonModule,
         AppMaterialModule
     ],
-    exports: [],
-    providers: []
+    exports: [
+        CharPipe
+    ],
+    providers: [CharPipe]
 })
 
-export class IconsModule {
+export class SharedModule {
     constructor(
         private domSanitizer: DomSanitizer,
         public matIconRegistry: MatIconRegistry
@@ -46,7 +49,7 @@ export class IconsModule {
             // console.log(`[custom-icon.service.ts] key: ${key}, iconUrl ${iconUrl}`);
             this.matIconRegistry.addSvgIconInNamespace('icons', key, this.setIconPath(`${iconUrl}/${key}.svg`));
         });
-        // console.log('[icons.module.ts] matIconRegistry: ', this.matIconRegistry);
+        // console.log('[shared.module.ts] matIconRegistry: ', this.matIconRegistry);
 
     }
 
