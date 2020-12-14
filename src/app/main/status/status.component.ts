@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./status.component.css']
 })
 export class StatusComponent implements OnInit {
+  view: string = "status";
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

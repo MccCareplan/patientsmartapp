@@ -1,114 +1,196 @@
-<!-- Health Status Icon and Title-->
-<div id="health-status-title">
+<div *ngIf="view==='status'">
+    <!-- Health Status Icon and Title-->
+    <div id="health-status-title">
+        <h2>
+            <mat-icon id="health-status-icon" svgIcon="icons:clipboard_blue"></mat-icon>
+            <span>Health Status</span>
+        </h2>
+    </div>
+    <!-- Health Status Blue Link Box (Diabetes etc.)-->
+    <div id="health-status-link-box">
+        <select class="mat-raised-button" aria-label="Link to Chronic Condition Hub">
+            <option>
+                Condition 1
+            </option>
+            <option>
+                Condition 2
+            </option>
+            <option selected>
+                Chronic Kidney Disease
+            </option>
+            <option>
+                Condition 4
+            </option>
+            <option>
+                Condition 5
+            </option>
+        </select>
+    </div>
+    <!-- List of Key Information -->
+    <div id="key-information-and-buttons">
+        <div id="key-information">
+            <ul>
+                <li>
+                    Key Information 1
+                </li>
+                <li>
+                    Key Information 2
+                </li>
+                <li>
+                    Key Information 3
+                </li>
+                <li>
+                    Key Information 4
+                </li>
+                <li>
+                    Secondary Information
+                </li>
+                <li>
+                    Secondary Information
+                </li>
+                <li>
+                    Secondary Information
+                </li>
+                <li>
+                    Secondary Information
+                </li>
+                <li>
+                    Secondary Information
+                </li>
+                <li>
+                    Secondary Information
+                </li>
+                <li>
+                    Tertiary Information
+                </li>
+                <li>
+                    Tertiary Information
+                </li>
+                <li>
+                    Tertiary Information
+                </li>
+            </ul>
+        </div>
+        <div id="buttons">
+            <ul>
+                <li>
+                    <button class="mat-raised-button">
+                        <img src="../../../assets/svg/stethscope.svg">
+                        <span>Vital Signs</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="mat-raised-button" (click)="view='lab'">
+                        <img src="../../../assets/svg/beaker.svg">
+                        <span>Lab Results</span>
+                        <div class="number-circle">2</div>
+                    </button>
+                </li>
+                <li>
+                    <button class="mat-raised-button">
+                        <img src="../../../assets/svg/checklist.svg">
+                        <span>Clinical Exams</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="mat-raised-button">
+                        <img src="../../../assets/svg/microscope.svg">
+                        <span>Pathology/ Radiology</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="mat-raised-button">
+                        <img src="../../../assets/svg/black-circle.svg">
+                        <span>Procedure/ Devices</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="mat-raised-button">
+                        <img src="../../../assets/svg/black-circle.svg">
+                        <span>My Reported Outcomes</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div *ngIf="view==='lab'" class="lab-results-container">
     <h2>
-        <mat-icon id="health-status-icon" svgIcon="icons:clipboard_blue"></mat-icon>
-        <span>Health Status</span>
+        <img src="../../../assets/svg/beaker.svg">
+        Lab Results
     </h2>
-</div>
-<!-- Health Status Blue Link Box (Diabetes etc.)-->
-<div id="health-status-link-box">
-    <select class="mat-raised-button" aria-label="Link to Chronic Condition Hub">
-        <option>
-            Condition 1
-        </option>
-        <option>
-            Condition 2
-        </option>
-        <option selected>
-            Chronic Kidney Disease
-        </option>
-        <option>
-            Condition 4
-        </option>
-        <option>
-            Condition 5
-        </option>
-    </select>
-</div>
-<!-- List of Key Information -->
-<div id="key-information-and-buttons">
-    <div id="key-information">
-        <ul>
-            <li>
-                Key Information 1
-            </li>
-            <li>
-                Key Information 2
-            </li>
-            <li>
-                Key Information 3
-            </li>
-            <li>
-                Key Information 4
-            </li>
-            <li>
-                Secondary Information
-            </li>
-            <li>
-                Secondary Information
-            </li>
-            <li>
-                Secondary Information
-            </li>
-            <li>
-                Secondary Information
-            </li>
-            <li>
-                Secondary Information
-            </li>
-            <li>
-                Secondary Information
-            </li>
-            <li>
-                Tertiary Information
-            </li>
-            <li>
-                Tertiary Information
-            </li>
-            <li>
-                Tertiary Information
-            </li>
-        </ul>
-    </div>
-    <div id="buttons">
-        <ul>
-            <li>
-                <button class="mat-raised-button">
-                    <img src="../../../assets/svg/stethscope.svg">
-                    <span>Vital Signs</span>
-                </button>
-            </li>
-            <li>
-                <button class="mat-raised-button">
-                    <img src="../../../assets/svg/beaker.svg">
-                    <span>Lab Results</span>
-                    <div class="number-circle">2</div>
-                </button>
-            </li>
-            <li>
-                <button class="mat-raised-button">
-                    <img src="../../../assets/svg/checklist.svg">
-                    <span>Clinical Exams</span>
-                </button>
-            </li>
-            <li>
-                <button class="mat-raised-button">
-                    <img src="../../../assets/svg/microscope.svg">
-                    <span>Pathology/ Radiology</span>
-                </button>
-            </li>
-            <li>
-                <button class="mat-raised-button">
-                    <img src="../../../assets/svg/black-circle.svg">
-                    <span>Procedure/ Devices</span>
-                </button>
-            </li>
-            <li>
-                <button class="mat-raised-button">
-                    <img src="../../../assets/svg/black-circle.svg">
-                    <span>My Reported Outcomes</span>
-                </button>
-            </li>
-        </ul>
-    </div>
+    <ul class="lab-result-items">
+        <li>
+            <div>
+                <h3 class="lab-result-title">GFR Blood Test</h3>
+                <span class="lab-result-details-1"></span>
+                <span class="lab-result-details lab-result-details-2">September 26, 2020</span>
+                <span class="lab-result-details lab-result-details-3"></span>
+            </div>
+            <span class="lab-result-more-icon">&gt;</span>
+        </li>
+        <li>
+            <div>
+                <h3 class="lab-result-title">Test Name 2</h3>
+                <span class="lab-result-details-1"></span>
+                <span class="lab-result-details lab-result-details-2">One line of details</span>
+                <span class="lab-result-details lab-result-details-3">September 18, 2020</span>
+            </div>
+            <span class="lab-result-more-icon">&gt;</span>
+        </li>
+        <li>
+            <div>
+                <h3 class="lab-result-title">Test Name 3</h3>
+                <span class="lab-result-details-1">September 18, 2020</span>
+                <span class="lab-result-details lab-result-details-2">One line of details</span>
+                <span class="lab-result-details lab-result-details-3"></span>
+            </div>
+            <span class="lab-result-more-icon">&gt;</span>
+        </li>
+        <li>
+            <div>
+                <h3 class="lab-result-title">Test Name 4</h3>
+                <span class="lab-result-details-1">September 18, 2020</span>
+                <span class="lab-result-details lab-result-details-2">Two lines of</span>
+                <span class="lab-result-details lab-result-details-3">Details</span>
+            </div>
+            <span class="lab-result-more-icon">&gt;</span>
+        </li>
+        <li>
+            <div>
+                <h3 class="lab-result-title">Test Name 5</h3>
+                <span class="lab-result-details-1"></span>
+                <span class="lab-result-details lab-result-details-2">August 3, 2020</span>
+                <span class="lab-result-details lab-result-details-3"></span>
+            </div>
+            <span class="lab-result-more-icon">&gt;</span>
+        </li>
+        <li>
+            <div>
+                <h3 class="lab-result-title">Test Name 6</h3>
+                <span class="lab-result-details-1"></span>
+                <span class="lab-result-details lab-result-details-2">September 26, 2020</span>
+                <span class="lab-result-details lab-result-details-3">September 26, 2020</span>
+            </div>
+            <span class="lab-result-more-icon">&gt;</span>
+        </li>
+        <li>
+            <div>
+                <h3 class="lab-result-title">GFR Blood Test</h3>
+                <span class="lab-result-details-1">September 26, 2020</span>
+                <span class="lab-result-details lab-result-details-2">September 26, 2020</span>
+                <span class="lab-result-details lab-result-details-3">September 26, 2020</span>
+            </div>
+            <span class="lab-result-more-icon">&gt;</span>
+        </li>
+        <li>
+            <div>
+                <h3 class="lab-result-title">GFR Blood Test</h3>
+                <span class="lab-result-details-1">September 26, 2020</span>
+                <span class="lab-result-details lab-result-details-2"></span>
+                <span class="lab-result-details lab-result-details-3"></span>
+            </div>
+            <span class="lab-result-more-icon">&gt;</span>
+        </li>
+    </ul>
 </div>
