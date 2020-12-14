@@ -14,7 +14,7 @@ mat-sidenav {
 .container {
     height: 100vh; /*Component content fills entire verticle*/
     overflow: auto; /*Keeps header from scrolling away*/
-    padding: 10px; /*Component content padding around edges*/
+    padding: 0px 20px 10px 20px; /*Component content padding around edges*/
     padding-top: 0px;
     margin-bottom: 50px; /*Matches height of footer so can see all content when scrolling to bottom*/
 }
