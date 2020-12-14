@@ -7,9 +7,23 @@
 </div>
 <!-- Health Status Blue Link Box (Diabetes etc.)-->
 <div id="health-status-link-box">
-    <button mat-raised-button color="primary" aria-label="Link to Chronic Condition Hub">
-        Diabetes View
-    </button>
+    <select class="mat-raised-button" aria-label="Link to Chronic Condition Hub">
+        <option>
+            Condition 1
+        </option>
+        <option>
+            Condition 2
+        </option>
+        <option selected>
+            Chronic Kidney Disease
+        </option>
+        <option>
+            Condition 4
+        </option>
+        <option>
+            Condition 5
+        </option>
+    </select>
 </div>
 <!-- List of Key Information -->
 <div id="key-information-and-buttons">
@@ -68,6 +82,7 @@
                 <button class="mat-raised-button">
                     <img src="../../../assets/svg/beaker.svg">
                     <span>Lab Results</span>
+                    <div class="number-circle">2</div>
                 </button>
             </li>
             <li>

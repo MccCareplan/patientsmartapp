@@ -15,6 +15,22 @@
     padding: 2px;
 }
 
+#health-status-link-box select {
+    flex-grow: 1;
+    background-color: rgb(72, 161, 255);
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    text-align-last: center;
+}
+
+#health-status-link-box option {
+    color: rgb(72, 161, 255);
+    background-color: white;
+    text-align-last: center;
+}
+
 #key-information-and-buttons {
     padding-top: 10px;
     display: flex;
@@ -52,6 +68,7 @@
 #buttons li {
     padding-bottom: 25px;
     height: 50px;
+    position: relative;
 }
 
 #buttons li button {
@@ -83,8 +100,19 @@
     font-size: .8em;
 }
 
-@media only screen and (min-width: 570px) {
-    #buttons li:last-child button span {
-        width: 100px;
-    }
+
+.number-circle {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    padding: 1px;
+    background: rgb(255, 0, 0);
+    border: 1px solid rgb(255, 0, 0);
+    color: white;
+    text-align: center;
+    font: 12px Arial, sans-serif;
+    vertical-align: middle;
 }
