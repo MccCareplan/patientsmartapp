@@ -10,14 +10,14 @@
 
 #health-status-link-box button {
     flex-grow: 1;
-    background-color: rgb(72, 161, 255);
+    background-color: #409FFF;
     border-radius: 5px;
     padding: 2px;
 }
 
 #health-status-link-box select {
     flex-grow: 1;
-    background-color: rgb(72, 161, 255);
+    background-color: #409FFF;
     border-radius: 5px;
     padding: 10px;
     color: white;
@@ -47,7 +47,7 @@
     padding-top: 10px;
     max-height: 500px;
     overflow: auto;
-    background-color: rgba(162, 207, 255, 0.561);
+    background-color: #F1F9FF;
     margin-right: 15px;
     padding-left: 20px;
 }
@@ -73,7 +73,7 @@
 
 #buttons li button {
     font-size: 1em;
-    background-color: rgba(162, 207, 255, 0.561);
+    background-color: #F1F9FF;
     border: 1px solid black;
     border-radius: 5px;
     width: 100%;
@@ -128,7 +128,7 @@ ul.lab-result-items {
 }
 
 ul.lab-result-items li {
-    background-color: rgba(162, 207, 255, 0.561);
+    background-color: #F1F9FF;
     position: relative;
     height: 90px;
     float: left;
@@ -152,23 +152,51 @@ ul.lab-result-items li .lab-result-title {
 }
 
 ul.lab-result-items li .lab-result-details {
-    color: rgb(0, 122, 255);
+    color: #409FFF;
     clear: both;
     float: left;
     font-size: .8em;
 }
 
-ul.lab-result-items li .lab-result-more-icon { 
+ul.lab-result-items li .lab-result-more-icon {
     position: absolute;
     right: 20px;
     top: 35%;
-    color: rgb(0, 122, 255);
+    color: #409FFF;
     font-size: 1.5em;
 }
 
-ul.lab-result-items li .lab-result-details-1 { 
+ul.lab-result-items li .lab-result-details-1 {
     position: absolute;
     top: 15px;
     right: 50px;
     font-size: .8em;
+}
+
+.lab-graph { 
+    padding: 30px;
+}
+
+.lab-graph .lab-graph-header { 
+    position: relative;
+}
+
+.lab-graph .lab-graph-header h2 { 
+    text-align: center;
+    margin-bottom: 5px;
+}
+.lab-graph .lab-graph-header h4 { 
+    margin: 10px 0;
+}
+
+.lab-graph .lab-graph-header img.back-arrow { 
+    position: absolute;
+    top: 3px;
+    left: -20px;
+}
+
+.lab-graph .lab-graph-header img.info { 
+    position: absolute;
+    top: 3px;
+    right: -20px;
 }

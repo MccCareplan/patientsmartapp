@@ -120,7 +120,7 @@
         Lab Results
     </h2>
     <ul class="lab-result-items">
-        <li>
+        <li (click)="view='lab-graph'">
             <div>
                 <h3 class="lab-result-title">GFR Blood Test</h3>
                 <span class="lab-result-details-1"></span>
@@ -129,7 +129,7 @@
             </div>
             <span class="lab-result-more-icon">&gt;</span>
         </li>
-        <li>
+        <li (click)="view='lab-graph'">
             <div>
                 <h3 class="lab-result-title">Test Name 2</h3>
                 <span class="lab-result-details-1"></span>
@@ -193,4 +193,12 @@
             <span class="lab-result-more-icon">&gt;</span>
         </li>
     </ul>
+</div>
+<div *ngIf="view==='lab-graph'" class="lab-graph">
+    <div class="lab-graph-header">
+        <h2>My GFR Results</h2>
+        <h4>GFR Tests how well your kidneys work</h4>
+        <img class="back-arrow" (click)="view='lab'" src="../../../assets/svg/arrow_back_blue.svg" />
+        <img class="info" src="../../../assets/svg/info_blue.svg" />
+    </div>
 </div>
