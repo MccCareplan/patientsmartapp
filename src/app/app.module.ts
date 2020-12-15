@@ -28,6 +28,7 @@ import { PatientLoadedGuard } from './guards/patient-loaded.guard';
 import { SubjectDataServiceService } from './services/subject-data-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { IconsModule } from './common/icons.module';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { IconsModule } from './common/icons.module';
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        ChartsModule,
         AppMaterialModule,
         FlexLayoutModule,
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),

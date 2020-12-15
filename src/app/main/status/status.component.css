@@ -179,6 +179,7 @@ ul.lab-result-items li .lab-result-details-1 {
 
 .lab-graph .lab-graph-header { 
     position: relative;
+    padding-bottom: 15px;
 }
 
 .lab-graph .lab-graph-header h2 { 

@@ -201,4 +201,10 @@
         <img class="back-arrow" (click)="view='lab'" src="../../../assets/svg/arrow_back_blue.svg" />
         <img class="info" src="../../../assets/svg/info_blue.svg" />
     </div>
+    <div class="lab-graph-chart">
+        <canvas baseChart width="300" height="200" [datasets]="lineChartData" [labels]="lineChartLabels"
+            [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+            [chartType]="lineChartType" [plugins]="lineChartPlugins">
+        </canvas>
+    </div>
 </div>
