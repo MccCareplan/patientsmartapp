@@ -1,0 +1,56 @@
+.lab-results-container>h2>img {
+    height: 30px;
+    float: left;
+    padding-right: 10px;
+}
+
+ul.lab-result-items {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul.lab-result-items li {
+    background-color: #F1F9FF;
+    position: relative;
+    height: 90px;
+    float: left;
+    clear: both;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+ul.lab-result-items li h3 {
+    margin: 0;
+}
+
+ul.lab-result-items li>div {
+    padding: 15px;
+    padding-top: 12px;
+}
+
+ul.lab-result-items li .lab-result-title {
+    font-weight: 500;
+    padding-bottom: 5px;
+}
+
+ul.lab-result-items li .lab-result-details {
+    color: #409FFF;
+    clear: both;
+    float: left;
+    font-size: .8em;
+}
+
+ul.lab-result-items li .lab-result-more-icon {
+    position: absolute;
+    right: 20px;
+    top: 35%;
+    color: #409FFF;
+    font-size: 1.5em;
+}
+
+ul.lab-result-items li .lab-result-details-1 {
+    position: absolute;
+    top: 15px;
+    right: 50px;
+    font-size: .8em;
+}

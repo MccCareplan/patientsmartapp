@@ -11,12 +11,16 @@ import {CareteamComponent} from './main/careteam/careteam.component';
 import {PatientLoadedGuard} from './guards/patient-loaded.guard';
 import {SelectPatientComponent} from './develop-mode/select-patient/select-patient.component';
 import {DevModeGuard} from './guards/dev-mode.guard';
+import { LabResultsComponent } from './main/lab-results/lab-results.component';
+import { LabGraphComponent } from './main/lab-graph/lab-graph.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'status', pathMatch: 'full'},
     {path: 'main', component: MainComponent},
     {path: 'launch', component: LaunchComponent},
     {path: 'status', component: StatusComponent, canActivate: [PatientLoadedGuard]},
+    {path: 'lab-graph', component: LabGraphComponent, canActivate: [PatientLoadedGuard]},
+    {path: 'lab-results', component: LabResultsComponent, canActivate: [PatientLoadedGuard]},
     {path: 'intervention', component: InterventionComponent},
     {path: 'goals', component: GoalsComponent},
     {path: 'health', component: HealthComponent},

@@ -1,4 +1,4 @@
-<div *ngIf="view==='status'">
+<div>
     <!-- Health Status Icon and Title-->
     <div id="health-status-title">
         <h2>
@@ -80,7 +80,7 @@
                     </button>
                 </li>
                 <li>
-                    <button class="mat-raised-button" (click)="view='lab'">
+                    <button class="mat-raised-button" routerLink="/lab-results">
                         <img src="../../../assets/svg/beaker.svg">
                         <span>Lab Results</span>
                         <div class="number-circle">2</div>
@@ -112,99 +112,5 @@
                 </li>
             </ul>
         </div>
-    </div>
-</div>
-<div *ngIf="view==='lab'" class="lab-results-container">
-    <h2>
-        <img src="../../../assets/svg/beaker.svg">
-        Lab Results
-    </h2>
-    <ul class="lab-result-items">
-        <li (click)="view='lab-graph'">
-            <div>
-                <h3 class="lab-result-title">GFR Blood Test</h3>
-                <span class="lab-result-details-1"></span>
-                <span class="lab-result-details lab-result-details-2">September 26, 2020</span>
-                <span class="lab-result-details lab-result-details-3"></span>
-            </div>
-            <span class="lab-result-more-icon">&gt;</span>
-        </li>
-        <li (click)="view='lab-graph'">
-            <div>
-                <h3 class="lab-result-title">Test Name 2</h3>
-                <span class="lab-result-details-1"></span>
-                <span class="lab-result-details lab-result-details-2">One line of details</span>
-                <span class="lab-result-details lab-result-details-3">September 18, 2020</span>
-            </div>
-            <span class="lab-result-more-icon">&gt;</span>
-        </li>
-        <li>
-            <div>
-                <h3 class="lab-result-title">Test Name 3</h3>
-                <span class="lab-result-details-1">September 18, 2020</span>
-                <span class="lab-result-details lab-result-details-2">One line of details</span>
-                <span class="lab-result-details lab-result-details-3"></span>
-            </div>
-            <span class="lab-result-more-icon">&gt;</span>
-        </li>
-        <li>
-            <div>
-                <h3 class="lab-result-title">Test Name 4</h3>
-                <span class="lab-result-details-1">September 18, 2020</span>
-                <span class="lab-result-details lab-result-details-2">Two lines of</span>
-                <span class="lab-result-details lab-result-details-3">Details</span>
-            </div>
-            <span class="lab-result-more-icon">&gt;</span>
-        </li>
-        <li>
-            <div>
-                <h3 class="lab-result-title">Test Name 5</h3>
-                <span class="lab-result-details-1"></span>
-                <span class="lab-result-details lab-result-details-2">August 3, 2020</span>
-                <span class="lab-result-details lab-result-details-3"></span>
-            </div>
-            <span class="lab-result-more-icon">&gt;</span>
-        </li>
-        <li>
-            <div>
-                <h3 class="lab-result-title">Test Name 6</h3>
-                <span class="lab-result-details-1"></span>
-                <span class="lab-result-details lab-result-details-2">September 26, 2020</span>
-                <span class="lab-result-details lab-result-details-3">September 26, 2020</span>
-            </div>
-            <span class="lab-result-more-icon">&gt;</span>
-        </li>
-        <li>
-            <div>
-                <h3 class="lab-result-title">GFR Blood Test</h3>
-                <span class="lab-result-details-1">September 26, 2020</span>
-                <span class="lab-result-details lab-result-details-2">September 26, 2020</span>
-                <span class="lab-result-details lab-result-details-3">September 26, 2020</span>
-            </div>
-            <span class="lab-result-more-icon">&gt;</span>
-        </li>
-        <li>
-            <div>
-                <h3 class="lab-result-title">GFR Blood Test</h3>
-                <span class="lab-result-details-1">September 26, 2020</span>
-                <span class="lab-result-details lab-result-details-2"></span>
-                <span class="lab-result-details lab-result-details-3"></span>
-            </div>
-            <span class="lab-result-more-icon">&gt;</span>
-        </li>
-    </ul>
-</div>
-<div *ngIf="view==='lab-graph'" class="lab-graph">
-    <div class="lab-graph-header">
-        <h2>My GFR Results</h2>
-        <h4>GFR Tests how well your kidneys work</h4>
-        <img class="back-arrow" (click)="view='lab'" src="../../../assets/svg/arrow_back_blue.svg" />
-        <img class="info" src="../../../assets/svg/info_blue.svg" />
-    </div>
-    <div class="lab-graph-chart">
-        <canvas baseChart height="200" [datasets]="lineChartData" [labels]="lineChartLabels"
-            [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
-            [chartType]="lineChartType" [plugins]="lineChartPlugins">
-        </canvas>
     </div>
 </div>

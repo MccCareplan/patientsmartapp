@@ -29,6 +29,8 @@ import { SubjectDataServiceService } from './services/subject-data-service.servi
 import { HttpClientModule } from '@angular/common/http';
 import { IconsModule } from './common/icons.module';
 import { ChartsModule } from 'ng2-charts';
+import { LabGraphComponent } from './main/lab-graph/lab-graph.component';
+import { LabResultsComponent } from './main/lab-results/lab-results.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { ChartsModule } from 'ng2-charts';
         LaunchComponent,
         HeaderMobileComponent,
         FooterMobileComponent,
+        LabGraphComponent,
+        LabResultsComponent,
         SidenavComponent,
         StatusComponent,
         InterventionComponent,
