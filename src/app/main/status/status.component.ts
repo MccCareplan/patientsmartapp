@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
+import { getEgrLineChartAnnotationsObject } from 'src/app/common/chart-utility-functions';
+import * as pluginAnnotations from 'chartjs-plugin-annotation';
 
 @Component({
   selector: 'app-status',
@@ -19,7 +21,7 @@ export class StatusComponent implements OnInit {
 
   }
 
-
+  public lineChartAnnotations = getEgrLineChartAnnotationsObject();
   public lineChartData: ChartDataSets[] = [
     {
       data: [41.0, 40.0, 34.8, 26.0],
@@ -39,7 +41,7 @@ export class StatusComponent implements OnInit {
       }
     },
     responsive: true,
-    annotation: undefined,
+    annotation: this.lineChartAnnotations,
     scales: {
       xAxes: [{
         display: false,
@@ -51,19 +53,19 @@ export class StatusComponent implements OnInit {
         display: true,
         gridLines: {
           display: true,
-          color: "red",
+          color: "rgba(0, 0, 0, 0.5)",
           drawBorder: false
         },
         ticks: {
-          fontColor: "green",
-          
-          min: 15,
-          max: 60,
+          min: 0,
+          max: 75,
           stepSize: 15,
           suggestedMin: 0.5,
           suggestedMax: 5.5,
           callback: function (label, index, labels) {
             switch (label) {
+              case 0:
+                return "0";
               case 15:
                 return '15';
               case 30:
@@ -72,6 +74,8 @@ export class StatusComponent implements OnInit {
                 return '45';
               case 60:
                 return '60';
+              case 75:
+                return "75";
             }
           }
         }
@@ -87,5 +91,5 @@ export class StatusComponent implements OnInit {
   ];
   public lineChartLegend = false;
   public lineChartType = 'line';
-  public lineChartPlugins = [];
+  public lineChartPlugins = [pluginAnnotations];
 }
