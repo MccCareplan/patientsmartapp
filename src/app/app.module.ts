@@ -31,6 +31,7 @@ import { IconsModule } from './common/icons.module';
 import { ChartsModule } from 'ng2-charts';
 import { LabGraphComponent } from './main/lab-graph/lab-graph.component';
 import { LabResultsComponent } from './main/lab-results/lab-results.component';
+import { SubjectService } from './services/subject/subject.service';
 
 
 @NgModule({
@@ -66,7 +67,7 @@ import { LabResultsComponent } from './main/lab-results/lab-results.component';
         HttpClientModule,
         IconsModule
     ],
-    providers: [PatientLoadedGuard, SubjectDataServiceService],
+    providers: [PatientLoadedGuard, SubjectDataServiceService, SubjectService],
     exports: [RouterModule],
     bootstrap: [AppComponent]
 })

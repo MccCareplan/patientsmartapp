@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="displayContent">
     <!-- Health Status Icon and Title-->
     <div id="health-status-title">
         <h2>
@@ -8,22 +8,9 @@
     </div>
     <!-- Health Status Blue Link Box (Diabetes etc.)-->
     <div id="health-status-link-box">
-        <select class="mat-raised-button" aria-label="Link to Chronic Condition Hub">
-            <option>
-                Condition 1
-            </option>
-            <option>
-                Condition 2
-            </option>
-            <option selected>
-                Chronic Kidney Disease
-            </option>
-            <option>
-                Condition 4
-            </option>
-            <option>
-                Condition 5
-            </option>
+        <select class="mat-raised-button" (change)=""
+            aria-label="Link to Chronic Condition Hub">
+            <option *ngFor="let item of conditionLists.activeConditions; index as i" [value]="i">{{item.code.text}}</option>
         </select>
     </div>
     <!-- List of Key Information -->

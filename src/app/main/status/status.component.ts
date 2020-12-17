@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs';
+import { Utilities } from 'src/app/common/utilities';
+import { ConditionLists, ConditionSummary } from 'src/app/generated-data-api';
+import { SubjectService } from 'src/app/services/subject/subject.service';
+import { MccPatient } from 'src/generated-data-api';
 
 @Component({
   selector: 'app-status',
@@ -6,8 +11,44 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./status.component.css']
 })
 export class StatusComponent implements OnInit {
-  constructor() { }
+  conditionLists: ConditionLists = {};
+  displayContent: boolean = true;
+  patient: MccPatient = {};
+  pId: string;
+  selectedCondition: any = {};
+
+
+  constructor(
+    private subjectService: SubjectService
+  ) { }
 
   ngOnInit(): void {
+    this.pId = Utilities.getQueryStringParam("subject");
+    if (this.pId) {
+      this.getInitialData();
+    }
+  }
+
+  getInitialData = (): void => {
+    const patientInfo$ = this.subjectService.getPatientById(this.pId);
+    const conditions$ = this.subjectService.getPatientConditionsById(this.pId);
+    const callArr = [patientInfo$, conditions$];
+
+    let multiCall = forkJoin(callArr);
+    // call both patient info and conditionLists
+    multiCall.subscribe(
+      ([patient, conditionLists]: [MccPatient, ConditionLists]) => {
+        this.patient = patient;
+        this.conditionLists = conditionLists;
+        if (this.conditionLists.activeConditions && this.conditionLists.activeConditions.length > 0) {
+          this.chronicConditionSelected({ target: { value: 0 } });
+        }
+        this.displayContent = true;
+      })
+  }
+
+  chronicConditionSelected = ($event: any): void => {
+    this.selectedCondition = this.conditionLists.activeConditions[$event.target.value];
+
   }
 }
