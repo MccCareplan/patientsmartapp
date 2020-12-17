@@ -47,4 +47,5 @@ export const getDevModeFlag = createSelector(getDevModeState,  (objDm: fromDevMo
 export const getCarePlans = createSelector(getCarePlansState, fromCarePlan.getCarePlans);
 export const getSelectedCarePlanId = createSelector(getCarePlansState, fromCarePlan.getSelectedCarePlanId);
 export const getSelectedContactId = createSelector(getContactState, fromContact.getSelectedContactId);
+export const getContacts = createSelector(getContactState, fromContact.getContacts);
 
