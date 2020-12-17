@@ -28,7 +28,7 @@ export const reducer = createReducer(
         ({
             ...state,
             careplans: payload,
-            selectedId: payload[0].fhirid
+            selectedId: (payload[0].fhirid ? payload[0].fhirid : '')  // initialize first careplan as the selected careplan
         })),
     on(careplan.loadCarePlansForSubjectFailureAction, (state) =>
         ({
