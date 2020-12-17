@@ -1,21 +1,21 @@
-<div *ngIf="displayContent">
+<div class="health-status-page">
     <!-- Health Status Icon and Title-->
-    <div id="health-status-title">
+    <div class="health-status-title">
         <h2>
-            <mat-icon id="health-status-icon" svgIcon="icons:clipboard_blue"></mat-icon>
+            <mat-icon class="health-status-icon" svgIcon="icons:clipboard_blue"></mat-icon>
             <span>Health Status</span>
         </h2>
     </div>
     <!-- Health Status Blue Link Box (Diabetes etc.)-->
-    <div id="health-status-link-box">
-        <select class="mat-raised-button" (change)=""
+    <div class="health-status-link-box">
+        <select class="mat-raised-button" (change)="chronicConditionSelected($event.target.value)"
             aria-label="Link to Chronic Condition Hub">
             <option *ngFor="let item of conditionLists.activeConditions; index as i" [value]="i">{{item.code.text}}</option>
         </select>
     </div>
     <!-- List of Key Information -->
-    <div id="key-information-and-buttons">
-        <div id="key-information">
+    <div class="key-information-and-buttons">
+        <div class="key-information">
             <ul>
                 <li>
                     Key Information 1
@@ -58,7 +58,7 @@
                 </li>
             </ul>
         </div>
-        <div id="buttons">
+        <div class="buttons">
             <ul>
                 <li>
                     <button class="mat-raised-button">
@@ -67,7 +67,7 @@
                     </button>
                 </li>
                 <li>
-                    <button class="mat-raised-button" routerLink="/lab-results">
+                    <button class="mat-raised-button" routerLink="/lab-results" queryParamsHandling="merge">
                         <img src="../../../assets/svg/beaker.svg">
                         <span>Lab Results</span>
                         <div class="number-circle">2</div>
@@ -82,19 +82,19 @@
                 <li>
                     <button class="mat-raised-button">
                         <img src="../../../assets/svg/microscope.svg">
-                        <span>Pathology/ Radiology</span>
+                        <span class="buttons-smaller-text">Pathology/ Radiology</span>
                     </button>
                 </li>
                 <li>
                     <button class="mat-raised-button">
                         <img src="../../../assets/svg/black-circle.svg">
-                        <span>Procedure/ Devices</span>
+                        <span class="buttons-smaller-text">Procedure/ Devices</span>
                     </button>
                 </li>
                 <li>
                     <button class="mat-raised-button">
                         <img src="../../../assets/svg/black-circle.svg">
-                        <span>My Reported Outcomes</span>
+                        <span class="buttons-smaller-text">My Reported Outcomes</span>
                     </button>
                 </li>
             </ul>

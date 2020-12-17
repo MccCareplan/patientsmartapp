@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'lab-graph',
   templateUrl: './lab-graph.component.html',
-  styleUrls: ['./lab-graph.component.css']
+  styleUrls: ['./lab-graph.component.scss']
 })
 export class LabGraphComponent implements OnInit {
   constructor(private router: Router) { }
@@ -17,7 +17,9 @@ export class LabGraphComponent implements OnInit {
   }
 
   goBack = (): void => {
-    this.router.navigateByUrl('/lab-results');
+    this.router.navigateByUrl('/lab-results', {
+      queryParamsHandling: "merge"
+    });
   }
 
   public lineChartAnnotations = getEgrLineChartAnnotationsObject();

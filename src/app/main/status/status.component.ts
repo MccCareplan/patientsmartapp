@@ -8,7 +8,7 @@ import { MccPatient } from 'src/generated-data-api';
 @Component({
   selector: 'app-status',
   templateUrl: './status.component.html',
-  styleUrls: ['./status.component.css']
+  styleUrls: ['./status.component.scss']
 })
 export class StatusComponent implements OnInit {
   conditionLists: ConditionLists = {};
@@ -41,14 +41,19 @@ export class StatusComponent implements OnInit {
         this.patient = patient;
         this.conditionLists = conditionLists;
         if (this.conditionLists.activeConditions && this.conditionLists.activeConditions.length > 0) {
-          this.chronicConditionSelected({ target: { value: 0 } });
+          this.chronicConditionSelected(0);
         }
         this.displayContent = true;
       })
   }
 
-  chronicConditionSelected = ($event: any): void => {
-    this.selectedCondition = this.conditionLists.activeConditions[$event.target.value];
+  chronicConditionSelected = (conditionIndex: number): void => {
+    this.selectedCondition = this.conditionLists.activeConditions[conditionIndex];
+
+    // What do I call here?
+  }
+
+  filterAvailableButtons = (): void => {
 
   }
 }
