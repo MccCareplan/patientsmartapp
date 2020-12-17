@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import * as careplan from '../actions/careplan.actions';
+// import * as careplan from '../actions/careplan.actions';
+import {CarePlanActions as careplan} from '../actions';
 import {MccCarePlan} from '../../generated-data-api';
-import * as patient from '../actions/patient.actions';
 
 export const careplanFeatureKey = 'careplan';
 

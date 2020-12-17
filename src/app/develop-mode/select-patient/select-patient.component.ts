@@ -2,8 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {from, Observable} from 'rxjs';
 import {take} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
-import * as patient from '../../ngrx/actions/patient.actions';
-import * as careplan from '../../ngrx/actions/careplan.actions';
+// import * as patient from '../../ngrx/actions/patient.actions';
+import {PatientActions as patient} from '../../ngrx/actions';
+// import * as careplan from '../../ngrx/actions/careplan.actions';
+import {CarePlanActions as careplan} from '../../ngrx/actions';
+
 import * as fromRoot from '../../ngrx/reducers';
 import {MccCarePlan, MccPatient} from '../../generated-data-api';
 

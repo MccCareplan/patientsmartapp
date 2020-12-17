@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import * as devmode from '../actions/dev-mode.actions';
-
+// import * as devmode from '../actions/dev-mode.actions';
+import {DevModeActions as devmode} from '../actions';
 export const devModeFeatureKey = 'devMode';
 
 export interface State {

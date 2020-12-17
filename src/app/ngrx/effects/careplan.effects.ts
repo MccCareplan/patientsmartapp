@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {CareplanService} from '../../services/careplan.service';
-import * as careplan from '../actions/careplan.actions';
+// import * as careplan from '../actions/careplan.actions';
+import {CarePlanActions as careplan} from '../actions';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
 import {of} from 'rxjs';
-import {loadCarePlansForSubjectSuccessAction} from '../actions/careplan.actions';
+
 
 
 @Injectable()
@@ -18,7 +18,7 @@ export class CareplanEffects {
                 // @ts-ignore
                 .getCarePlansBySubject(action.data)
                 .pipe(
-                    map(careplans => loadCarePlansForSubjectSuccessAction({data: careplans})
+                    map(careplans => careplan.loadCarePlansForSubjectSuccessAction({data: careplans})
                     ),
                     catchError(error =>
                         of(careplan.loadCarePlansForSubjectFailureAction({error}))
