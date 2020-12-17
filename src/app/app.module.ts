@@ -29,6 +29,8 @@ import { SubjectDataServiceService} from './services/subject-data-service.servic
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {SharedModule} from './common/shared.module';
 import { CareteamCaretabComponent } from './main/careteam/careteam.caretab/careteam.caretab.component';
+import { CareplanEffects } from './ngrx/effects/careplan.effects';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -56,11 +58,12 @@ import { CareteamCaretabComponent } from './main/careteam/careteam.caretab/caret
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
         AppRoutingModule,
         StoreModule.forRoot({topLevel: reducer}),
-        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+        StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
         EffectsModule.forRoot([]),
-        EffectsModule.forFeature([PatientEffects]),
+        EffectsModule.forFeature([PatientEffects, CareplanEffects]),
         HttpClientModule,
-        SharedModule
+        SharedModule,
+        FormsModule
     ],
     providers: [PatientLoadedGuard, SubjectDataServiceService],
     exports: [RouterModule],

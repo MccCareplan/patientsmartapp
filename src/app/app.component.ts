@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
-import * as devmode from './ngrx/actions/dev-mode.actions';
+// import * as devmode from './ngrx/actions/dev-mode.actions';
+import {DevModeActions as devmode} from './ngrx/actions';
 import * as fromRoot from './ngrx/reducers';
-import * as patient from './ngrx/actions/patient.actions';
+// import * as patient from './ngrx/actions/patient.actions';
+import {PatientActions as patient} from './ngrx/actions';
 
 @Component({
     selector: 'app-root',
