@@ -31,6 +31,7 @@ import {SharedModule} from './common/shared.module';
 import { CareteamCaretabComponent } from './main/careteam/careteam.caretab/careteam.caretab.component';
 import { CareplanEffects } from './ngrx/effects/careplan.effects';
 import {FormsModule} from '@angular/forms';
+import { ContactEffects } from './ngrx/effects/contact.effects';
 
 
 @NgModule({
@@ -60,7 +61,7 @@ import {FormsModule} from '@angular/forms';
         StoreModule.forRoot({topLevel: reducer}),
         StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
         EffectsModule.forRoot([]),
-        EffectsModule.forFeature([PatientEffects, CareplanEffects]),
+        EffectsModule.forFeature([PatientEffects, CareplanEffects, ContactEffects]),
         HttpClientModule,
         SharedModule,
         FormsModule
