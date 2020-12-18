@@ -2,7 +2,6 @@ import {Component, OnInit, Input} from '@angular/core';
 import {SharedModule} from '../../../common/shared.module';
 import {CharPipe} from '../../../common/char.pipe';
 import {Store} from '@ngrx/store';
-import * as contact from '../../../ngrx/actions';
 import * as fromRoot from '../../../ngrx/reducers';
 import {Contact} from '../../../generated-data-api';
 import {Observable, of, combineLatest} from 'rxjs';
@@ -23,10 +22,11 @@ export class CareteamCaretabComponent implements OnInit {
     filteredContacts$: Observable<Contact[]>;
     filter$: Observable<string>;
 
-    charCodes = Array.from(Array(26), (_, index) => 65 + index);
-    selectedCharacter = '';
-    selectedCharCode = 0;
+    // charCodes = Array.from(Array(26), (_, index) => 65 + index);
+    // selectedCharacter = '';
+    // selectedCharCode = 0;
 
+    // icon names prefixed with "icon:" are custom icons found in assets/svg.  Loaded into  /src/app/shared.module.ts.
     iconNames = {
         types:
             [
@@ -35,12 +35,13 @@ export class CareteamCaretabComponent implements OnInit {
             ],
         roles:
             [
-                {role: 'patient', icon: 'sick'},
+                {role: 'attorney', icon: 'icons:scales'},
+                {role: 'patient', icon: 'person'},
                 {role: 'catering', icon: 'food_bank'},
-                {role: 'physician', icon: 'medical_services'},
+                {role: 'physician', icon: 'icons:dr_circle_blue'},
                 {role: 'nurse', icon: 'medical_services'},
-                {role: 'caregiver', icon: 'medical_services'},
-                {role: 'ologist', icon: 'medical_services'},
+                {role: 'caregiver', icon: 'icons:twopeople_money'},
+                {role: 'ologist', icon: 'icons:dr_circle_blue'},
                 {role: 'dietician', icon: 'fastfood'},
                 {role: 'social worker', icon: 'psychology'},
                 {role: 'pharmacist', icon: 'medical_services'},
@@ -51,7 +52,6 @@ export class CareteamCaretabComponent implements OnInit {
 
     }
 
-    // https://stackblitz.com/edit/angular-filtering-rxjs
     ngOnInit(): void {
         this.contacts$ = this.store.select(fromRoot.getContacts);
         this.filter$ = of('patient');
@@ -70,11 +70,10 @@ export class CareteamCaretabComponent implements OnInit {
         }
     }
 
-    onSelect(charCode): void {
-        // console.log('[careteam.caretab.component.ts] onSelect(charCode) charCode: ', charCode);  // todo: remove after testing
-        this.selectedCharacter = this.char.transform(charCode);
-        this.selectedCharCode = charCode;
-    }
+    // onSelect(charCode): void {
+    //     this.selectedCharacter = this.char.transform(charCode);
+    //     this.selectedCharCode = charCode;
+    // }
 
     getTypeIcon(type): string {
         const icon = this.iconNames.types.filter( t => type.toLowerCase().includes(t.type.toLowerCase()));

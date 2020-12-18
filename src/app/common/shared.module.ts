@@ -30,9 +30,12 @@ export class SharedModule {
             clipboard = 'clipboard',
             clipboard_blue = 'clipboard_blue',
             clipboard_ltgrey = 'clipboard_ltgrey',
+            dr_circle = 'dr_circle',
+            dr_circle_blue = 'dr_circle_blue',
             gear_ltgrey = 'gear_ltgrey',
             gear_blue = 'gear_blue',
             gear = 'gear',
+            scales = 'scales',
             target = 'target',
             target_blue = 'target_blue',
             target_ltgrey = 'target_ltgrey',
@@ -42,14 +45,15 @@ export class SharedModule {
             twopeople = 'twopeople_blk',
             twopeople_blue = 'twopeople_blue',
             twopeople_ltgrey = 'twopeople_ltgrey',
+            twopeople_money = 'twopeople_money',
             cool2 = 'cool2'
         }
         const iconKeys = Object.values(Icons);
         iconKeys.forEach(key => {
-            // console.log(`[custom-icon.service.ts] key: ${key}, iconUrl ${iconUrl}`);
+            // console.log(`[custom-icon.service.ts] key: ${key}, iconUrl ${iconUrl}`);  // todo: remove after testing..
             this.matIconRegistry.addSvgIconInNamespace('icons', key, this.setIconPath(`${iconUrl}/${key}.svg`));
         });
-        // console.log('[shared.module.ts] matIconRegistry: ', this.matIconRegistry);
+        // console.log('[shared.module.ts] matIconRegistry: ', this.matIconRegistry);   // todo: remove after testing
 
     }
 

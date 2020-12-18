@@ -33,7 +33,7 @@ export class SelectPatientComponent implements OnInit {
      }
 
     selectCarePlan(carePlanId: string): void {
-        console.log('[select-patient.component.ts] selectCareplan() carePlanId: ', carePlanId);
+        // console.log('[select-patient.component.ts] selectCareplan() carePlanId: ', carePlanId); // todo: remove after testing..
         this.store.dispatch(careplan.SelectAction({data: carePlanId}));
     }
 
@@ -46,7 +46,7 @@ export class SelectPatientComponent implements OnInit {
         this.patient$.subscribe(p => this.patient = p);
 
         this.careplanid$.subscribe(c => {
-            console.log('[select-patient.component.ts] ngOnInit() careplanId$.subscribe(): c:', c);
+            // console.log('[select-patient.component.ts] ngOnInit() careplanId$.subscribe(): c:', c); // todo: remove after testing..
             this.store.dispatch(contact.loadContactsForSubjectAndCarePlanAction(
                 {subjectId: this.patient.fhirid, carePlanId: c}));
         });

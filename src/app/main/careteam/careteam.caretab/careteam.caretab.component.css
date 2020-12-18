@@ -10,7 +10,7 @@ ul.care-team-items li {
     float: left;
     clear: both;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 2px;
 }
 
 ul.care-team-items li h3 {
@@ -25,7 +25,7 @@ ul.care-team-items li>div {
 ul.care-team-items li .care-team-title {
     color: #409FFF;
     font-weight: 500;
-    padding-bottom: 2px;
+    padding-bottom: 1px;
 }
 
 ul.care-team-items li .care-team-details {
@@ -68,18 +68,3 @@ ul.care-team-items li .care-team-details-1 {
     color: blue !important;
 }
 
-/*
-.content {
-    padding:  16px;
-}
-
-.content > mat-card {
-    width: 100%;
-}
-
-mat-icon.mat-card-avatar {
-    width: 25px;
-    height: 25px;
-    font-size: 25px;
-}
-*/

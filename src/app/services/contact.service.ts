@@ -15,7 +15,7 @@ export class ContactService extends DataService {
   }
 
   getContactsBySubjectAndCareplan(subjectId: string, carePlanId: string): Observable<Contact> {
-    console.log(`[contact.service.ts]: getContactsBySubjectAndCareplan() subjectID:${subjectId} carePlanId: ${carePlanId}`);  // todo : remove after testing
+    // console.log(`[contact.service.ts]: getContactsBySubjectAndCareplan() subjectID:${subjectId} carePlanId: ${carePlanId}`);  // todo : remove after testing
     return this.getBySubjectIdAndCarePlanId(subjectId, carePlanId);
   }
 
