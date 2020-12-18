@@ -16,11 +16,11 @@
 .grey-button {
     color: #A9A9A9;
 }
-.active-menu-item {
-    color: blue;
+.active-menu-item, .active-menu-item button {
+    color: rgb(0, 122, 255);
 }
 .btn-icon:hover {
-    fill: blue;
+    fill: rgb(0, 122, 255);
 }
 .active .mat-icon{
     color: inherit;

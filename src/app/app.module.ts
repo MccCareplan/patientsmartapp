@@ -32,6 +32,7 @@ import { ChartsModule } from 'ng2-charts';
 import { LabGraphComponent } from './main/lab-graph/lab-graph.component';
 import { LabResultsComponent } from './main/lab-results/lab-results.component';
 import { SubjectService } from './services/subject/subject.service';
+import { VitalSignsComponent } from './main/vital-signs/vital-signs.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { SubjectService } from './services/subject/subject.service';
         HealthComponent,
         CareteamComponent,
         SidenavComponent,
-        SelectPatientComponent
+        SelectPatientComponent,
+        VitalSignsComponent
     ],
     imports: [
         BrowserModule,

@@ -17,9 +17,7 @@ export class LabGraphComponent implements OnInit {
   }
 
   goBack = (): void => {
-    this.router.navigateByUrl('/lab-results', {
-      queryParamsHandling: "merge"
-    });
+    window.history.back();
   }
 
   public lineChartAnnotations = getEgrLineChartAnnotationsObject();
