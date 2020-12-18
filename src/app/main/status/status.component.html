@@ -10,7 +10,7 @@
     <div class="health-status-link-box">
         <select class="mat-raised-button" (change)="chronicConditionSelected($event.target.value)"
             aria-label="Link to Chronic Condition Hub">
-            <option *ngFor="let item of conditionLists.activeConditions; index as i" [value]="i">{{item.code.text}}</option>
+            <option *ngFor="let item of ddlConditions; index as i" [value]="i">{{item.code.text}}</option>
         </select>
     </div>
     <!-- List of Key Information -->

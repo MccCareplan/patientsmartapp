@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { Utilities } from 'src/app/common/utilities';
-import { ConditionLists, ConditionSummary } from 'src/app/generated-data-api';
+import { ConditionLists, ConditionSummary, MccCondition } from 'src/app/generated-data-api';
 import { SubjectService } from 'src/app/services/subject/subject.service';
 import { MccPatient } from 'src/generated-data-api';
 
@@ -11,11 +11,10 @@ import { MccPatient } from 'src/generated-data-api';
   styleUrls: ['./status.component.scss']
 })
 export class StatusComponent implements OnInit {
-  conditionLists: ConditionLists = {};
-  displayContent: boolean = true;
+  ddlConditions: ConditionSummary[] = [];
   patient: MccPatient = {};
   pId: string;
-  selectedCondition: any = {};
+  selectedCondition: ConditionSummary = {};
 
 
   constructor(
@@ -39,18 +38,30 @@ export class StatusComponent implements OnInit {
     multiCall.subscribe(
       ([patient, conditionLists]: [MccPatient, ConditionLists]) => {
         this.patient = patient;
-        this.conditionLists = conditionLists;
-        if (this.conditionLists.activeConditions && this.conditionLists.activeConditions.length > 0) {
-          this.chronicConditionSelected(0);
+        // Check if active conditions is null
+        if (conditionLists.activeConditions && conditionLists.activeConditions.length > 0) {
+          // if not null, filter by those with a profile id
+          conditionLists.activeConditions = conditionLists.activeConditions.filter(x => x.profileId);
+          // Sort alphabetically by code text
+          conditionLists.activeConditions.sort((a, b) => {
+            if (a.code && a.code.text && b.code && b.code.text) {
+              return a.code.text.toUpperCase() > b.code.text.toUpperCase() ? 1 : -1;
+            }
+            else return 0;
+          })
+          // If there are active conditions with profile ids, select the first
+          if (conditionLists.activeConditions.length > 0) {
+            this.ddlConditions = conditionLists.activeConditions;
+            this.chronicConditionSelected(0);
+          }
         }
-        this.displayContent = true;
       })
   }
 
+  // Select drop down event to change selected chronic condition
   chronicConditionSelected = (conditionIndex: number): void => {
-    this.selectedCondition = this.conditionLists.activeConditions[conditionIndex];
-
-    // What do I call here?
+    if (conditionIndex === -1) conditionIndex = 0;
+    this.selectedCondition = this.ddlConditions[conditionIndex];
   }
 
   filterAvailableButtons = (): void => {
