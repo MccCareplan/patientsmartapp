@@ -1,32 +1,23 @@
-th, td {
-    padding: 5px;
+.careteam-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
-/* Styles for tab labels */
-.mat-tab-label {
-    min-width: 50px !important;
-    padding: 5px;
-    background-color: transparent;
-    border-color: lightblue;
-    color: black;
-    font-weight: 700;
+.careteam-header {
+    flex-shrink: 0;
+    flex-grow: 0;
+    padding: 2px 25px;
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
 }
-
-/* Styles for the active tab label */
-.mat-tab-label.mat-tab-label-active {
-    min-width: 25px !important;
-    padding: 5px;
-    background-color: lightblue;
-    border-color: lightblue;
-    color: blue;
-    font-weight: 700;
-}
-
-/* Styles for the ink bar */
-.mat-ink-bar {
-    background-color: pink;
+.careteam-content {
+    flex-shrink: 1;
+    flex-grow: 1;
+    padding: 3px 5px;
+    position: relative;
+    overflow-y: auto;
 }
 
-p {
-    font-family: Lato;
-}
 

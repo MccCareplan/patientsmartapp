@@ -102,6 +102,9 @@
           "configurations": {
             "production": {
               "browserTarget": "patientsmartapp:build:production"
+            },
+            "dev": {
+              "browserTarget": "patientsmartapp:build:dev"
             }
           }
         },

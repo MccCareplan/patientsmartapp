@@ -1,7 +1,7 @@
 import {createReducer, on} from '@ngrx/store';
 import {MccPatient} from '../../generated-data-api';
-import * as patient from '../actions/patient.actions';
-
+// import * as patient from '../actions/patient.actions';
+import {PatientActions as patient} from '../actions';
 export const patientFeatureKey = 'patient';
 
 export interface State {

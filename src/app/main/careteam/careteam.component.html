@@ -1,23 +1,17 @@
-<div class="container">
-    <div fxLayout="column" fxLayoutAlign="center">
-        <table>
-            <tr>
-                <td>
-                    <mat-icon svgIcon="icons:twopeople_blue"></mat-icon>
-                </td>
-                <td><h2>My Profile & Care Team</h2></td>
-            </tr>
-        </table>
-        <div>
-            <mat-tab-group mat-align-tabs="center">
-                <mat-tab label="My Care Team">
-                    <div style="padding-top: 25px;">My Care Team</div>
-                </mat-tab>
-                <mat-tab label="My Profile">
-                    <div style="padding-top: 25px;">My Profile</div>
-                </mat-tab>
-            </mat-tab-group>
-        </div>
+<div class="careteam-container">
+    <div class="careteam-header">
+        <mat-icon svgIcon="icons:twopeople_blue"></mat-icon>
+        My Profile & Care Team
+    </div>
+    <div class="careteam-content">
+        <mat-tab-group mat-align-tabs="center">
+            <mat-tab label="My Care Team">
+                <app-careteam-caretab displayFilter="careteam"></app-careteam-caretab>
+            </mat-tab>
+            <mat-tab label="My Profile">
+                <app-careteam-caretab displayFilter="profile"></app-careteam-caretab>
+            </mat-tab>
+        </mat-tab-group>
     </div>
 </div>
 

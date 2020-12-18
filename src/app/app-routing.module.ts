@@ -21,7 +21,7 @@ const routes: Routes = [
     {path: 'goals', component: GoalsComponent},
     {path: 'health', component: HealthComponent},
     {path: 'careteam', component: CareteamComponent},
-    {path: 'devmode', component: SelectPatientComponent, canActivate: [DevModeGuard]}
+    {path: 'devmode', component: SelectPatientComponent, canActivate: [DevModeGuard, PatientLoadedGuard]}
 ];
 
 export const appRouting = RouterModule.forRoot(routes, {enableTracing: false});
