@@ -1,8 +1,47 @@
+<ul class="care-team-items">
+    <li *ngFor="let contact of (filteredContacts$ | async)">
+        <div>
+            <mat-icon>{{getRoleIcon(contact.role)}}</mat-icon>
+            <span class="care-team-title care-team-details">{{contact.name}}</span>
+            <span class="care-team-details">{{contact.role}}</span>
+            <span class="care-team-details">{{contact.phone}}</span>
+            <span class="care-team-details">{{contact.email}}</span>
+        </div>
+        <span *ngIf="displayFilter === 'profile'" class="care-team-more-icon">&gt;</span>
+    </li>
+</ul>
+<!--
 <div class="content"
      fxLayout="row"
      fxFlexFill>
-    <div fxFlex="90" class="main" style="padding: 50px;">
-        Item Selected: {{selectedCharacter}}
+    <div fxFlex="100">
+        <div class="content" fxLayout="row wrap" fxLayoutAlign="start stretch" fxLayoutGap="16px grid">
+            <div fxFlex="100" *ngFor="let contact of (filteredContacts$ | async)">
+                <mat-card class="mat-elevation-z1">
+                    <mat-card-header>
+                        <mat-icon mat-card-avatar>{{getTypeIcon(contact.type)}}</mat-icon>
+                        <mat-icon mat-card-avatar>{{getRoleIcon(contact.role)}}</mat-icon>
+                        <mat-card-title>{{contact.name}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <table>
+                            <tr>
+                                <td style="font-weight:bold">Role:</td><td>{{contact.role}}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight:bold">Phone:</td><td>{{contact.phone}}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight:bold">Email:</td><td>{{contact.email}}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight:bold">Address:</td><td>{{contact.address}}</td>
+                            </tr>
+                        </table>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
     </div>
     <div fxFlex="10" class="select">
         <mat-list>
@@ -12,3 +51,4 @@
         </mat-list>
     </div>
 </div>
+-->

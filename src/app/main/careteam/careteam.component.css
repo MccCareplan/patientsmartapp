@@ -1,6 +1,21 @@
-th, td {
-    padding: 5px;
+.care-team-container>h2>img {
+    height: 30px;
+    float: left;
+    padding-right: 10px;
 }
+
+/*th, td {*/
+/*    padding: 5px;*/
+/*}*/
+/*component content area*/
+.container {
+    height: 100vh; /*Component content fills entire verticle*/
+    overflow: auto; /*Keeps header from scrolling away*/
+    padding: 10px; /*Component content padding around edges*/
+    /* margin-bottom: 50px; /*Matches height of footer so can see all content when scrolling to bottom*/
+}
+
+
 /* Styles for tab labels */
 .mat-tab-label {
     min-width: 50px !important;

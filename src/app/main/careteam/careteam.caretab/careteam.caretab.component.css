@@ -1,5 +1,62 @@
-.main {
-    color:blue;
+ul.care-team-items {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul.care-team-items li {
+    background-color: #F1F9FF;
+    position: relative;
+    height: 90px;
+    float: left;
+    clear: both;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+ul.care-team-items li h3 {
+    margin: 0;
+}
+
+ul.care-team-items li>div {
+    padding: 15px;
+    padding-top: 12px;
+}
+
+ul.care-team-items li .care-team-title {
+    color: #409FFF;
+    font-weight: 500;
+    padding-bottom: 2px;
+}
+
+ul.care-team-items li .care-team-details {
+    color: #409FFF;
+    clear: both;
+    float: left;
+    font-size: .8em;
+    padding-left: 50px;
+}
+
+ul.care-team-items li .care-team-more-icon {
+    position: absolute;
+    right: 20px;
+    top: 35%;
+    color: #409FFF;
+    font-size: 1.5em;
+}
+
+ul.care-team-items li .mat-icon {
+    position: absolute;
+    left: 15px;
+    top: 30%;
+    color: #409FFF;
+}
+
+
+ul.care-team-items li .care-team-details-1 {
+    position: absolute;
+    top: 15px;
+    right: 50px;
+    font-size: .8em;
 }
 
 .select .mat-list .mat-list-item {
@@ -10,3 +67,19 @@
 .select .selected {
     color: blue !important;
 }
+
+/*
+.content {
+    padding:  16px;
+}
+
+.content > mat-card {
+    width: 100%;
+}
+
+mat-icon.mat-card-avatar {
+    width: 25px;
+    height: 25px;
+    font-size: 25px;
+}
+*/
