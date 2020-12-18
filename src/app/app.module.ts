@@ -27,7 +27,11 @@ import { SelectPatientComponent } from './develop-mode/select-patient/select-pat
 import { PatientLoadedGuard } from './guards/patient-loaded.guard';
 import { SubjectDataServiceService} from './services/subject-data-service.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {IconsModule} from './common/icons.module';
+import {SharedModule} from './common/shared.module';
+import { CareteamCaretabComponent } from './main/careteam/careteam.caretab/careteam.caretab.component';
+import { CareplanEffects } from './ngrx/effects/careplan.effects';
+import {FormsModule} from '@angular/forms';
+import { ContactEffects } from './ngrx/effects/contact.effects';
 
 
 @NgModule({
@@ -44,7 +48,8 @@ import {IconsModule} from './common/icons.module';
         HealthComponent,
         CareteamComponent,
         SidenavComponent,
-        SelectPatientComponent
+        SelectPatientComponent,
+        CareteamCaretabComponent
     ],
     imports: [
         BrowserModule,
@@ -54,11 +59,12 @@ import {IconsModule} from './common/icons.module';
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
         AppRoutingModule,
         StoreModule.forRoot({topLevel: reducer}),
-        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+        StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
         EffectsModule.forRoot([]),
-        EffectsModule.forFeature([PatientEffects]),
+        EffectsModule.forFeature([PatientEffects, CareplanEffects, ContactEffects]),
         HttpClientModule,
-        IconsModule
+        SharedModule,
+        FormsModule
     ],
     providers: [PatientLoadedGuard, SubjectDataServiceService],
     exports: [RouterModule],

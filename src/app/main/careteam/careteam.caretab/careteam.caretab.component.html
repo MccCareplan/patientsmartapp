@@ -1,0 +1,25 @@
+<ul class="care-team-items">
+    <li *ngFor="let contact of (filteredContacts$ | async)">
+        <div>
+            <mat-icon *ngIf="!getRoleIcon(contact.role).includes(':')">{{getRoleIcon(contact.role)}}</mat-icon>
+            <mat-icon *ngIf="getRoleIcon(contact.role).includes(':')" svgIcon="{{getRoleIcon(contact.role)}}"></mat-icon>
+            <span class="care-team-title care-team-details">{{contact.name}}</span>
+            <span class="care-team-details">{{contact.role}}</span>
+            <span *ngIf="contact.address" class="care-team-details">{{contact.address}}</span>
+            <span class="care-team-details">{{contact.phone}}</span>
+            <span class="care-team-details">{{contact.email}}</span>
+        </div>
+<!--        <span *ngIf="displayFilter === 'profile'" class="care-team-more-icon">&gt;</span> -->
+    </li>
+</ul>
+<!--
+
+    <div fxFlex="10" class="select">
+        <mat-list>
+            <mat-list-item [ngClass]="{selected: charCode === this.selectedCharCode}" *ngFor="let charCode of charCodes" (click)="onSelect(charCode)">
+                <span fxLayoutAlign="right"> {{ charCode | char }}</span>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>
+-->
