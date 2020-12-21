@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { forkJoin, Observable, of } from 'rxjs';
-import { Utilities } from 'src/app/common/utilities';
-import { ConditionLists, ConditionSummary, MccCondition } from 'src/app/generated-data-api';
-import { SubjectService } from 'src/app/services/subject/subject.service';
+import { Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { ConditionLists, ConditionSummary } from 'src/app/generated-data-api';
 import { MccPatient } from 'src/generated-data-api';
+import * as fromRoot from '../../ngrx/reducers';
 
 @Component({
   selector: 'app-status',
@@ -11,51 +11,39 @@ import { MccPatient } from 'src/generated-data-api';
   styleUrls: ['./status.component.scss']
 })
 export class StatusComponent implements OnInit {
+  careplanid$: Observable<string>;
+  conditionsList$: Observable<ConditionLists>;
   ddlConditions$: Observable<ConditionSummary[]>
-  patient: MccPatient = {};
-  pId: string;
+  patient$: Observable<MccPatient>;
   selectedCondition: ConditionSummary = {};
 
-
   constructor(
-    private subjectService: SubjectService
+    private store: Store<fromRoot.State>
   ) { }
 
   ngOnInit(): void {
-    this.pId = Utilities.getQueryStringParam("subject");
-    if (this.pId) {
-      this.getInitialData();
-    }
+    this.patient$ = this.store.select(fromRoot.getPatientProfile);
+    this.conditionsList$ = this.store.select(fromRoot.getConditionsSummary);
+    this.conditionsList$.subscribe(this.populateDropDownList)
   }
 
-  getInitialData = (): void => {
-    const patientInfo$ = this.subjectService.getPatientById(this.pId);
-    const conditions$ = this.subjectService.getPatientConditionsById(this.pId);
-    const callArr = [patientInfo$, conditions$];
-
-    let multiCall = forkJoin(callArr);
-    // call both patient info and conditionLists
-    multiCall.subscribe(
-      ([patient, conditionLists]: [MccPatient, ConditionLists]) => {
-        this.patient = patient;
-        // Check if active conditions is null
-        if (conditionLists.activeConditions && conditionLists.activeConditions.length > 0) {
-          // if not null, filter by those with a profile id
-          conditionLists.activeConditions = conditionLists.activeConditions.filter(x => x.profileId);
-          // Sort alphabetically by code text
-          conditionLists.activeConditions.sort((a, b) => {
-            if (a.code && a.code.text && b.code && b.code.text) {
-              return a.code.text.toUpperCase() > b.code.text.toUpperCase() ? 1 : -1;
-            }
-            else return 0;
-          })
-          // If there are active conditions with profile ids, select the first
-          if (conditionLists.activeConditions.length > 0) {
-            this.ddlConditions$ = of(conditionLists.activeConditions);
-            this.chronicConditionSelected(0);
-          }
+  populateDropDownList = (conditionsList: ConditionLists): void => {
+    if (conditionsList.activeConditions && conditionsList.activeConditions.length > 0) {
+      // if not null, filter by those with a profile id
+      let filteredActiveConditions = conditionsList.activeConditions.filter(x => x.profileId);
+      // Sort alphabetically by code text
+      filteredActiveConditions.sort((a, b) => {
+        if (a.code && a.code.text && b.code && b.code.text) {
+          return a.code.text.toUpperCase() > b.code.text.toUpperCase() ? 1 : -1;
         }
+        else return 0;
       })
+      // If there are active conditions with profile ids, select the first
+      if (filteredActiveConditions.length > 0) {
+        this.ddlConditions$ = of(filteredActiveConditions);
+        this.chronicConditionSelected(0);
+      }
+    }
   }
 
   // Select drop down event to change selected chronic condition

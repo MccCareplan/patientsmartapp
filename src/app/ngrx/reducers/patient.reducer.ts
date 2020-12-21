@@ -1,7 +1,6 @@
-import {createReducer, on} from '@ngrx/store';
-import {MccPatient} from '../../generated-data-api';
-// import * as patient from '../actions/patient.actions';
-import {PatientActions as patient} from '../actions';
+import { createReducer, on } from '@ngrx/store';
+import { MccPatient } from '../../generated-data-api';
+import { PatientActions as patient } from '../actions';
 export const patientFeatureKey = 'patient';
 
 export interface State {
@@ -20,28 +19,28 @@ export const initialState: State = {
 export const reducer = createReducer(
     initialState,
     // tslint:disable-next-line:variable-name
-    on(patient.LoadAllSuccessAction, (state, {data: payload}) =>
-        ({
-            ...state,
-            patients: payload
-        })),
-    on(patient.LoadPatientSuccessAction, (state, {data: payload}) =>
-        ({
-            ...state,
-            profile: payload,
-            failure: false
-        })),
+    on(patient.LoadAllSuccessAction, (state, { data: payload }) =>
+    ({
+        ...state,
+        patients: payload
+    })),
+    on(patient.LoadPatientSuccessAction, (state, { data: payload }) =>
+    ({
+        ...state,
+        profile: payload,
+        failure: false
+    })),
     on(patient.LoadPatientFailAction, (state) =>
-        ({
-            ...state,
-            failure: true
-        })),
+    ({
+        ...state,
+        failure: true
+    })),
 );
 
 
 export const getPatients = (state: State) => {
-    // console.log('[patient.reducer.ts] getPatients state ', state);  // todo: remove after testing..
-    return state.patients; };
+    return state.patients;
+};
 
 export const getProfile = (state: State) => state.profile;
 

@@ -37,6 +37,7 @@ import { CareteamCaretabComponent } from './main/careteam/careteam.caretab/caret
 import { CareplanEffects } from './ngrx/effects/careplan.effects';
 import { FormsModule } from '@angular/forms';
 import { ContactEffects } from './ngrx/effects/contact.effects';
+import { ConditionsSummaryEffects } from './ngrx/effects/condition-summary';
 
 
 @NgModule({
@@ -70,12 +71,12 @@ import { ContactEffects } from './ngrx/effects/contact.effects';
                 StoreModule.forRoot({ topLevel: reducer }),
                 StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
                 EffectsModule.forRoot([]),
-                EffectsModule.forFeature([PatientEffects, CareplanEffects, ContactEffects]),
+                EffectsModule.forFeature([PatientEffects, CareplanEffects, ContactEffects, ConditionsSummaryEffects]),
                 HttpClientModule,
                 SharedModule,
                 FormsModule
         ],
-        providers: [PatientLoadedGuard, SubjectDataServiceService, SubjectService],
+        providers: [PatientLoadedGuard, SubjectDataServiceService],
         exports: [RouterModule],
         bootstrap: [AppComponent]
 })
