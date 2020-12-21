@@ -38,10 +38,10 @@ export class AppComponent implements OnInit {
                 this.store.dispatch(patient.SelectAction({ data: this.currentSubjectId }));
                 this.store.dispatch(conditionsSummary.loadConditionSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
 
-                this.store.dispatch(careplan.LoadCarePlansForSubjectAction({ data: this.currentSubjectId }));
-                this.careplanid$.subscribe(c =>
-                    this.store.dispatch(contact.loadContactsForSubjectAndCarePlanAction(
-                        { subjectId: this.currentSubjectId, carePlanId: c })));
+                // this.store.dispatch(careplan.LoadCarePlansForSubjectAction({ data: this.currentSubjectId }));
+                // this.careplanid$.subscribe(c =>
+                //     this.store.dispatch(contact.loadContactsForSubjectAndCarePlanAction(
+                //         { subjectId: this.currentSubjectId, carePlanId: c })));
             }
         });
 

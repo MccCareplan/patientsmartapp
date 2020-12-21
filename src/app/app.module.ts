@@ -28,7 +28,6 @@ import { PatientLoadedGuard } from './guards/patient-loaded.guard';
 import { ChartsModule } from 'ng2-charts';
 import { LabGraphComponent } from './main/lab-graph/lab-graph.component';
 import { LabResultsComponent } from './main/lab-results/lab-results.component';
-import { SubjectService } from './services/subject/subject.service';
 import { VitalSignsComponent } from './main/vital-signs/vital-signs.component';
 import { SubjectDataServiceService } from './services/subject-data-service.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -38,7 +37,6 @@ import { CareplanEffects } from './ngrx/effects/careplan.effects';
 import { FormsModule } from '@angular/forms';
 import { ContactEffects } from './ngrx/effects/contact.effects';
 import { ConditionsSummaryEffects } from './ngrx/effects/condition-summary';
-
 
 @NgModule({
         declarations: [

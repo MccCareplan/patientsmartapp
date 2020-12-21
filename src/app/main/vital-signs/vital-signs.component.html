@@ -7,7 +7,7 @@
         <img class="back-arrow" src="../../../assets/svg/arrow_back_blue.svg" onclick="window.history.back()" />
     </div>
     <ul class="vital-sign-items">
-        <li routerLink="/lab-graph" queryParamsHandling="merge">
+        <li routerLink="/lab-graph" [queryParams]="{key:'bp'}" queryParamsHandling="merge">
             <div class="vital-sign-item">
                 <h3 class="vital-sign-title">Blood Pressure</h3>
                 <span class="vital-sign-details-1"></span>
@@ -16,7 +16,7 @@
             </div>
             <span class="vital-sign-more-icon">&gt;</span>
         </li>
-        <li routerLink="/lab-graph" queryParamsHandling="merge">
+        <li routerLink="/lab-graph" [queryParams]="{key:'weight'}" queryParamsHandling="merge">
             <div class="vital-sign-item">
                 <h3 class="vital-sign-title">Weight</h3>
                 <span class="vital-sign-details-1"></span>
