@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { Utilities } from 'src/app/common/utilities';
 import { ConditionLists, ConditionSummary, MccCondition } from 'src/app/generated-data-api';
 import { SubjectService } from 'src/app/services/subject/subject.service';
@@ -11,7 +11,7 @@ import { MccPatient } from 'src/generated-data-api';
   styleUrls: ['./status.component.scss']
 })
 export class StatusComponent implements OnInit {
-  ddlConditions: ConditionSummary[] = [];
+  ddlConditions$: Observable<ConditionSummary[]>
   patient: MccPatient = {};
   pId: string;
   selectedCondition: ConditionSummary = {};
@@ -51,7 +51,7 @@ export class StatusComponent implements OnInit {
           })
           // If there are active conditions with profile ids, select the first
           if (conditionLists.activeConditions.length > 0) {
-            this.ddlConditions = conditionLists.activeConditions;
+            this.ddlConditions$ = of(conditionLists.activeConditions);
             this.chronicConditionSelected(0);
           }
         }
@@ -60,8 +60,8 @@ export class StatusComponent implements OnInit {
 
   // Select drop down event to change selected chronic condition
   chronicConditionSelected = (conditionIndex: number): void => {
-    if (conditionIndex === -1) conditionIndex = 0;
-    this.selectedCondition = this.ddlConditions[conditionIndex];
+    if (conditionIndex === -1) return;
+    this.selectedCondition = this.ddlConditions$[conditionIndex];
   }
 
   filterAvailableButtons = (): void => {
