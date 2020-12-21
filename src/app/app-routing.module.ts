@@ -19,7 +19,7 @@ const routes: Routes = [
     { path: '', redirectTo: 'status', pathMatch: 'full' },
     { path: 'main', component: MainComponent },
     { path: 'launch', component: LaunchComponent },
-    { path: 'status', component: StatusComponent, canActivate: [PatientLoadedGuard], children: [] },
+    { path: 'status', component: StatusComponent, canActivate: [PatientLoadedGuard] },
     { path: 'lab-graph', component: LabGraphComponent, canActivate: [PatientLoadedGuard] },
     { path: 'lab-results', component: LabResultsComponent, canActivate: [PatientLoadedGuard] },
     { path: 'vital-signs', component: VitalSignsComponent, canActivate: [PatientLoadedGuard] },
@@ -27,7 +27,7 @@ const routes: Routes = [
     { path: 'goals', component: GoalsComponent },
     { path: 'health', component: HealthComponent },
     { path: 'careteam', component: CareteamComponent },
-    { path: 'devmode', component: SelectPatientComponent, canActivate: [DevModeGuard] }
+    { path: 'devmode', component: SelectPatientComponent, canActivate: [DevModeGuard, PatientLoadedGuard] }
 ];
 
 export const appRouting = RouterModule.forRoot(routes, { enableTracing: false });

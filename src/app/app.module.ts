@@ -25,53 +25,59 @@ import { EffectsModule } from '@ngrx/effects';
 import { PatientEffects } from './ngrx/effects/patient.effects';
 import { SelectPatientComponent } from './develop-mode/select-patient/select-patient.component';
 import { PatientLoadedGuard } from './guards/patient-loaded.guard';
-import { SubjectDataServiceService } from './services/subject-data-service.service';
-import { HttpClientModule } from '@angular/common/http';
-import { IconsModule } from './common/icons.module';
 import { ChartsModule } from 'ng2-charts';
 import { LabGraphComponent } from './main/lab-graph/lab-graph.component';
 import { LabResultsComponent } from './main/lab-results/lab-results.component';
 import { SubjectService } from './services/subject/subject.service';
 import { VitalSignsComponent } from './main/vital-signs/vital-signs.component';
+import { SubjectDataServiceService } from './services/subject-data-service.service';
+import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './common/shared.module';
+import { CareteamCaretabComponent } from './main/careteam/careteam.caretab/careteam.caretab.component';
+import { CareplanEffects } from './ngrx/effects/careplan.effects';
+import { FormsModule } from '@angular/forms';
+import { ContactEffects } from './ngrx/effects/contact.effects';
 
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        MainComponent,
-        LaunchComponent,
-        HeaderMobileComponent,
-        FooterMobileComponent,
-        LabGraphComponent,
-        LabResultsComponent,
-        SidenavComponent,
-        StatusComponent,
-        InterventionComponent,
-        GoalsComponent,
-        HealthComponent,
-        CareteamComponent,
-        SidenavComponent,
-        SelectPatientComponent,
-        VitalSignsComponent
-    ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        ChartsModule,
-        AppMaterialModule,
-        FlexLayoutModule,
-        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-        AppRoutingModule,
-        StoreModule.forRoot({ topLevel: reducer }),
-        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-        EffectsModule.forRoot([]),
-        EffectsModule.forFeature([PatientEffects]),
-        HttpClientModule,
-        IconsModule
-    ],
-    providers: [PatientLoadedGuard, SubjectDataServiceService, SubjectService],
-    exports: [RouterModule],
-    bootstrap: [AppComponent]
+        declarations: [
+                AppComponent,
+                MainComponent,
+                LaunchComponent,
+                HeaderMobileComponent,
+                FooterMobileComponent,
+                LabGraphComponent,
+                LabResultsComponent,
+                SidenavComponent,
+                StatusComponent,
+                InterventionComponent,
+                GoalsComponent,
+                HealthComponent,
+                CareteamComponent,
+                SidenavComponent,
+                SelectPatientComponent,
+                VitalSignsComponent,
+                CareteamCaretabComponent
+        ],
+        imports: [
+                BrowserModule,
+                BrowserAnimationsModule,
+                ChartsModule,
+                AppMaterialModule,
+                FlexLayoutModule,
+                ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+                AppRoutingModule,
+                StoreModule.forRoot({ topLevel: reducer }),
+                StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+                EffectsModule.forRoot([]),
+                EffectsModule.forFeature([PatientEffects, CareplanEffects, ContactEffects]),
+                HttpClientModule,
+                SharedModule,
+                FormsModule
+        ],
+        providers: [PatientLoadedGuard, SubjectDataServiceService, SubjectService],
+        exports: [RouterModule],
+        bootstrap: [AppComponent]
 })
 export class AppModule {
 }

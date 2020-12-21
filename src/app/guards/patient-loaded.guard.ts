@@ -3,8 +3,12 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree} from 
 import {Observable, of} from 'rxjs';
 import {take, tap, filter, switchMap, catchError} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
-import * as patient from '../ngrx/actions/patient.actions';
+// import * as patient from '../ngrx/actions/patient.actions';
+import {PatientActions as patient} from '../ngrx/actions';
+// import * as careplan from '../ngrx/actions/careplan.actions';
+import {CarePlanActions as careplan} from '../ngrx/actions';
 import * as fromRoot from '../ngrx/reducers';
+import {environment} from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -27,12 +31,13 @@ export class PatientLoadedGuard implements CanActivate {
 
     getFromStoreOrAPI(): Observable<any> {
         // console.log('[patient-loaded.guard.ts] getFromStoreorAPI()'); // todo: remove after testing..
-        this.store.dispatch(patient.LoadAllAction({data: null}));  // todo: remove after testing...
-        return of(true);                                            // todo: remove after testing...
+        this.store.dispatch(patient.LoadAllAction({data: null}));  // todo: remove after get code below working...
+        this.store.dispatch(careplan.LoadCarePlansForSubjectAction({data: environment.testPatients[0]}));
+        return of(true);                                            // todo: remove after get code below working...
 
         // todo:  get working below..
 
-        /*
+        /* code below checks if patients is not loaded yet.
         return this.store
             .select(fromRoot.getPatients).pipe(
              tap((data: any) => {

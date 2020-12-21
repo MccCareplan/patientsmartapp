@@ -25,6 +25,16 @@ export class DataService {
         .pipe(catchError(this.handleError));
   }
 
+  getBySubjectId(subjectId: string): Observable<any> {
+    return this.http.get(`${this.url}\\?subject=${subjectId}`)
+        .pipe(catchError(this.handleError));
+  }
+
+  getBySubjectIdAndCarePlanId(subjectId: string, carePlanId: string): Observable<any> {
+    return this.http.get(`${this.url}\\?subject=${subjectId}&careplan=${carePlanId}`)
+        .pipe(catchError(this.handleError));
+  }
+
   create(resource): Observable<any> {
     return this.http.post(this.url, JSON.stringify(resource))
         .pipe(
