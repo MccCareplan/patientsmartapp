@@ -37,6 +37,9 @@ import { CareplanEffects } from './ngrx/effects/careplan.effects';
 import { FormsModule } from '@angular/forms';
 import { ContactEffects } from './ngrx/effects/contact.effects';
 import { ConditionsSummaryEffects } from './ngrx/effects/condition-summary';
+import { GoalsTabComponent } from './main/goals/goals.tab/goals.tab.component';
+import { HealthTabComponent } from './main/health/health.tab/health.tab.component';
+import { InterventionsTabComponent } from './main/intervention/intervention.tab/intervention.tab.component';
 
 @NgModule({
         declarations: [
@@ -56,7 +59,10 @@ import { ConditionsSummaryEffects } from './ngrx/effects/condition-summary';
                 SidenavComponent,
                 SelectPatientComponent,
                 VitalSignsComponent,
-                CareteamCaretabComponent
+                CareteamCaretabComponent,
+                GoalsTabComponent,
+                HealthTabComponent,
+                InterventionsTabComponent
         ],
         imports: [
                 BrowserModule,

@@ -1,0 +1,22 @@
+.goals-container {
+    .goals-header {
+        position: relative;
+
+        h2 { 
+            padding-left: 30px;
+            margin-bottom: 10px;
+        }
+
+        .goals-title-icon {
+            height: 30px;
+            float: left;
+            padding-right: 10px;
+        }
+        .back-arrow {
+            position: absolute;
+            top: 3px;
+            left: 0;
+        }
+    }
+
+}

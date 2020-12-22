@@ -6,9 +6,13 @@
         <img class="info" src="../../../assets/svg/info_blue.svg"/>
     </div>
     <div class="lab-graph-chart">
-        <canvas baseChart height="200" [datasets]="lineChartData" [labels]="lineChartLabels"
+        <canvas *ngIf="lineChartPlugins" baseChart height="200" [datasets]="lineChartData" [labels]="lineChartLabels"
             [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
             [chartType]="lineChartType" [plugins]="lineChartPlugins">
+        </canvas>
+        <canvas *ngIf="!lineChartPlugins" baseChart height="200" [datasets]="lineChartData" [labels]="lineChartLabels"
+            [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+            [chartType]="lineChartType">
         </canvas>
     </div>
 </div>

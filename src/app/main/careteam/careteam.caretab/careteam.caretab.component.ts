@@ -70,11 +70,6 @@ export class CareteamCaretabComponent implements OnInit {
         }
     }
 
-    // onSelect(charCode): void {
-    //     this.selectedCharacter = this.char.transform(charCode);
-    //     this.selectedCharCode = charCode;
-    // }
-
     getTypeIcon(type): string {
         const icon = this.iconNames.types.filter( t => type.toLowerCase().includes(t.type.toLowerCase()));
         if (icon.length >  0) {
@@ -92,5 +87,4 @@ export class CareteamCaretabComponent implements OnInit {
             return '';
         }
     }
-
 }

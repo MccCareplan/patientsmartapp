@@ -5,7 +5,7 @@ import { AppError } from '../common/app.error';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ConditionLists } from '../generated-data-api';
+import { ConditionLists, MccObservation } from '../generated-data-api';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +38,12 @@ export class DataService {
 
   getPatientConditionsById(id: string): Observable<ConditionLists> {
     const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params: new HttpParams({ fromString: "subject=" + id }) };
+    return this.http.get(this.url, options).pipe(
+      catchError(this.handleError));
+  }
+
+  getBloodPressureById(id: string): Observable<any> {
+    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params: new HttpParams({ fromString: "subject=" + id }).set("code", "8480-6") };
     return this.http.get(this.url, options).pipe(
       catchError(this.handleError));
   }

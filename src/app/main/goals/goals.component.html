@@ -1,5 +1,18 @@
 <div class="goals-container">
     <div class="goals-header">
-        
+        <h2>
+            <img class="goals-title-icon" src="../../../assets/svg/target_blue.svg">
+            Goals & Preferences
+        </h2>
+    </div>
+    <div class="goals-tabs">
+        <mat-tab-group mat-align-tabs="center">
+            <mat-tab label="My Goals">
+                <app-goals-tab displayFilter="my-goals"></app-goals-tab>
+            </mat-tab>
+            <mat-tab label="Team's Goals">
+                <app-goals-tab displayFilter="team-goals"></app-goals-tab>
+            </mat-tab>
+        </mat-tab-group>
     </div>
 </div>
