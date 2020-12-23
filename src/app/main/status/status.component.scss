@@ -1,16 +1,19 @@
 .health-status-page {
-    .health-status-title,
+    .health-status-header {
+        position: relative;
+        text-align: center;
+
+        img {
+            height: 25px;
+            margin-bottom: -3px;
+            padding-right: 2px;
+        }
+    }
+
     .health-status-link-box {
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .health-status-icon {
-        padding-right: 5px;
-    }
-
-    .health-status-link-box {
         button {
             flex-grow: 1;
             background-color: #409fff;

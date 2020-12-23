@@ -3,7 +3,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 @Component({
   selector: 'app-careteam',
   templateUrl: './careteam.component.html',
-  styleUrls: ['./careteam.component.css'],
+  styleUrls: ['./careteam.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class CareteamComponent implements OnInit {

@@ -1,0 +1,23 @@
+.careteam-container {
+    .careteam-content {
+        flex-shrink: 1;
+        flex-grow: 1;
+        padding: 3px 5px;
+        position: relative;
+        overflow-y: auto;
+    }
+
+    .careteam-header {
+        position: relative;
+        text-align: center;
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        .careteam-title-icon {
+            height: 22px;
+            margin-bottom: -3px;
+        }
+    }
+}
