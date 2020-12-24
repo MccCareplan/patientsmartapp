@@ -6,6 +6,7 @@ import * as fromCarePlan from './careplan.reducer';
 import * as fromContact from './contact.reducer';
 import * as fromConditionsSummary from './conditions-summary.reducer';
 import * as fromGoalsSummary from "./goals-summary.reducer";
+import * as fromMedicationSummary from "./medication-summary.reducer";
 
 export interface State {
     topLevel: {
@@ -15,6 +16,7 @@ export interface State {
         contact: fromContact.State;
         conditionsSummary: fromConditionsSummary.State;
         goalsSummary: fromGoalsSummary.State;
+        medicationSummary: fromMedicationSummary.State;
     };
 }
 
@@ -24,7 +26,8 @@ const reducers = {
     careplan: fromCarePlan.reducer,
     contact: fromContact.reducer,
     conditionsSummary: fromConditionsSummary.reducer,
-    goalsSummary: fromGoalsSummary.reducer
+    goalsSummary: fromGoalsSummary.reducer,
+    medicationSummary: fromMedicationSummary.reducer
 };
 
 const combinedReducer = combineReducers(reducers);
@@ -46,8 +49,11 @@ export const getContactState = (state: State) => {
 export const getConditionsSummaryState = (state: State) => {
     return state.topLevel.conditionsSummary;
 }
-export const getGoalsSummaryState = (state: State) => { 
+export const getGoalsSummaryState = (state: State) => {
     return state.topLevel.goalsSummary;
+}
+export const getMedicationSummaryState = (state: State) => {
+    return state.topLevel.medicationSummary;
 }
 
 export const getDevModeState = (state: State) => state.topLevel.devmode;
@@ -61,3 +67,4 @@ export const getSelectedContactId = createSelector(getContactState, fromContact.
 export const getContacts = createSelector(getContactState, fromContact.getContacts);
 export const getConditionsSummary = createSelector(getConditionsSummaryState, fromConditionsSummary.getConditionsSummary);
 export const getGoalsSummary = createSelector(getGoalsSummaryState, fromGoalsSummary.getGoalsSummary);
+export const getMedicationSummary = createSelector(getMedicationSummaryState, fromMedicationSummary.getMedicationSummary);

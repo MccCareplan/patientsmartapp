@@ -15,6 +15,9 @@
                 <li *ngIf="goal.priority && goal.priority != 'Undefined'">
                     <label>Priority: </label>{{ goal.priority }}
                 </li>
+                <li *ngIf="goal.expressedByType == 'Practitioner'">
+                    <label>Practicioner: </label>{{ goal.expressedBy }}
+                </li>
             </ul>
         </div>
     </li>

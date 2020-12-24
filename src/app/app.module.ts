@@ -41,6 +41,7 @@ import { GoalsTabComponent } from './main/goals/goals.tab/goals.tab.component';
 import { HealthTabComponent } from './main/health/health.tab/health.tab.component';
 import { InterventionsTabComponent } from './main/intervention/intervention.tab/intervention.tab.component';
 import { GoalsSummaryEffects } from './ngrx/effects/goals-summary.effects';
+import { MedicationSummaryEffects } from './ngrx/effects/medication-summary.effects';
 
 @NgModule({
         declarations: [
@@ -76,7 +77,7 @@ import { GoalsSummaryEffects } from './ngrx/effects/goals-summary.effects';
                 StoreModule.forRoot({ topLevel: reducer }),
                 StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
                 EffectsModule.forRoot([]),
-                EffectsModule.forFeature([PatientEffects, CareplanEffects, ContactEffects, ConditionsSummaryEffects, GoalsSummaryEffects]),
+                EffectsModule.forFeature([PatientEffects, CareplanEffects, ContactEffects, ConditionsSummaryEffects, GoalsSummaryEffects, MedicationSummaryEffects]),
                 HttpClientModule,
                 SharedModule,
                 FormsModule

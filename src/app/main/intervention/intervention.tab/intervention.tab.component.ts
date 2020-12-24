@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../ngrx/reducers';
 import { Observable, of, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { MedicationLists } from 'src/app/generated-data-api';
 
 @Component({
     selector: 'app-interventions-tab',
@@ -16,11 +17,16 @@ export class InterventionsTabComponent implements OnInit {
     @Input()
     displayFilter: string;
 
+    medicationLists$: Observable<MedicationLists>;
+
     constructor(private char: CharPipe, private store: Store<fromRoot.State>) {
 
     }
 
     ngOnInit(): void {
-
+        this.medicationLists$ = this.store.select(fromRoot.getMedicationSummary);
+        this.medicationLists$.subscribe(x => {
+            debugger;
+        })
     }
 }

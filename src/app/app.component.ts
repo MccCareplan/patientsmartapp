@@ -7,7 +7,8 @@ import {
     DevModeActions as devmode,
     ContactActions as contact,
     ConditionSummaryActions as conditionsSummary,
-    GoalsSummaryActions as goalsSummary
+    GoalsSummaryActions as goalsSummary,
+    MedicationSummaryActions as medicationSummary
 } from './ngrx/actions';
 import * as fromRoot from './ngrx/reducers';
 
@@ -41,6 +42,7 @@ export class AppComponent implements OnInit {
                 this.store.dispatch(conditionsSummary.loadConditionSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
                 this.store.dispatch(goalsSummary.loadGoalsSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
                 this.store.dispatch(careplan.LoadCarePlansForSubjectAction({ data: this.currentSubjectId }));
+                this.store.dispatch(medicationSummary.loadMedicationSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
                 this.careplanid$.subscribe(c => this.store.dispatch(contact.loadContactsForSubjectAndCarePlanAction({ subjectId: this.currentSubjectId, carePlanId: c })));
             }
         });
