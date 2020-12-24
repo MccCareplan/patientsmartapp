@@ -3,14 +3,17 @@
         <div class="goals-item">
             <h3 class="goals-title">{{ goal.description }}</h3>
             <ul>
-                <li>
-                    Treatment in case of kidney failure: Transplant
+                <li *ngIf="goal.startDateText">
+                    <label>Start Date: </label>{{ goal.startDateText }}
                 </li>
-                <li>
-                    Type of donor kidney: Deceased
+                <li *ngIf="goal.targetDateText">
+                    <label>Target Date: </label>{{ goal.targetDateText }}
                 </li>
-                <li>
-                    Preferred dialysis if required:
+                <li *ngIf="goal.lifecycleStatus">
+                    <label>Status: </label>{{ goal.lifecycleStatus }}
+                </li>
+                <li *ngIf="goal.priority && goal.priority != 'Undefined'">
+                    <label>Priority: </label>{{ goal.priority }}
                 </li>
             </ul>
         </div>
