@@ -1,10 +1,16 @@
-<ul class="health-items">
-    <li>
+<ul class="health-items" *ngIf="displayFilter=='social'">
+    <li *ngFor="let socialConcern of socialConcerns$ | async">
         <div class="health-item">
-            <h3 class="health-title">Dyslipidemia</h3>
+            <h3 class="health-title">{{ socialConcern.name }}</h3>
             <ul>
-                <li>
-
+                <li *ngIf="socialConcern.data">
+                    <label>Data:</label> {{socialConcern.data}}
+                </li>
+                <li *ngIf="socialConcern.date">
+                    <label>Date:</label> {{socialConcern.date}}
+                </li>
+                <li *ngIf="socialConcern.description">
+                    <label>Description:</label> {{socialConcern.description}}
                 </li>
             </ul>
         </div>

@@ -7,6 +7,7 @@ import * as fromContact from './contact.reducer';
 import * as fromConditionsSummary from './conditions-summary.reducer';
 import * as fromGoalsSummary from "./goals-summary.reducer";
 import * as fromMedicationSummary from "./medication-summary.reducer";
+import * as fromSocialConcerns from "./social-concerns.reducer";
 
 export interface State {
     topLevel: {
@@ -17,6 +18,7 @@ export interface State {
         conditionsSummary: fromConditionsSummary.State;
         goalsSummary: fromGoalsSummary.State;
         medicationSummary: fromMedicationSummary.State;
+        socialConcerns: fromSocialConcerns.State;
     };
 }
 
@@ -27,7 +29,8 @@ const reducers = {
     contact: fromContact.reducer,
     conditionsSummary: fromConditionsSummary.reducer,
     goalsSummary: fromGoalsSummary.reducer,
-    medicationSummary: fromMedicationSummary.reducer
+    medicationSummary: fromMedicationSummary.reducer,
+    socialConcerns: fromSocialConcerns.reducer
 };
 
 const combinedReducer = combineReducers(reducers);
@@ -55,6 +58,9 @@ export const getGoalsSummaryState = (state: State) => {
 export const getMedicationSummaryState = (state: State) => {
     return state.topLevel.medicationSummary;
 }
+export const getSocialConcernsState = (state: State) => {
+    return state.topLevel.socialConcerns;
+}
 
 export const getDevModeState = (state: State) => state.topLevel.devmode;
 export const getPatientProfile = createSelector(getPatientState, fromPatient.getProfile);
@@ -68,3 +74,4 @@ export const getContacts = createSelector(getContactState, fromContact.getContac
 export const getConditionsSummary = createSelector(getConditionsSummaryState, fromConditionsSummary.getConditionsSummary);
 export const getGoalsSummary = createSelector(getGoalsSummaryState, fromGoalsSummary.getGoalsSummary);
 export const getMedicationSummary = createSelector(getMedicationSummaryState, fromMedicationSummary.getMedicationSummary);
+export const getSocialConcerns = createSelector(getSocialConcernsState, fromSocialConcerns.getSocialConcerns);
