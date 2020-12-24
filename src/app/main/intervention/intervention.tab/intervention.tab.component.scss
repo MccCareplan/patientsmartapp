@@ -10,12 +10,6 @@ ul.interventions-items {
         width: 100%;
         margin-bottom: 20px;
 
-        &:nth-of-type(even) {
-            h3 {
-                font-weight: normal;
-            }
-        }
-
         h3 {
             margin: 0;
             font-size: 1em;
@@ -29,6 +23,14 @@ ul.interventions-items {
             > ul {
                 padding-left: 20px;
                 list-style: disc;
+
+                li { 
+                    label { 
+                        font-weight: 500;
+                        text-decoration: underline;
+                        padding-right: 5px;
+                    }
+                }
             }
         }
     }

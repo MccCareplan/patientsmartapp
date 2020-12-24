@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../ngrx/reducers';
 import { Observable, of, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MedicationLists } from 'src/app/generated-data-api';
+import { MccMedicationRecord, MedicationLists } from 'src/app/generated-data-api';
 
 @Component({
     selector: 'app-interventions-tab',
@@ -18,6 +18,7 @@ export class InterventionsTabComponent implements OnInit {
     displayFilter: string;
 
     medicationLists$: Observable<MedicationLists>;
+    medications$: Observable<MccMedicationRecord[]>;
 
     constructor(private char: CharPipe, private store: Store<fromRoot.State>) {
 
@@ -26,7 +27,9 @@ export class InterventionsTabComponent implements OnInit {
     ngOnInit(): void {
         this.medicationLists$ = this.store.select(fromRoot.getMedicationSummary);
         this.medicationLists$.subscribe(x => {
-            debugger;
+            if (x.activeMedications) {
+                this.medications$ = of(x.activeMedications);
+            }
         })
     }
 }
