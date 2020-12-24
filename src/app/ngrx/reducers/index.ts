@@ -5,6 +5,7 @@ import * as fromDevMode from './dev-mode.reducer';
 import * as fromCarePlan from './careplan.reducer';
 import * as fromContact from './contact.reducer';
 import * as fromConditionsSummary from './conditions-summary.reducer';
+import * as fromGoalsSummary from "./goals-summary.reducer";
 
 export interface State {
     topLevel: {
@@ -13,6 +14,7 @@ export interface State {
         careplan: fromCarePlan.State;
         contact: fromContact.State;
         conditionsSummary: fromConditionsSummary.State;
+        goalsSummary: fromGoalsSummary.State;
     };
 }
 
@@ -21,7 +23,8 @@ const reducers = {
     devmode: fromDevMode.reducer,
     careplan: fromCarePlan.reducer,
     contact: fromContact.reducer,
-    conditionsSummary: fromConditionsSummary.reducer
+    conditionsSummary: fromConditionsSummary.reducer,
+    goalsSummary: fromGoalsSummary.reducer
 };
 
 const combinedReducer = combineReducers(reducers);
@@ -43,6 +46,9 @@ export const getContactState = (state: State) => {
 export const getConditionsSummaryState = (state: State) => {
     return state.topLevel.conditionsSummary;
 }
+export const getGoalsSummaryState = (state: State) => { 
+    return state.topLevel.goalsSummary;
+}
 
 export const getDevModeState = (state: State) => state.topLevel.devmode;
 export const getPatientProfile = createSelector(getPatientState, fromPatient.getProfile);
@@ -54,3 +60,4 @@ export const getSelectedCarePlanId = createSelector(getCarePlansState, fromCareP
 export const getSelectedContactId = createSelector(getContactState, fromContact.getSelectedContactId);
 export const getContacts = createSelector(getContactState, fromContact.getContacts);
 export const getConditionsSummary = createSelector(getConditionsSummaryState, fromConditionsSummary.getConditionsSummary);
+export const getGoalsSummary = createSelector(getGoalsSummaryState, fromGoalsSummary.getGoalsSummary);

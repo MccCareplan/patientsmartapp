@@ -48,6 +48,12 @@ export class DataService {
       catchError(this.handleError));
   }
 
+  getGoalsSummaryById(id: string): Observable<any> {
+    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params: new HttpParams({ fromString: "subject=" + id }) };
+    return this.http.get(this.url, options).pipe(
+      catchError(this.handleError));
+  }
+
   create(resource): Observable<any> {
     return this.http.post(this.url, JSON.stringify(resource))
       .pipe(
