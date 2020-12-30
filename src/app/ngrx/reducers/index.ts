@@ -8,6 +8,7 @@ import * as fromConditionsSummary from './conditions-summary.reducer';
 import * as fromGoalsSummary from "./goals-summary.reducer";
 import * as fromMedicationSummary from "./medication-summary.reducer";
 import * as fromSocialConcerns from "./social-concerns.reducer";
+import * as fromCarePlansSummary from "./careplans-summary.reducer";
 
 export interface State {
     topLevel: {
@@ -19,6 +20,7 @@ export interface State {
         goalsSummary: fromGoalsSummary.State;
         medicationSummary: fromMedicationSummary.State;
         socialConcerns: fromSocialConcerns.State;
+        carePlansSummary: fromCarePlansSummary.State;
     };
 }
 
@@ -30,7 +32,8 @@ const reducers = {
     conditionsSummary: fromConditionsSummary.reducer,
     goalsSummary: fromGoalsSummary.reducer,
     medicationSummary: fromMedicationSummary.reducer,
-    socialConcerns: fromSocialConcerns.reducer
+    socialConcerns: fromSocialConcerns.reducer,
+    carePlansSummary: fromCarePlansSummary.reducer
 };
 
 const combinedReducer = combineReducers(reducers);
@@ -61,6 +64,9 @@ export const getMedicationSummaryState = (state: State) => {
 export const getSocialConcernsState = (state: State) => {
     return state.topLevel.socialConcerns;
 }
+export const getCarePlansSummaryState = (state: State) => {
+    return state.topLevel.carePlansSummary;
+}
 
 export const getDevModeState = (state: State) => state.topLevel.devmode;
 export const getPatientProfile = createSelector(getPatientState, fromPatient.getProfile);
@@ -75,3 +81,4 @@ export const getConditionsSummary = createSelector(getConditionsSummaryState, fr
 export const getGoalsSummary = createSelector(getGoalsSummaryState, fromGoalsSummary.getGoalsSummary);
 export const getMedicationSummary = createSelector(getMedicationSummaryState, fromMedicationSummary.getMedicationSummary);
 export const getSocialConcerns = createSelector(getSocialConcernsState, fromSocialConcerns.getSocialConcerns);
+export const getCarePlansSummary = createSelector(getCarePlansSummaryState, fromCarePlansSummary.getCarePlansSummary);

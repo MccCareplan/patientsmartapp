@@ -7,5 +7,6 @@ import * as BloodPressureActions from "./blood-pressure.actions";
 import * as GoalsSummaryActions from "./goals-summary.actions";
 import * as MedicationSummaryActions from "./medication-summary.actions";
 import * as SocialConcernsActions from "./social-concerns.actions";
+import * as CareplansSummaryActions from "./careplans-summary.actions";
 
-export { CarePlanActions, DevModeActions, PatientActions, ContactActions, ConditionSummaryActions, BloodPressureActions, GoalsSummaryActions, MedicationSummaryActions, SocialConcernsActions };
+export { CarePlanActions, DevModeActions, PatientActions, ContactActions, ConditionSummaryActions, BloodPressureActions, GoalsSummaryActions, MedicationSummaryActions, SocialConcernsActions, CareplansSummaryActions };
