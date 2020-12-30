@@ -1,11 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SharedModule } from '../../../common/shared.module';
 import { CharPipe } from '../../../common/char.pipe';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../ngrx/reducers';
 import { Observable, of, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { MccMedicationRecord, MedicationLists } from 'src/app/generated-data-api';
+import { EducationSummary } from 'src/generated-data-api/models/EducationSummary';
 
 @Component({
     selector: 'app-interventions-tab',
@@ -20,6 +19,8 @@ export class InterventionsTabComponent implements OnInit {
     medicationLists$: Observable<MedicationLists>;
     medications$: Observable<MccMedicationRecord[]>;
 
+    educationSummaries$: Observable<EducationSummary[]>;
+
     constructor(private char: CharPipe, private store: Store<fromRoot.State>) {
 
     }
@@ -31,5 +32,8 @@ export class InterventionsTabComponent implements OnInit {
                 this.medications$ = of(x.activeMedications);
             }
         })
+
+        this.educationSummaries$ = this.store.select(fromRoot.getEducationSummary);
+        
     }
 }

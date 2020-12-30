@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { MccCarePlanSummary } from 'src/generated-data-api/models/MccCarePlanSummary';
 import {
     PatientActions as patient,
     CarePlanActions as careplan,
@@ -12,7 +10,8 @@ import {
     GoalsSummaryActions as goalsSummary,
     MedicationSummaryActions as medicationSummary,
     SocialConcernsActions as socialConcerns,
-    CareplansSummaryActions as carePlansSummary
+    CareplansSummaryActions as carePlansSummary,
+    EducationSummaryActions as educationSummary
 } from './ngrx/actions';
 import * as fromRoot from './ngrx/reducers';
 
@@ -23,7 +22,6 @@ import * as fromRoot from './ngrx/reducers';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    initialLoadDone: boolean = false;
     title = 'Patient Smart App';
 
     constructor(
@@ -32,35 +30,49 @@ export class AppComponent implements OnInit {
     ) {
     }
 
-    carePlansSummary$: Observable<MccCarePlanSummary[]> = this.store.select(fromRoot.getCarePlansSummary);
-    currentSubjectId = '';
-    carePlanId = '';
     devmode = false;
 
     ngOnInit(): void {
+        let initialLoadDone = false;
+
         this.route.queryParams.subscribe(params => {
-            if (!this.initialLoadDone) {
+            if (!initialLoadDone) {
                 const dev = params.devmode;
                 this.devmode = (dev === 'true');
                 this.store.dispatch(devmode.EditAction({ data: this.devmode }));
+
+                let currentSubjectId: string = '';
+                let carePlanId: string = '';
+
                 if (params.subject != null) {
-                    this.currentSubjectId = params.subject;
+                    currentSubjectId = params.subject;
                     // Load best careplan for the subject, then load subsequent data
-                    // ?? Should calls with optional careplan param have it passed in ??
-                    this.carePlansSummary$.subscribe(c => {
+                    this.store.dispatch(carePlansSummary.loadCareplansSummaryForSubjectAction({ subjectId: currentSubjectId }));
+                    this.store.select(fromRoot.getCarePlansSummary).subscribe(c => {
                         if (c && c.length > 0) {
-                            this.carePlanId = c[0].profiles[0];
-                            this.store.dispatch(contact.loadContactsForSubjectAndCarePlanAction({ subjectId: this.currentSubjectId, carePlanId: this.carePlanId }));
-                            this.store.dispatch(patient.SelectAction({ data: this.currentSubjectId }));
-                            this.store.dispatch(conditionsSummary.loadConditionSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
-                            this.store.dispatch(goalsSummary.loadGoalsSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
-                            this.store.dispatch(careplan.LoadCarePlansForSubjectAction({ data: this.currentSubjectId }));
-                            this.store.dispatch(medicationSummary.loadMedicationSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
-                            this.store.dispatch(socialConcerns.loadSocialConcernsForSubjectAction({ subjectId: this.currentSubjectId }));
-                            this.initialLoadDone = true;
+                            // Set default careplan
+                            carePlanId = c[0].profiles[0]; // Should calls with optional careplan param have it passed in? 
+
+                            // CarePlan Screen
+                            this.store.dispatch(contact.loadContactsForSubjectAndCarePlanAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
+                            this.store.dispatch(patient.SelectAction({ data: currentSubjectId }));
+
+                            // Health Status Screen
+                            this.store.dispatch(conditionsSummary.loadConditionSummaryForSubjectAction({ subjectId: currentSubjectId }));
+
+                            // Interventions & Maintenance Screen
+                            this.store.dispatch(medicationSummary.loadMedicationSummaryForSubjectAction({ subjectId: currentSubjectId }));
+                            this.store.dispatch(educationSummary.loadEducationSummaryForSubjectAction({ subjectId: currentSubjectId }));
+
+                            // Goals & Preferences Screen
+                            this.store.dispatch(goalsSummary.loadGoalsSummaryForSubjectAction({ subjectId: currentSubjectId }));
+
+                            // Health Concerns Screen
+                            this.store.dispatch(socialConcerns.loadSocialConcernsForSubjectAction({ subjectId: currentSubjectId }));
+
+                            initialLoadDone = true;
                         }
                     })
-                    this.store.dispatch(carePlansSummary.loadCareplansSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
                 }
             }
         });

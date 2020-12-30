@@ -1,8 +1,8 @@
-<ul class="interventions-items">
+<ul class="interventions-items" *ngIf="displayFilter=='maintenance'">
     <li *ngFor="let medication of medications$ | async">
         <div class="interventions-item">
             <h3 class="interventions-title">{{ medication.medication | titlecase }}</h3>
-            <hr/>
+            <hr />
             <ul>
                 <li *ngIf="medication.dosages">
                     <label>Dosages:</label>
@@ -26,6 +26,72 @@
                     <label>Status:</label>
                     <span>
                         {{ medication.status | titlecase }}
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>
+<ul class="interventions-items" *ngIf="displayFilter=='interventions'">
+    <li *ngFor="let education of educationSummaries$ | async">
+        <div class="interventions-item">
+            <h3 class="interventions-title">{{ education.topic | titlecase }}</h3>
+            <hr />
+            <ul>
+                <li *ngIf="education.type">
+                    <label>Type:</label>
+                    <span>
+                        {{ education.type }}
+                    </span>
+                </li>
+                <li *ngIf="education.displayDate">
+                    <label>Date:</label>
+                    <span>
+                        {{ education.displayDate }}
+                    </span>
+                </li>
+                <li *ngIf="education.status">
+                    <label>Status:</label>
+                    <span>
+                        {{ education.status | titlecase }}
+                    </span>
+                </li>
+                <li *ngIf="education.outcome">
+                    <label>Outcome:</label>
+                    <span>
+                        {{ education.outcome }}
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </li>
+    <li *ngFor="let education of educationSummaries$ | async">
+        <div class="interventions-item">
+            <h3 class="interventions-title">{{ education.topic | titlecase }}</h3>
+            <hr />
+            <ul>
+                <li *ngIf="education.type">
+                    <label>Type:</label>
+                    <span>
+                        {{ education.type }}
+                    </span>
+                </li>
+                <li *ngIf="education.displayDate">
+                    <label>Date:</label>
+                    <span>
+                        {{ education.displayDate }}
+                    </span>
+                </li>
+                <li *ngIf="education.status">
+                    <label>Status:</label>
+                    <span>
+                        {{ education.status | titlecase }}
+                    </span>
+                </li>
+                <li *ngIf="education.outcome">
+                    <label>Outcome:</label>
+                    <span>
+                        {{ education.outcome }}
                     </span>
                 </li>
             </ul>

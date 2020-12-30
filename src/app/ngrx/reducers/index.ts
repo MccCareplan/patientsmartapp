@@ -9,6 +9,7 @@ import * as fromGoalsSummary from "./goals-summary.reducer";
 import * as fromMedicationSummary from "./medication-summary.reducer";
 import * as fromSocialConcerns from "./social-concerns.reducer";
 import * as fromCarePlansSummary from "./careplans-summary.reducer";
+import * as fromEducationSummary from "./education-summary.reducer";
 
 export interface State {
     topLevel: {
@@ -21,6 +22,7 @@ export interface State {
         medicationSummary: fromMedicationSummary.State;
         socialConcerns: fromSocialConcerns.State;
         carePlansSummary: fromCarePlansSummary.State;
+        educationSummary: fromEducationSummary.State;
     };
 }
 
@@ -33,7 +35,8 @@ const reducers = {
     goalsSummary: fromGoalsSummary.reducer,
     medicationSummary: fromMedicationSummary.reducer,
     socialConcerns: fromSocialConcerns.reducer,
-    carePlansSummary: fromCarePlansSummary.reducer
+    carePlansSummary: fromCarePlansSummary.reducer,
+    educationSummary: fromEducationSummary.reducer
 };
 
 const combinedReducer = combineReducers(reducers);
@@ -67,6 +70,9 @@ export const getSocialConcernsState = (state: State) => {
 export const getCarePlansSummaryState = (state: State) => {
     return state.topLevel.carePlansSummary;
 }
+export const getEducationSummaryState = (state: State) => {
+    return state.topLevel.educationSummary;
+}
 
 export const getDevModeState = (state: State) => state.topLevel.devmode;
 export const getPatientProfile = createSelector(getPatientState, fromPatient.getProfile);
@@ -82,3 +88,4 @@ export const getGoalsSummary = createSelector(getGoalsSummaryState, fromGoalsSum
 export const getMedicationSummary = createSelector(getMedicationSummaryState, fromMedicationSummary.getMedicationSummary);
 export const getSocialConcerns = createSelector(getSocialConcernsState, fromSocialConcerns.getSocialConcerns);
 export const getCarePlansSummary = createSelector(getCarePlansSummaryState, fromCarePlansSummary.getCarePlansSummary);
+export const getEducationSummary = createSelector(getEducationSummaryState, fromEducationSummary.getEducationSummary);
