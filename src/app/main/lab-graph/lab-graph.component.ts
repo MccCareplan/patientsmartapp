@@ -57,12 +57,30 @@ export class LabGraphComponent implements OnInit {
   bp = (): void => {
     this.title = "My Blood Pressure";
     this.description = "Systolic and Dystolic values over time";
+    this.testData();
+
   }
 
   egfr = (): void => {
+    //http://localhost:8081/observationsbyvalueset?subject=cc-pat-pnoelle&valueset=2.16.840.1.113762.1.4.1222.179  EGFR
     this.title = "My GFR Results";
     this.description = "GFR Tests how well your kidneys work";
-    //http://localhost:8081/observationsbyvalueset?subject=cc-pat-pnoelle&valueset=2.16.840.1.113762.1.4.1222.179  EGFR
+    this.testData();
+  }
+
+  uacr = (): void => {
+    //http://localhost:8081/observationsbyvalueset?subject=cc-pat-pnoelle&valueset=2.16.840.1.113883.3.6929.2.1002 UACR
+    this.title = "UACR Results";
+    this.testData();
+  }
+
+  weight = (): void => {
+    this.title = "My Weight Results";
+    this.description = "Your weight over time"
+    this.testData();
+  }
+
+  testData = (): void => {
     this.lineChartAnnotations = getEgrLineChartAnnotationsObject();
     this.lineChartData = [
       {
@@ -133,15 +151,5 @@ export class LabGraphComponent implements OnInit {
     this.lineChartLegend = false;
     this.lineChartType = "line";
     this.lineChartPlugins = [pluginAnnotations];
-  }
-
-  uacr = (): void => {
-    //http://localhost:8081/observationsbyvalueset?subject=cc-pat-pnoelle&valueset=2.16.840.1.113883.3.6929.2.1002 UACR
-    this.title = "UACR Results";
-  }
-
-  weight = (): void => {
-    this.title = "My Weight Results";
-    this.description = "Your weight over time"
   }
 }

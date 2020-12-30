@@ -1,11 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SharedModule } from '../../../common/shared.module';
 import { CharPipe } from '../../../common/char.pipe';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../ngrx/reducers';
-import { Observable, of, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { SocialConcern } from 'src/app/generated-data-api';
+import { Observable } from 'rxjs';
+import { ConditionLists, SocialConcern } from 'src/app/generated-data-api';
 
 @Component({
     selector: 'app-health-tab',
@@ -18,6 +16,7 @@ export class HealthTabComponent implements OnInit {
     displayFilter: string;
 
     socialConcerns$: Observable<SocialConcern[]>;
+    conditionsList$: Observable<ConditionLists>;
 
     constructor(private char: CharPipe, private store: Store<fromRoot.State>) {
 
@@ -25,5 +24,6 @@ export class HealthTabComponent implements OnInit {
 
     ngOnInit(): void {
         this.socialConcerns$ = this.store.select(fromRoot.getSocialConcerns);
+        this.conditionsList$ = this.store.select(fromRoot.getConditionsSummary);
     }
 }

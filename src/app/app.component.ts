@@ -20,6 +20,7 @@ import * as fromRoot from './ngrx/reducers';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+    initialLoadDone: boolean = false;
     title = 'Patient Smart App';
 
     constructor(
@@ -33,19 +34,23 @@ export class AppComponent implements OnInit {
     devmode = false;
 
     ngOnInit(): void {
+        console.log("Test");
         this.route.queryParams.subscribe(params => {
-            const dev = params.devmode;
-            this.devmode = (dev === 'true');
-            this.store.dispatch(devmode.EditAction({ data: this.devmode }));
-            if (params.subject != null) {
-                this.currentSubjectId = params.subject;
-                this.store.dispatch(patient.SelectAction({ data: this.currentSubjectId }));
-                this.store.dispatch(conditionsSummary.loadConditionSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
-                this.store.dispatch(goalsSummary.loadGoalsSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
-                this.store.dispatch(careplan.LoadCarePlansForSubjectAction({ data: this.currentSubjectId }));
-                this.store.dispatch(medicationSummary.loadMedicationSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
-                this.store.dispatch(socialConcerns.loadSocialConcernsForSubjectAction({ subjectId: this.currentSubjectId }));
-                this.careplanid$.subscribe(c => this.store.dispatch(contact.loadContactsForSubjectAndCarePlanAction({ subjectId: this.currentSubjectId, carePlanId: c })));
+            if (!this.initialLoadDone) {
+                const dev = params.devmode;
+                this.devmode = (dev === 'true');
+                this.store.dispatch(devmode.EditAction({ data: this.devmode }));
+                if (params.subject != null) {
+                    this.currentSubjectId = params.subject;
+                    this.store.dispatch(patient.SelectAction({ data: this.currentSubjectId }));
+                    this.store.dispatch(conditionsSummary.loadConditionSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
+                    this.store.dispatch(goalsSummary.loadGoalsSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
+                    this.store.dispatch(careplan.LoadCarePlansForSubjectAction({ data: this.currentSubjectId }));
+                    this.store.dispatch(medicationSummary.loadMedicationSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
+                    this.store.dispatch(socialConcerns.loadSocialConcernsForSubjectAction({ subjectId: this.currentSubjectId }));
+                    this.careplanid$.subscribe(c => this.store.dispatch(contact.loadContactsForSubjectAndCarePlanAction({ subjectId: this.currentSubjectId, carePlanId: c })));
+                    this.initialLoadDone = true;
+                }
             }
         });
     }

@@ -2,6 +2,7 @@
     <li *ngFor="let goal of filteredGoals$ | async">
         <div class="goals-item">
             <h3 class="goals-title">{{ goal.description }}</h3>
+            <hr/>
             <ul>
                 <li *ngIf="goal.startDateText">
                     <label>Start Date: </label>{{ goal.startDateText }}
@@ -10,10 +11,10 @@
                     <label>Target Date: </label>{{ goal.targetDateText }}
                 </li>
                 <li *ngIf="goal.lifecycleStatus">
-                    <label>Status: </label>{{ goal.lifecycleStatus }}
+                    <label>Status: </label>{{ goal.lifecycleStatus | titlecase }}
                 </li>
                 <li *ngIf="goal.priority && goal.priority != 'Undefined'">
-                    <label>Priority: </label>{{ goal.priority }}
+                    <label>Priority: </label>{{ goal.priority | titlecase }}
                 </li>
                 <li *ngIf="goal.expressedByType == 'Practitioner'">
                     <label>Practicioner: </label>{{ goal.expressedBy }}

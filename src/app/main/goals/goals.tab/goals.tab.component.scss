@@ -10,19 +10,25 @@ ul.goals-items {
         width: 100%;
         margin-bottom: 20px;
 
-        h3 {
-            margin: 0;
-            font-size: 1em;
-            padding-bottom: 5px;
-        }
-
-        .goals-item {
+        > div {
             padding: 15px;
             padding-top: 12px;
 
+            h3 {
+                margin: 0;
+                font-size: 1em;
+            }
+
             > ul {
-                padding-left: 20px;
-                list-style: disc;
+                padding-left: 0px;
+                list-style-type: none;
+
+                li {
+                    label {
+                        font-weight: 500;
+                        padding-right: 5px;
+                    }
+                }
             }
         }
     }

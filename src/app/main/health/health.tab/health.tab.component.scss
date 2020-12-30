@@ -5,31 +5,30 @@ ul.health-items {
     > li {
         background-color: #f1f9ff;
         position: relative;
-        min-height: 90px;
         float: left;
         clear: both;
         width: 100%;
         margin-bottom: 20px;
 
-        h3 {
-            margin: 0;
-        }
-
-        .health-item {
+        > div {
             padding: 15px;
             padding-top: 12px;
 
-            .health-title {
-                font-weight: 500;
-                padding-bottom: 5px;
+            h3 {
+                margin: 0;
                 font-size: 1em;
             }
 
-            .health-details {
-                color: #409fff;
-                clear: both;
-                float: left;
-                font-size: 0.8em;
+            > ul {
+                padding-left: 0px;
+                list-style-type: none;
+
+                li {
+                    label {
+                        font-weight: 500;
+                        padding-right: 5px;
+                    }
+                }
             }
         }
     }

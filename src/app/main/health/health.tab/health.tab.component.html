@@ -2,15 +2,32 @@
     <li *ngFor="let socialConcern of socialConcerns$ | async">
         <div class="health-item">
             <h3 class="health-title">{{ socialConcern.name }}</h3>
+            <hr/>
             <ul>
                 <li *ngIf="socialConcern.data">
-                    <label>Data:</label> {{socialConcern.data}}
+                    <label>Data:</label> {{socialConcern.data | titlecase }}
                 </li>
                 <li *ngIf="socialConcern.date">
                     <label>Date:</label> {{socialConcern.date}}
                 </li>
                 <li *ngIf="socialConcern.description">
                     <label>Description:</label> {{socialConcern.description}}
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>
+<ul class="health-items" *ngIf="displayFilter=='health'">
+    <li *ngFor="let healthConcern of (conditionsList$ | async).activeConditions">
+        <div class="health-item">
+            <h3 class="health-title">{{ healthConcern.code.text }}</h3>
+            <hr/>
+            <ul>
+                <li *ngIf="healthConcern.firstOnset">
+                    <label>First Onset:</label> {{healthConcern.firstOnset | titlecase }}
+                </li>
+                <li *ngIf="healthConcern.clinicalStatus">
+                    <label>Clinical Status:</label> {{healthConcern.clinicalStatus | titlecase}}
                 </li>
             </ul>
         </div>

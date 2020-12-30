@@ -1,19 +1,32 @@
 <ul class="interventions-items">
     <li *ngFor="let medication of medications$ | async">
         <div class="interventions-item">
-            <h3 class="interventions-title">{{ medication.medication }}</h3>
+            <h3 class="interventions-title">{{ medication.medication | titlecase }}</h3>
+            <hr/>
             <ul>
                 <li *ngIf="medication.dosages">
-                    <label>Dosages:</label>{{ medication.dosages }}
+                    <label>Dosages:</label>
+                    <span>
+                        {{ medication.dosages }}
+                    </span>
                 </li>
                 <li *ngIf="medication.reasons">
-                    <label>Reasons:</label>{{ medication.reasons }}
+                    <label>Reasons:</label>
+                    <span>
+                        {{ medication.reasons }}
+                    </span>
                 </li>
                 <li *ngIf="medication.requestedBy">
-                    <label>Requested By:</label>{{ medication.requestedBy }}
+                    <label>Requested By:</label>
+                    <span>
+                        {{ medication.requestedBy }}
+                    </span>
                 </li>
                 <li *ngIf="medication.status">
-                    <label>Status:</label>{{ medication.status }}
+                    <label>Status:</label>
+                    <span>
+                        {{ medication.status | titlecase }}
+                    </span>
                 </li>
             </ul>
         </div>
