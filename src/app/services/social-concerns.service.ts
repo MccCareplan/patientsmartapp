@@ -15,6 +15,6 @@ export class SocialConcernsService extends DataService {
     }
 
     getSocialConcernsByPatientId(subjectId: string): Observable<SocialConcern[]> {
-        return this.getSocialConcernsById(subjectId);
+        return this.getBySubjectId(subjectId);
     }
 }

@@ -15,6 +15,6 @@ export class GoalsSummaryService extends DataService {
     }
 
     getGoalsSummaryByPatientId(subjectId: string): Observable<GoalLists> {
-        return this.getGoalsSummaryById(subjectId);
+        return this.getBySubjectId(subjectId);
     }
 }

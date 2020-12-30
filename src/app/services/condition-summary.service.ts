@@ -15,6 +15,6 @@ export class ConditionSummaryService extends DataService {
     }
 
     getConditionsSummaryPatientId(subjectId: string): Observable<ConditionLists> {
-        return this.getPatientConditionsById(subjectId);
+        return this.getBySubjectId(subjectId);
     }
 }

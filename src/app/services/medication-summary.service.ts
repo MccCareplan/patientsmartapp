@@ -15,6 +15,6 @@ export class MedicationSummaryService extends DataService {
     }
 
     getMedicationSummaryByPatientId(subjectId: string): Observable<MedicationLists> {
-        return this.getMedicationSummaryById(subjectId);
+        return this.getBySubjectId(subjectId);
     }
 }
