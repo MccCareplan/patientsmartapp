@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {
     PatientActions as patient,
-    CarePlanActions as careplan,
     DevModeActions as devmode,
     ContactActions as contact,
     ConditionSummaryActions as conditionsSummary,
@@ -11,7 +10,8 @@ import {
     MedicationSummaryActions as medicationSummary,
     SocialConcernsActions as socialConcerns,
     CareplansSummaryActions as carePlansSummary,
-    EducationSummaryActions as educationSummary
+    EducationSummaryActions as educationSummary,
+    ReferralsSummaryActions as referralsSummary
 } from './ngrx/actions';
 import * as fromRoot from './ngrx/reducers';
 
@@ -63,6 +63,7 @@ export class AppComponent implements OnInit {
                             // Interventions & Maintenance Screen
                             this.store.dispatch(medicationSummary.loadMedicationSummaryForSubjectAction({ subjectId: currentSubjectId }));
                             this.store.dispatch(educationSummary.loadEducationSummaryForSubjectAction({ subjectId: currentSubjectId }));
+                            this.store.dispatch(referralsSummary.loadReferralsSummaryForSubjectAction({ subjectId: currentSubjectId }));
 
                             // Goals & Preferences Screen
                             this.store.dispatch(goalsSummary.loadGoalsSummaryForSubjectAction({ subjectId: currentSubjectId }));

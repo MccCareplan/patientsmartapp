@@ -45,6 +45,7 @@ import { MedicationSummaryEffects } from './ngrx/effects/medication-summary.effe
 import { SocialConcernsEffects } from './ngrx/effects/social-concerns.effects';
 import { CareplansSummaryEffects } from './ngrx/effects/careplans-summary.effects';
 import { EducationSummaryEffects } from './ngrx/effects/education-summary.effects';
+import { ReferralsSummaryEffects } from './ngrx/effects/referrals-summary.effects';
 
 @NgModule({
         declarations: [
@@ -80,7 +81,7 @@ import { EducationSummaryEffects } from './ngrx/effects/education-summary.effect
                 StoreModule.forRoot({ topLevel: reducer }),
                 StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
                 EffectsModule.forRoot([]),
-                EffectsModule.forFeature([PatientEffects, CareplanEffects, ContactEffects, ConditionsSummaryEffects, GoalsSummaryEffects, MedicationSummaryEffects, SocialConcernsEffects, CareplansSummaryEffects, EducationSummaryEffects]),
+                EffectsModule.forFeature([PatientEffects, CareplanEffects, ContactEffects, ConditionsSummaryEffects, GoalsSummaryEffects, MedicationSummaryEffects, SocialConcernsEffects, CareplansSummaryEffects, EducationSummaryEffects, ReferralsSummaryEffects]),
                 HttpClientModule,
                 SharedModule,
                 FormsModule

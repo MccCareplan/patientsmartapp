@@ -97,4 +97,36 @@
             </ul>
         </div>
     </li>
+    <li *ngFor="let referral of referralSummaries$ | async">
+        <div class="interventions-item">
+            <h3 class="interventions-title">{{ referral.topic | titlecase }}</h3>
+            <hr />
+            <ul>
+                <li *ngIf="referral.type">
+                    <label>Type:</label>
+                    <span>
+                        {{ referral.type }}
+                    </span>
+                </li>
+                <li *ngIf="referral.displayDate">
+                    <label>Date:</label>
+                    <span>
+                        {{ referral.displayDate }}
+                    </span>
+                </li>
+                <li *ngIf="referral.status">
+                    <label>Status:</label>
+                    <span>
+                        {{ referral.status | titlecase }}
+                    </span>
+                </li>
+                <li *ngIf="referral.outcome">
+                    <label>Outcome:</label>
+                    <span>
+                        {{ referral.outcome }}
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </li>
 </ul>

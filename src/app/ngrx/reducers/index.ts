@@ -10,6 +10,7 @@ import * as fromMedicationSummary from "./medication-summary.reducer";
 import * as fromSocialConcerns from "./social-concerns.reducer";
 import * as fromCarePlansSummary from "./careplans-summary.reducer";
 import * as fromEducationSummary from "./education-summary.reducer";
+import * as fromReferralsSummary from "./referrals-summary.reducer";
 
 export interface State {
     topLevel: {
@@ -23,6 +24,7 @@ export interface State {
         socialConcerns: fromSocialConcerns.State;
         carePlansSummary: fromCarePlansSummary.State;
         educationSummary: fromEducationSummary.State;
+        referralsSummary: fromReferralsSummary.State;
     };
 }
 
@@ -36,7 +38,8 @@ const reducers = {
     medicationSummary: fromMedicationSummary.reducer,
     socialConcerns: fromSocialConcerns.reducer,
     carePlansSummary: fromCarePlansSummary.reducer,
-    educationSummary: fromEducationSummary.reducer
+    educationSummary: fromEducationSummary.reducer,
+    referralsSummary: fromReferralsSummary.reducer
 };
 
 const combinedReducer = combineReducers(reducers);
@@ -73,6 +76,9 @@ export const getCarePlansSummaryState = (state: State) => {
 export const getEducationSummaryState = (state: State) => {
     return state.topLevel.educationSummary;
 }
+export const getReferralsSummaryState = (state: State) => {
+    return state.topLevel.referralsSummary;
+}
 
 export const getDevModeState = (state: State) => state.topLevel.devmode;
 export const getPatientProfile = createSelector(getPatientState, fromPatient.getProfile);
@@ -89,3 +95,4 @@ export const getMedicationSummary = createSelector(getMedicationSummaryState, fr
 export const getSocialConcerns = createSelector(getSocialConcernsState, fromSocialConcerns.getSocialConcerns);
 export const getCarePlansSummary = createSelector(getCarePlansSummaryState, fromCarePlansSummary.getCarePlansSummary);
 export const getEducationSummary = createSelector(getEducationSummaryState, fromEducationSummary.getEducationSummary);
+export const getReferralsSummary = createSelector(getReferralsSummaryState, fromReferralsSummary.getReferralsSummary);

@@ -5,6 +5,7 @@ import * as fromRoot from '../../../ngrx/reducers';
 import { Observable, of, combineLatest } from 'rxjs';
 import { MccMedicationRecord, MedicationLists } from 'src/app/generated-data-api';
 import { EducationSummary } from 'src/generated-data-api/models/EducationSummary';
+import { ReferralSummary } from 'src/app/generated-data-api/models/ReferralSummary';
 
 @Component({
     selector: 'app-interventions-tab',
@@ -20,6 +21,7 @@ export class InterventionsTabComponent implements OnInit {
     medications$: Observable<MccMedicationRecord[]>;
 
     educationSummaries$: Observable<EducationSummary[]>;
+    referralSummaries$: Observable<ReferralSummary[]>;
 
     constructor(private char: CharPipe, private store: Store<fromRoot.State>) {
 
@@ -34,6 +36,6 @@ export class InterventionsTabComponent implements OnInit {
         })
 
         this.educationSummaries$ = this.store.select(fromRoot.getEducationSummary);
-        
+        this.referralSummaries$ = this.store.select(fromRoot.getReferralsSummary);
     }
 }
