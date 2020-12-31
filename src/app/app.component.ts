@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
                     this.store.select(fromRoot.getCarePlansSummary).subscribe(c => {
                         if (c && c.length > 0) {
                             // Set default careplan
-                            carePlanId = c[0].profiles[0]; // Should calls with optional careplan param have it passed in? 
+                            carePlanId = c[0].fhirid; // Should calls with optional careplan param have it passed in? 
 
                             // CarePlan Screen
                             this.store.dispatch(contact.loadContactsForSubjectAndCarePlanAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
