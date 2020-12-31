@@ -10,6 +10,7 @@ import * as SocialConcernsActions from "./social-concerns.actions";
 import * as CareplansSummaryActions from "./careplans-summary.actions";
 import * as EducationSummaryActions from "./education-summary.actions";
 import * as ReferralsSummaryActions from "./referrals-summary.actions";
+import * as CounselingSummaryActions from "./counseling-summary.actions";
 
 export {
     CarePlanActions,
@@ -23,5 +24,6 @@ export {
     SocialConcernsActions,
     CareplansSummaryActions,
     EducationSummaryActions,
-    ReferralsSummaryActions
+    ReferralsSummaryActions,
+    CounselingSummaryActions
 };

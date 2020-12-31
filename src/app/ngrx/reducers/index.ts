@@ -11,6 +11,7 @@ import * as fromSocialConcerns from "./social-concerns.reducer";
 import * as fromCarePlansSummary from "./careplans-summary.reducer";
 import * as fromEducationSummary from "./education-summary.reducer";
 import * as fromReferralsSummary from "./referrals-summary.reducer";
+import * as fromCounselingSummary from "./counseling-summary.reducer";
 
 export interface State {
     topLevel: {
@@ -25,6 +26,7 @@ export interface State {
         carePlansSummary: fromCarePlansSummary.State;
         educationSummary: fromEducationSummary.State;
         referralsSummary: fromReferralsSummary.State;
+        counselingSummary: fromCounselingSummary.State;
     };
 }
 
@@ -39,7 +41,8 @@ const reducers = {
     socialConcerns: fromSocialConcerns.reducer,
     carePlansSummary: fromCarePlansSummary.reducer,
     educationSummary: fromEducationSummary.reducer,
-    referralsSummary: fromReferralsSummary.reducer
+    referralsSummary: fromReferralsSummary.reducer,
+    counselingSummary: fromCounselingSummary.reducer
 };
 
 const combinedReducer = combineReducers(reducers);
@@ -79,6 +82,9 @@ export const getEducationSummaryState = (state: State) => {
 export const getReferralsSummaryState = (state: State) => {
     return state.topLevel.referralsSummary;
 }
+export const getCounselingSummaryState = (state: State) => {
+    return state.topLevel.counselingSummary;
+}
 
 export const getDevModeState = (state: State) => state.topLevel.devmode;
 export const getPatientProfile = createSelector(getPatientState, fromPatient.getProfile);
@@ -96,3 +102,4 @@ export const getSocialConcerns = createSelector(getSocialConcernsState, fromSoci
 export const getCarePlansSummary = createSelector(getCarePlansSummaryState, fromCarePlansSummary.getCarePlansSummary);
 export const getEducationSummary = createSelector(getEducationSummaryState, fromEducationSummary.getEducationSummary);
 export const getReferralsSummary = createSelector(getReferralsSummaryState, fromReferralsSummary.getReferralsSummary);
+export const getCounselingSummary = createSelector(getCounselingSummaryState, fromCounselingSummary.getCounselingSummary);

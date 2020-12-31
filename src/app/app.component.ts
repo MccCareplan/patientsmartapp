@@ -11,7 +11,8 @@ import {
     SocialConcernsActions as socialConcerns,
     CareplansSummaryActions as carePlansSummary,
     EducationSummaryActions as educationSummary,
-    ReferralsSummaryActions as referralsSummary
+    ReferralsSummaryActions as referralsSummary,
+    CounselingSummaryActions as counselingSummary
 } from './ngrx/actions';
 import * as fromRoot from './ngrx/reducers';
 
@@ -64,6 +65,7 @@ export class AppComponent implements OnInit {
                             this.store.dispatch(medicationSummary.loadMedicationSummaryForSubjectAction({ subjectId: currentSubjectId }));
                             this.store.dispatch(educationSummary.loadEducationSummaryForSubjectAction({ subjectId: currentSubjectId }));
                             this.store.dispatch(referralsSummary.loadReferralsSummaryForSubjectAction({ subjectId: currentSubjectId }));
+                            this.store.dispatch(counselingSummary.loadCounselingSummaryForSubjectAction({ subjectId: currentSubjectId }));
 
                             // Goals & Preferences Screen
                             this.store.dispatch(goalsSummary.loadGoalsSummaryForSubjectAction({ subjectId: currentSubjectId }));
