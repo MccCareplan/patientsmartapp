@@ -33,3 +33,24 @@ ul.health-items {
         }
     }
 }
+
+ul.health-items {
+    hr {
+        visibility: hidden;
+        margin-bottom: 0px;
+    }
+
+    > li {
+        > div {
+            h3 {
+                font-weight: 500;
+            }
+
+            > ul {
+                padding-left: 20px;
+                list-style-type: disc;
+                font-size: 0.9em;
+            }
+        }
+    }
+}
