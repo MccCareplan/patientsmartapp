@@ -13,7 +13,7 @@ export class GoalsSummaryEffects {
         switchMap(action => {
             return this.service
                 // @ts-ignore
-                .getGoalsSummaryByPatientId(action.subjectId)
+                .getGoalsSummaryByPatientId(action.subjectId, action.carePlanId)
                 .pipe(
                     map(goalsSummary => goalsSummaryActions.loadGoalsSummaryForSubjectSuccessAction({ data: goalsSummary })
                     ),

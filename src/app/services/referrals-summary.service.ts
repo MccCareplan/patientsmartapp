@@ -14,7 +14,12 @@ export class ReferralsSummaryService extends DataService {
         super(`${environment.mccapiUrl}/summary/referrals`, http);
     }
 
-    getReferralsSummaryByPatientId(subjectId: string): Observable<ReferralSummary[]> {
-        return this.getBySubjectId(subjectId);
+    getReferralsSummaryByPatientId(subjectId: string, carePlanId?: string): Observable<ReferralSummary[]> {
+        if (carePlanId) {
+            return this.getBySubjectIdAndCarePlanId(subjectId, carePlanId);
+        }
+        else {
+            return this.getBySubjectId(subjectId);
+        }
     }
 }

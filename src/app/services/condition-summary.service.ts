@@ -11,10 +11,15 @@ import { Observable, of } from 'rxjs';
 export class ConditionSummaryService extends DataService {
 
     constructor(http: HttpClient) {
-        super(`${environment.mccapiUrl}/conditionsummary`, http);
+        super(`${environment.mccapiUrl}/summary/conditions`, http);
     }
 
-    getConditionsSummaryPatientId(subjectId: string): Observable<ConditionLists> {
-        return this.getBySubjectId(subjectId);
+    getConditionsSummaryPatientId(subjectId: string, carePlanId?: string): Observable<ConditionLists> {
+        if (carePlanId) {
+            return this.getBySubjectIdAndCarePlanId(subjectId, carePlanId);
+        }
+        else {
+            return this.getBySubjectId(subjectId);
+        }
     }
 }

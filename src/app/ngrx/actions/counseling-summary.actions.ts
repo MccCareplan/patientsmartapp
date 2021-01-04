@@ -6,7 +6,7 @@ export const LOAD_FOR_SUBJECT_COUNSELING_SUMMARY_FAILURE = '[CounselingSummary] 
 
 export const loadCounselingSummaryForSubjectAction = createAction(
   LOAD_FOR_SUBJECT_COUNSELING_SUMMARY,
-  props<{ subjectId: string }>()
+  props<{ subjectId: string, carePlanId?: string }>()
 );
 
 export const loadCounselingSummaryForSubjectSuccessAction = createAction(

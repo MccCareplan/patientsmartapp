@@ -6,7 +6,7 @@ export const LOAD_FOR_SUBJECT_CONDITIONS_SUMMARY_FAILURE = '[ConditionsSummary] 
 
 export const loadConditionSummaryForSubjectAction = createAction(
   LOAD_FOR_SUBJECT_CONDITIONS_SUMMARY,
-  props<{ subjectId: string }>()
+  props<{ subjectId: string, carePlanId?: string }>()
 );
 
 export const loadConditionSummaryForSubjectSuccessAction = createAction(

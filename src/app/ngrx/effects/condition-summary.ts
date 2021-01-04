@@ -13,7 +13,7 @@ export class ConditionsSummaryEffects {
         switchMap(action => {
             return this.service
                 // @ts-ignore
-                .getConditionsSummaryPatientId(action.subjectId)
+                .getConditionsSummaryPatientId(action.subjectId, action.carePlanId)
                 .pipe(
                     map(conditionsSummaryResult => conditionsSummary.loadConditionSummaryForSubjectSuccessAction({ data: conditionsSummaryResult })
                     ),

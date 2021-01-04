@@ -6,7 +6,7 @@ export const LOAD_FOR_SUBJECT_EDUCATION_SUMMARY_FAILURE = '[EducationSummary] Lo
 
 export const loadEducationSummaryForSubjectAction = createAction(
   LOAD_FOR_SUBJECT_EDUCATION_SUMMARY,
-  props<{ subjectId: string }>()
+  props<{ subjectId: string, carePlanId?: string }>()
 );
 
 export const loadEducationSummaryForSubjectSuccessAction = createAction(

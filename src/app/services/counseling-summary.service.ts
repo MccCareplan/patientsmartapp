@@ -14,7 +14,12 @@ export class CounselingSummaryService extends DataService {
         super(`${environment.mccapiUrl}/summary/counselings`, http);
     }
 
-    getCounselingSummaryByPatientId(subjectId: string): Observable<CounselingSummary[]> {
-        return this.getBySubjectId(subjectId);
+    getCounselingSummaryByPatientId(subjectId: string, carePlanId?: string): Observable<CounselingSummary[]> {
+        if (carePlanId) {
+            return this.getBySubjectIdAndCarePlanId(subjectId, carePlanId);
+        }
+        else {
+            return this.getBySubjectId(subjectId);
+        }
     }
 }

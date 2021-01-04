@@ -6,7 +6,7 @@ export const LOAD_FOR_SUBJECT_SOCIAL_CONCERNS_FAILURE = '[SocialConcerns] Load f
 
 export const loadSocialConcernsForSubjectAction = createAction(
   LOAD_FOR_SUBJECT_SOCIAL_CONCERNS,
-  props<{ subjectId: string }>()
+  props<{ subjectId: string, carePlanId?: string }>()
 );
 
 export const loadSocialConcernsForSubjectSuccessAction = createAction(

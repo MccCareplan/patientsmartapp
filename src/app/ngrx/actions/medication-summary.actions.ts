@@ -6,7 +6,7 @@ export const LOAD_FOR_SUBJECT_MEDICATION_SUMMARY_FAILURE = '[MedicationSummary] 
 
 export const loadMedicationSummaryForSubjectAction = createAction(
   LOAD_FOR_SUBJECT_MEDICATION_SUMMARY,
-  props<{ subjectId: string }>()
+  props<{ subjectId: string, carePlanId?: string }>()
 );
 
 export const loadMedicationSummaryForSubjectSuccessAction = createAction(

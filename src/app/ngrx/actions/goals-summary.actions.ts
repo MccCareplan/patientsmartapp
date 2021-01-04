@@ -6,7 +6,7 @@ export const LOAD_FOR_SUBJECT_GOALS_SUMMARY_FAILURE = '[GoalsSummary] Load for S
 
 export const loadGoalsSummaryForSubjectAction = createAction(
   LOAD_FOR_SUBJECT_GOALS_SUMMARY,
-  props<{ subjectId: string }>()
+  props<{ subjectId: string, carePlanId?: string }>()
 );
 
 export const loadGoalsSummaryForSubjectSuccessAction = createAction(

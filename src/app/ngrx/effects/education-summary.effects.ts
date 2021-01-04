@@ -13,7 +13,7 @@ export class EducationSummaryEffects {
         switchMap(action => {
             return this.service
                 // @ts-ignore
-                .getEducationSummaryByPatientId(action.subjectId)
+                .getEducationSummaryByPatientId(action.subjectId, action.carePlanId)
                 .pipe(
                     map(educationSummary => educationSummaryActions.loadEducationSummaryForSubjectSuccessAction({ data: educationSummary })
                     ),

@@ -13,7 +13,7 @@ export class SocialConcernsEffects {
         switchMap(action => {
             return this.service
                 // @ts-ignore
-                .getSocialConcernsByPatientId(action.subjectId)
+                .getSocialConcernsByPatientId(action.subjectId, action.carePlanId)
                 .pipe(
                     map(socialConcerns => socialConcernsActions.loadSocialConcernsForSubjectSuccessAction({ data: socialConcerns })
                     ),

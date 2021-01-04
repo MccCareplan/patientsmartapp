@@ -6,7 +6,7 @@ export const LOAD_FOR_SUBJECT_REFERRALS_SUMMARY_FAILURE = '[ReferralsSummary] Lo
 
 export const loadReferralsSummaryForSubjectAction = createAction(
   LOAD_FOR_SUBJECT_REFERRALS_SUMMARY,
-  props<{ subjectId: string }>()
+  props<{ subjectId: string, carePlanId?: string }>()
 );
 
 export const loadReferralsSummaryForSubjectSuccessAction = createAction(

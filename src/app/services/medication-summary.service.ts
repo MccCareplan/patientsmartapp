@@ -11,10 +11,15 @@ import { Observable, of } from 'rxjs';
 export class MedicationSummaryService extends DataService {
 
     constructor(http: HttpClient) {
-        super(`${environment.mccapiUrl}/medicationsummary`, http);
+        super(`${environment.mccapiUrl}/summary/medications`, http);
     }
 
-    getMedicationSummaryByPatientId(subjectId: string): Observable<MedicationLists> {
-        return this.getBySubjectId(subjectId);
+    getMedicationSummaryByPatientId(subjectId: string, carePlanId?: string): Observable<MedicationLists> {
+        if (carePlanId) {
+            return this.getBySubjectIdAndCarePlanId(subjectId, carePlanId);
+        }
+        else {
+            return this.getBySubjectId(subjectId);
+        }
     }
 }

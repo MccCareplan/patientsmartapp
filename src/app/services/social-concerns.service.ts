@@ -14,7 +14,12 @@ export class SocialConcernsService extends DataService {
         super(`${environment.mccapiUrl}/socialconcerns`, http);
     }
 
-    getSocialConcernsByPatientId(subjectId: string): Observable<SocialConcern[]> {
-        return this.getBySubjectId(subjectId);
+    getSocialConcernsByPatientId(subjectId: string, carePlanId?: string): Observable<SocialConcern[]> {
+        if (carePlanId) {
+            return this.getBySubjectIdAndCarePlanId(subjectId, carePlanId);
+        }
+        else {
+            return this.getBySubjectId(subjectId);
+        }
     }
 }

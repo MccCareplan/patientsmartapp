@@ -12,7 +12,7 @@ export class CounselingSummaryEffects {
         switchMap(action => {
             return this.service
                 // @ts-ignore
-                .getCounselingSummaryByPatientId(action.subjectId)
+                .getCounselingSummaryByPatientId(action.subjectId, action.carePlanId)
                 .pipe(
                     map(
                         counselingSummary => CounselingSummaryActions.loadCounselingSummaryForSubjectSuccessAction({ data: counselingSummary })

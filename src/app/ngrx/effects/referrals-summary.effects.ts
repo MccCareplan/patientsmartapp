@@ -13,7 +13,7 @@ export class ReferralsSummaryEffects {
         switchMap(action => {
             return this.service
                 // @ts-ignore
-                .getReferralsSummaryByPatientId(action.subjectId)
+                .getReferralsSummaryByPatientId(action.subjectId, action.carePlanId)
                 .pipe(
                     map(referralsSummary => ReferralsSummaryActions.loadReferralsSummaryForSubjectSuccessAction({ data: referralsSummary })
                     ),

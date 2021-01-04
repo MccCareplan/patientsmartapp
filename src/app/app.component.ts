@@ -59,19 +59,19 @@ export class AppComponent implements OnInit {
                             this.store.dispatch(patient.SelectAction({ data: currentSubjectId }));
 
                             // Health Status Screen
-                            this.store.dispatch(conditionsSummary.loadConditionSummaryForSubjectAction({ subjectId: currentSubjectId }));
+                            this.store.dispatch(conditionsSummary.loadConditionSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
 
                             // Interventions & Maintenance Screen
                             this.store.dispatch(medicationSummary.loadMedicationSummaryForSubjectAction({ subjectId: currentSubjectId }));
-                            this.store.dispatch(educationSummary.loadEducationSummaryForSubjectAction({ subjectId: currentSubjectId }));
-                            this.store.dispatch(referralsSummary.loadReferralsSummaryForSubjectAction({ subjectId: currentSubjectId }));
-                            this.store.dispatch(counselingSummary.loadCounselingSummaryForSubjectAction({ subjectId: currentSubjectId }));
+                            this.store.dispatch(educationSummary.loadEducationSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
+                            this.store.dispatch(referralsSummary.loadReferralsSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
+                            this.store.dispatch(counselingSummary.loadCounselingSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
 
                             // Goals & Preferences Screen
-                            this.store.dispatch(goalsSummary.loadGoalsSummaryForSubjectAction({ subjectId: currentSubjectId }));
+                            this.store.dispatch(goalsSummary.loadGoalsSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
 
                             // Health Concerns Screen
-                            this.store.dispatch(socialConcerns.loadSocialConcernsForSubjectAction({ subjectId: currentSubjectId }));
+                            this.store.dispatch(socialConcerns.loadSocialConcernsForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
 
                             initialLoadDone = true;
                         }
