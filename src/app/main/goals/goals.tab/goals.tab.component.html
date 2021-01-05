@@ -1,4 +1,4 @@
-<ul class="goals-items">
+<ul class="goals-items" *ngIf="displayFilter == 'my-goals' || displayFilter == 'team-goals'">
     <li *ngFor="let goal of filteredGoals$ | async">
         <div class="goals-item">
             <h3 class="goals-title">{{ goal.description }}</h3>
@@ -18,6 +18,26 @@
                 </li>
                 <li *ngIf="goal.expressedByType == 'Practitioner'">
                     <label>Practicioner: </label>{{ goal.expressedBy }}
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>
+<ul class="goals-items" *ngIf="displayFilter == 'targets'">
+    <!-- measure: string;
+    mostRecentResult: string;
+    date: string;
+    target: string;
+    status: string;
+    highlighted?: boolean;
+    hovered?: boolean; -->
+    <li *ngFor="let target of targetValues">
+        <div class="goals-item">
+            <h3 class="goals-title">{{ target.measure }}</h3>
+            <hr/>
+            <ul>
+                <li *ngIf="target.mostRecentResult">
+                    <label>Latest Result: </label>{{ target.mostRecentResult }}
                 </li>
             </ul>
         </div>

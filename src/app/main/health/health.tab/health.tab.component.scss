@@ -39,7 +39,10 @@ ul.health-items {
         visibility: hidden;
         margin-bottom: 0px;
     }
-
+    h4 {
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
     > li {
         > div {
             h3 {

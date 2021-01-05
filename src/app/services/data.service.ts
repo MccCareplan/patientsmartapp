@@ -36,6 +36,10 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
+  getBySubjectIdAndCode(subjectId: string, code: string): Observable<any> {
+    return this.http.get(`${this.url}\\?subject=${subjectId}&code=${code}`)
+      .pipe(catchError(this.handleError));
+  }
   getBloodPressureById(id: string): Observable<any> {
     const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params: new HttpParams({ fromString: "subject=" + id }).set("code", "8480-6") };
     return this.http.get(this.url, options).pipe(

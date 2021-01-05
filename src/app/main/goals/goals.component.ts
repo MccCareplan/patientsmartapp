@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import * as fromRoot from '../../ngrx/reducers';
 
 @Component({
   selector: 'app-goals',

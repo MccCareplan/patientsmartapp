@@ -18,6 +18,7 @@
     </li>
 </ul>
 <ul class="health-items" *ngIf="displayFilter=='health'">
+    <h4 *ngIf="(conditionsList$ | async).activeConditions && (conditionsList$ | async).activeConditions.length > 0">Active Conditions</h4>
     <li *ngFor="let healthConcern of (conditionsList$ | async).activeConditions">
         <div class="health-item">
             <h3 class="health-title">{{ healthConcern.code.text }}</h3>
@@ -26,8 +27,17 @@
                 <li *ngIf="healthConcern.firstOnset">
                     <label>First Onset:</label> {{healthConcern.firstOnset | titlecase }}
                 </li>
-                <li *ngIf="healthConcern.clinicalStatus">
-                    <label>Clinical Status:</label> {{healthConcern.clinicalStatus | titlecase}}
+            </ul>
+        </div>
+    </li>
+    <h4 *ngIf="(conditionsList$ | async).inactiveConditions && (conditionsList$ | async).inactiveConditions.length > 0">Inactive Conditions</h4>
+    <li *ngFor="let healthConcern of (conditionsList$ | async).inactiveConditions">
+        <div class="health-item">
+            <h3 class="health-title">{{ healthConcern.code.text }}</h3>
+            <hr/>
+            <ul>
+                <li *ngIf="healthConcern.firstOnset">
+                    <label>First Onset:</label> {{healthConcern.firstOnset | titlecase }}
                 </li>
             </ul>
         </div>

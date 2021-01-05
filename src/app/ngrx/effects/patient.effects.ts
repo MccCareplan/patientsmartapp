@@ -54,9 +54,7 @@ export class PatientEffects {
 
     loadEffect$: any = createEffect((): any => this.actions$.pipe(
         ofType(patient.SELECT),
-        startWith(patient.SelectAction({ data: environment.testPatients[0] }))
-        // , map(toPayload)
-        , switchMap((action) => {
+        switchMap((action: any) => {
             return this.service.getPatientProfile(action.data).pipe(
                 switchMap(profile => [
                     patient.LoadPatientSuccessAction({ data: profile }),

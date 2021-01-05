@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { concatMap } from 'rxjs/operators';
+import { TargetValue } from './main/goals/goals.tab/target-value';
 import {
     PatientActions as patient,
     DevModeActions as devmode,
@@ -15,7 +17,6 @@ import {
     CounselingSummaryActions as counselingSummary
 } from './ngrx/actions';
 import * as fromRoot from './ngrx/reducers';
-
 
 @Component({
     selector: 'app-root',
