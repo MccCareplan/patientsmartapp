@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { concatMap } from 'rxjs/operators';
 import { TargetValue } from './main/goals/goals.tab/target-value';
@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        private router: Router,
         private store: Store<fromRoot.State>
     ) {
     }
@@ -54,7 +55,6 @@ export class AppComponent implements OnInit {
                         if (c && c.length > 0) {
                             // Set default careplan
                             carePlanId = c[0].fhirid; // Should calls with optional careplan param have it passed in? 
-
                             // CarePlan Screen
                             this.store.dispatch(contact.loadContactsForSubjectAndCarePlanAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
                             this.store.dispatch(patient.SelectAction({ data: currentSubjectId }));
@@ -75,6 +75,12 @@ export class AppComponent implements OnInit {
                             this.store.dispatch(socialConcerns.loadSocialConcernsForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
 
                             initialLoadDone = true;
+                            this.router.navigate(['.'], {
+                                relativeTo: this.route, queryParams: {
+                                    subject: currentSubjectId,
+                                    careplan: carePlanId
+                                }
+                            });
                         }
                     })
                 }

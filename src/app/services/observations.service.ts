@@ -11,9 +11,7 @@ import { TargetValue } from '../main/goals/goals.tab/target-value';
     providedIn: 'root'
 })
 export class ObservationsService extends DataService {
-    private observationURL = '/find/latest/observation';
-    private observationsURL = '/observations';
-    private observationsbyvaluesetURL = '/observationsbyvalueset';
+    public formattedTargetValue: TargetValue[] = [];
 
     constructor(http: HttpClient) {
         super(`${environment.mccapiUrl}/find/latest/observation`, http);
