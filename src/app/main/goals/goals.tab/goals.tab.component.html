@@ -2,7 +2,7 @@
     <li *ngFor="let goal of filteredGoals$ | async">
         <div class="goals-item">
             <h3 class="goals-title">{{ goal.description }}</h3>
-            <hr/>
+            <hr />
             <ul>
                 <li *ngIf="goal.startDateText">
                     <label>Start Date: </label>{{ goal.startDateText }}
@@ -31,10 +31,13 @@
     status: string;
     highlighted?: boolean;
     hovered?: boolean; -->
-    <li *ngFor="let target of targetValues">
+    <span *ngIf="(targetValues$ | async)">
+        <b>TESTING {{(targetValues$ | async).measure}}</b>
+    </span>
+    <li *ngFor="let target of (targetValues$ | async)">
         <div class="goals-item">
             <h3 class="goals-title">{{ target.measure }}</h3>
-            <hr/>
+            <hr />
             <ul>
                 <li *ngIf="target.mostRecentResult">
                     <label>Latest Result: </label>{{ target.mostRecentResult }}

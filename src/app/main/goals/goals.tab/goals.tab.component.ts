@@ -21,7 +21,7 @@ export class GoalsTabComponent implements OnInit {
   goalSummary$: Observable<GoalLists>;
   filteredGoals$: Observable<GoalSummary[]>;
 
-  targetValues: TargetValue[] = [];
+  targetValues$: Observable<TargetValue>;
 
   constructor(
     private store: Store<fromRoot.State>,
@@ -31,30 +31,25 @@ export class GoalsTabComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.select(fromRoot.getPatientProfile).subscribe(x => {
-      if (x && x.fhirid) {
-        this.goalSummary$ = this.store.select(fromRoot.getGoalsSummary);
-        this.goalSummary$.subscribe(goalLists => {
-          if (goalLists.allGoals) {
-            if (this.displayFilter === 'my-goals') {
-              this.filteredGoals$ = this.goalSummary$.pipe(map(x => x.allGoals.filter(a => a.expressedByType === "Patient")));
-            } else {
-              this.filteredGoals$ = this.goalSummary$.pipe(map(x => x.allGoals.filter(a => a.expressedByType != "Patient")));
-            }
-            if (goalLists.activeTargets) {
-              this.loadTargets(x.fhirid, goalLists.activeTargets);
-            }
-          }
-        })
+    this.goalSummary$ = this.store.select(fromRoot.getGoalsSummary);
+    this.goalSummary$.subscribe(goalLists => {
+      if (goalLists.allGoals) {
+        switch (this.displayFilter) {
+          case "my-goals":
+            this.filteredGoals$ = this.goalSummary$.pipe(map(x => x.allGoals.filter(a => a.expressedByType === "Patient")));
+            break;
+          case "team-goals":
+            this.filteredGoals$ = this.goalSummary$.pipe(map(x => x.allGoals.filter(a => a.expressedByType != "Patient")));
+            break;
+          case "targets":
+            this.loadTargets();
+            break;
+        }
       }
     })
   }
 
-  loadTargets = (patientId: string, activeTargets: GoalTarget[]): void => {
-      this.service.formatTargets(patientId, activeTargets).subscribe(res => {
-        if (res) {
-          this.targetValues.push(res);
-        }
-      });
+  loadTargets = (): void => {
+    this.targetValues$ = this.service.getTargetValues();
   }
 }

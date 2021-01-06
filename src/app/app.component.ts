@@ -17,6 +17,8 @@ import {
     CounselingSummaryActions as counselingSummary
 } from './ngrx/actions';
 import * as fromRoot from './ngrx/reducers';
+import { GoalsSummaryService } from './services/goals-summary.service';
+import { ObservationsService } from './services/observations.service';
 
 @Component({
     selector: 'app-root',
@@ -28,7 +30,8 @@ export class AppComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private store: Store<fromRoot.State>
+        private store: Store<fromRoot.State>,
+        private service: ObservationsService
     ) {
     }
 
@@ -70,7 +73,9 @@ export class AppComponent implements OnInit {
 
                             // Goals & Preferences Screen
                             this.store.dispatch(goalsSummary.loadGoalsSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
-
+                            this.store.select(fromRoot.getGoalsSummary).subscribe(goalList => {
+                                if (goalList && goalList.activeTargets) this.service.setTargetValues(currentSubjectId, goalList.activeTargets);
+                            });
                             // Health Concerns Screen
                             this.store.dispatch(socialConcerns.loadSocialConcernsForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
 
