@@ -15,6 +15,7 @@ import {
     CounselingSummaryActions as counselingSummary
 } from './ngrx/actions';
 import * as fromRoot from './ngrx/reducers';
+import { BloodPresureService } from './services/blood-pressure.service';
 import { ObservationsService } from './services/observations.service';
 
 @Component({
@@ -28,7 +29,7 @@ export class AppComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private store: Store<fromRoot.State>,
-        private service: ObservationsService
+        private bpService: BloodPresureService
     ) {
     }
 
@@ -71,8 +72,12 @@ export class AppComponent implements OnInit {
                             // Goals & Preferences Screen
                             this.store.dispatch(goalsSummary.loadGoalsSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
                             this.store.select(fromRoot.getGoalsSummary);
+
                             // Health Concerns Screen
                             this.store.dispatch(socialConcerns.loadSocialConcernsForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
+
+                            // Observations
+                            this.bpService.getPatientBPInfo(currentSubjectId);
 
                             initialLoadDone = true;
                         }

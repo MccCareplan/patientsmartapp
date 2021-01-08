@@ -18,7 +18,6 @@ export class InterventionsTabComponent implements OnInit {
     @Input()
     displayFilter: string;
 
-    medicationLists$: Observable<MedicationLists>;
     medications$: Observable<MccMedicationRecord[]>;
 
     educationSummaries$: Observable<EducationSummary[]>;
@@ -30,8 +29,7 @@ export class InterventionsTabComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.medicationLists$ = this.store.select(fromRoot.getMedicationSummary);
-        this.medicationLists$.subscribe(x => {
+        this.store.select(fromRoot.getMedicationSummary).subscribe(x => {
             if (x.activeMedications) {
                 this.medications$ = of(x.activeMedications);
             }

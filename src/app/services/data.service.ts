@@ -4,8 +4,24 @@ import { NotFound } from './../common/not-found.error';
 import { AppError } from '../common/app.error';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { ConditionLists, MccObservation } from '../generated-data-api';
+import { VitalSignsTableData } from '../data-model/vitalSigns';
+
+enum observationCodes {
+  Systolic = '8480-6',
+  Diastolic = '8462-4',
+  Egfr = '69405-9',
+  Uacr = '9318-7',
+  Wot = '29463-7',
+  Blood_pressure = '85354-9'
+}
+
+enum observationValuesets {
+  // Egfr = '2.16.840.1.113883.3.6929.3.1000',
+  Egfr = '2.16.840.1.113762.1.4.1222.179',
+  Uacr = '2.16.840.1.113883.3.6929.2.1002'
+}
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +62,43 @@ export class DataService {
       catchError(this.handleError));
   }
 
+  getPatientVitalSigns(patientId: string): Observable<VitalSignsTableData> {
+    return new Observable(observer => {
+      this.getObservationsByPanel(patientId, observationCodes.Blood_pressure)
+        .pipe(finalize(() => {
+          observer.complete();
+        }))
+        .subscribe(observations => {
+          observations.map(obs => {
+            let systolic = 0;
+            let diastolic = 0;
+            obs.components.map(c => {
+              switch (c.code.coding[0].code) {
+                case observationCodes.Diastolic:
+                  diastolic = c.value.quantityValue.value;
+                  break;
+                case observationCodes.Systolic:
+                  systolic = c.value.quantityValue.value;
+                  break;
+                default:
+              }
+            });
+            const vs: VitalSignsTableData = {
+              date: obs.effective.dateTime.date,
+              diastolic,
+              systolic
+            };
+            observer.next(vs);
+          });
+        });
+    });
+  }
+
+  getObservationsByPanel(patientId: string, code: string): Observable<MccObservation[]> {
+    return this.http.get<MccObservation[]>(`${this.url}\\?subject=${patientId}&code=${code}&mode=panel`)
+      .pipe(catchError(this.handleError));
+  }
+
 
   create(resource): Observable<any> {
     return this.http.post(this.url, JSON.stringify(resource))
@@ -75,7 +128,5 @@ export class DataService {
     }
 
     return throwError(new AppError(error));
-
   }
-
 }

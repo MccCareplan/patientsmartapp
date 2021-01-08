@@ -4,6 +4,7 @@ import { Label, Color } from 'ng2-charts';
 import { getEgrLineChartAnnotationsObject } from 'src/app/common/chart-utility-functions';
 import { ActivatedRoute } from '@angular/router';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
+import { BloodPresureService } from 'src/app/services/blood-pressure.service';
 
 @Component({
   selector: 'lab-graph',
@@ -17,13 +18,16 @@ export class LabGraphComponent implements OnInit {
   lineChartData: ChartDataSets[];
   lineChartLabels: Label[];
   lineChartLegend: boolean;
-  lineChartOptions: (ChartOptions & { annotation: any })
+  lineChartOptions: any;
   lineChartPlugins: any[];
   lineChartType: string;
   title: string;
 
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private bpService: BloodPresureService
+  ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -57,8 +61,32 @@ export class LabGraphComponent implements OnInit {
   bp = (): void => {
     this.title = "My Blood Pressure";
     this.description = "Systolic and Dystolic values over time";
-    this.testData();
+    this.lineChartLabels = ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May'];
+    this.lineChartData = this.bpService.vitalSigns.chartData;
+    this.lineChartOptions = this.bpService.vitalSigns.lineChartOptions;
+    this.lineChartColors = [
+      {
+        borderColor: 'black',
+      },
+    ];
 
+    this.lineChartLegend = true;
+    this.lineChartPlugins = [
+      {
+        annotation: {
+          annotations: {
+            drawTime: 'beforeDatasetsDraw',
+            type: 'box',
+            xScaleID: 'x-axis-0',
+            yScaleID: 'y-axis-0',
+            borderWidth: 0,
+            yMin: 70,
+            yMax: 130,
+            backgroundColor: 'rgba(46, 204, 113,0.3)'
+          }
+        }
+      }];
+    this.lineChartType = 'line';
   }
 
   egfr = (): void => {
