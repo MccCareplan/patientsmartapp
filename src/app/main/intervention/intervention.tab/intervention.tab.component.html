@@ -36,62 +36,37 @@
     <h4 *ngIf="(educationSummaries$ | async).length > 0">Education</h4>
     <li *ngFor="let education of (educationSummaries$ | async)">
         <div class="interventions-item">
-            <div>{{stringify(education)}}</div>
-            
-{
-    "topic": {
-      "coding": [
-        {
-          "system": "http://snomed.info/sct",
-          "code": "438578000",
-          "display": "Dietary education for renal disorder"
-        }
-      ],
-      "text": "Dietary education for renal disorder"
-    },
-    "type": "Procedure",
-    "displayDate": "02/15/2017 07:00",
-    "date": {},
-    "outcome": {
-      "coding": [
-        {
-          "system": "http://snomed.info/sct",
-          "code": "385670004",
-          "display": "Partially successful"
-        }
-      ],
-      "text": "Partially sucessful"
-    },
-    "status": "completed",
-    "performer": "Dr. John Carlson, MD",
-    "reasons": "Chronic kidney disease",
-    "fhirid": "cc-proc-pnoelle-ed1"
-  }
-            <!-- <h3 class="interventions-title">{{ education.topic | titlecase }}</h3> -->
+            <h3 class="interventions-title" *ngIf="education.topic">{{ education.topic.text | titlecase }}</h3>
             <hr />
             <ul>
-                <li *ngIf="education.type">
-                    <label>Type:</label>
-                    <span>
-                        {{ education.type }}
-                    </span>
-                </li>
                 <li *ngIf="education.displayDate">
                     <label>Date:</label>
                     <span>
                         {{ education.displayDate | date }}
                     </span>
                 </li>
-                <li *ngIf="education.status">
-                    <label>Status:</label>
+                <li *ngIf="education.performer">
+                    <label>Performer:</label>
                     <span>
-                        {{ education.status | titlecase }}
+                        {{ education.performer }}
+                    </span>
+                </li>
+                <li *ngIf="education.reasons">
+                    <label>Reason:</label>
+                    <span>
+                        {{ education.reasons }}
                     </span>
                 </li>
                 <li *ngIf="education.outcome">
                     <label>Outcome:</label>
                     <span>
-                        {{ education.outcome }}
+                        {{ education.outcome.text | titlecase }}
+                    </span>
+                </li>
+                <li *ngIf="education.status">
+                    <label>Status:</label>
+                    <span>
+                        {{ education.status | titlecase }}
                     </span>
                 </li>
             </ul>
@@ -103,28 +78,34 @@
             <h3 class="interventions-title">{{ counseling.topic.text | titlecase }}</h3>
             <hr />
             <ul>
-                <li *ngIf="counseling.type">
-                    <label>Type:</label>
-                    <span>
-                        {{ counseling.type }}
-                    </span>
-                </li>
                 <li *ngIf="counseling.displayDate">
                     <label>Date:</label>
                     <span>
                         {{ counseling.displayDate | date }}
                     </span>
                 </li>
-                <li *ngIf="counseling.status">
-                    <label>Status:</label>
+                <li *ngIf="counseling.performer">
+                    <label>Performer:</label>
                     <span>
-                        {{ counseling.status | titlecase }}
+                        {{ counseling.performer | titlecase }}
+                    </span>
+                </li>
+                <li *ngIf="counseling.reasons">
+                    <label>Reason:</label>
+                    <span>
+                        {{ counseling.reasons | titlecase }}
                     </span>
                 </li>
                 <li *ngIf="counseling.outcome">
                     <label>Outcome:</label>
                     <span>
                         {{ counseling.outcome.text }}
+                    </span>
+                </li>
+                <li *ngIf="counseling.status">
+                    <label>Status:</label>
+                    <span>
+                        {{ counseling.status | titlecase }}
                     </span>
                 </li>
             </ul>
@@ -134,7 +115,6 @@
     <li *ngFor="let referral of referralSummaries$ | async">
         <div class="interventions-item">
             <h3 *ngIf="referral.purpose.text" class="interventions-title">{{ referral.purpose.text | titlecase }}</h3>
-            <h3 *ngIf="!referral.purpose.text && referral.purpose.coding.length > 0 && referral.purpose.coding[0].display" class="interventions-title">{{ referral.purpose.coding[0].display | titlecase }}</h3>
             <hr />
             <ul>
                 <li *ngIf="referral.referrer">

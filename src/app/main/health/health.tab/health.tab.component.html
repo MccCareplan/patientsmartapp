@@ -5,10 +5,10 @@
             <hr/>
             <ul>
                 <li *ngIf="socialConcern.data">
-                    <label>Data:</label> {{socialConcern.data | titlecase }}
+                    <label>Value:</label> {{socialConcern.data | titlecase }}
                 </li>
                 <li *ngIf="socialConcern.date">
-                    <label>Date:</label> {{socialConcern.date}}
+                    <label>Last Update:</label> {{socialConcern.date}}
                 </li>
                 <li *ngIf="socialConcern.description">
                     <label>Description:</label> {{socialConcern.description}}
