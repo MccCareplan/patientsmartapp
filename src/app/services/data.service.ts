@@ -23,10 +23,12 @@ enum observationValuesets {
   Uacr = '2.16.840.1.113883.3.6929.2.1002'
 }
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+  private observationsbyvaluesetURL = '/observationsbyvalueset';
 
   constructor(private url: string, private http: HttpClient) {
   }
@@ -61,6 +63,7 @@ export class DataService {
     return this.http.get(this.url, options).pipe(
       catchError(this.handleError));
   }
+
 
   getPatientVitalSigns(patientId: string): Observable<VitalSignsTableData> {
     return new Observable(observer => {
@@ -98,7 +101,10 @@ export class DataService {
     return this.http.get<MccObservation[]>(`${this.url}\\?subject=${patientId}&code=${code}&mode=panel`)
       .pipe(catchError(this.handleError));
   }
-
+  getObservationsByValueset(patientId: string, valueSet: string): Observable<MccObservation[]> {
+    return this.http.get<MccObservation[]>(`${this.url}\\?subject=${patientId}&valueset=${valueSet}`)
+      .pipe(catchError(this.handleError));
+  }
 
   create(resource): Observable<any> {
     return this.http.post(this.url, JSON.stringify(resource))

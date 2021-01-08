@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
-import { getEgrLineChartAnnotationsObject } from 'src/app/common/chart-utility-functions';
+import { formatEgfrResult, getEgrLineChartAnnotationsObject } from 'src/app/common/chart-utility-functions';
 import { ActivatedRoute } from '@angular/router';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { BloodPresureService } from 'src/app/services/blood-pressure.service';
+import { EgfrService } from 'src/app/services/egfr.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { EgfrTableData } from 'src/app/data-model/egfr';
 
 @Component({
   selector: 'lab-graph',
@@ -12,7 +16,11 @@ import { BloodPresureService } from 'src/app/services/blood-pressure.service';
   styleUrls: ['./lab-graph.component.scss']
 })
 export class LabGraphComponent implements OnInit {
+  key: string;
+  title: string;
   description: string;
+
+  // chart
   lineChartAnnotations: any;
   lineChartColors: Color[];
   lineChartData: ChartDataSets[];
@@ -21,17 +29,26 @@ export class LabGraphComponent implements OnInit {
   lineChartOptions: any;
   lineChartPlugins: any[];
   lineChartType: string;
-  title: string;
 
+  // table
+  vitalSignsRowMax = 7;
+  egfrRowMax = 7;
+  displayedColumns = [];
+  tableDataSource: any;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private route: ActivatedRoute,
-    private bpService: BloodPresureService
+    private bpService: BloodPresureService,
+    private egfrService: EgfrService
   ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       if (params.key) {
+        this.key = params.key;
         this.populateData(params.key);
       }
     });
@@ -59,6 +76,8 @@ export class LabGraphComponent implements OnInit {
   }
 
   bp = (): void => {
+    this.tableDataSource = this.bpService.vitalSignsDataSource;
+    this.displayedColumns = ['date', 'systolic', 'diastolic'];
     this.title = "My Blood Pressure";
     this.description = "Systolic and Dystolic values over time";
     this.lineChartLabels = ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May'];
@@ -90,14 +109,48 @@ export class LabGraphComponent implements OnInit {
   }
 
   egfr = (): void => {
-    //http://localhost:8081/observationsbyvalueset?subject=cc-pat-pnoelle&valueset=2.16.840.1.113762.1.4.1222.179  EGFR
+    this.tableDataSource = this.egfrService.egfrDataSource;
+    this.lineChartData = this.egfrService.egfr.chartData;
+    this.lineChartOptions = this.egfrService.egfr.lineChartOptions;
+    this.displayedColumns = ['date', 'result'];
     this.title = "My GFR Results";
     this.description = "GFR Tests how well your kidneys work";
-    this.testData();
+    this.lineChartColors = [
+      {
+        borderColor: 'black',
+      },
+    ];
+    this.lineChartLegend = false;
+    this.lineChartPlugins = [pluginAnnotations];
+    this.lineChartType = 'line';
+  }
+
+  EgfrResult(egfr: EgfrTableData): string {
+    return formatEgfrResult(egfr.egfr, egfr.unit);
+  }
+
+  getEgfrRowCssClass(egfr: EgfrTableData): string {
+    let cssClass = '';
+    const val = egfr.egfr;
+    if (val) {
+      switch (true) {
+        case (val >= 60):
+          cssClass = 'resultBorderline';
+          break;
+        case (val < 60 && val >= 15):
+          cssClass = 'resultGood';
+          break;
+        case (val < 15):
+          cssClass = 'resultCritical';
+          break;
+        default:
+          break;
+      }
+    }
+    return cssClass;
   }
 
   uacr = (): void => {
-    //http://localhost:8081/observationsbyvalueset?subject=cc-pat-pnoelle&valueset=2.16.840.1.113883.3.6929.2.1002 UACR
     this.title = "UACR Results";
     this.testData();
   }

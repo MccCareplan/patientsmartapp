@@ -16,6 +16,7 @@ import {
 } from './ngrx/actions';
 import * as fromRoot from './ngrx/reducers';
 import { BloodPresureService } from './services/blood-pressure.service';
+import { EgfrService } from './services/egfr.service';
 import { ObservationsService } from './services/observations.service';
 
 @Component({
@@ -29,7 +30,8 @@ export class AppComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private store: Store<fromRoot.State>,
-        private bpService: BloodPresureService
+        private bpService: BloodPresureService,
+        private egfrService: EgfrService
     ) {
     }
 
@@ -78,6 +80,7 @@ export class AppComponent implements OnInit {
 
                             // Observations
                             this.bpService.getPatientBPInfo(currentSubjectId);
+                            this.egfrService.getPatientEgfrInfo(currentSubjectId);
 
                             initialLoadDone = true;
                         }

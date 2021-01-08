@@ -18,7 +18,6 @@ export class BloodPresureService extends DataService {
     vitalSigns: VitalSigns = emptyVitalSigns;
     vitalSignsDataSource: any = new MatTableDataSource(this.vitalSigns.tableData);
 
-
     constructor(http: HttpClient) {
         super(`${environment.mccapiUrl}/observations`, http);
     }
