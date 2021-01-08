@@ -19,7 +19,7 @@ export const reducer = createReducer(
     on(educationSummaryActions.loadEducationSummaryForSubjectSuccessAction, (state, { data: payload }) =>
     ({
         ...state,
-        goalsSummary: payload,
+        educationSummary: payload,
     })),
     on(educationSummaryActions.loadEducationSummaryForSubjectFailureAction, (state) =>
     ({

@@ -41,4 +41,8 @@ export class InterventionsTabComponent implements OnInit {
         this.referralSummaries$ = this.store.select(fromRoot.getReferralsSummary);
         this.counselingSummaries$ = this.store.select(fromRoot.getCounselingSummary);
     }
+
+    stringify = (obj): string => {
+        return JSON.stringify(obj);
+    }
 }

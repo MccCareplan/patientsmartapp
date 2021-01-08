@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { concatMap } from 'rxjs/operators';
-import { TargetValue } from './main/goals/goals.tab/target-value';
 import {
     PatientActions as patient,
     DevModeActions as devmode,
@@ -17,7 +15,6 @@ import {
     CounselingSummaryActions as counselingSummary
 } from './ngrx/actions';
 import * as fromRoot from './ngrx/reducers';
-import { GoalsSummaryService } from './services/goals-summary.service';
 import { ObservationsService } from './services/observations.service';
 
 @Component({
@@ -66,16 +63,14 @@ export class AppComponent implements OnInit {
                             this.store.dispatch(conditionsSummary.loadConditionSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
 
                             // Interventions & Maintenance Screen
-                            this.store.dispatch(medicationSummary.loadMedicationSummaryForSubjectAction({ subjectId: currentSubjectId }));
+                            this.store.dispatch(medicationSummary.loadMedicationSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
                             this.store.dispatch(educationSummary.loadEducationSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
                             this.store.dispatch(referralsSummary.loadReferralsSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
                             this.store.dispatch(counselingSummary.loadCounselingSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
 
                             // Goals & Preferences Screen
                             this.store.dispatch(goalsSummary.loadGoalsSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
-                            this.store.select(fromRoot.getGoalsSummary).subscribe(goalList => {
-                                if (goalList && goalList.activeTargets) this.service.setTargetValues(currentSubjectId, goalList.activeTargets);
-                            });
+                            this.store.select(fromRoot.getGoalsSummary);
                             // Health Concerns Screen
                             this.store.dispatch(socialConcerns.loadSocialConcernsForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
 

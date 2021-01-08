@@ -7,6 +7,7 @@ import { GoalLists, GoalSummary, GoalTarget, MccObservation, MccPatient } from '
 import { TargetValue } from './target-value';
 import { ObservationsService } from 'src/app/services/observations.service';
 import { formatGoalTargetValue } from 'src/app/common/utility-functions';
+import { Utilities } from 'src/app/common/utilities';
 
 @Component({
   selector: 'app-goals-tab',
@@ -21,7 +22,7 @@ export class GoalsTabComponent implements OnInit {
   goalSummary$: Observable<GoalLists>;
   filteredGoals$: Observable<GoalSummary[]>;
 
-  targetValues$: Observable<TargetValue>;
+  targetValues$: Observable<TargetValue[]>;
 
   constructor(
     private store: Store<fromRoot.State>,
@@ -42,14 +43,16 @@ export class GoalsTabComponent implements OnInit {
             this.filteredGoals$ = this.goalSummary$.pipe(map(x => x.allGoals.filter(a => a.expressedByType != "Patient")));
             break;
           case "targets":
-            this.loadTargets();
+            this.loadTargets(goalLists);
             break;
         }
       }
     })
   }
 
-  loadTargets = (): void => {
-    this.targetValues$ = this.service.getTargetValues();
+  loadTargets = (goalList: GoalLists): void => {
+    if (goalList && goalList.activeTargets) {
+      this.targetValues$ = this.service.getTargetValues(Utilities.getQueryStringParam("subject"), goalList.activeTargets);
+    }
   }
 }

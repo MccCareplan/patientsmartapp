@@ -24,23 +24,19 @@
     </li>
 </ul>
 <ul class="goals-items" *ngIf="displayFilter == 'targets'">
-    <!-- measure: string;
-    mostRecentResult: string;
-    date: string;
-    target: string;
-    status: string;
-    highlighted?: boolean;
-    hovered?: boolean; -->
-    <span *ngIf="(targetValues$ | async)">
-        <b>TESTING {{(targetValues$ | async).measure}}</b>
-    </span>
-    <li *ngFor="let target of (targetValues$ | async)">
+    <li *ngFor="let target of (targetValues$ | async)" [class.caution]="target.highlighted">
         <div class="goals-item">
             <h3 class="goals-title">{{ target.measure }}</h3>
             <hr />
             <ul>
                 <li *ngIf="target.mostRecentResult">
                     <label>Latest Result: </label>{{ target.mostRecentResult }}
+                </li>
+                <li *ngIf="target.target">
+                    <label>Target: </label>{{ target.target }}
+                </li>
+                <li *ngIf="target.date">
+                    <label>Test Date: </label>{{ target.date | date }}
                 </li>
             </ul>
         </div>

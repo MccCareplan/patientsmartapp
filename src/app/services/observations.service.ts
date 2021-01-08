@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { forkJoin, Observable, of, Subject } from 'rxjs';
 import { GoalTarget, MccObservation } from '../generated-data-api';
 import { formatGoalTargetValue } from '../common/chart-utility-functions';
 import { TargetValue } from '../main/goals/goals.tab/target-value';
+import { from } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ObservationsService extends DataService {
-    targetValues: Subject<TargetValue> = new Subject<TargetValue>();
-
     constructor(http: HttpClient) {
         super(`${environment.mccapiUrl}/find/latest/observation`, http);
     }
@@ -21,22 +21,25 @@ export class ObservationsService extends DataService {
         return this.getBySubjectIdAndCode(subjectId, code);
     }
 
-    getTargetValues = (): Subject<TargetValue> => {
-        return this.targetValues;
-    }
-
-    setTargetValues = (patientId: string, activeTarget: GoalTarget[]): void => {
+    getTargetValues = (patientId: string, activeTarget: GoalTarget[]): Observable<TargetValue[]> => {
         if (!patientId || !activeTarget || activeTarget.length == 0) {
             return;
         }
-        activeTarget.map(gt => {
-            this.getMostRecentObservation(patientId, gt.measure.coding[0].code)
-                .subscribe(obs => {
+        let calls: any = [];
+        activeTarget.forEach(v => {
+            calls.push(this.getMostRecentObservation(patientId, v.measure.coding[0].code));
+        })
+
+        return forkJoin(calls).pipe(
+            map(results => {
+                let targetValues: TargetValue[] = [];
+                results.forEach((obs: MccObservation, index) => {
+                    let gt: GoalTarget = activeTarget[index];
                     let mostRecentResultValue = '';
                     let observationDate = '';
                     let rowHighlighted = false;
                     let formattedTargetValue = '';
-                    if (obs !== undefined) {
+                    if (obs !== undefined && obs.status !== "notfound") {
                         if (obs.value !== undefined) {
                             mostRecentResultValue = obs.value.quantityValue.value.toString();
                         }
@@ -51,11 +54,10 @@ export class ObservationsService extends DataService {
                         }
 
                         if (obs.effective !== undefined) {
-                            if (obs.effective.type === 'DateTime') {
+                            if (obs.effective.type.toUpperCase() === 'DATETIME') {
                                 observationDate = obs.effective.dateTime.date;
                             }
                         }
-
                         [formattedTargetValue, rowHighlighted] = formatGoalTargetValue(gt, mostRecentResultValue);
                         const tv: TargetValue = {
                             measure: gt.measure.text,
@@ -65,10 +67,11 @@ export class ObservationsService extends DataService {
                             highlighted: rowHighlighted,
                             status: obs.status
                         };
-                        this.targetValues.next(tv);
+                        targetValues.push(tv);
                     }
                 });
-        });
-
+                return targetValues;
+            })
+        );
     }
 }

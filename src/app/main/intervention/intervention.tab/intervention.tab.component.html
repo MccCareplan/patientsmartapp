@@ -34,9 +34,40 @@
 </ul>
 <ul class="interventions-items" *ngIf="displayFilter=='interventions'">
     <h4 *ngIf="(educationSummaries$ | async).length > 0">Education</h4>
-    <li *ngFor="let education of educationSummaries$ | async">
+    <li *ngFor="let education of (educationSummaries$ | async)">
         <div class="interventions-item">
-            <h3 class="interventions-title">{{ education.topic | titlecase }}</h3>
+            <div>{{stringify(education)}}</div>
+            
+{
+    "topic": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "438578000",
+          "display": "Dietary education for renal disorder"
+        }
+      ],
+      "text": "Dietary education for renal disorder"
+    },
+    "type": "Procedure",
+    "displayDate": "02/15/2017 07:00",
+    "date": {},
+    "outcome": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "385670004",
+          "display": "Partially successful"
+        }
+      ],
+      "text": "Partially sucessful"
+    },
+    "status": "completed",
+    "performer": "Dr. John Carlson, MD",
+    "reasons": "Chronic kidney disease",
+    "fhirid": "cc-proc-pnoelle-ed1"
+  }
+            <!-- <h3 class="interventions-title">{{ education.topic | titlecase }}</h3> -->
             <hr />
             <ul>
                 <li *ngIf="education.type">
@@ -48,7 +79,7 @@
                 <li *ngIf="education.displayDate">
                     <label>Date:</label>
                     <span>
-                        {{ education.displayDate }}
+                        {{ education.displayDate | date }}
                     </span>
                 </li>
                 <li *ngIf="education.status">
@@ -81,7 +112,7 @@
                 <li *ngIf="counseling.displayDate">
                     <label>Date:</label>
                     <span>
-                        {{ counseling.displayDate }}
+                        {{ counseling.displayDate | date }}
                     </span>
                 </li>
                 <li *ngIf="counseling.status">
