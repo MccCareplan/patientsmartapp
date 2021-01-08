@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
-import { MccObservation } from '../generated-data-api';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -8,24 +7,9 @@ import { ChartDataSets } from 'chart.js';
 import * as moment from 'moment';
 import { finalize } from 'rxjs/operators';
 import { reformatYYYYMMDD, getLineChartOptionsObject, formatEgfrResult, getEgrLineChartAnnotationsObject } from '../common/chart-utility-functions';
-import { emptyVitalSigns, VitalSigns, VitalSignsTableData } from '../data-model/vitalSigns';
 import { MatTableDataSource } from '@angular/material/table';
 import { Egfr, emptyEgfr, EgfrTableData } from '../data-model/egfr';
-
-enum observationCodes {
-    Systolic = '8480-6',
-    Diastolic = '8462-4',
-    Egfr = '69405-9',
-    Uacr = '9318-7',
-    Wot = '29463-7',
-    Blood_pressure = '85354-9'
-}
-
-enum observationValuesets {
-    // Egfr = '2.16.840.1.113883.3.6929.3.1000',
-    Egfr = '2.16.840.1.113762.1.4.1222.179',
-    Uacr = '2.16.840.1.113883.3.6929.2.1002'
-}
+import { codes } from '../data-model/codes';
 
 @Injectable({
     providedIn: 'root'
@@ -100,14 +84,14 @@ export class EgfrService extends DataService {
 
     getPatientEgfr(patientId: string): Observable<EgfrTableData> {
         return new Observable(observer => {
-            this.getObservationsByValueset(patientId, observationValuesets.Egfr)
+            this.getObservationsByValueset(patientId, codes.observationValuesets.Egfr)
                 .pipe(finalize(() => {
                     observer.complete();
                 }))
                 .subscribe(observations => {
                     observations.map(obs => {
                         switch (obs.code.coding[0].code) {
-                            case observationCodes.Egfr:
+                            case codes.observationCodes.Egfr:
                                 const egfr: EgfrTableData = {
                                     date: obs.effective.dateTime.date,
                                     egfr: obs.value.quantityValue.value,

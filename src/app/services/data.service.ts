@@ -28,7 +28,11 @@ enum observationValuesets {
   providedIn: 'root'
 })
 export class DataService {
-  private observationsbyvaluesetURL = '/observationsbyvalueset';
+  authorizationToken: string;
+  mainfhirserver: string;
+  commonHttpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+  currentPatientId: string;
+  currentCareplanId: string;
 
   constructor(private url: string, private http: HttpClient) {
   }
@@ -58,12 +62,12 @@ export class DataService {
     return this.http.get(`${this.url}\\?subject=${subjectId}&code=${code}`)
       .pipe(catchError(this.handleError));
   }
+
   getBloodPressureById(id: string): Observable<any> {
     const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params: new HttpParams({ fromString: "subject=" + id }).set("code", "8480-6") };
     return this.http.get(this.url, options).pipe(
       catchError(this.handleError));
   }
-
 
   getPatientVitalSigns(patientId: string): Observable<VitalSignsTableData> {
     return new Observable(observer => {
@@ -101,10 +105,12 @@ export class DataService {
     return this.http.get<MccObservation[]>(`${this.url}\\?subject=${patientId}&code=${code}&mode=panel`)
       .pipe(catchError(this.handleError));
   }
+
   getObservationsByValueset(patientId: string, valueSet: string): Observable<MccObservation[]> {
     return this.http.get<MccObservation[]>(`${this.url}\\?subject=${patientId}&valueset=${valueSet}`)
       .pipe(catchError(this.handleError));
   }
+
 
   create(resource): Observable<any> {
     return this.http.post(this.url, JSON.stringify(resource))

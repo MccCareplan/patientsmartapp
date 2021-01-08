@@ -30,14 +30,15 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "src/slaunch.html"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css",
               "src/theme.scss"
             ],
-            "scripts": []
+            "scripts": ["./node_modules/fhirclient/build/fhir-client.js"]
           },
           "configurations": {
             "production": {
@@ -45,6 +46,15 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "assets": [
+                "src/favicon.ico",
+                "src/assets",
+                {
+                  "input": "src/deployment/production",
+                  "output": "/assets",
+                  "glob": "*.js"
                 }
               ],
               "optimization": true,
@@ -106,7 +116,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "patientsmartapp:build",
-            "port": 4201
+            "port": 4200
           },
           "configurations": {
             "production": {
