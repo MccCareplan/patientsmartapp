@@ -28,6 +28,8 @@ import { FhirService } from './services/fhir.service';
 export class AppComponent implements OnInit {
     title = 'Patient Smart App';
     smartLaunch: boolean;
+    currentSubjectId: string = '';
+    carePlanId: string = '';
 
     constructor(
         private route: ActivatedRoute,
@@ -41,6 +43,18 @@ export class AppComponent implements OnInit {
     devmode = false;
 
     ngOnInit(): void {
+        const skey = sessionStorage.SMART_KEY;
+        const key = skey ? skey.replace(/['"]+/g, '') : "";
+        console.log('Ang: Smart Key is ' + key);
+        if (key != null) {
+            this.updateDataContext(key, 10);
+        }
+        else {
+            this.loadPatientData();
+        }
+    }
+
+    loadPatientData = (): void => {
         let initialLoadDone = false;
 
         this.route.queryParams.subscribe(params => {
@@ -49,41 +63,39 @@ export class AppComponent implements OnInit {
                 this.devmode = (dev === 'true');
                 this.store.dispatch(devmode.EditAction({ data: this.devmode }));
 
-                let currentSubjectId: string = '';
-                let carePlanId: string = '';
+                if (params.subject != null) this.currentSubjectId = params.subject;
 
-                if (params.subject != null) {
-                    currentSubjectId = params.subject;
+                if (this.currentSubjectId) {
                     // Load best careplan for the subject, then load subsequent data
-                    this.store.dispatch(carePlansSummary.loadCareplansSummaryForSubjectAction({ subjectId: currentSubjectId }));
+                    this.store.dispatch(carePlansSummary.loadCareplansSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
                     this.store.select(fromRoot.getCarePlansSummary).subscribe(c => {
                         if (c && c.length > 0) {
                             // Set default careplan
-                            carePlanId = c[0].fhirid; // Should calls with optional careplan param have it passed in? 
+                            this.carePlanId = c[0].fhirid; // Should calls with optional careplan param have it passed in? 
 
                             // CarePlan Screen
-                            this.store.dispatch(contact.loadContactsForSubjectAndCarePlanAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
-                            this.store.dispatch(patient.SelectAction({ data: currentSubjectId }));
+                            this.store.dispatch(contact.loadContactsForSubjectAndCarePlanAction({ subjectId: this.currentSubjectId, carePlanId: this.carePlanId }));
+                            this.store.dispatch(patient.SelectAction({ data: this.currentSubjectId }));
 
                             // Health Status Screen
-                            this.store.dispatch(conditionsSummary.loadConditionSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
+                            this.store.dispatch(conditionsSummary.loadConditionSummaryForSubjectAction({ subjectId: this.currentSubjectId, carePlanId: this.carePlanId }));
 
                             // Interventions & Maintenance Screen
-                            this.store.dispatch(medicationSummary.loadMedicationSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
-                            this.store.dispatch(educationSummary.loadEducationSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
-                            this.store.dispatch(referralsSummary.loadReferralsSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
-                            this.store.dispatch(counselingSummary.loadCounselingSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
+                            this.store.dispatch(medicationSummary.loadMedicationSummaryForSubjectAction({ subjectId: this.currentSubjectId, carePlanId: this.carePlanId }));
+                            this.store.dispatch(educationSummary.loadEducationSummaryForSubjectAction({ subjectId: this.currentSubjectId, carePlanId: this.carePlanId }));
+                            this.store.dispatch(referralsSummary.loadReferralsSummaryForSubjectAction({ subjectId: this.currentSubjectId, carePlanId: this.carePlanId }));
+                            this.store.dispatch(counselingSummary.loadCounselingSummaryForSubjectAction({ subjectId: this.currentSubjectId, carePlanId: this.carePlanId }));
 
                             // Goals & Preferences Screen
-                            this.store.dispatch(goalsSummary.loadGoalsSummaryForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
+                            this.store.dispatch(goalsSummary.loadGoalsSummaryForSubjectAction({ subjectId: this.currentSubjectId, carePlanId: this.carePlanId }));
                             this.store.select(fromRoot.getGoalsSummary);
 
                             // Health Concerns Screen
-                            this.store.dispatch(socialConcerns.loadSocialConcernsForSubjectAction({ subjectId: currentSubjectId, carePlanId: carePlanId }));
+                            this.store.dispatch(socialConcerns.loadSocialConcernsForSubjectAction({ subjectId: this.currentSubjectId, carePlanId: this.carePlanId }));
 
                             // Observations
-                            this.bpService.getPatientBPInfo(currentSubjectId);
-                            this.egfrService.getPatientEgfrInfo(currentSubjectId);
+                            this.bpService.getPatientBPInfo(this.currentSubjectId);
+                            this.egfrService.getPatientEgfrInfo(this.currentSubjectId);
 
                             initialLoadDone = true;
                         }
@@ -91,13 +103,6 @@ export class AppComponent implements OnInit {
                 }
             }
         });
-
-        const skey = sessionStorage.SMART_KEY;
-        const key = skey ? skey.replace(/['"]+/g, '') : "";
-        console.log('Ang: Smart Key is ' + key);
-        if (key != null) {
-            this.updateDataContext(key, 4);
-        }
     }
 
     waitFor(time: number) {
@@ -115,16 +120,13 @@ export class AppComponent implements OnInit {
             console.log('server: ' + info.serverUrl);
             const tokenResp = info.tokenResponse;
             if (tokenResp.access_token != null) {
-                debugger;
                 console.log('access_token: ' + tokenResp.access_token);
                 console.log('patient: ' + tokenResp.patient);
                 this.fhirService.updateFHIRConnection(info.serverUrl, tokenResp.access_token);
-                // this.patientSelected(tokenResp.patient);
                 this.smartLaunch = true;
-                debugger;
-                // this.changeDetector.detectChanges();
+                this.currentSubjectId = tokenResp.patient;
+                this.loadPatientData();
             } else {
-                // Smart on FHIR still not ready (grrr....)
                 if (count > 0) {
                     const t = await this.waitFor(1000);
                     console.log(t);
