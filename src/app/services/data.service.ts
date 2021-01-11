@@ -5,7 +5,7 @@ import { AppError } from '../common/app.error';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
-import { ConditionLists, MccObservation } from '../generated-data-api';
+import { MccObservation } from '../generated-data-api';
 import { VitalSignsTableData } from '../data-model/vitalSigns';
 
 enum observationCodes {

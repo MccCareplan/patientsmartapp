@@ -18,6 +18,7 @@ import * as fromRoot from './ngrx/reducers';
 import { BloodPresureService } from './services/blood-pressure.service';
 import { EgfrService } from './services/egfr.service';
 import { FhirService } from './services/fhir.service';
+import { UacrService } from './services/uacr.service';
 import { WeightService } from './services/weight.service';
 
 @Component({
@@ -37,7 +38,8 @@ export class AppComponent implements OnInit {
         private bpService: BloodPresureService,
         private egfrService: EgfrService,
         private fhirService: FhirService,
-        private weightService: WeightService
+        private weightService: WeightService,
+        private uacrService: UacrService
     ) {
     }
 
@@ -98,6 +100,7 @@ export class AppComponent implements OnInit {
                             this.bpService.getPatientBPInfo(this.currentSubjectId);
                             this.egfrService.getPatientEgfrInfo(this.currentSubjectId);
                             this.weightService.getPatientWotInfo(this.currentSubjectId);
+                            this.uacrService.getPatientUacrInfo(this.currentSubjectId);
 
                             initialLoadDone = true;
                         }

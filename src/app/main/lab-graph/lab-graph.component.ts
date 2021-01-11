@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
-import { formatEgfrResult, formatWotResult, getEgrLineChartAnnotationsObject, reformatYYYYMMDD } from 'src/app/common/chart-utility-functions';
+import { formatEgfrResult, formatUacrResult, formatWotResult, getEgrLineChartAnnotationsObject, reformatYYYYMMDD } from 'src/app/common/chart-utility-functions';
 import { ActivatedRoute } from '@angular/router';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { BloodPresureService } from 'src/app/services/blood-pressure.service';
@@ -11,6 +11,8 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { EgfrTableData } from 'src/app/data-model/egfr';
 import { WotTableData } from 'src/app/data-model/weight-over-time';
 import { WeightService } from 'src/app/services/weight.service';
+import { UacrTableData } from 'src/app/data-model/uacr';
+import { UacrService } from 'src/app/services/uacr.service';
 
 @Component({
   selector: 'lab-graph',
@@ -22,30 +24,14 @@ export class LabGraphComponent implements OnInit {
   title: string;
   description: string;
 
-  // chart
-  lineChartAnnotations: any;
-  lineChartColors: Color[];
-  lineChartData: ChartDataSets[];
-  lineChartLabels: Label[];
-  lineChartLegend: boolean;
-  lineChartOptions: any;
-  lineChartPlugins: any[];
-  lineChartType: string;
-
   // table
-  vitalSignsRowMax = 7;
-  egfrRowMax = 7;
   wotRowMax = 7;
-  displayedColumns = [];
-  tableDataSource: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private route: ActivatedRoute,
-    private bpService: BloodPresureService,
-    private egfrService: EgfrService,
     private weightService: WeightService
   ) { }
 
@@ -80,198 +66,22 @@ export class LabGraphComponent implements OnInit {
   }
 
   bp = (): void => {
-    this.tableDataSource = this.bpService.vitalSignsDataSource;
-    this.displayedColumns = ['date', 'systolic', 'diastolic'];
     this.title = "My Blood Pressure";
     this.description = "Systolic and Dystolic values over time";
-    this.lineChartLabels = ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May'];
-    this.lineChartData = this.bpService.vitalSigns.chartData;
-    this.lineChartOptions = this.bpService.vitalSigns.lineChartOptions;
-    this.lineChartColors = [
-      {
-        borderColor: 'black',
-      },
-    ];
-
-    this.lineChartLegend = true;
-    this.lineChartPlugins = [
-      {
-        annotation: {
-          annotations: {
-            drawTime: 'beforeDatasetsDraw',
-            type: 'box',
-            xScaleID: 'x-axis-0',
-            yScaleID: 'y-axis-0',
-            borderWidth: 0,
-            yMin: 70,
-            yMax: 130,
-            backgroundColor: 'rgba(46, 204, 113,0.3)'
-          }
-        }
-      }];
-    this.lineChartType = 'line';
   }
 
   egfr = (): void => {
-    this.tableDataSource = this.egfrService.egfrDataSource;
-    this.lineChartData = this.egfrService.egfr.chartData;
-    this.lineChartOptions = this.egfrService.egfr.lineChartOptions;
-    this.displayedColumns = ['date', 'result'];
     this.title = "My GFR Results";
     this.description = "GFR Tests how well your kidneys work";
-    this.lineChartColors = [
-      {
-        borderColor: 'black',
-      },
-    ];
-    this.lineChartLegend = false;
-    this.lineChartPlugins = [pluginAnnotations];
-    this.lineChartType = 'line';
-  }
-
-  EgfrResult(egfr: EgfrTableData): string {
-    return formatEgfrResult(egfr.egfr, egfr.unit);
-  }
-
-  getEgfrRowCssClass(egfr: EgfrTableData): string {
-    let cssClass = '';
-    const val = egfr.egfr;
-    if (val) {
-      switch (true) {
-        case (val >= 60):
-          cssClass = 'resultBorderline';
-          break;
-        case (val < 60 && val >= 15):
-          cssClass = 'resultGood';
-          break;
-        case (val < 15):
-          cssClass = 'resultCritical';
-          break;
-        default:
-          break;
-      }
-    }
-    return cssClass;
   }
 
   uacr = (): void => {
     this.title = "UACR Results";
-    this.testData();
+    this.description = "Urine Albumin-to-Creatinine Ratio";
   }
 
   weight = (): void => {
     this.title = "My Weight Results";
     this.description = "Your weight over time"
-    this.tableDataSource = this.weightService.wotDataSource;
-    this.lineChartData = this.weightService.wot.chartData;
-    this.lineChartOptions = this.weightService.wot.lineChartOptions;
-    this.wotRowMax = 7;
-    this.lineChartColors = [
-      {
-        borderColor: 'black',
-      },
-    ];
-    this.lineChartLegend = false;
-    this.lineChartPlugins = [pluginAnnotations];
-    this.lineChartType = 'line';
-    this.displayedColumns = ['date', 'result'];
-  }
-
-  WotResult(wot: WotTableData): string {
-    return formatWotResult(wot.value, wot.unit);
-  }
-
-  getWotRowCssClass(wot: WotTableData): string {
-    let cssClass = '';
-    const val = wot.value;
-    if (val) {
-      switch (true) {
-        case (val >= 200):
-          cssClass = 'resultBorderline';
-          break;
-        case (val < 200 && val >= 105):
-          cssClass = 'resultGood';
-          break;
-        case (val < 105):
-          cssClass = 'resultCritical';
-          break;
-        default:
-          break;
-      }
-    }
-    return cssClass;
-  }
-
-  testData = (): void => {
-    this.lineChartAnnotations = getEgrLineChartAnnotationsObject();
-    this.lineChartData = [
-      {
-        data: [41.0, 40.0, 34.8, 26.0],
-        fill: false,
-        pointRadius: 6,
-        pointHoverRadius: 10,
-        pointBackgroundColor: "yellow",
-        pointBorderColor: "black",
-        barThickness: 50
-      }
-    ];
-    this.lineChartLabels = ["1/13/20", "4/16/20", "7/20/20", "9/26/20"];
-    this.lineChartOptions = {
-      elements: {
-        line: {
-          tension: 0
-        }
-      },
-      responsive: true,
-      annotation: this.lineChartAnnotations,
-      scales: {
-        xAxes: [{
-          display: false,
-          gridLines: {
-            display: false,
-          }
-        }],
-        yAxes: [{
-          display: true,
-          gridLines: {
-            display: true,
-            color: "rgba(0, 0, 0, 0.5)",
-            drawBorder: false
-          },
-          ticks: {
-            min: 0,
-            max: 75,
-            stepSize: 15,
-            suggestedMin: 0.5,
-            suggestedMax: 5.5,
-            callback: function (label, index, labels) {
-              switch (label) {
-                case 0:
-                  return "0";
-                case 15:
-                  return '15';
-                case 30:
-                  return '30';
-                case 45:
-                  return '45';
-                case 60:
-                  return '60';
-                case 75:
-                  return "75";
-              }
-            }
-          }
-        }],
-      }
-    };
-    this.lineChartColors = [
-      {
-        borderColor: 'black',
-        backgroundColor: "none",
-      },
-    ];
-    this.lineChartLegend = false;
-    this.lineChartType = "line";
-    this.lineChartPlugins = [pluginAnnotations];
   }
 }

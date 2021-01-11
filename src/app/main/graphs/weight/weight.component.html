@@ -1,0 +1,24 @@
+<div class="lab-graph-chart">
+    <canvas baseChart height="200" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+        [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins">
+    </canvas>
+</div>
+<div class="lab-graph-table">
+    <table mat-table matSort [dataSource]="tableDataSource" width="100%">
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="date">Date</th>
+            <td mat-cell *matCellDef="let wot"> {{wot.date | date: 'MM/dd/yyyy'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="result">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="result">Result</th>
+            <td mat-cell *matCellDef="let wot" [innerHTML]="WotResult(wot)"></td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="row.highlighted = !row.highlighted"
+            (mouseover)="row.hovered = true" (mouseout)="row.hovered = false" [ngClass]="getWotRowCssClass(row)">
+        </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 15, 30]" showFirstLastButtons
+        [ngStyle]="{display: this.tableDataSource.data.length > this.wotRowMax ? 'block' : 'none'}">
+    </mat-paginator>
+</div>

@@ -47,6 +47,10 @@ import { CareplansSummaryEffects } from './ngrx/effects/careplans-summary.effect
 import { EducationSummaryEffects } from './ngrx/effects/education-summary.effects';
 import { ReferralsSummaryEffects } from './ngrx/effects/referrals-summary.effects';
 import { CounselingSummaryEffects } from './ngrx/effects/counseling-summary.effects';
+import { BPGraphComponent } from './main/graphs/bp/bp.component';
+import { EGFRGraphComponent } from './main/graphs/egfr/egfr.component';
+import { WeightGraphComponent } from './main/graphs/weight/weight.component';
+import { UACRGraphComponent } from './main/graphs/uacr/uacr.component';
 
 @NgModule({
         declarations: [
@@ -69,7 +73,11 @@ import { CounselingSummaryEffects } from './ngrx/effects/counseling-summary.effe
                 CareteamCaretabComponent,
                 GoalsTabComponent,
                 HealthTabComponent,
-                InterventionsTabComponent
+                InterventionsTabComponent,
+                BPGraphComponent,
+                EGFRGraphComponent,
+                WeightGraphComponent,
+                UACRGraphComponent
         ],
         imports: [
                 BrowserModule,
