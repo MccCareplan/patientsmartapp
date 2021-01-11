@@ -1,14 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
-import { formatEgfrResult, getEgrLineChartAnnotationsObject } from 'src/app/common/chart-utility-functions';
+import { formatEgfrResult, formatWotResult, getEgrLineChartAnnotationsObject, reformatYYYYMMDD } from 'src/app/common/chart-utility-functions';
 import { ActivatedRoute } from '@angular/router';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { BloodPresureService } from 'src/app/services/blood-pressure.service';
 import { EgfrService } from 'src/app/services/egfr.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { EgfrTableData } from 'src/app/data-model/egfr';
+import { WotTableData } from 'src/app/data-model/weight-over-time';
+import { WeightService } from 'src/app/services/weight.service';
 
 @Component({
   selector: 'lab-graph',
@@ -33,6 +35,7 @@ export class LabGraphComponent implements OnInit {
   // table
   vitalSignsRowMax = 7;
   egfrRowMax = 7;
+  wotRowMax = 7;
   displayedColumns = [];
   tableDataSource: any;
 
@@ -42,7 +45,8 @@ export class LabGraphComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private bpService: BloodPresureService,
-    private egfrService: EgfrService
+    private egfrService: EgfrService,
+    private weightService: WeightService
   ) { }
 
   ngOnInit(): void {
@@ -158,7 +162,44 @@ export class LabGraphComponent implements OnInit {
   weight = (): void => {
     this.title = "My Weight Results";
     this.description = "Your weight over time"
-    this.testData();
+    this.tableDataSource = this.weightService.wotDataSource;
+    this.lineChartData = this.weightService.wot.chartData;
+    this.lineChartOptions = this.weightService.wot.lineChartOptions;
+    this.wotRowMax = 7;
+    this.lineChartColors = [
+      {
+        borderColor: 'black',
+      },
+    ];
+    this.lineChartLegend = false;
+    this.lineChartPlugins = [pluginAnnotations];
+    this.lineChartType = 'line';
+    this.displayedColumns = ['date', 'result'];
+  }
+
+  WotResult(wot: WotTableData): string {
+    return formatWotResult(wot.value, wot.unit);
+  }
+
+  getWotRowCssClass(wot: WotTableData): string {
+    let cssClass = '';
+    const val = wot.value;
+    if (val) {
+      switch (true) {
+        case (val >= 200):
+          cssClass = 'resultBorderline';
+          break;
+        case (val < 200 && val >= 105):
+          cssClass = 'resultGood';
+          break;
+        case (val < 105):
+          cssClass = 'resultCritical';
+          break;
+        default:
+          break;
+      }
+    }
+    return cssClass;
   }
 
   testData = (): void => {

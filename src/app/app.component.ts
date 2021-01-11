@@ -16,9 +16,9 @@ import {
 } from './ngrx/actions';
 import * as fromRoot from './ngrx/reducers';
 import { BloodPresureService } from './services/blood-pressure.service';
-import { DataService } from './services/data.service';
 import { EgfrService } from './services/egfr.service';
 import { FhirService } from './services/fhir.service';
+import { WeightService } from './services/weight.service';
 
 @Component({
     selector: 'app-root',
@@ -36,7 +36,8 @@ export class AppComponent implements OnInit {
         private store: Store<fromRoot.State>,
         private bpService: BloodPresureService,
         private egfrService: EgfrService,
-        private fhirService: FhirService
+        private fhirService: FhirService,
+        private weightService: WeightService
     ) {
     }
 
@@ -46,8 +47,8 @@ export class AppComponent implements OnInit {
         const skey = sessionStorage.SMART_KEY;
         const key = skey ? skey.replace(/['"]+/g, '') : "";
         console.log('Ang: Smart Key is ' + key);
-        if (key != null) {
-            this.updateDataContext(key, 10);
+        if (key != null && key.length > 0) {
+            this.updateDataContext(key, 4);
         }
         else {
             this.loadPatientData();
@@ -65,7 +66,7 @@ export class AppComponent implements OnInit {
 
                 if (params.subject != null) this.currentSubjectId = params.subject;
 
-                if (this.currentSubjectId) {
+                if (this.currentSubjectId && this.currentSubjectId.length > 0) {
                     // Load best careplan for the subject, then load subsequent data
                     this.store.dispatch(carePlansSummary.loadCareplansSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
                     this.store.select(fromRoot.getCarePlansSummary).subscribe(c => {
@@ -96,6 +97,7 @@ export class AppComponent implements OnInit {
                             // Observations
                             this.bpService.getPatientBPInfo(this.currentSubjectId);
                             this.egfrService.getPatientEgfrInfo(this.currentSubjectId);
+                            this.weightService.getPatientWotInfo(this.currentSubjectId);
 
                             initialLoadDone = true;
                         }
