@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
@@ -12,6 +12,9 @@ import { EgfrTableData } from 'src/app/data-model/egfr';
     styleUrls: ['./egfr.component.scss']
 })
 export class EGFRGraphComponent implements OnInit {
+    @Input()
+    showTable: boolean;
+
     // chart
     lineChartAnnotations: any;
     lineChartColors: Color[];

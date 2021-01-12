@@ -5,8 +5,10 @@
         <img class="back-arrow" src="../../../assets/svg/arrow_back_blue.svg" onclick="window.history.back()" />
         <img class="info" src="../../../assets/svg/info_blue.svg" />
     </div>
-    <bp-graph *ngIf="key==='bp'"></bp-graph>
-    <egfr-graph *ngIf="key==='egfr'"></egfr-graph>
-    <uacr-graph *ngIf="key==='uacr'"></uacr-graph>
-    <weight-graph *ngIf="key==='weight'"></weight-graph>
+    <div [ngSwitch]="key">
+        <bp-graph *ngSwitchCase="'bp'"></bp-graph>
+        <egfr-graph *ngSwitchCase="'egfr'"></egfr-graph>
+        <uacr-graph *ngSwitchCase="'uacr'"></uacr-graph>
+        <weight-graph *ngSwitchCase="'weight'"></weight-graph>
+    </div>
 </div>

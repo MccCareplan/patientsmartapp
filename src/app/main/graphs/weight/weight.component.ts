@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
-import {  formatWotResult } from 'src/app/common/utility-functions';
+import { formatWotResult } from 'src/app/common/utility-functions';
 import { WeightService } from 'src/app/services/weight.service';
 import { WotTableData } from 'src/app/data-model/weight-over-time';
 
@@ -12,6 +12,9 @@ import { WotTableData } from 'src/app/data-model/weight-over-time';
     styleUrls: ['./weight.component.scss']
 })
 export class WeightGraphComponent implements OnInit {
+    @Input()
+    showTable: boolean;
+
     // chart
     lineChartAnnotations: any;
     lineChartColors: Color[];

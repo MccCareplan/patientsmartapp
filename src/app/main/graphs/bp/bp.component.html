@@ -3,7 +3,7 @@
         [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType">
     </canvas>
 </div>
-<div class="lab-graph-table">
+<div class="lab-graph-table" *ngIf="showTable !== false">
     <table mat-table [dataSource]="tableDataSource" width="100%">
         <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef>Date</th>

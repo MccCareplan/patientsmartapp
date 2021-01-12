@@ -1,18 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Label, Color } from 'ng2-charts';
-import { formatEgfrResult, formatUacrResult, formatWotResult, getEgrLineChartAnnotationsObject, reformatYYYYMMDD } from 'src/app/common/chart-utility-functions';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import * as pluginAnnotations from 'chartjs-plugin-annotation';
-import { BloodPresureService } from 'src/app/services/blood-pressure.service';
-import { EgfrService } from 'src/app/services/egfr.service';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
-import { EgfrTableData } from 'src/app/data-model/egfr';
-import { WotTableData } from 'src/app/data-model/weight-over-time';
-import { WeightService } from 'src/app/services/weight.service';
-import { UacrTableData } from 'src/app/data-model/uacr';
-import { UacrService } from 'src/app/services/uacr.service';
 
 @Component({
   selector: 'lab-graph',
@@ -24,15 +11,8 @@ export class LabGraphComponent implements OnInit {
   title: string;
   description: string;
 
-  // table
-  wotRowMax = 7;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
   constructor(
-    private route: ActivatedRoute,
-    private weightService: WeightService
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {

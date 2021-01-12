@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { BloodPresureService } from 'src/app/services/blood-pressure.service';
@@ -9,7 +9,10 @@ import { BloodPresureService } from 'src/app/services/blood-pressure.service';
     styleUrls: ['./bp.component.scss']
 })
 export class BPGraphComponent implements OnInit {
-    // chart
+    @Input() 
+    showTable: boolean;
+
+ // chart
     lineChartAnnotations: any;
     lineChartColors: Color[];
     lineChartData: ChartDataSets[];
