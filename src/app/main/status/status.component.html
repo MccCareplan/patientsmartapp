@@ -14,91 +14,27 @@
             <option *ngFor="let item of ddlConditions$ | async; index as i" [value]="i">{{item.code.text}}</option>
         </select>
     </div>
-    <!-- List of Key Information -->
+    <div class="graphs">
+        <span>EGFR</span>
+        <egfr-graph [showTable]="false"></egfr-graph>
+        <span>UACR</span>
+        <uacr-graph [showTable]="false"></uacr-graph>
+        <span>Blood Pressure</span>
+        <bp-graph [showTable]="false"></bp-graph>
+        <span>Weight</span>
+        <weight-graph [showTable]="false"></weight-graph>
+    </div>
     <div class="key-information-and-buttons">
-        <div class="key-information">
-            <ul>
-                <li>
-                    Key Information 1
-                </li>
-                <li>
-                    Key Information 2
-                </li>
-                <li>
-                    Key Information 3
-                </li>
-                <li>
-                    Key Information 4
-                </li>
-                <li>
-                    Secondary Information
-                </li>
-                <li>
-                    Secondary Information
-                </li>
-                <li>
-                    Secondary Information
-                </li>
-                <li>
-                    Secondary Information
-                </li>
-                <li>
-                    Secondary Information
-                </li>
-                <li>
-                    Secondary Information
-                </li>
-                <li>
-                    Tertiary Information
-                </li>
-                <li>
-                    Tertiary Information
-                </li>
-                <li>
-                    Tertiary Information
-                </li>
-            </ul>
-        </div>
         <div class="buttons">
-            <ul>
-                <li>
-                    <button class="mat-raised-button" routerLink="/vital-signs" queryParamsHandling="merge">
-                        <img src="../../../assets/svg/stethscope.svg">
-                        <span>Vital Signs</span>
-                    </button>
-                </li>
-                <li>
-                    <button class="mat-raised-button" routerLink="/lab-results" queryParamsHandling="merge">
-                        <img src="../../../assets/svg/beaker.svg">
-                        <span>Lab Results</span>
-                        <div class="number-circle">2</div>
-                    </button>
-                </li>
-                <li>
-                    <button class="mat-raised-button">
-                        <img src="../../../assets/svg/checklist.svg">
-                        <span>Clinical Exams</span>
-                    </button>
-                </li>
-                <li>
-                    <button class="mat-raised-button">
-                        <img src="../../../assets/svg/microscope.svg">
-                        <span class="buttons-smaller-text">Pathology/ Radiology</span>
-                    </button>
-                </li>
-                <li>
-                    <button class="mat-raised-button">
-                        <img src="../../../assets/svg/black-circle.svg">
-                        <span class="buttons-smaller-text">Procedure/ Devices</span>
-                    </button>
-                </li>
-                <li>
-                    <button class="mat-raised-button">
-                        <img src="../../../assets/svg/black-circle.svg">
-                        <span class="buttons-smaller-text">My Reported Outcomes</span>
-                    </button>
-                </li>
-            </ul>
+            <button class="mat-raised-button" routerLink="/vital-signs" queryParamsHandling="merge">
+                <img src="../../../assets/svg/stethscope.svg">
+                <span>Vital Signs</span>
+            </button>
+            <button class="mat-raised-button" routerLink="/lab-results" queryParamsHandling="merge">
+                <img src="../../../assets/svg/beaker.svg">
+                <span>Lab Results</span>
+                <div class="number-circle">2</div>
+            </button>
         </div>
     </div>
 </div>
