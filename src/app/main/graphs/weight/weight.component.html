@@ -1,5 +1,5 @@
 <div class="lab-graph-chart">
-    <canvas baseChart height="200" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+    <canvas baseChart height="200" [datasets]="weightService.wot.chartData" [labels]="lineChartLabels" [options]="weightService.wot.lineChartOptions"
         [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins">
     </canvas>
 </div>

@@ -1,5 +1,5 @@
-<div class="lab-graph-chart" *ngIf="ready">
-    <canvas baseChart height="200" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+<div class="lab-graph-chart">
+    <canvas baseChart height="200" [datasets]="egfrService.egfr.chartData" [labels]="lineChartLabels" [options]="egfrService.egfr.lineChartOptions"
         [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins">
     </canvas>
 </div>

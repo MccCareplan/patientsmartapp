@@ -14,6 +14,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        clear: both;
+
         button {
             flex-grow: 1;
             background-color: #409fff;
@@ -61,7 +63,6 @@
         flex: auto;
         display: flex;
         justify-content: center;
-
 
         button {
             height: 50px;

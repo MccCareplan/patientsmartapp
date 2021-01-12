@@ -31,15 +31,13 @@ export class WeightGraphComponent implements OnInit {
     wotRowMax = 7;
 
     constructor(
-        private weightService: WeightService
+        public weightService: WeightService
     ) {
 
     }
 
     ngOnInit() {
         this.tableDataSource = this.weightService.wotDataSource;
-        this.lineChartData = this.weightService.wot.chartData;
-        this.lineChartOptions = this.weightService.wot.lineChartOptions;
         this.wotRowMax = 7;
         this.lineChartColors = [
             {

@@ -33,18 +33,13 @@ export class EGFRGraphComponent implements OnInit {
     egfrRowMax = 7;
 
     constructor(
-        private egfrService: EgfrService
+        public egfrService: EgfrService
     ) {
 
     }
 
     ngOnInit() {
-        this.egfrService.egfrObs.subscribe(() => {
-            debugger;
-            if (this.egfrService.egfr.tableData.length > 0 && !this.ready) {
-                this.chartInit();
-            }
-        })
+        this.chartInit();
     }
 
     chartInit = async (): Promise<void> => {

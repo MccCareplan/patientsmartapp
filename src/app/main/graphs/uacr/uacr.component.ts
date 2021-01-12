@@ -31,7 +31,7 @@ export class UACRGraphComponent implements OnInit {
     uacrRowMax = 7;
 
     constructor(
-        private uacrService: UacrService
+        public uacrService: UacrService
     ) {
 
     }
@@ -49,8 +49,6 @@ export class UACRGraphComponent implements OnInit {
         this.lineChartPlugins = [pluginAnnotations];
         this.lineChartType = 'line';
         this.displayedColumns = ['date', 'result'];
-        this.lineChartData = this.uacrService.uacr.chartData;
-        this.lineChartOptions = this.uacrService.uacr.lineChartOptions;
     }
 
     UacrResult(uacr: UacrTableData): string {

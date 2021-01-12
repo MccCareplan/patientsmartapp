@@ -9,10 +9,10 @@ import { BloodPresureService } from 'src/app/services/blood-pressure.service';
     styleUrls: ['./bp.component.scss']
 })
 export class BPGraphComponent implements OnInit {
-    @Input() 
+    @Input()
     showTable: boolean;
 
- // chart
+    // chart
     lineChartAnnotations: any;
     lineChartColors: Color[];
     lineChartData: ChartDataSets[];
@@ -28,7 +28,7 @@ export class BPGraphComponent implements OnInit {
     vitalSignsRowMax = 7;
 
     constructor(
-        private bpService: BloodPresureService
+        public bpService: BloodPresureService
     ) {
 
     }
@@ -37,8 +37,6 @@ export class BPGraphComponent implements OnInit {
         this.tableDataSource = this.bpService.vitalSignsDataSource;
         this.displayedColumns = ['date', 'systolic', 'diastolic'];
         this.lineChartLabels = ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May'];
-        this.lineChartData = this.bpService.vitalSigns.chartData;
-        this.lineChartOptions = this.bpService.vitalSigns.lineChartOptions;
         this.lineChartColors = [
             {
                 borderColor: 'black',
