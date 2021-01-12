@@ -1,1 +1,18 @@
-<p>intervention works!</p>
+<div class="interventions-container">
+    <div class="interventions-header">
+        <h2>
+            <img class="interventions-title-icon" src="../../../assets/svg/gear_blue_alt.svg">
+            Maintenance & Interventions
+        </h2>
+    </div>
+    <div class="interventions-tabs">
+        <mat-tab-group mat-align-tabs="center">
+            <mat-tab label="Medications">
+                <app-interventions-tab displayFilter="maintenance"></app-interventions-tab>
+            </mat-tab>
+            <mat-tab label="Interventions">
+                <app-interventions-tab displayFilter="interventions"></app-interventions-tab>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

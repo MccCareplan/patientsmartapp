@@ -1,13 +1,13 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {AppMaterialModule} from '../app-material/app-material.module';
-import {MatIconRegistry} from '@angular/material/icon';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AppMaterialModule } from '../app-material/app-material.module';
+import { MatIconRegistry } from '@angular/material/icon';
 import { CharPipe } from './char.pipe';
 
 
 @NgModule({
-    declarations: [ CharPipe],
+    declarations: [CharPipe],
     imports: [
         CommonModule,
         AppMaterialModule
@@ -35,6 +35,7 @@ export class SharedModule {
             gear_ltgrey = 'gear_ltgrey',
             gear_blue = 'gear_blue',
             gear = 'gear',
+            stethscope = "stethscope",
             scales = 'scales',
             target = 'target',
             target_blue = 'target_blue',

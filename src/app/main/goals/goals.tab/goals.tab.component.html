@@ -1,0 +1,44 @@
+<ul class="goals-items" *ngIf="displayFilter == 'my-goals' || displayFilter == 'team-goals'">
+    <li *ngFor="let goal of filteredGoals$ | async">
+        <div class="goals-item">
+            <h3 class="goals-title">{{ goal.description }}</h3>
+            <hr />
+            <ul>
+                <li *ngIf="goal.startDateText">
+                    <label>Start Date: </label>{{ goal.startDateText }}
+                </li>
+                <li *ngIf="goal.targetDateText">
+                    <label>Target Date: </label>{{ goal.targetDateText }}
+                </li>
+                <li *ngIf="goal.lifecycleStatus">
+                    <label>Status: </label>{{ goal.lifecycleStatus | titlecase }}
+                </li>
+                <li *ngIf="goal.priority && goal.priority != 'Undefined'">
+                    <label>Priority: </label>{{ goal.priority | titlecase }}
+                </li>
+                <li *ngIf="goal.expressedByType == 'Practitioner'">
+                    <label>Practicioner: </label>{{ goal.expressedBy }}
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>
+<ul class="goals-items" *ngIf="displayFilter == 'targets'">
+    <li *ngFor="let target of (targetValues$ | async)" [class.caution]="target.highlighted">
+        <div class="goals-item">
+            <h3 class="goals-title">{{ target.measure }}</h3>
+            <hr />
+            <ul>
+                <li *ngIf="target.mostRecentResult">
+                    <label>Latest Result: </label>{{ target.mostRecentResult }}
+                </li>
+                <li *ngIf="target.target">
+                    <label>Target: </label>{{ target.target }}
+                </li>
+                <li *ngIf="target.date">
+                    <label>Test Date: </label>{{ target.date | date }}
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>

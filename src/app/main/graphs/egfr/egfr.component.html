@@ -1,0 +1,21 @@
+<div class="lab-graph-chart">
+    <canvas baseChart height="200" [datasets]="egfrService.egfr.chartData" [labels]="lineChartLabels" [options]="egfrService.egfr.lineChartOptions"
+        [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins">
+    </canvas>
+</div>
+<div class="lab-graph-table" *ngIf="showTable !== false">
+    <table mat-table matSort [dataSource]="tableDataSource" width="100%">
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="date">Date</th>
+            <td mat-cell *matCellDef="let egfr"> {{egfr.date | date: 'MM/dd/yyyy'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="result">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="result">Result</th>
+            <td mat-cell *matCellDef="let egfr" [innerHTML]="EgfrResult(egfr)"></td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="row.highlighted = !row.highlighted"
+            (mouseover)="row.hovered = true" (mouseout)="row.hovered = false" [ngClass]="getEgfrRowCssClass(row)">
+        </tr>
+    </table>
+</div>

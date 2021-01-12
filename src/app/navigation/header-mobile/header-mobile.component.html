@@ -1,45 +1,54 @@
 <mat-toolbar class="mat-elevation-z2" color="background">
 
-    <button mat-button class="grey-button" routerLink="/status" routerLinkActive="active-menu-item" queryParamsHandling="merge">
+    <div routerLinkActive="active-menu-item">
+        <button mat-button class="grey-button" routerLink="/status" queryParamsHandling="merge">
+            <div class="toolbar-icon">
+                <mat-icon svgIcon="icons:clipboard"></mat-icon>
+            </div>
+            <div class="toolbar-icon-text">
+                <span>Health<br />Status</span>
+            </div>
+        </button>
+        <a routerLink="/lab-results" style="display: none;"></a>
+        <a routerLink="/lab-graph" style="display: none;"></a>
+        <a routerLink="/vital-signs" style="display: none;"></a>
+    </div>
+
+    <button mat-button class="grey-button" routerLink="/intervention" routerLinkActive="active-menu-item"
+        queryParamsHandling="merge">
         <div class="toolbar-icon">
-            <mat-icon svgIcon="icons:clipboard" ></mat-icon>
-        </div>
-        <div class="toolbar-icon-text">
-            <span>Health<br />Status</span>
-        </div>
-    </button>
-    <button mat-button class="grey-button" routerLink="/intervention" routerLinkActive="active-menu-item" queryParamsHandling="merge">
-        <div class="toolbar-icon">
-            <mat-icon svgIcon="icons:gear" ></mat-icon>
+            <!--            <mat-icon>loop</mat-icon>-->
+            <mat-icon svgIcon="icons:gear"></mat-icon>
         </div>
         <div class="toolbar-icon-text">
             <span>Interventions<br />& Maintenance</span>
         </div>
     </button>
-    <button mat-button class="grey-button" routerLink="/goals" routerLinkActive="active-menu-item" queryParamsHandling="merge">
+    <button mat-button class="grey-button" routerLink="/goals" routerLinkActive="active-menu-item"
+        queryParamsHandling="merge">
         <div class="toolbar-icon">
-            <mat-icon svgIcon="icons:target" ></mat-icon>
+            <mat-icon svgIcon="icons:target"></mat-icon>
         </div>
         <div class="toolbar-icon-text">
             <span>Goals<br />& Preferences</span>
         </div>
     </button>
-    <button mat-button class="grey-button" routerLink="/health" routerLinkActive="active-menu-item" queryParamsHandling="merge">
+    <button mat-button class="grey-button" routerLink="/health" routerLinkActive="active-menu-item"
+        queryParamsHandling="merge">
         <div class="toolbar-icon">
-            <mat-icon svgIcon="icons:heart" ></mat-icon>
+            <mat-icon svgIcon="icons:heart"></mat-icon>
         </div>
         <div class="toolbar-icon-text">
             <span>Health<br />Concerns</span>
         </div>
     </button>
-    <button mat-button class="grey-button" routerLink="/careteam" routerLinkActive="active-menu-item" queryParamsHandling="merge">
+    <button mat-button class="grey-button" routerLink="/careteam" routerLinkActive="active-menu-item"
+        queryParamsHandling="merge">
         <div class="toolbar-icon">
-            <mat-icon svgIcon="icons:twopeople_blk" ></mat-icon>
+            <mat-icon svgIcon="icons:twopeople_blk"></mat-icon>
         </div>
         <div class="toolbar-icon-text">
             <span>Care Team</span>
         </div>
     </button>
-
 </mat-toolbar>
-
