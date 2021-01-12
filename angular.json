@@ -116,7 +116,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "patientsmartapp:build",
-            "port": 4200
+            "port": 4000
           },
           "configurations": {
             "production": {
@@ -143,7 +143,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "src/serviceworker.js"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
