@@ -1,4 +1,4 @@
-<div class="lab-graph-chart">
+<div class="lab-graph-chart" *ngIf="ready">
     <canvas baseChart height="200" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
         [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins">
     </canvas>

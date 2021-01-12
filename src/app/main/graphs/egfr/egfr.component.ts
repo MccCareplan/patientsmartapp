@@ -5,6 +5,7 @@ import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { EgfrService } from 'src/app/services/egfr.service';
 import { formatEgfrResult } from 'src/app/common/utility-functions';
 import { EgfrTableData } from 'src/app/data-model/egfr';
+import { from } from 'rxjs';
 
 @Component({
     selector: 'egfr-graph',
@@ -24,6 +25,7 @@ export class EGFRGraphComponent implements OnInit {
     lineChartOptions: any;
     lineChartPlugins: any[];
     lineChartType: string;
+    ready: boolean = false;
 
     // table
     displayedColumns = [];
@@ -37,6 +39,15 @@ export class EGFRGraphComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.egfrService.egfrObs.subscribe(() => {
+            debugger;
+            if (this.egfrService.egfr.tableData.length > 0 && !this.ready) {
+                this.chartInit();
+            }
+        })
+    }
+
+    chartInit = async (): Promise<void> => {
         this.tableDataSource = this.egfrService.egfrDataSource;
         this.lineChartData = this.egfrService.egfr.chartData;
         this.lineChartOptions = this.egfrService.egfr.lineChartOptions;
@@ -49,6 +60,7 @@ export class EGFRGraphComponent implements OnInit {
         this.lineChartLegend = false;
         this.lineChartPlugins = [pluginAnnotations];
         this.lineChartType = 'line';
+        this.ready = true;
     }
 
 
