@@ -54,7 +54,7 @@ const emptyUacr: Uacr = {
   xAxisLabels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
   suggestedMin: new Date('2020-01-01'),
   suggestedMax: new Date('2020-06-30'),
-  lineChartOptions: { ...getLineChartOptionsObject(0, 400, new Date('2020-01-01'), new Date('2020-06-30')), annotation: [] }
+  lineChartOptions: { ...getLineChartOptionsObject(0, 2000, new Date('2020-01-01'), new Date('2020-06-30')), annotation: [] }
 };
 
 export {

@@ -257,7 +257,7 @@ export function getUacrLineChartAnnotationsObject() {
             yScaleID: 'y-axis-0',
             borderWidth: 0,
             yMin: 300,
-            yMax: 400,
+            yMax: 2000,
             backgroundColor: 'rgba(227, 127, 104,0.3)'
         }
         ]
