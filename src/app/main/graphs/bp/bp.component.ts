@@ -36,7 +36,6 @@ export class BPGraphComponent implements OnInit {
     ngOnInit() {
         this.tableDataSource = this.bpService.vitalSignsDataSource;
         this.displayedColumns = ['date', 'systolic', 'diastolic'];
-        this.lineChartLabels = ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May'];
         this.lineChartColors = [
             {
                 borderColor: 'black',
