@@ -1,5 +1,5 @@
 <div class="lab-graph-chart">
-    <canvas baseChart height="200" [datasets]="bpService.vitalSigns.chartData" [options]="bpService.vitalSigns.lineChartOptions"
+    <canvas baseChart height="200" [datasets]="bpService.vitalSigns.chartData" [labels]="lineChartLabels" [options]="bpService.vitalSigns.lineChartOptions"
         [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType">
     </canvas>
 </div>
