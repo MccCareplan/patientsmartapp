@@ -24,7 +24,7 @@ import { WeightService } from './services/weight.service';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
     title = 'Patient Smart App';
@@ -55,6 +55,10 @@ export class AppComponent implements OnInit {
         else {
             this.loadPatientData();
         }
+    }
+
+    getOffSet(): boolean {
+        return window.location.href.toLowerCase().indexOf('/status') > 0;
     }
 
     loadPatientData = (): void => {

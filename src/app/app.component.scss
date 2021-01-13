@@ -1,4 +1,6 @@
-mat-sidenav-container, mat-sidenav-content, mat-sidenav {
+mat-sidenav-container,
+mat-sidenav-content,
+mat-sidenav {
     height: 100vh; /*Component content fills entire verticle space*/
 }
 
@@ -19,12 +21,16 @@ mat-sidenav {
     margin-bottom: 50px; /*Matches height of footer so can see all content when scrolling to bottom*/
 }
 
+.offset {
+    margin-bottom: 120px;
+}
+
 .center {
     position: absolute;
     left: 50%;
     top: 40%;
     transform: translate(-50%, -50%);
-    border: 5px solid #5F85DB;
+    border: 5px solid #5f85db;
     padding: 10px;
 }
 
@@ -32,7 +38,7 @@ mat-sidenav {
     text-align: center;
     width: 400px;
     padding: 10px;
-    background: #5F85DB;
+    background: #5f85db;
     color: #fff;
     font-weight: bold;
     font-family: Tahoma;

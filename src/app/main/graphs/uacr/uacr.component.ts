@@ -12,7 +12,7 @@ import { UacrService } from 'src/app/services/uacr.service';
     styleUrls: ['./uacr.component.scss']
 })
 export class UACRGraphComponent implements OnInit {
-    @Input() 
+    @Input()
     showTable: boolean;
 
     // chart
@@ -61,13 +61,13 @@ export class UACRGraphComponent implements OnInit {
         if (val) {
             switch (true) {
                 case (val >= 300):
-                    cssClass = 'resultBorderline';
+                    cssClass = 'resultCritical';
                     break;
                 case (val < 300 && val >= 25):
-                    cssClass = 'resultGood';
+                    cssClass = 'resultBorderline';
                     break;
                 case (val < 25):
-                    cssClass = 'resultCritical';
+                    cssClass = 'resultGood';
                     break;
                 default:
                     break;

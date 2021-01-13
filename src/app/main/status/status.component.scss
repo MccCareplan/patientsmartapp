@@ -42,9 +42,11 @@
 
     .key-information-and-buttons {
         padding-top: 20px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
+        position: fixed;
+        height: 110px;
+        width: 100%;
+        left: 0;
+        bottom: 0;
     }
 
     .graphs {
