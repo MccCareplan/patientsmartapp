@@ -6,5 +6,19 @@
       "**/.*",
       "**/node_modules/**"
     ]
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/slaunch.html",
+      "destination": "/slaunch.html"
+    },
+    {
+      "source": "slaunch.html",
+      "destination": "/slaunch.html"
+    },
+    {
+      "source": "**",
+      "destination": "/index.html"
+    }
+    ]
 }
