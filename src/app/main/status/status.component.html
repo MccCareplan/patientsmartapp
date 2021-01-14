@@ -16,19 +16,35 @@
     </div>
     <div class="graphs">
         <div class="graph-wrapper">
-            <span>EGFR</span>
+            <div routerLink="/lab-graph" [queryParams]="{key:'egfr'}" queryParamsHandling="merge">
+                <span>
+                    EGFR
+                </span>
+            </div>
             <egfr-graph [showTable]="false"></egfr-graph>
         </div>
         <div class="graph-wrapper">
-            <span>UACR</span>
+            <div routerLink="/lab-graph" [queryParams]="{key:'uacr'}" queryParamsHandling="merge">
+                <span>
+                    UACR
+                </span>
+            </div>
             <uacr-graph [showTable]="false"></uacr-graph>
         </div>
         <div class="graph-wrapper">
-            <span>Blood Pressure</span>
+            <div routerLink="/lab-graph" [queryParams]="{key:'bp'}" queryParamsHandling="merge">
+                <span>
+                    Blood Pressure
+                </span>
+            </div>
             <bp-graph [showTable]="false"></bp-graph>
         </div>
         <div class="graph-wrapper">
-            <span>Weight</span>
+            <div routerLink="/lab-graph" [queryParams]="{key:'weight'}" queryParamsHandling="merge">
+                <span>
+                    Weight
+                </span>
+            </div>
             <weight-graph [showTable]="false"></weight-graph>
         </div>
     </div>
