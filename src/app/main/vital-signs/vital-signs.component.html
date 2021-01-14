@@ -4,7 +4,7 @@
             <img class="vital-signs-title-icon" src="../../../assets/svg/stethscope.svg">
             Vital Signs
         </h2>
-        <img class="back-arrow" src="../../../assets/svg/arrow_back_blue.svg" onclick="window.history.back()" />
+        <img class="back-arrow" src="../../../assets/svg/arrow_back_blue.svg" routerLink="/status" queryParamsHandling="merge"/>
     </div>
     <ul class="vital-sign-items">
         <li routerLink="/lab-graph" [queryParams]="{key:'bp'}" queryParamsHandling="merge">

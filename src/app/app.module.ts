@@ -51,6 +51,7 @@ import { BPGraphComponent } from './main/graphs/bp/bp.component';
 import { EGFRGraphComponent } from './main/graphs/egfr/egfr.component';
 import { WeightGraphComponent } from './main/graphs/weight/weight.component';
 import { UACRGraphComponent } from './main/graphs/uacr/uacr.component';
+import { ObservationsService } from './services/observations.service.new';
 
 @NgModule({
         declarations: [
@@ -95,7 +96,7 @@ import { UACRGraphComponent } from './main/graphs/uacr/uacr.component';
                 SharedModule,
                 FormsModule
         ],
-        providers: [PatientLoadedGuard, SubjectDataServiceService],
+        providers: [PatientLoadedGuard, SubjectDataServiceService, ObservationsService],
         exports: [RouterModule],
         bootstrap: [AppComponent]
 })

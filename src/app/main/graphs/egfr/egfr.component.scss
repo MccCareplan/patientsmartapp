@@ -1,8 +1,9 @@
 .lab-graph-chart {
     width: 100%;
-    height: auto;
+
     position: relative;
     canvas {
         width: 100% !important;
+        min-height: 200px;
     }
 }
