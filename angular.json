@@ -49,6 +49,8 @@
                 }
               ],
               "assets": [
+                "src/manifest.webmanifest",
+                "src/slaunch.html",
                 "src/favicon.ico",
                 "src/assets",
                 {
