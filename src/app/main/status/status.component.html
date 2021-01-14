@@ -15,32 +15,32 @@
         </select>
     </div>
     <div class="graphs">
-        <div class="graph-wrapper">
-            <div routerLink="/lab-graph" [queryParams]="{key:'egfr'}" queryParamsHandling="merge">
+        <div class="graph-wrapper" routerLink="/lab-graph" [queryParams]="{key:'egfr'}" queryParamsHandling="merge">
+            <div>
                 <span>
                     EGFR
                 </span>
             </div>
             <egfr-graph [showTable]="false"></egfr-graph>
         </div>
-        <div class="graph-wrapper">
-            <div routerLink="/lab-graph" [queryParams]="{key:'uacr'}" queryParamsHandling="merge">
+        <div class="graph-wrapper" routerLink="/lab-graph" [queryParams]="{key:'uacr'}" queryParamsHandling="merge">
+            <div>
                 <span>
                     UACR
                 </span>
             </div>
             <uacr-graph [showTable]="false"></uacr-graph>
         </div>
-        <div class="graph-wrapper">
-            <div routerLink="/lab-graph" [queryParams]="{key:'bp'}" queryParamsHandling="merge">
+        <div class="graph-wrapper" routerLink="/lab-graph" [queryParams]="{key:'bp'}" queryParamsHandling="merge">
+            <div>
                 <span>
                     Blood Pressure
                 </span>
             </div>
             <bp-graph [showTable]="false"></bp-graph>
         </div>
-        <div class="graph-wrapper">
-            <div routerLink="/lab-graph" [queryParams]="{key:'weight'}" queryParamsHandling="merge">
+        <div class="graph-wrapper" routerLink="/lab-graph" [queryParams]="{key:'weight'}" queryParamsHandling="merge">
+            <div>
                 <span>
                     Weight
                 </span>
