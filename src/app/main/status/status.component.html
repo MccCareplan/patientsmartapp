@@ -1,1 +1,40 @@
-<p>status works!</p>
+<div class="health-status-page">
+    <!-- Health Status Icon and Title-->
+    <div class="health-status-header">
+        <h2>
+            <img src="../../../assets/svg/clipboard_blue.svg" />
+            Health Status
+        </h2>
+    </div>
+    <!-- Health Status Blue Link Box (Diabetes etc.)-->
+    <div class="health-status-link-box">
+        <select class="mat-raised-button" (change)="chronicConditionSelected($event.target.value)"
+            aria-label="Link to Chronic Condition Hub">
+            <option value='-1' *ngIf="!(ddlConditions$ | async)">Loading...</option>
+            <option *ngFor="let item of ddlConditions$ | async; index as i" [value]="i">{{item.code.text}}</option>
+        </select>
+    </div>
+    <div class="graphs">
+        <span>EGFR</span>
+        <egfr-graph [showTable]="false"></egfr-graph>
+        <span>UACR</span>
+        <uacr-graph [showTable]="false"></uacr-graph>
+        <span>Blood Pressure</span>
+        <bp-graph [showTable]="false"></bp-graph>
+        <span>Weight</span>
+        <weight-graph [showTable]="false"></weight-graph>
+    </div>
+    <div class="key-information-and-buttons">
+        <div class="buttons">
+            <button class="mat-raised-button" routerLink="/vital-signs" queryParamsHandling="merge">
+                <img src="../../../assets/svg/stethscope.svg">
+                <span>Vital Signs</span>
+            </button>
+            <button class="mat-raised-button" routerLink="/lab-results" queryParamsHandling="merge">
+                <img src="../../../assets/svg/beaker.svg">
+                <span>Lab Results</span>
+                <div class="number-circle">2</div>
+            </button>
+        </div>
+    </div>
+</div>

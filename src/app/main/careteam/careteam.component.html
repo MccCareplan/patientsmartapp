@@ -1,1 +1,18 @@
-<p>careteam works!</p>
+<div class="careteam-container">
+    <div class="careteam-header">
+        <h2>
+            <img src="../../../assets/svg/twopeople_blue.svg" class="careteam-title-icon" />
+            My Profile & Care Team
+        </h2>
+    </div>
+    <div class="careteam-content">
+        <mat-tab-group mat-align-tabs="center">
+            <mat-tab label="My Care Team">
+                <app-careteam-caretab displayFilter="careteam"></app-careteam-caretab>
+            </mat-tab>
+            <mat-tab label="My Profile">
+                <app-careteam-caretab displayFilter="profile"></app-careteam-caretab>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Patient Smart App</title>
@@ -9,10 +10,48 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&amp;display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="manifest" href="manifest.webmanifest">
-<!--  <meta name="theme-color" content="#1976d2">-->
+  <meta name="theme-color" content="#1976d2">
+  <script src="assets/env.js"></script>
+  <script src="assets/fhir-client.js"></script>
+  <script>
+    const queryString = window.location.search;
+    console.log("Query: ".concat(queryString));
+    const urlParams = new URLSearchParams(queryString);
+    const nosmart = urlParams.get('nosmart') == true;
+    const code = urlParams.get('code')
+
+    if ((nosmart == false) && (code != null)) {
+
+      FHIR.oauth2.ready((client) => {
+        function gotScope(scope) {
+          let scopes = client.tokenResponse.scope.split(' ');
+          return scopes.find((a) => a === scope);
+        }
+
+        if (gotScope('launch/patient')) {
+          console.log("Launched in Smart Mode - Standalone")
+        } else if (gotScope('launch')) {
+          console.log("Launched in Smart Mode - Embedded")
+        }
+      }
+      )
+        .then(
+          console.log("Launched in Smart Mode")
+        )
+        .then(
+          console.log("Connected")
+        )
+        .catch(console.error)
+    }
+    else {
+      console.log("Not launching as SMART")
+    }
+  </script>
 </head>
+
 <body>
   <app-root></app-root>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
 </body>
+
 </html>

@@ -1,0 +1,59 @@
+ul.health-items {
+    list-style-type: none;
+    padding: 0;
+
+    > li {
+        background-color: #f1f9ff;
+        position: relative;
+        float: left;
+        clear: both;
+        width: 100%;
+        margin-bottom: 20px;
+
+        > div {
+            padding: 15px;
+            padding-top: 12px;
+
+            h3 {
+                margin: 0;
+                font-size: 1em;
+            }
+
+            > ul {
+                padding-left: 0px;
+                list-style-type: none;
+
+                li {
+                    label {
+                        font-weight: 500;
+                        padding-right: 5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+ul.health-items {
+    hr {
+        visibility: hidden;
+        margin-bottom: 0px;
+    }
+    h4 {
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    > li {
+        > div {
+            h3 {
+                font-weight: 500;
+            }
+
+            > ul {
+                padding-left: 20px;
+                list-style-type: disc;
+                font-size: 0.9em;
+            }
+        }
+    }
+}

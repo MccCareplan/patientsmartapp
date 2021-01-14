@@ -1,0 +1,124 @@
+.health-status-page {
+    .health-status-header {
+        position: relative;
+        text-align: center;
+
+        img {
+            height: 25px;
+            margin-bottom: -3px;
+            padding-right: 2px;
+        }
+    }
+
+    .health-status-link-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        button {
+            flex-grow: 1;
+            background-color: #409fff;
+            border-radius: 5px;
+            padding: 2px;
+        }
+
+        select {
+            flex-grow: 1;
+            background-color: #409fff;
+            border-radius: 5px;
+            padding: 10px;
+            color: white;
+            text-align: center;
+            text-align-last: center;
+        }
+
+        option {
+            color: rgb(72, 161, 255);
+            background-color: white;
+            text-align-last: center;
+        }
+    }
+
+    .key-information-and-buttons {
+        padding-top: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .key-information {
+        width: 66%;
+
+        ul {
+            list-style: none;
+            padding-top: 10px;
+            max-height: 500px;
+            overflow: auto;
+            background-color: #f1f9ff;
+            margin-right: 15px;
+            padding-left: 20px;
+        }
+        li {
+            padding: 10px 0;
+        }
+    }
+
+    .buttons {
+        width: 33%;
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            padding-bottom: 25px;
+            height: 50px;
+            position: relative;
+
+            button {
+                font-size: 1em;
+                background-color: #f1f9ff;
+                border: 1px solid black;
+                border-radius: 5px;
+                width: 100%;
+                white-space: pre-wrap !important;
+                line-height: 1.25em;
+                padding-left: 10px;
+                padding-right: 5px;
+
+                img {
+                    float: left;
+                    height: auto;
+                    width: 25px;
+                    margin: 12px 0;
+                }
+
+                span {
+                    font-size: 0.9em;
+                    display: block;
+                    margin: 4px 0;
+                }
+
+                span.buttons-smaller-text {
+                    font-size: 0.8em;
+                }
+            }
+        }
+    }
+
+    .number-circle {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        border-radius: 50%;
+        width: 12px;
+        height: 12px;
+        padding: 1px;
+        background: rgb(255, 0, 0);
+        border: 1px solid rgb(255, 0, 0);
+        color: white;
+        text-align: center;
+        font: 12px Arial, sans-serif;
+        vertical-align: middle;
+    }
+}

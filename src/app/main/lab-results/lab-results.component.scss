@@ -1,0 +1,71 @@
+.lab-results-container {
+    .lab-results-header {
+        position: relative;
+
+        h2 { 
+            padding-left: 30px;
+        }
+
+        .lab-results-title-icon {
+            height: 30px;
+            float: left;
+            padding-right: 10px;
+        }
+        .back-arrow {
+            position: absolute;
+            top: 3px;
+            left: 0;
+        }
+    }
+
+    ul.lab-result-items {
+        list-style-type: none;
+        padding: 0;
+
+        li {
+            background-color: #f1f9ff;
+            position: relative;
+            height: 90px;
+            float: left;
+            clear: both;
+            width: 100%;
+            margin-bottom: 20px;
+
+            h3 {
+                margin: 0;
+            }
+
+            .lab-result-item {
+                padding: 15px;
+                padding-top: 12px;
+
+                .lab-result-title {
+                    font-weight: 500;
+                    padding-bottom: 5px;
+                }
+
+                .lab-result-details {
+                    color: #409fff;
+                    clear: both;
+                    float: left;
+                    font-size: 0.8em;
+                }
+            }
+
+            .lab-result-more-icon {
+                position: absolute;
+                right: 20px;
+                top: 35%;
+                color: #409fff;
+                font-size: 1.5em;
+            }
+
+            .lab-result-details-1 {
+                position: absolute;
+                top: 15px;
+                right: 50px;
+                font-size: 0.8em;
+            }
+        }
+    }
+}
