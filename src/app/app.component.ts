@@ -57,8 +57,16 @@ export class AppComponent implements OnInit {
         }
     }
 
-    getOffSet(): boolean {
-        return window.location.href.toLowerCase().indexOf('/status') > 0;
+    showFooter(): boolean {
+        const urlToCheck = window.location.href.toLowerCase();
+        const trusted_urls = ["/status", "/lab-results", "/vital-signs"]
+        let checkPassed = false;
+        trusted_urls.forEach((v, i)=> { 
+            if (urlToCheck.indexOf(v) > -1){
+                checkPassed = true;
+            }
+        })
+        return checkPassed;
     }
 
     loadPatientData = (): void => {
