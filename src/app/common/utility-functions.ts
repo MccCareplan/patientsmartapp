@@ -132,7 +132,7 @@ export function reformatYYYYMMDD(dt): string {
 export function getLineChartOptionsObject(min: number, max: number, suggestedMinDate: Date, suggestedMaxDate: Date): {} {
     const opts =
     {
-        responsive: false,
+        responsive: true,
         maintainAspectRatio: true,
         scales: {
             yAxes: [{

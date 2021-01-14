@@ -15,14 +15,22 @@
         </select>
     </div>
     <div class="graphs">
-        <span>EGFR</span>
-        <egfr-graph [showTable]="false"></egfr-graph>
-        <span>UACR</span>
-        <uacr-graph [showTable]="false"></uacr-graph>
-        <span>Blood Pressure</span>
-        <bp-graph [showTable]="false"></bp-graph>
-        <span>Weight</span>
-        <weight-graph [showTable]="false"></weight-graph>
+        <div class="graph-wrapper">
+            <span>EGFR</span>
+            <egfr-graph [showTable]="false"></egfr-graph>
+        </div>
+        <div class="graph-wrapper">
+            <span>UACR</span>
+            <uacr-graph [showTable]="false"></uacr-graph>
+        </div>
+        <div class="graph-wrapper">
+            <span>Blood Pressure</span>
+            <bp-graph [showTable]="false"></bp-graph>
+        </div>
+        <div class="graph-wrapper">
+            <span>Weight</span>
+            <weight-graph [showTable]="false"></weight-graph>
+        </div>
     </div>
     <div class="key-information-and-buttons">
         <div class="buttons">
