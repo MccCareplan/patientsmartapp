@@ -2,15 +2,37 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 
-@Injectable()
-export class ObservationsService {
-    public HTTP_OPTIONS = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    public OBSERVATIONS: Map<string, any> = new Map<string, any>();
+enum ConditionMapTypes {
+    "panel",
+    "valueset",
+    "code"
+}
 
-    _defaultUrl = environment.mccapiUrl;
+interface ConditionMap {
+    key: string;
+    data: string[];
+    type: ConditionMapTypes
+}
+
+@Injectable()
+export class ConditionMappingService {
+    private kv = new Map<string, ConditionMap[]>([]);
     constructor(
         protected http: HttpClient
     ) {
+
+    }
+
+    updateKv = (key, value, type): void => {
+        let newKey = key + value + type;
+        if (this.kv.has(key)) {
+            let conMaps: ConditionMap[] = this.kv.get(key);
+            let conMapByKey: ConditionMap = conMaps.find(x => x.key == key)
+            conMapByKey.data = value;
+        }
+        else {
+            this.kv.set()
+        }
     }
 
     _observationUrl = "find/latest/observation";
@@ -30,15 +52,14 @@ export class ObservationsService {
     };
 
     _observationByValueSetUrl = "observationsbyvalueset"
-    getObservationsByValueSet = (patientId: string, valueSet: string, sort?: string, max?: string): Promise<any> => {
+    getObservationsByValueSet = (patientId: string, valueSet: string): Promise<any> => {
         const key = patientId + "-" + valueSet;
-        const url = `${environment.mccapiUrl}/${this._observationByValueSetUrl}?subject=${patientId}&valueset=${valueSet}` + (sort ? `&sort=${sort}` : ``) + (max ? `&max=${max}` : ``);
 
         if (this.OBSERVATIONS.has(key)) {
             return Promise.resolve(this.OBSERVATIONS.get(key));
         }
         else {
-            return this.http.get(url, this.HTTP_OPTIONS).toPromise()
+            return this.http.get(`${environment.mccapiUrl}/${this._observationByValueSetUrl}?subject=${patientId}&valueset=${valueSet}`, this.HTTP_OPTIONS).toPromise()
                 .then(res => {
                     this.OBSERVATIONS.set(key, res);
                     return res;

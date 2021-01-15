@@ -4,7 +4,8 @@
             <img class="lab-results-title-icon" src="../../../assets/svg/beaker.svg">
             Lab Results
         </h2>
-        <img class="back-arrow" src="../../../assets/svg/arrow_back_blue.svg" routerLink="/status" queryParamsHandling="merge"/>
+        <img class="back-arrow" src="../../../assets/svg/arrow_back_blue.svg" routerLink="/status"
+            queryParamsHandling="merge" />
     </div>
     <ul class="lab-result-items">
         <li routerLink="/lab-graph" [queryParams]="{key:'egfr'}" queryParamsHandling="merge">
@@ -21,6 +22,14 @@
                 <h3 class="lab-result-title">UACR</h3>
                 <span class="lab-result-details-1"></span>
                 <span class="lab-result-details lab-result-details-3">September 18, 2020</span>
+            </div>
+            <span class="lab-result-more-icon">&gt;</span>
+        </li>
+        <li *ngFor="let res of results">
+            <div class="lab-result-item">
+                <h3 class="lab-result-title">{{res}}</h3>
+                <span class="lab-result-details-1">{{res}}</span>
+                <span class="lab-result-details lab-result-details-3">{{res}}</span>
             </div>
             <span class="lab-result-more-icon">&gt;</span>
         </li>

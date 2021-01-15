@@ -71,9 +71,10 @@ export class GoalsTabComponent implements OnInit {
       })
 
       Promise.all(callArray).then(resArray => {
-        resArray.filter(x => x !== undefined && x.status !== "notfound").forEach((v, i) => { // Filter
+        resArray.filter(x => x !== undefined && x.status !== "notfound").forEach((v, i, d) => { // Filter
+          debugger;
           this.targetValues.push(
-            this.formatTarget(v, i, goalList.activeTargets) // Format
+            this.formatTarget(v, i, d) // Format
           );
         });
       });
@@ -81,6 +82,7 @@ export class GoalsTabComponent implements OnInit {
   }
 
   formatTarget = (obs: MccObservation, index: number, activeTargets: GoalTarget[]): TargetValue => {
+    debugger;
     let gt: GoalTarget = activeTargets[index];
     let mostRecentResultValue = '';
     let observationDate = '';
