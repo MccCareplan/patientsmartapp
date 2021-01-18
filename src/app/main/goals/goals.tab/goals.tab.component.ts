@@ -7,7 +7,6 @@ import { GoalLists, GoalSummary, GoalTarget, MccObservation } from 'src/app/gene
 import { TargetValue } from './target-value';
 import { ObservationsService } from 'src/app/services/observations.service.new';
 import { formatGoalTargetValue } from 'src/app/common/utility-functions';
-import { Target } from '@angular/compiler';
 
 @Component({
   selector: 'app-goals-tab',
@@ -82,7 +81,6 @@ export class GoalsTabComponent implements OnInit {
   }
 
   formatTarget = (obs: MccObservation, index: number, activeTargets: GoalTarget[]): TargetValue => {
-    debugger;
     let gt: GoalTarget = activeTargets[index];
     let mostRecentResultValue = '';
     let observationDate = '';

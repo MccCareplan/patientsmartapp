@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { filter } from 'rxjs/operators';
 import { MccObservation } from 'src/app/generated-data-api';
 import { ObservationsService } from 'src/app/services/observations.service.new';
 
@@ -32,9 +33,13 @@ export class LabResultsComponent implements OnInit {
 
   }
 
+  formatJSON = (val: any): string => {
+    return JSON.stringify(val);
+  }
+
   ngOnInit(): void {
     this.testData();
-
+    this.results = [];
     let callsToMake: PatientLabResultsMap[] = this.keyToObservations.get(this.longTermCondition);
     let promiseArray = [];
     callsToMake.forEach((v, i) => {
@@ -50,31 +55,106 @@ export class LabResultsComponent implements OnInit {
           break;
       }
     })
-    Promise.all(promiseArray).then(
-      (resArr: any[]) => {
-        resArr.forEach((res: any, i) => {
-          switch (true) {
-            case (res && !res.length && res.status !== "notfound"): // code
-              this.results.push(res);
-              break;
-            case (res && res.length > 0): // valueset
-              this.results.push(res[0]);
-              break;
-            case (res && res.length > 1): // panel
-              this.results.push(res[0]);
-              break;
-          }
-        });
-      }
-    )
+    Promise.all(promiseArray).then((resArr: any[]) => {
+      resArr.filter(x => this.filterOutBadValues(x)).forEach((res: any, index: number) => {
+        switch (true) {
+          case (res && !res.length): // code
+            this.results.push(res);
+            break;
+          case (res && res.length > 0): // valueset
+            this.results.push(res[0]);
+            break;
+          case (res && res.length > 1): // panel
+            this.results.push(res[0]);
+            break;
+        }
+      });
+    });
   }
 
-
-
-
+  filterOutBadValues = (res: any): boolean => {
+    if (res.status === "notfound")
+      return false;
+    if (!res)
+      return false;
+    if (res.length < 1)
+      return false;
+    return true;
+  }
 
   testData() {
     this.keyToObservations.set(this.longTermCondition, [
+      {
+        name: "Blood Pressure",
+        value: "85354-9",
+        type: "panel"
+      },
+      {
+        name: "Weight",
+        value: "29463-7",
+        type: "panel"
+      },
+      {
+        name: "eGFR",
+        value: "2.16.840.1.113762.1.4.1222.179",
+        type: "valueset"
+      },
+      {
+        name: "Serum Creatinine",
+        value: "2.16.840.1.113762.1.4.1222.111",
+        type: "valueset"
+      },
+      ,
+      {
+        name: "Hemoglobin",
+        value: "2.16.840.1.113762.1.4.1222.114",
+        type: "valueset"
+      },
+      {
+        name: "A1C",
+        value: "2.16.840.1.113762.1.4.1222.119",
+        type: "valueset"
+      },
+      {
+        name: "Serum Potassium",
+        value: "2.16.840.1.113762.1.4.1222.120",
+        type: "valueset"
+      },
+      {
+        name: "Serum phosphorus",
+        value: "2.16.840.1.113762.1.4.1222.123",
+        type: "valueset"
+      },
+      {
+        name: "Calcium",
+        value: "17861-6",
+        type: "code"
+      },
+      {
+        name: "Corrected Calcium",
+        value: "2.16.840.1.113762.1.4.1222.122",
+        type: "valueset"
+      },
+      {
+        name: "Serum Albumin",
+        value: "2.16.840.1.113762.1.4.1222.151",
+        type: "valueset"
+      },
+      {
+        name: "Transferrin Staturation",
+        value: "2.16.840.1.113762.1.4.1222.118",
+        type: "valueset"
+      },
+      {
+        name: "Ferritin",
+        value: "2.16.840.1.113762.1.4.1222.140",
+        type: "valueset"
+      },
+      {
+        name: "Blood Urea Nitrogen",
+        value: "2.16.840.1.113762.1.4.1222.113",
+        type: "valueset"
+      },
       {
         name: "LDL",
         value: "13457-7",
@@ -86,10 +166,45 @@ export class LabResultsComponent implements OnInit {
         type: "code"
       },
       {
-        name: "Hemoglobin",
-        value: "2.16.840.1.113762.1.4.1222.111",
+        name: "Triglycerides",
+        value: "2.16.840.1.113762.1.4.1222.137",
         type: "valueset"
-      }
+      },
+      {
+        name: "Total Cholesterol",
+        value: "2.16.840.1.113762.1.4.1222.139",
+        type: "valueset"
+      },
+      {
+        name: "Vitamin D",
+        value: "2.16.840.1.113762.1.4.1222.126",
+        type: "valueset"
+      },
+      {
+        name: "KT/V",
+        value: "2.16.840.1.113762.1.4.1222.128",
+        type: "valueset"
+      },
+      {
+        name: "Intact Parathyroid Hormone",
+        value: "2.16.840.1.113762.1.4.1222.129",
+        type: "valueset"
+      },
+      {
+        name: "Serum Biacarbonate",
+        value: "2.16.840.1.113762.1.4.1222.130",
+        type: "valueset"
+      },
+      {
+        name: "Sodium",
+        value: "2.16.840.1.113762.1.4.1222.131",
+        type: "valueset"
+      },
+      {
+        name: "Chloride",
+        value: "2.16.840.1.113762.1.4.1222.132",
+        type: "valueset"
+      },
     ])
   }
 }
