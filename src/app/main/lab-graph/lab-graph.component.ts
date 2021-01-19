@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { MccObservation } from 'src/app/generated-data-api';
+import { ObservationsService } from 'src/app/services/observations.service.new';
+import * as fromRoot from '../../ngrx/reducers';
 
 @Component({
   selector: 'lab-graph',
@@ -12,7 +16,9 @@ export class LabGraphComponent implements OnInit {
   description: string;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store<fromRoot.State>,
+    private obsService: ObservationsService
   ) { }
 
   ngOnInit(): void {
@@ -42,7 +48,22 @@ export class LabGraphComponent implements OnInit {
       case "uacr":
         this.uacr();
         return;
+      default:
+        this.generic(key);
+        break;
     }
+  }
+
+  generic = (key: string): void => {
+    this.store.select(fromRoot.getPatientProfile).subscribe(x => {
+      if (x && x.fhirid) {
+        this.obsService.getObservation(x.fhirid, key).then(
+          (res: MccObservation) => {
+            this.title = res.code.text;
+          }
+        )
+      }
+    });
   }
 
   bp = (): void => {

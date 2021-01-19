@@ -71,10 +71,10 @@ export class GoalsTabComponent implements OnInit {
 
       Promise.all(callArray).then(resArray => {
         resArray.filter(x => x !== undefined && x.status !== "notfound").forEach((v, i, d) => { // Filter
-          debugger;
-          this.targetValues.push(
-            this.formatTarget(v, i, d) // Format
-          );
+          let formattedTarget = this.formatTarget(v, i, d);
+          if (formattedTarget) {
+            this.targetValues.push(formattedTarget);
+          }
         });
       });
     }
@@ -105,14 +105,17 @@ export class GoalsTabComponent implements OnInit {
       }
     }
     [formattedTargetValue, rowHighlighted] = formatGoalTargetValue(gt, mostRecentResultValue);
-    const tv: TargetValue = {
-      measure: gt.measure.text,
-      date: observationDate, // todo: Get observation date when API is updated
-      mostRecentResult: mostRecentResultValue.toString(),
-      target: formattedTargetValue,
-      highlighted: rowHighlighted,
-      status: obs.status
-    };
-    return tv;
+    if (gt.measure) {
+      const tv: TargetValue = {
+        measure: gt.measure.text,
+        date: observationDate, // todo: Get observation date when API is updated
+        mostRecentResult: mostRecentResultValue.toString(),
+        target: formattedTargetValue,
+        highlighted: rowHighlighted,
+        status: obs.status
+      };
+      return tv;
+    }
+    else return null;
   }
 }

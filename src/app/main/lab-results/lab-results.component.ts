@@ -4,6 +4,7 @@ import * as fromRoot from '../../ngrx/reducers';
 import { Constants } from 'src/app/common/constants';
 import { MccObservation } from 'src/app/generated-data-api';
 import { ObservationsService } from 'src/app/services/observations.service.new';
+import { Router, NavigationExtras, Params } from '@angular/router';
 
 interface PatientLabResultsMap {
   name: string;
@@ -22,10 +23,46 @@ export class LabResultsComponent implements OnInit {
   longTermCondition: string;
 
   constructor(
+    private router: Router,
     private store: Store<fromRoot.State>,
     private obsService: ObservationsService
   ) {
 
+  }
+
+  navToGraph(res: MccObservation) {
+    switch (res.code.coding[0].code) {
+      case "85354-9":
+        this.router.navigate(["/lab-graph"], <NavigationExtras>{
+          queryParams: <Params>{ key: "bp" },
+          queryParamsHandling: "merge"
+        });
+        break;
+      case "29463-7":
+        this.router.navigate(["/lab-graph"], <NavigationExtras>{
+          queryParams: <Params>{ key: "weight" },
+          queryParamsHandling: "merge"
+        });
+        break;
+      case "69405-9":
+        this.router.navigate(["/lab-graph"], <NavigationExtras>{
+          queryParams: <Params>{ key: "egfr" },
+          queryParamsHandling: "merge"
+        });
+        break;
+      case "9318-7":
+        this.router.navigate(["/lab-graph"], <NavigationExtras>{
+          queryParams: <Params>{ key: "uacr" },
+          queryParamsHandling: "merge"
+        });
+        break;
+      default:
+        this.router.navigate(["/lab-graph"], <NavigationExtras>{
+          queryParams: <Params>{ key: res.code.coding[0].code },
+          queryParamsHandling: "merge"
+        });
+        break;
+    }
   }
 
   formatJSON = (val: any): string => {

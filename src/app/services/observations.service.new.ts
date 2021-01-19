@@ -29,6 +29,21 @@ export class ObservationsService {
         }
     };
 
+    _observationsUrl = "observations";
+    getObservations(patientId: string, code: string): Promise<any> {
+        const key = patientId + "-" + code + "-multiple";
+
+        if (this.OBSERVATIONS.has(key)) {
+            return Promise.resolve(this.OBSERVATIONS.get(key));
+        }
+        else {
+            return this.http.get(`${environment.mccapiUrl}/${this._observationsUrl}?subject=${patientId}&code=${code}&sort=descending`).toPromise()
+                .then(res => {
+                    this.OBSERVATIONS.set(key, res);
+                    return res;
+                });
+        }
+    };
     _observationByValueSetUrl = "observationsbyvalueset"
     getObservationsByValueSet = (patientId: string, valueSet: string, sort?: string, max?: string): Promise<any> => {
         const key = patientId + "-" + valueSet;

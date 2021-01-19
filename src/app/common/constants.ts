@@ -11,7 +11,11 @@ export class Constants {
                 value: "2.16.840.1.113762.1.4.1222.111",
                 type: "valueset"
             },
-            ,
+            {
+                name: "UACR",
+                value: "2.16.840.1.113883.3.6929.2.1002",
+                type: "valueset"
+            },
             {
                 name: "Hemoglobin",
                 value: "2.16.840.1.113762.1.4.1222.114",
@@ -111,6 +115,21 @@ export class Constants {
                 name: "Chloride",
                 value: "2.16.840.1.113762.1.4.1222.132",
                 type: "valueset"
+            }
+        ]]
+    ]);
+
+    public static readonly vitalSignsMap: Map<string, PatientLabResultsMap[]> = new Map<string, PatientLabResultsMap[]>([
+        ["ckd", [
+            {
+                name: "Blood Pressure",
+                value: "85354-9",
+                type: "panel"
+            },
+            {
+                name: "Weight",
+                value: "29463-7",
+                type: "panel"
             }
         ]]
     ]);
