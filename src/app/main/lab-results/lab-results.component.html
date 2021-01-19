@@ -4,23 +4,15 @@
             <img class="lab-results-title-icon" src="../../../assets/svg/beaker.svg">
             Lab Results
         </h2>
-        <img class="back-arrow" src="../../../assets/svg/arrow_back_blue.svg" routerLink="/status" queryParamsHandling="merge"/>
+        <img class="back-arrow" src="../../../assets/svg/arrow_back_blue.svg" routerLink="/status"
+            queryParamsHandling="merge" />
     </div>
     <ul class="lab-result-items">
-        <li routerLink="/lab-graph" [queryParams]="{key:'egfr'}" queryParamsHandling="merge">
-            <div class="lab-result-item">
-                <h3 class="lab-result-title">GFR Blood Test</h3>
-                <span class="lab-result-details-1"></span>
-                <span class="lab-result-details lab-result-details-2">September 26, 2020</span>
-                <span class="lab-result-details lab-result-details-3"></span>
-            </div>
-            <span class="lab-result-more-icon">&gt;</span>
-        </li>
-        <li routerLink="/lab-graph" [queryParams]="{key:'uacr'}" queryParamsHandling="merge">
-            <div class="lab-result-item">
-                <h3 class="lab-result-title">UACR</h3>
-                <span class="lab-result-details-1"></span>
-                <span class="lab-result-details lab-result-details-3">September 18, 2020</span>
+        <li *ngFor="let res of results" (click)="navToGraph(res)">
+            <div  *ngIf="res.code" class="lab-result-item">
+                <h3 class="lab-result-title">{{res.code.text}}</h3>
+                <span class="lab-result-details lab-result-details-2">{{res.effective.dateTime.date | date}}</span>
+                <span class="lab-result-details lab-result-details-3" *ngIf="res.value && res.value.quantityValue">{{res.value.quantityValue.value + " " + (res.value.quantityValue.unit ? res.value.quantityValue.unit : "")}}</span>
             </div>
             <span class="lab-result-more-icon">&gt;</span>
         </li>

@@ -52,6 +52,7 @@ import { EGFRGraphComponent } from './main/graphs/egfr/egfr.component';
 import { WeightGraphComponent } from './main/graphs/weight/weight.component';
 import { UACRGraphComponent } from './main/graphs/uacr/uacr.component';
 import { ObservationsService } from './services/observations.service.new';
+import { GenericGraphComponent } from './main/graphs/generic/generic.component';
 
 @NgModule({
         declarations: [
@@ -78,7 +79,8 @@ import { ObservationsService } from './services/observations.service.new';
                 BPGraphComponent,
                 EGFRGraphComponent,
                 WeightGraphComponent,
-                UACRGraphComponent
+                UACRGraphComponent,
+                GenericGraphComponent
         ],
         imports: [
                 BrowserModule,

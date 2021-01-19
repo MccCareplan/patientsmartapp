@@ -7,7 +7,6 @@ import { GoalLists, GoalSummary, GoalTarget, MccObservation } from 'src/app/gene
 import { TargetValue } from './target-value';
 import { ObservationsService } from 'src/app/services/observations.service.new';
 import { formatGoalTargetValue } from 'src/app/common/utility-functions';
-import { Target } from '@angular/compiler';
 
 @Component({
   selector: 'app-goals-tab',
@@ -71,10 +70,11 @@ export class GoalsTabComponent implements OnInit {
       })
 
       Promise.all(callArray).then(resArray => {
-        resArray.filter(x => x !== undefined && x.status !== "notfound").forEach((v, i) => { // Filter
-          this.targetValues.push(
-            this.formatTarget(v, i, goalList.activeTargets) // Format
-          );
+        resArray.filter(x => x !== undefined && x.status !== "notfound").forEach((v, i, d) => { // Filter
+          let formattedTarget = this.formatTarget(v, i, d);
+          if (formattedTarget) {
+            this.targetValues.push(formattedTarget);
+          }
         });
       });
     }
@@ -105,14 +105,17 @@ export class GoalsTabComponent implements OnInit {
       }
     }
     [formattedTargetValue, rowHighlighted] = formatGoalTargetValue(gt, mostRecentResultValue);
-    const tv: TargetValue = {
-      measure: gt.measure.text,
-      date: observationDate, // todo: Get observation date when API is updated
-      mostRecentResult: mostRecentResultValue.toString(),
-      target: formattedTargetValue,
-      highlighted: rowHighlighted,
-      status: obs.status
-    };
-    return tv;
+    if (gt.measure) {
+      const tv: TargetValue = {
+        measure: gt.measure.text,
+        date: observationDate, // todo: Get observation date when API is updated
+        mostRecentResult: mostRecentResultValue.toString(),
+        target: formattedTargetValue,
+        highlighted: rowHighlighted,
+        status: obs.status
+      };
+      return tv;
+    }
+    else return null;
   }
 }
