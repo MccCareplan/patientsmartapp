@@ -40,6 +40,10 @@ export class ObservationsService {
         const key = patientId + "-" + code + "-multiple";
 
         if (this.OBSERVATIONS.has(key)) {
+            let returnVal = this.OBSERVATIONS.get(key);
+            if (keyToStore) {
+                returnVal[0].key = keyToStore;
+            }
             return Promise.resolve(this.OBSERVATIONS.get(key));
         }
         else {

@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { ChartDataSets } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import * as Chart from 'chart.js';
+import { ChartData, ChartDataSets, ChartOptions } from 'chart.js';
+import { getDisplayValue, getInnerValue, getValueHighlighted } from 'src/app/common/chart-utility-functions';
 import { Constants } from 'src/app/common/constants';
-import { WotTableData } from 'src/app/data-model/weight-over-time';
-import { MccObservation } from 'src/app/generated-data-api';
+import { Effective, GenericType, MccCodeableConcept, MccReference, ObservationComponent, ReferenceRange } from 'src/app/generated-data-api';
 import { ObservationsService } from 'src/app/services/observations.service.new';
 import * as fromRoot from '../../../ngrx/reducers';
 
@@ -17,13 +17,14 @@ import * as fromRoot from '../../../ngrx/reducers';
 export class GenericGraphComponent implements OnInit {
     @Input()
     showTable: boolean;
+    tableReady: boolean = false;
 
     @Input()
     key: string;
 
-    lineChartData: ChartDataSets = { data: [], label: '' };;
-    lineChartType: string;
-    tableDataSource: any;
+    chart: ChartDataSets[] = [{}];
+    data: any[];
+
     patientId;
     longTermCondition;
 
@@ -68,7 +69,56 @@ export class GenericGraphComponent implements OnInit {
     }
 
     processData = (res: MccObservation[]): void => {
-        // transform observations into easily parsed table & chart data
-        
+        let formattedData = [];
+        let key = res[0].key;
+        res.forEach((res: MccObservation, index) => {
+            let formattedObject: any = {};
+            formattedObject.title = key;
+            formattedObject.date = this.formatDate(res.effective);
+            formattedObject.displayValue = getDisplayValue(res.value);
+            formattedObject.value = getInnerValue(res.value);
+            formattedObject.highlighted = getValueHighlighted(res.value);
+            formattedData.push(formattedObject);
+        })
+        this.data = formattedData;
+        this.processChartData(key);
     }
+
+    processChartData = (key) => {
+        this.chart[0].data = this.data.map(x => { return x.value });
+        this.chart[0].label = key;
+        this.chart[0].fill = false;
+        this.tableReady = true;
+    }
+
+    formatDate = (ef: Effective): Date => {
+        return new Date(ef.dateTime.rawDate);
+    }
+
+    sortedField: string = "value";
+    sortingDirection: boolean = false;
+    sortData = (key) => {
+        this.sortingDirection = !this.sortingDirection;
+        this.sortedField = key;
+        this.data = this.data.sort((a, b) => {
+            if (this.sortingDirection) return a[key] > b[key] ? 1 : -1;
+            else return a[key] > b[key] ? -1 : 1;
+        })
+    }
+}
+
+
+interface MccObservation {
+    code?: MccCodeableConcept;
+    status?: string;
+    basedOn?: Array<MccReference>;
+    effective?: Effective;
+    value?: GenericType;
+    note?: string;
+    referenceRanges?: Array<ReferenceRange>;
+    components?: Array<ObservationComponent>;
+    category?: Array<MccCodeableConcept>;
+    dataAbsentReason?: MccCodeableConcept;
+    fhirid?: string;
+    key?: string;
 }

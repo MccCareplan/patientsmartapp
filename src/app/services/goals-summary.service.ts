@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
-import { GoalLists, GoalSummary, GoalTarget } from '../generated-data-api';
+import { GoalLists } from '../generated-data-api';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { formatGoalTargetValue } from '../common/chart-utility-functions';
-import { TargetValue } from '../main/goals/goals.tab/target-value';
 
 @Injectable({
     providedIn: 'root'
