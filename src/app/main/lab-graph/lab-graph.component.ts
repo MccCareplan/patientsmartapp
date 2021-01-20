@@ -55,15 +55,7 @@ export class LabGraphComponent implements OnInit {
   }
 
   generic = (key: string): void => {
-    this.store.select(fromRoot.getPatientProfile).subscribe(x => {
-      if (x && x.fhirid) {
-        this.obsService.getObservation(x.fhirid, key).then(
-          (res: MccObservation) => {
-            this.title = res.code.text;
-          }
-        )
-      }
-    });
+    this.title = key;
   }
 
   bp = (): void => {

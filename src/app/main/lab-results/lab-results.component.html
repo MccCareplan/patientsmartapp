@@ -9,10 +9,12 @@
     </div>
     <ul class="lab-result-items">
         <li *ngFor="let res of results" (click)="navToGraph(res)">
-            <div  *ngIf="res.code" class="lab-result-item">
-                <h3 class="lab-result-title">{{res.code.text}}</h3>
+            <div *ngIf="res.code" class="lab-result-item">
+                <h3 class="lab-result-title">{{res.key}}</h3>
                 <span class="lab-result-details lab-result-details-2">{{res.effective.dateTime.date | date}}</span>
-                <span class="lab-result-details lab-result-details-3" *ngIf="res.value && res.value.quantityValue">{{res.value.quantityValue.value + " " + (res.value.quantityValue.unit ? res.value.quantityValue.unit : "")}}</span>
+                <span class="lab-result-details lab-result-details-3"
+                    *ngIf="res.value && res.value.quantityValue">{{res.value.quantityValue.value + " " +
+                    (res.value.quantityValue.unit ? res.value.quantityValue.unit : "")}}</span>
             </div>
             <span class="lab-result-more-icon">&gt;</span>
         </li>
