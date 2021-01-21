@@ -21,6 +21,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Generating updated models
 
 $ openapi -i https://mcc-niddk-backend.wl.r.appspot.com/api-docs
+$ openapi -i https://mcc-niddk-backend.wl.r.appspot.com/api-docs -o src/app/generated-data-api
+
 
 ## Browse API
     https://mcc-niddk-backend.wl.r.appspot.com/swagger-ui/index.html?configUrl=/api-docs/swagger-config
@@ -49,8 +51,8 @@ The included file 'Dockerfle-prod' is a basic production build docker file. It w
 - At the moment the /environment/environment.prod.ts needs to be editted to point to MCC-API server, update the entry for mccapiUrl. In the future support for an environment variable override wi// be implemented. 
 
 ### Building the image
-$  docker build -f Dockerfile-prod -t mcccareplan/mccpatientapp
+ $  docker build -f Dockerfile-prod -t mcccareplan/mccpatientapp .
 
 ### Running the image
 
-$ docker run -it -p 80:80 --rm mcccareplan/mccpatientapp
+ $ docker run -it -p 80:80 --rm mcccareplan/mccpatientapp
