@@ -16,6 +16,9 @@ export class EGFRGraphComponent implements OnInit {
     @Input()
     showTable: boolean;
 
+    @Input()
+    embedded: boolean = false;
+
     // chart
     lineChartAnnotations: any;
     lineChartColors: Color[];

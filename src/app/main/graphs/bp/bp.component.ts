@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { BloodPresureService } from 'src/app/services/blood-pressure.service';
@@ -11,6 +13,9 @@ import { BloodPresureService } from 'src/app/services/blood-pressure.service';
 export class BPGraphComponent implements OnInit {
     @Input()
     showTable: boolean;
+
+    @Input()
+    embedded: boolean = false;
 
     // chart
     lineChartAnnotations: any;
@@ -26,6 +31,9 @@ export class BPGraphComponent implements OnInit {
     displayedColumns = [];
     tableDataSource: any;
     vitalSignsRowMax = 7;
+
+    @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
     constructor(
         public bpService: BloodPresureService

@@ -1,6 +1,7 @@
-<div class="lab-graph-chart">
-    <canvas baseChart height="200" [datasets]="bpService.vitalSigns.chartData" [labels]="lineChartLabels" [options]="bpService.vitalSigns.lineChartOptions"
-        [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType">
+<div class="lab-graph-chart" [ngClass]="{'alt': !embedded}">
+    <canvas baseChart [datasets]="bpService.vitalSigns.chartData" [labels]="lineChartLabels"
+        [options]="bpService.vitalSigns.lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+        [chartType]="lineChartType">
     </canvas>
 </div>
 <div class="lab-graph-table" *ngIf="showTable !== false">
@@ -18,11 +19,7 @@
             <td mat-cell *matCellDef="let vs"> {{vs.diastolic}} </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="row.highlighted = !row.highlighted"
-            (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
-        </tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[5, 15, 30]" showFirstLastButtons
-        [ngStyle]="{display: tableDataSource.data.length > vitalSignsRowMax ? 'block' : 'none'}">
-    </mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 15, 30]" showFirstLastButtons></mat-paginator>
 </div>

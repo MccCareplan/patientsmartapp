@@ -14,6 +14,9 @@ import { UacrService } from 'src/app/services/uacr.service';
 export class UACRGraphComponent implements OnInit {
     @Input()
     showTable: boolean;
+    
+    @Input()
+    embedded: boolean = false;
 
     // chart
     lineChartAnnotations: any;

@@ -1,4 +1,4 @@
-<div class="lab-graph-chart" *ngIf="data && data.length > 0">
+<div class="lab-graph-chart" *ngIf="data && data.length > 1">
     <canvas baseChart [datasets]="chartDataSets" [chartType]="'line'" [colors]="lineChartColors"
         [labels]="lineChartLabels" [options]="lineChartOptions">
     </canvas>
@@ -16,5 +16,5 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons *ngIf="tableData && tableData.length > 5"></mat-paginator>
 </div>

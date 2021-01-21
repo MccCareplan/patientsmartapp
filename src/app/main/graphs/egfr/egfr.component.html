@@ -1,4 +1,4 @@
-<div class="lab-graph-chart">
+<div class="lab-graph-chart" [ngClass]="{'alt': !embedded}">
     <canvas baseChart [datasets]="egfrService.egfr.chartData" [labels]="lineChartLabels" [options]="egfrService.egfr.lineChartOptions"
         [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins">
     </canvas>
