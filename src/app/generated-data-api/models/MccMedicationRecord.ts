@@ -7,11 +7,11 @@ import { MccDosage } from './MccDosage';
 import { MccReference } from './MccReference';
 
 export interface MccMedicationRecord {
-    type?: string;
-    fhirId?: string;
+    type: string;
+    fhirId: string;
     inConflict?: boolean;
     conflictsWith?: Array<string>;
-    status?: string;
+    status: string;
     statusReasons?: Array<MccCodeableConcept>;
     categories?: Array<MccCodeableConcept>;
     medication?: MccCodeableConcept;

@@ -8,7 +8,7 @@ import { MccDate } from './MccDate';
 import { MccDuration } from './MccDuration';
 
 export interface GoalTarget {
-    measure?: MccCodeableConcept;
+    measure: MccCodeableConcept;
     value?: GenericType;
     dueType?: string;
     due?: string;

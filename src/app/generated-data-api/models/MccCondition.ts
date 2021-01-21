@@ -8,8 +8,8 @@ import { MccIdentifer } from './MccIdentifer';
 import { MccReference } from './MccReference';
 
 export interface MccCondition {
-    clinicalStatus?: MccCodeableConcept;
-    verifiationStatus?: MccCodeableConcept;
+    clinicalStatus: MccCodeableConcept;
+    verifiationStatus: MccCodeableConcept;
     categories?: Array<MccCodeableConcept>;
     severity?: MccCodeableConcept;
     code?: MccCodeableConcept;

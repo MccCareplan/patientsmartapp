@@ -2,14 +2,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import { GenericType } from './GenericType';
 import { MccCodeableConcept } from './MccCodeableConcept';
 
 export interface ReferralSummary {
-    purpose?: MccCodeableConcept;
-    date?: Date;
-    displayDate?: string;
-    referrer?: string;
-    receiver?: string;
-    status?: string;
+    purpose: MccCodeableConcept;
+    date?: GenericType;
+    displayDate: string;
+    referrer: string;
+    receiver: string;
+    status: string;
+    performerType: MccCodeableConcept;
     fhirid?: string;
 }

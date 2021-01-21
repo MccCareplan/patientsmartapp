@@ -9,16 +9,41 @@ export class CareplanControllerService {
 
     /**
      * @param subject
+     * @param matchScheme
      * @result any OK
      * @throws ApiError
      */
-    public static async getCarePlans(
+    public static async getBest(
+        subject: string,
+        matchScheme: string = 'profiles',
+    ): Promise<any> {
+
+        const result = await __request({
+            method: 'get',
+            path: `/find/best/careplan`,
+            query: {
+                'subject': subject,
+                'matchScheme': matchScheme,
+            },
+        });
+
+        catchGenericError(result);
+
+        return result.body;
+    }
+
+    /**
+     * @param subject
+     * @result any OK
+     * @throws ApiError
+     */
+    public static async getSupportedCarePlans(
         subject: string,
     ): Promise<any> {
 
         const result = await __request({
             method: 'get',
-            path: `/careplan`,
+            path: `/find/supported/careplans`,
             query: {
                 'subject': subject,
             },
@@ -41,6 +66,28 @@ export class CareplanControllerService {
         const result = await __request({
             method: 'get',
             path: `/careplan/${id}`,
+        });
+
+        catchGenericError(result);
+
+        return result.body;
+    }
+
+    /**
+     * @param subject
+     * @result any OK
+     * @throws ApiError
+     */
+    public static async getCarePlans1(
+        subject: string,
+    ): Promise<any> {
+
+        const result = await __request({
+            method: 'get',
+            path: `/careplan`,
+            query: {
+                'subject': subject,
+            },
         });
 
         catchGenericError(result);

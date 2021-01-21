@@ -7,8 +7,8 @@ import { MccCodeableConcept } from './MccCodeableConcept';
 import { ReferenceRange } from './ReferenceRange';
 
 export interface ObservationComponent {
-    code?: MccCodeableConcept;
-    value?: GenericType;
+    code: MccCodeableConcept;
+    value: GenericType;
     interpretation?: Array<MccCodeableConcept>;
     dataAbsentReason?: MccCodeableConcept;
     referenceRanges?: Array<ReferenceRange>;

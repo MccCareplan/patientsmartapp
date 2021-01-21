@@ -4,13 +4,13 @@
 
 
 export interface MedicationSummary {
-    type?: string;
-    fhirId?: string;
+    type: string;
+    fhirId: string;
     inConflict?: boolean;
     conflictsWith?: Array<string>;
-    status?: string;
+    status: string;
     categories?: string;
-    medication?: string;
+    medication: string;
     dosages?: string;
     requestedBy?: string;
     reasons?: string;
