@@ -50,6 +50,9 @@ export class ObservationsService {
             return this.http.get(`${environment.mccapiUrl}/${this._observationsUrl}?subject=${patientId}&code=${code}&sort=descending`).toPromise()
                 .then((res: MccObservation[]) => {
                     this.OBSERVATIONS.set(key, res);
+                    if (res.length > 0 && keyToStore) {
+                        res[0].key = keyToStore;
+                    }
                     return res;
                 });
         }

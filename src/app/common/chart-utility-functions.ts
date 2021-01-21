@@ -62,7 +62,7 @@ export function getDisplayValue(value: GenericType): any {
                 break;
             }
             case 'Quantity': {
-                formatted = value.quantityValue.value + ' ' + value.quantityValue.unit;
+                formatted = value.quantityValue.value + ' ' + (value.quantityValue.unit ? value.quantityValue.unit : "");
                 break;
             }
             case 'Range': {

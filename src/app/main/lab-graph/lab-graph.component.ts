@@ -59,12 +59,12 @@ export class LabGraphComponent implements OnInit {
 
   bp = (): void => {
     this.title = "My Blood Pressure";
-    this.description = "Systolic and Dystolic values over time";
+    this.description = "Systolic and Diastolic values over time";
   }
 
   egfr = (): void => {
-    this.title = "My GFR Results";
-    this.description = "GFR Tests how well your kidneys work";
+    this.title = "My EGFR Results";
+    this.description = "EGFR Tests how well your kidneys work";
   }
 
   uacr = (): void => {

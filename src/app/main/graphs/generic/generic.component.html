@@ -1,25 +1,20 @@
-<div class="lab-graph-chart" *ngIf="tableReady">
-    <canvas baseChart [datasets]="chart" [chartType]="'line'">
+<div class="lab-graph-chart" *ngIf="data && data.length > 0">
+    <canvas baseChart [datasets]="chartDataSets" [chartType]="'line'" [colors]="lineChartColors"
+        [labels]="lineChartLabels" [options]="lineChartOptions">
     </canvas>
-
 </div>
 <div class="lab-graph-table">
-    <table width="100%">
-        <thead style="text-align:center;">
-            <tr>
-                <th (click)="sortData('value')" class="{{sortedField=='value' ? 'sorting' : ''}}">Value</th>
-                <th (click)="sortData('date')" class="{{sortedField=='date' ? 'sorting' : ''}}">Date</th>
-            </tr>
-        </thead>
-        <tbody style="text-align:right;">
-            <tr *ngFor="let item of data">
-                <td class="{{sortedField=='value' ? 'sorting' : ''}}">
-                    {{item.displayValue}}
-                </td>
-                <td class="{{sortedField=='date' ? 'sorting' : ''}}">
-                    {{item.date.toDateString()}}
-                </td>
-            </tr>
-        </tbody>
+    <table mat-table matSort [dataSource]="tableData" width="100%">
+        <ng-container matColumnDef="value">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Result </th>
+            <td mat-cell *matCellDef="let element"> {{element.displayValue}} </td>
+        </ng-container>
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.date | date: 'MM/dd/yyyy'}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>

@@ -1,12 +1,28 @@
 .lab-graph-chart {
-    width: 100%;
     position: relative;
+    border: 1px solid #000000;
+    margin: 13px 5px;
+    padding: 5px;
+    position: relative;
+    margin-bottom: 25px;
+    background-color: #ffffff;
+
     canvas {
         width: 100% !important;
         min-height: 200px;
     }
 }
+.lab-graph-table {
+    border: 1px solid #000000;
+    margin: 13px 5px;
+    padding: 5px;
+    position: relative;
+    margin-bottom: 25px;
+    background-color: #ffffff;
 
-.sorting {
-    // background: rgb(0, 0, 0, 0.3);
+    table {
+    }
+    .sorting {
+        // background: rgb(0, 0, 0, 0.3);
+    }
 }

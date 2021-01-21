@@ -1,8 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
-import * as Chart from 'chart.js';
-import { ChartData, ChartDataSets, ChartOptions } from 'chart.js';
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import * as moment from 'moment';
+import { Color, Label } from 'ng2-charts';
 import { getDisplayValue, getInnerValue, getValueHighlighted } from 'src/app/common/chart-utility-functions';
 import { Constants } from 'src/app/common/constants';
 import { Effective, GenericType, MccCodeableConcept, MccReference, ObservationComponent, ReferenceRange } from 'src/app/generated-data-api';
@@ -17,19 +20,29 @@ import * as fromRoot from '../../../ngrx/reducers';
 export class GenericGraphComponent implements OnInit {
     @Input()
     showTable: boolean;
-    tableReady: boolean = false;
-
     @Input()
     key: string;
 
-    chart: ChartDataSets[] = [{}];
-    data: any[];
+    lineChartColors: Color[] = [{
+        borderColor: "#409FFF"
+    }];
+    chartDataSets: ChartDataSets[] = [{}];
+    lineChartLabels: Label[] = [];
+    lineChartOptions: ChartOptions = {
+        responsive: false,
+        maintainAspectRatio: true
+    }
+    displayedColumns: any[] = ["value", "date"];
 
+    data;
+    tableData;
     patientId;
     longTermCondition;
 
+    @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
     constructor(
-        private router: Router,
         private store: Store<fromRoot.State>,
         private obsService: ObservationsService
     ) {
@@ -80,30 +93,23 @@ export class GenericGraphComponent implements OnInit {
             formattedObject.highlighted = getValueHighlighted(res.value);
             formattedData.push(formattedObject);
         })
-        this.data = formattedData;
+        this.data = formattedData.sort((a, b) => { return a.date > b.date ? -1 : 1; });
+        this.tableData = new MatTableDataSource(this.data);
+        this.tableData.sort = this.sort;
+        this.tableData.paginator = this.paginator;
         this.processChartData(key);
     }
 
     processChartData = (key) => {
-        this.chart[0].data = this.data.map(x => { return x.value });
-        this.chart[0].label = key;
-        this.chart[0].fill = false;
-        this.tableReady = true;
+        let chartData = [...this.data].sort((a, b) => { return a.date > b.date ? 1 : -1; });
+        this.chartDataSets[0].data = chartData.map(x => { return x.value });
+        this.lineChartLabels = chartData.map(x => { return moment(x.date).format("MM/YYYY") })
+        this.chartDataSets[0].label = key;
+        this.chartDataSets[0].fill = false;
     }
 
     formatDate = (ef: Effective): Date => {
         return new Date(ef.dateTime.rawDate);
-    }
-
-    sortedField: string = "value";
-    sortingDirection: boolean = false;
-    sortData = (key) => {
-        this.sortingDirection = !this.sortingDirection;
-        this.sortedField = key;
-        this.data = this.data.sort((a, b) => {
-            if (this.sortingDirection) return a[key] > b[key] ? 1 : -1;
-            else return a[key] > b[key] ? -1 : 1;
-        })
     }
 }
 
