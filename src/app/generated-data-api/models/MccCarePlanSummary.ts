@@ -2,10 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccPeriod } from "src/app/generated-data-api";
+import { MccPeriod } from './MccPeriod';
 
 export interface MccCarePlanSummary {
-    profiles?: string[];
+    profiles: Array<string>;
     created?: string;
     lastUpdated?: string;
     period?: MccPeriod;

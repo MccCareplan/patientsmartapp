@@ -5,11 +5,11 @@
 import { MccCodeableConcept } from './MccCodeableConcept';
 
 export interface ConditionHistory {
-    code?: MccCodeableConcept;
+    code: MccCodeableConcept;
     onset?: string;
     abatement?: string;
-    clinicalStatus?: string;
-    verificationStatus?: string;
+    clinicalStatus: string;
+    verificationStatus: string;
     categories?: string;
     fhirid?: string;
 }

@@ -3,7 +3,6 @@
 /* eslint-disable */
 
 
-export interface MccDateTime {
-    rawDate: string;
-    date: string;
+export interface MccId {
+    value: string;
 }

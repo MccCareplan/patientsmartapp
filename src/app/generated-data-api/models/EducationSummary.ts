@@ -2,14 +2,17 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccCodeableConcept } from "src/app/generated-data-api";
+import { FuzzyDate } from './FuzzyDate';
+import { MccCodeableConcept } from './MccCodeableConcept';
 
 export interface EducationSummary {
-    topic?: MccCodeableConcept;
-    type?: string;
+    topic: MccCodeableConcept;
+    type: string;
     displayDate?: string;
-    date?: Date;
+    date?: FuzzyDate;
     outcome?: MccCodeableConcept;
-    status?: string;
+    status: string;
+    performer?: string;
+    reasons?: string;
     fhirid?: string;
 }

@@ -6,6 +6,6 @@
 export interface MccCoding {
     system?: string;
     version?: string;
-    code?: string;
+    code: string;
     display?: string;
 }

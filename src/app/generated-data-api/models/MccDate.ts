@@ -4,6 +4,6 @@
 
 
 export interface MccDate {
-    rawDate?: string;
-    date?: string;
+    rawDate: string;
+    date: string;
 }

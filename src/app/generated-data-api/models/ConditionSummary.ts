@@ -6,9 +6,9 @@ import { ConditionHistory } from './ConditionHistory';
 import { MccCodeableConcept } from './MccCodeableConcept';
 
 export interface ConditionSummary {
-    code?: MccCodeableConcept;
+    code: MccCodeableConcept;
     categories?: string;
-    history?: Array<ConditionHistory>;
+    history: Array<ConditionHistory>;
     profileId?: string;
     firstOnset?: string;
     clinicalStatus?: string;
