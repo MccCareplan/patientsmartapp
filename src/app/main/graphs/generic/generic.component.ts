@@ -33,6 +33,7 @@ export class GenericGraphComponent implements OnInit {
         maintainAspectRatio: true
     }
     displayedColumns: any[] = ["value", "date"];
+    showPaginator: boolean = true;
 
     data;
     tableData;
@@ -97,6 +98,7 @@ export class GenericGraphComponent implements OnInit {
         this.tableData = new MatTableDataSource(this.data);
         this.tableData.sort = this.sort;
         this.tableData.paginator = this.paginator;
+        this.showPaginator = this.data.length > 5;
         this.processChartData(key);
     }
 

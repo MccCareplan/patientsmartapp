@@ -10,7 +10,7 @@
     <ul class="vital-sign-items">
         <li *ngFor="let res of results" (click)="navToGraph(res)">
             <div *ngIf="res.code" class="vital-sign-item">
-                <h3 class="vital-sign-title">{{res.code.text}}</h3>
+                <h3 class="vital-sign-title">{{res.key}}</h3>
                 <span class="vital-sign-details vital-sign-details-2">{{res.effective.dateTime.date | date}}</span>
                 <span class="vital-sign-details vital-sign-details-3"
                     *ngIf="res.value && res.value.quantityValue">{{res.value.quantityValue.value + " " +
