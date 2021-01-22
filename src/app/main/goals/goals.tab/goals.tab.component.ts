@@ -71,7 +71,9 @@ export class GoalsTabComponent implements OnInit {
 
       Promise.all(callArray).then(resArray => {
         resArray.filter(x => x !== undefined && x.status !== "notfound").forEach((v, i, d) => { // Filter
-          let formattedTarget = this.formatTarget(v, i, d);
+          // find corresponding goal target 
+          let correspondingTarget = goalList.activeTargets.find(x => { return x.measure.coding[0].code === v.code.coding[0].code; })
+          let formattedTarget = this.formatTarget(v, i, correspondingTarget);
           if (formattedTarget) {
             this.targetValues.push(formattedTarget);
           }
@@ -80,8 +82,7 @@ export class GoalsTabComponent implements OnInit {
     }
   }
 
-  formatTarget = (obs: MccObservation, index: number, activeTargets: GoalTarget[]): TargetValue => {
-    let gt: GoalTarget = activeTargets[index];
+  formatTarget = (obs: MccObservation, index: number, gt: GoalTarget): TargetValue => {
     let mostRecentResultValue = '';
     let observationDate = '';
     let rowHighlighted = false;

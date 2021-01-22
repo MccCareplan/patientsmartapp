@@ -97,7 +97,7 @@ export class EGFRGraphComponent implements OnInit {
     matTableWorkaroud = (): void => {
         let counter = 0;
         let int = setInterval(() => {
-            if (this.tableDataSource.filteredData.length > 0) {
+            if (this.tableDataSource && this.tableDataSource.filteredData && this.tableDataSource.filteredData.length > 0) {
                 this.tableDataSource.sort = this.sort;
                 this.tableDataSource.paginator = this.paginator;
                 this.tableReady = true;

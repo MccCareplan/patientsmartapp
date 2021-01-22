@@ -15,7 +15,7 @@ export class StatusComponent implements OnInit {
   conditionsList$: Observable<ConditionLists>;
   ddlConditions$: Observable<ConditionSummary[]>
   patient$: Observable<MccPatient>;
-  selectedCondition: ConditionSummary = {};
+  selectedCondition: ConditionSummary;
 
   constructor(
     private store: Store<fromRoot.State>
