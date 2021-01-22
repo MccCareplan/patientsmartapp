@@ -6,5 +6,5 @@ import { MccCoding } from './MccCoding';
 
 export interface MccCodeableConcept {
     coding?: Array<MccCoding>;
-    text?: string;
+    text: string;
 }

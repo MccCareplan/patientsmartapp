@@ -2,16 +2,17 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import { Acceptance } from './Acceptance';
 import { GoalTarget } from './GoalTarget';
 import { MccCodeableConcept } from './MccCodeableConcept';
 import { MccDate } from './MccDate';
 import { MccReference } from './MccReference';
 
 export interface MccGoal {
-    id?: string;
+    id: string;
     statusDate?: string;
     statusReason?: string;
-    lifecycleStatus?: string;
+    lifecycleStatus: string;
     categorySummary?: string;
     expressedBy?: MccReference;
     categories?: Array<MccCodeableConcept>;
@@ -26,5 +27,6 @@ export interface MccGoal {
     notes?: Array<string>;
     outcomeCodes?: Array<MccCodeableConcept>;
     outcomeReference?: string;
+    acceptance?: Array<Acceptance>;
     fhirid?: string;
 }

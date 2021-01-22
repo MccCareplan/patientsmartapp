@@ -5,7 +5,7 @@
 import { catchGenericError } from '../core/ApiError';
 import { request as __request } from '../core/request';
 
-export class SocialConcernControllerService {
+export class EducationControllerService {
 
     /**
      * @param subject
@@ -13,39 +13,17 @@ export class SocialConcernControllerService {
      * @result any OK
      * @throws ApiError
      */
-    public static async getConditionSummary(
+    public static async getEducationSummary(
         subject: string,
         careplan?: string,
     ): Promise<any> {
 
         const result = await __request({
             method: 'get',
-            path: `/socialconcernsummary`,
+            path: `/summary/educations`,
             query: {
                 'subject': subject,
                 'careplan': careplan,
-            },
-        });
-
-        catchGenericError(result);
-
-        return result.body;
-    }
-
-    /**
-     * @param subject
-     * @result any OK
-     * @throws ApiError
-     */
-    public static async getCarePlans(
-        subject: string,
-    ): Promise<any> {
-
-        const result = await __request({
-            method: 'get',
-            path: `/socialconcerns`,
-            query: {
-                'subject': subject,
             },
         });
 

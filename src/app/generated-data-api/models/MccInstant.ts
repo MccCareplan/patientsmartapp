@@ -4,5 +4,5 @@
 
 
 export interface MccInstant {
-    value?: string;
+    value: string;
 }

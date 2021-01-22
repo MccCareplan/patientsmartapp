@@ -6,6 +6,7 @@ import { MccCodeableConcept } from './MccCodeableConcept';
 import { MccDate } from './MccDate';
 import { MccDateTime } from './MccDateTime';
 import { MccDuration } from './MccDuration';
+import { MccId } from './MccId';
 import { MccIdentifer } from './MccIdentifer';
 import { MccInstant } from './MccInstant';
 import { MccPeriod } from './MccPeriod';
@@ -17,10 +18,11 @@ import { MccTime } from './MccTime';
 import { MccTiming } from './MccTiming';
 
 export interface GenericType {
-    valueType?: string;
+    valueType: string;
     stringValue?: string;
     integerValue?: number;
     booleanValue?: boolean;
+    idValue?: MccId;
     codeableConceptValue?: MccCodeableConcept;
     quantityValue?: MccQuantity;
     rangeValue?: MccRange;
