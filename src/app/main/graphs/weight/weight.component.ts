@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { formatWotResult } from 'src/app/common/utility-functions';
 import { WeightService } from 'src/app/services/weight.service';
 import { WotTableData } from 'src/app/data-model/weight-over-time';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
     selector: 'weight-graph',
@@ -13,7 +15,7 @@ import { WotTableData } from 'src/app/data-model/weight-over-time';
 })
 export class WeightGraphComponent implements OnInit {
     @Input()
-    showTable: boolean;
+    showTable: boolean = true;
 
     @Input()
     embedded: boolean = false;
@@ -33,6 +35,9 @@ export class WeightGraphComponent implements OnInit {
     tableDataSource: any;
     wotRowMax = 7;
 
+    @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
     constructor(
         public weightService: WeightService
     ) {
@@ -40,6 +45,7 @@ export class WeightGraphComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.matTableWorkaroud();
         this.tableDataSource = this.weightService.wotDataSource;
         this.wotRowMax = 7;
         this.lineChartColors = [
@@ -77,5 +83,21 @@ export class WeightGraphComponent implements OnInit {
             }
         }
         return cssClass;
+    }
+
+    tableReady: boolean = false;
+    matTableWorkaroud = (): void => {
+        let counter = 0;
+        let int = setInterval(() => {
+            if (this.tableDataSource.filteredData.length > 0) {
+                this.tableDataSource.sort = this.sort;
+                this.tableDataSource.paginator = this.paginator;
+                this.tableReady = true;
+                clearInterval(int);
+            }
+            if (++counter > 20) {
+                clearInterval(int);
+            }
+        }, 250);
     }
 }

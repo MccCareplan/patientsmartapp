@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { formatUacrResult } from 'src/app/common/utility-functions';
 import { UacrTableData } from 'src/app/data-model/uacr';
 import { UacrService } from 'src/app/services/uacr.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
     selector: 'uacr-graph',
@@ -13,8 +15,8 @@ import { UacrService } from 'src/app/services/uacr.service';
 })
 export class UACRGraphComponent implements OnInit {
     @Input()
-    showTable: boolean;
-    
+    showTable: boolean = true;
+
     @Input()
     embedded: boolean = false;
 
@@ -33,6 +35,9 @@ export class UACRGraphComponent implements OnInit {
     tableDataSource: any;
     uacrRowMax = 7;
 
+    @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
     constructor(
         public uacrService: UacrService
     ) {
@@ -40,6 +45,7 @@ export class UACRGraphComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.matTableWorkaroud();
         this.tableDataSource = this.uacrService.uacrDataSource;
         this.uacrRowMax = 7;
         this.lineChartColors = [
@@ -79,4 +85,19 @@ export class UACRGraphComponent implements OnInit {
         return cssClass;
     }
 
+    tableReady: boolean = false;
+    matTableWorkaroud = (): void => {
+        let counter = 0;
+        let int = setInterval(() => {
+            if (this.tableDataSource.filteredData.length > 0) {
+                this.tableDataSource.sort = this.sort;
+                this.tableDataSource.paginator = this.paginator;
+                this.tableReady = true;
+                clearInterval(int);
+            }
+            if (++counter > 20) {
+                clearInterval(int);
+            }
+        }, 250);
+    }
 }

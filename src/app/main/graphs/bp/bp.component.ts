@@ -12,7 +12,7 @@ import { BloodPresureService } from 'src/app/services/blood-pressure.service';
 })
 export class BPGraphComponent implements OnInit {
     @Input()
-    showTable: boolean;
+    showTable: boolean = true;
 
     @Input()
     embedded: boolean = false;
@@ -42,6 +42,7 @@ export class BPGraphComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.matTableWorkaroud();
         this.tableDataSource = this.bpService.vitalSignsDataSource;
         this.displayedColumns = ['date', 'systolic', 'diastolic'];
         this.lineChartLabels = ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May'];
@@ -68,5 +69,21 @@ export class BPGraphComponent implements OnInit {
                 }
             }];
         this.lineChartType = 'line';
+    }
+
+    tableReady: boolean = false;
+    matTableWorkaroud = (): void => {
+        let counter = 0;
+        let int = setInterval(() => {
+            if (this.tableDataSource.filteredData.length > 0) {
+                this.tableDataSource.sort = this.sort;
+                this.tableDataSource.paginator = this.paginator;
+                this.tableReady = true;
+                clearInterval(int);
+            }
+            if (++counter > 20) {
+                clearInterval(int);
+            }
+        }, 250);
     }
 }
