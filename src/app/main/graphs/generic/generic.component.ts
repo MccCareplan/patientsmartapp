@@ -30,7 +30,12 @@ export class GenericGraphComponent implements OnInit {
     lineChartLabels: Label[] = [];
     lineChartOptions: ChartOptions = {
         responsive: false,
-        maintainAspectRatio: true
+        maintainAspectRatio: true,
+        elements: {
+            line: {
+                tension: 0
+            }
+        }
     }
     displayedColumns: any[] = ["value", "date"];
     showPaginator: boolean = true;
