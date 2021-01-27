@@ -5,31 +5,25 @@
 import { catchGenericError } from '../core/ApiError';
 import { request as __request } from '../core/request';
 
-export class ObservationControllerService {
+export class QuestionnaireResponseControllerService {
 
     /**
      * @param subject
      * @param code
-     * @param mode
-     * @param translate
      * @result any OK
      * @throws ApiError
      */
-    public static async getLatestObservation(
+    public static async getLatestQuestionnaireResponse(
         subject: string,
         code: string,
-        mode: string = 'code',
-        translate: string = 'false',
     ): Promise<any> {
 
         const result = await __request({
             method: 'get',
-            path: `/find/latest/observation`,
+            path: `/find/latest/questionnaireresponse`,
             query: {
                 'subject': subject,
                 'code': code,
-                'mode': mode,
-                'translate': translate,
             },
         });
 
@@ -41,29 +35,20 @@ export class ObservationControllerService {
     /**
      * @param subject
      * @param code
-     * @param count
-     * @param sort
-     * @param mode
      * @result any OK
      * @throws ApiError
      */
-    public static async getObservation(
+    public static async getLatestQuestionnaireResponseForItem(
         subject: string,
         code: string,
-        count: number = 100,
-        sort: string = 'ascending',
-        mode: string = 'code',
     ): Promise<any> {
 
         const result = await __request({
             method: 'get',
-            path: `/observations`,
+            path: `/find/latest/questionnaireresponseitem`,
             query: {
                 'subject': subject,
                 'code': code,
-                'count': count,
-                'sort': sort,
-                'mode': mode,
             },
         });
 
@@ -74,30 +59,59 @@ export class ObservationControllerService {
 
     /**
      * @param subject
-     * @param valueset
-     * @param max
-     * @param sort
-     * @param mode
      * @result any OK
      * @throws ApiError
      */
-    public static async getObservationsByValueSet(
+    public static async getQuestionnaireResponseSummary(
         subject: string,
-        valueset: string,
-        max: number = 100,
-        sort: string = 'ascending',
-        mode: string = 'code',
     ): Promise<any> {
 
         const result = await __request({
             method: 'get',
-            path: `/observationsbyvalueset`,
+            path: `/summary/questionnaireresponses`,
             query: {
                 'subject': subject,
-                'valueset': valueset,
-                'max': max,
-                'sort': sort,
-                'mode': mode,
+            },
+        });
+
+        catchGenericError(result);
+
+        return result.body;
+    }
+
+    /**
+     * @param id
+     * @result any OK
+     * @throws ApiError
+     */
+    public static async getQuestionnaireResponse(
+        id: string,
+    ): Promise<any> {
+
+        const result = await __request({
+            method: 'get',
+            path: `/questionnaireresponse/${id}`,
+        });
+
+        catchGenericError(result);
+
+        return result.body;
+    }
+
+    /**
+     * @param subject
+     * @result any OK
+     * @throws ApiError
+     */
+    public static async getQuestionnaireResponses(
+        subject: string,
+    ): Promise<any> {
+
+        const result = await __request({
+            method: 'get',
+            path: `/questionnaireresponse`,
+            query: {
+                'subject': subject,
             },
         });
 
