@@ -9,6 +9,28 @@ export class SocialConcernControllerService {
 
     /**
      * @param subject
+     * @result any OK
+     * @throws ApiError
+     */
+    public static async getCarePlans(
+        subject: string,
+    ): Promise<any> {
+
+        const result = await __request({
+            method: 'get',
+            path: `/socialconcerns`,
+            query: {
+                'subject': subject,
+            },
+        });
+
+        catchGenericError(result);
+
+        return result.body;
+    }
+
+    /**
+     * @param subject
      * @param careplan
      * @result any OK
      * @throws ApiError
@@ -24,28 +46,6 @@ export class SocialConcernControllerService {
             query: {
                 'subject': subject,
                 'careplan': careplan,
-            },
-        });
-
-        catchGenericError(result);
-
-        return result.body;
-    }
-
-    /**
-     * @param subject
-     * @result any OK
-     * @throws ApiError
-     */
-    public static async getCarePlans(
-        subject: string,
-    ): Promise<any> {
-
-        const result = await __request({
-            method: 'get',
-            path: `/socialconcerns`,
-            query: {
-                'subject': subject,
             },
         });
 

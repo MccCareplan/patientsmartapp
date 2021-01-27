@@ -3,6 +3,7 @@
 /* eslint-disable */
 
 import { MccCodeableConcept } from './MccCodeableConcept';
+import { MccCoding } from './MccCoding';
 import { MccDate } from './MccDate';
 import { MccDateTime } from './MccDateTime';
 import { MccDuration } from './MccDuration';
@@ -36,4 +37,6 @@ export interface GenericType {
     timingValue?: MccTiming;
     instantValue?: MccInstant;
     identiferValue?: MccIdentifer;
+    codingValue?: MccCoding;
+    decimalValue?: number;
 }
