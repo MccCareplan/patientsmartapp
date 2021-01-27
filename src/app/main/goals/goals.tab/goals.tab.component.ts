@@ -67,16 +67,18 @@ export class GoalsTabComponent implements OnInit {
       let callArray: Promise<MccObservation>[] = [];
       goalList.activeTargets.forEach((v, i) => {
         /* ADD TRANSLATE PARAM HERE */
-        callArray.push(this.service.getObservation(this.patientId, v.measure.coding[0].code));  // Query
+        callArray.push(this.service.getObservation(this.patientId, v.measure.coding[0].code, null, true));  // Query
       })
 
       Promise.all(callArray).then(resArray => {
-        resArray.filter(x => x !== undefined && x.status !== "notfound").forEach((v, i, d) => { // Filter
-          // find corresponding goal target 
-          let correspondingTarget = goalList.activeTargets.find(x => { return x.measure.coding[0].code === v.code.coding[0].code; })
-          let formattedTarget = this.formatTarget(v, i, correspondingTarget);
-          if (formattedTarget) {
-            this.targetValues.push(formattedTarget);
+        resArray.forEach((v, i, d) => {
+          if (v !== undefined && v.status !== "notfound") {
+            // find corresponding goal target 
+            let correspondingTarget = goalList.activeTargets[i];
+            let formattedTarget = this.formatTarget(v, i, correspondingTarget);
+            if (formattedTarget) {
+              this.targetValues.push(formattedTarget);
+            }
           }
         });
       });

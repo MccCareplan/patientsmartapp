@@ -15,7 +15,7 @@ export class ObservationsService {
     }
 
     _observationUrl = "find/latest/observation";
-    getObservation(patientId: string, code: string, keyToStore?: string): Promise<any> {
+    getObservation(patientId: string, code: string, keyToStore?: string, translate?: boolean): Promise<any> {
         const key = patientId + "-" + code;
 
         if (this.OBSERVATIONS.has(key)) {
@@ -26,7 +26,7 @@ export class ObservationsService {
             return Promise.resolve(returnVal);
         }
         else {
-            return this.http.get(`${environment.mccapiUrl}/${this._observationUrl}?subject=${patientId}&code=${code}`).toPromise()
+            return this.http.get(`${environment.mccapiUrl}/${this._observationUrl}?subject=${patientId}&code=${code}&translate=${translate ? "true" : "false"}`).toPromise()
                 .then((res: MccObservation) => {
                     this.OBSERVATIONS.set(key, res);
                     if (keyToStore) res.key = keyToStore;
