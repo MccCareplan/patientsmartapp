@@ -8,6 +8,25 @@ import { request as __request } from '../core/request';
 export class ConditionControllerService {
 
     /**
+     * @param id
+     * @result any OK
+     * @throws ApiError
+     */
+    public static async getCondition(
+        id: string,
+    ): Promise<any> {
+
+        const result = await __request({
+            method: 'get',
+            path: `/condition/${id}`,
+        });
+
+        catchGenericError(result);
+
+        return result.body;
+    }
+
+    /**
      * @param subject
      * @param careplan
      * @result any OK
@@ -72,25 +91,6 @@ export class ConditionControllerService {
                 'subject': subject,
                 'careplan': careplan,
             },
-        });
-
-        catchGenericError(result);
-
-        return result.body;
-    }
-
-    /**
-     * @param id
-     * @result any OK
-     * @throws ApiError
-     */
-    public static async getCondition(
-        id: string,
-    ): Promise<any> {
-
-        const result = await __request({
-            method: 'get',
-            path: `/condition/${id}`,
         });
 
         catchGenericError(result);
