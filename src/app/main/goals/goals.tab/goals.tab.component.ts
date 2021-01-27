@@ -66,6 +66,7 @@ export class GoalsTabComponent implements OnInit {
     if (goalList && goalList.activeTargets && this.patientId) {
       let callArray: Promise<MccObservation>[] = [];
       goalList.activeTargets.forEach((v, i) => {
+        /* ADD TRANSLATE PARAM HERE */
         callArray.push(this.service.getObservation(this.patientId, v.measure.coding[0].code));  // Query
       })
 
