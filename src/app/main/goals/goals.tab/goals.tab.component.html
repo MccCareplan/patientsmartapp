@@ -19,6 +19,9 @@
                 <li *ngIf="goal.expressedByType == 'Practitioner'">
                     <label>Practicioner: </label>{{ goal.expressedBy }}
                 </li>
+                <li *ngIf="goal.acceptance">
+                    <label>Accepted By: </label>{{ goal.acceptance }}
+                </li>
             </ul>
         </div>
     </li>

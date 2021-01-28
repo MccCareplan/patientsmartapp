@@ -66,22 +66,24 @@ export class GoalsTabComponent implements OnInit {
     if (goalList && goalList.activeTargets && this.patientId) {
       let callArray: Promise<MccObservation>[] = [];
       goalList.activeTargets.forEach((v, i) => {
-        callArray.push(this.service.getObservation(this.patientId, v.measure.coding[0].code));  // Query
+        callArray.push(this.service.getObservation(this.patientId, v.measure.coding[0].code, null, true));
       })
 
       Promise.all(callArray).then(resArray => {
-        resArray.filter(x => x !== undefined && x.status !== "notfound").forEach((v, i, d) => { // Filter
-          let formattedTarget = this.formatTarget(v, i, d);
-          if (formattedTarget) {
-            this.targetValues.push(formattedTarget);
+        resArray.forEach((v, i, d) => {
+          if (v !== undefined && v.status !== "notfound") {
+            let correspondingTarget = goalList.activeTargets[i];
+            let formattedTarget = this.formatTarget(v, i, correspondingTarget);
+            if (formattedTarget) {
+              this.targetValues.push(formattedTarget);
+            }
           }
         });
       });
     }
   }
 
-  formatTarget = (obs: MccObservation, index: number, activeTargets: GoalTarget[]): TargetValue => {
-    let gt: GoalTarget = activeTargets[index];
+  formatTarget = (obs: MccObservation, index: number, gt: GoalTarget): TargetValue => {
     let mostRecentResultValue = '';
     let observationDate = '';
     let rowHighlighted = false;

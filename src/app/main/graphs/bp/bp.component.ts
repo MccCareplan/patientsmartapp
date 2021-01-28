@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { BloodPresureService } from 'src/app/services/blood-pressure.service';
@@ -10,7 +12,10 @@ import { BloodPresureService } from 'src/app/services/blood-pressure.service';
 })
 export class BPGraphComponent implements OnInit {
     @Input()
-    showTable: boolean;
+    showTable: boolean = true;
+
+    @Input()
+    embedded: boolean = false;
 
     // chart
     lineChartAnnotations: any;
@@ -27,6 +32,9 @@ export class BPGraphComponent implements OnInit {
     tableDataSource: any;
     vitalSignsRowMax = 7;
 
+    @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
     constructor(
         public bpService: BloodPresureService
     ) {
@@ -34,6 +42,7 @@ export class BPGraphComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.matTableWorkaroud();
         this.tableDataSource = this.bpService.vitalSignsDataSource;
         this.displayedColumns = ['date', 'systolic', 'diastolic'];
         this.lineChartLabels = ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May'];
@@ -60,5 +69,21 @@ export class BPGraphComponent implements OnInit {
                 }
             }];
         this.lineChartType = 'line';
+    }
+
+    tableReady: boolean = false;
+    matTableWorkaroud = (): void => {
+        let counter = 0;
+        let int = setInterval(() => {
+            if (this.tableDataSource.filteredData.length > 0) {
+                this.tableDataSource.sort = this.sort;
+                this.tableDataSource.paginator = this.paginator;
+                this.tableReady = true;
+                clearInterval(int);
+            }
+            if (++counter > 20) {
+                clearInterval(int);
+            }
+        }, 250);
     }
 }

@@ -1,4 +1,130 @@
-import { GoalTarget } from "../generated-data-api";
+import { GenericType, GoalTarget } from "../generated-data-api";
+
+export function getInnerValue(value: GenericType): any {
+    let rval: any = 0;
+
+    if (isNaN(rval)) {
+        rval = 0;
+    }
+
+    if (value !== undefined) {
+        switch (value.valueType) {
+            case 'String': {
+                rval = value.stringValue;
+                break;
+            }
+            case 'Integer': {
+                rval = value.integerValue;
+                break;
+            }
+            case 'Boolean': {
+                rval = value.booleanValue;
+                break;
+            }
+            case 'Quantity': {
+                rval = value.quantityValue.value;
+                break;
+            }
+            case 'Range': {
+                rval = value.quantityValue.value;
+                break;
+            }
+        }
+    }
+    return rval;
+}
+
+export function getDisplayValue(value: GenericType): any {
+    let formatted = 'Unknown Type: ';
+    let rval = 0;
+
+    if (isNaN(rval)) {
+        rval = 0;
+    }
+
+    if (value !== undefined) {
+        formatted += ' ' + value.valueType;
+        switch (value.valueType) {
+            case 'String': {
+                formatted = value.stringValue;
+                break;
+            }
+            case 'Integer': {
+                formatted = value.integerValue.toString();
+                break;
+            }
+            case 'Boolean': {
+                formatted = String(value.booleanValue);
+                break;
+            }
+            case 'CodeableConcept': {
+                // todo:  formatTargetValue CodeableConcept
+                break;
+            }
+            case 'Quantity': {
+                formatted = value.quantityValue.value + ' ' + (value.quantityValue.unit ? value.quantityValue.unit : "");
+                break;
+            }
+            case 'Range': {
+                formatted = value.rangeValue.low.value
+                    + ' - ' + value.rangeValue.high.value
+                    + ' ' + value.rangeValue.high.unit;
+                break;
+            }
+        }
+        return formatted;
+    }
+}
+
+export function getValueHighlighted(value: GenericType): boolean {
+    let highlighted = false;
+    let rval = 0;
+    let qval = 0;
+    let highval = 0;
+    let lowval = 0;
+
+    if (isNaN(rval)) {
+        rval = 0;
+    }
+
+    if (value !== undefined) {
+        switch (value.valueType) {
+            case 'Quantity': {
+                qval = Number(value.quantityValue.value);
+                if (!isNaN(qval)) {
+                    if (value.quantityValue.comparator === '<') {
+                        if (rval >= qval) {
+                            highlighted = true;
+                        }
+                    }
+                    if (value.quantityValue.comparator === '>') {
+                        if (rval <= qval) {
+                            highlighted = true;
+                        }
+                    }
+                    if (value.quantityValue.comparator === '=') {
+                        if (rval !== qval) {
+                            highlighted = true;
+                        }
+                    }
+                }
+                break;
+            }
+            case 'Range': {
+                highval = Number(value.rangeValue.high.value);
+                lowval = Number(value.rangeValue.low.value);
+                if (!isNaN(lowval) && !isNaN(highval)) {
+                    if (rval < lowval || rval > highval) {
+                        highlighted = true;
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    return highlighted;
+}
 
 export function formatGoalTargetValue(target: GoalTarget, mostRecentResultValue: string): any[] {
     let formatted = 'Unknown Type: ';
@@ -115,7 +241,6 @@ export function formatGoalTargetValue(target: GoalTarget, mostRecentResultValue:
     }
 
     return [formatted, highlighted];
-
 }
 
 export function reformatYYYYMMDD(dt): string {
@@ -132,6 +257,11 @@ export function reformatYYYYMMDD(dt): string {
 export function getLineChartOptionsObject(min: number, max: number, suggestedMinDate: Date, suggestedMaxDate: Date): {} {
     const opts =
     {
+        elements: {
+            line: {
+                tension: 0
+            }
+        },
         responsive: false,
         maintainAspectRatio: true,
         scales: {

@@ -21,7 +21,7 @@
                     EGFR
                 </span>
             </div>
-            <egfr-graph [showTable]="false"></egfr-graph>
+            <egfr-graph [showTable]="false" [embedded]="true"></egfr-graph>
         </div>
         <div class="graph-wrapper" routerLink="/lab-graph" [queryParams]="{key:'uacr'}" queryParamsHandling="merge">
             <div>
@@ -29,7 +29,7 @@
                     UACR
                 </span>
             </div>
-            <uacr-graph [showTable]="false"></uacr-graph>
+            <uacr-graph [showTable]="false" [embedded]="true"></uacr-graph>
         </div>
         <div class="graph-wrapper" routerLink="/lab-graph" [queryParams]="{key:'bp'}" queryParamsHandling="merge">
             <div>
@@ -37,7 +37,7 @@
                     Blood Pressure
                 </span>
             </div>
-            <bp-graph [showTable]="false"></bp-graph>
+            <bp-graph [showTable]="false" [embedded]="true"></bp-graph>
         </div>
         <div class="graph-wrapper" routerLink="/lab-graph" [queryParams]="{key:'weight'}" queryParamsHandling="merge">
             <div>
@@ -45,7 +45,7 @@
                     Weight
                 </span>
             </div>
-            <weight-graph [showTable]="false"></weight-graph>
+            <weight-graph [showTable]="false" [embedded]="true"></weight-graph>
         </div>
     </div>
 </div>

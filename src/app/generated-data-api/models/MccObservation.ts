@@ -21,4 +21,5 @@ export interface MccObservation {
     category?: Array<MccCodeableConcept>;
     dataAbsentReason?: MccCodeableConcept;
     fhirid?: string;
+    key?: string;
 }

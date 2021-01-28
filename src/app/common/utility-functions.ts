@@ -132,6 +132,11 @@ export function reformatYYYYMMDD(dt): string {
 export function getLineChartOptionsObject(min: number, max: number, suggestedMinDate: Date, suggestedMaxDate: Date): {} {
     const opts =
     {
+        elements: {
+            line: {
+                tension: 0
+            }
+        },
         responsive: true,
         maintainAspectRatio: true,
         scales: {

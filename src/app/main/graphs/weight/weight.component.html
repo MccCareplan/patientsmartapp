@@ -1,9 +1,10 @@
-<div class="lab-graph-chart">
-    <canvas baseChart height="200" [datasets]="weightService.wot.chartData" [labels]="lineChartLabels" [options]="weightService.wot.lineChartOptions"
-        [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins">
+<div class="lab-graph-chart" [ngClass]="{'alt': !embedded}">
+    <canvas baseChart height="200" [datasets]="weightService.wot.chartData" [labels]="lineChartLabels"
+        [options]="weightService.wot.lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+        [chartType]="lineChartType" [plugins]="lineChartPlugins">
     </canvas>
 </div>
-<div class="lab-graph-table" *ngIf="showTable !== false">
+<div class="lab-graph-table" [ngClass]="{'hidden':  !(showTable && tableReady)}">
     <table mat-table matSort [dataSource]="tableDataSource" width="100%">
         <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef mat-sort-header="date">Date</th>
@@ -19,6 +20,6 @@
         </tr>
     </table>
     <mat-paginator [pageSizeOptions]="[5, 15, 30]" showFirstLastButtons
-        [ngStyle]="{display: this.tableDataSource.data.length > this.wotRowMax ? 'block' : 'none'}">
+        [ngClass]="{'hidden':  !(tableDataSource.filteredData.length > 5)}">
     </mat-paginator>
 </div>

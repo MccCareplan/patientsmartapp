@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { MccObservation } from 'src/app/generated-data-api';
 import { ObservationsService } from 'src/app/services/observations.service.new';
 import * as fromRoot from '../../ngrx/reducers';
 
@@ -55,25 +54,17 @@ export class LabGraphComponent implements OnInit {
   }
 
   generic = (key: string): void => {
-    this.store.select(fromRoot.getPatientProfile).subscribe(x => {
-      if (x && x.fhirid) {
-        this.obsService.getObservation(x.fhirid, key).then(
-          (res: MccObservation) => {
-            this.title = res.code.text;
-          }
-        )
-      }
-    });
+    this.title = key;
   }
 
   bp = (): void => {
     this.title = "My Blood Pressure";
-    this.description = "Systolic and Dystolic values over time";
+    this.description = "Systolic and Diastolic values over time";
   }
 
   egfr = (): void => {
-    this.title = "My GFR Results";
-    this.description = "GFR Tests how well your kidneys work";
+    this.title = "My EGFR Results";
+    this.description = "EGFR Tests how well your kidneys work";
   }
 
   uacr = (): void => {

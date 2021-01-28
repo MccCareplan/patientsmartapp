@@ -59,15 +59,11 @@ export class VitalSignsComponent implements OnInit {
                 break;
             default:
                 this.router.navigate(["/lab-graph"], <NavigationExtras>{
-                    queryParams: <Params>{ key: res.code.coding[0].code },
+                    queryParams: <Params>{ key: res.key },
                     queryParamsHandling: "merge"
                 });
                 break;
         }
-    }
-
-    navigateToGraph = (): void => {
-
     }
 
     formatJSON = (val: any): string => {
@@ -96,13 +92,13 @@ export class VitalSignsComponent implements OnInit {
         callsToMake.forEach((v, i) => {
             switch (v.type) {
                 case "code":
-                    promiseArray.push(this.obsService.getObservation(this.patientId, v.value));
+                    promiseArray.push(this.obsService.getObservation(this.patientId, v.value, v.name));
                     break;
                 case "valueset":
-                    promiseArray.push(this.obsService.getObservationsByValueSet(this.patientId, v.value, "descending", "1"));
+                    promiseArray.push(this.obsService.getObservationsByValueSet(this.patientId, v.value, "descending", "1", v.name));
                     break;
                 case "panel":
-                    promiseArray.push(this.obsService.getObservationsByPanel(this.patientId, v.value));
+                    promiseArray.push(this.obsService.getObservationsByPanel(this.patientId, v.value, "descending", "1", v.name));
                     break;
             }
         })
