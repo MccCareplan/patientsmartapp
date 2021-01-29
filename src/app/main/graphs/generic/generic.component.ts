@@ -53,7 +53,7 @@ export class GenericGraphComponent implements OnInit {
 
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator: MatPaginator;
-
+    
     constructor(
         private store: Store<fromRoot.State>,
         private obsService: ObservationsService
@@ -91,17 +91,16 @@ export class GenericGraphComponent implements OnInit {
                 this.obsService.getObservationsByPanel(this.patientId, valueToCall.value, "descending", "50", this.key).then(this.processData);
                 break;
             case "question":
-                this.obsService.getQuestionnaireItem(this.patientId, valueToCall.value).then(this.processQuestionnaire);
+                this.obsService.getQuestionnaireItems(this.patientId, valueToCall.value).then(this.processQuestionnaire);
                 break;
         }
     }
 
     processData = (res: MccObservation[]): void => {
         let formattedData = [];
-        let key = res[0].key;
         res.forEach((res: MccObservation, index) => {
             let formattedObject: any = {};
-            formattedObject.title = key;
+            formattedObject.title = res.code.text;
             formattedObject.date = this.formatDate(res.effective);
             formattedObject.displayValue = getDisplayValue(res.value);
             formattedObject.value = getInnerValue(res.value);
@@ -113,7 +112,7 @@ export class GenericGraphComponent implements OnInit {
         this.tableData.sort = this.sort;
         this.tableData.paginator = this.paginator;
         this.showPaginator = this.data.length > 5;
-        this.processChartData(key);
+        this.processChartData(this.key);
     }
 
     processQuestionnaire = (res: SimpleQuestionnaireItem[]): void => {
@@ -133,7 +132,7 @@ export class GenericGraphComponent implements OnInit {
         this.tableData.paginator = this.paginator;
         this.showPaginator = this.data.length > 5;
         if (res && res.length > 0) {
-            this.processChartData(res[0].item.text);
+            this.processChartData(this.key);
         }
     }
 

@@ -119,4 +119,19 @@ export class ObservationsService {
                 });
         }
     }
+
+    _questionnaireAllItemsUrl = "find/all/questionnaireresponseitems";
+    getQuestionnaireItems(patientId: string, code: string): Promise<any> {
+        const key = patientId + "-" + code + "-all";
+
+        if (this.QUESTIONNAIRES.has(key)) {
+            return Promise.resolve(this.QUESTIONNAIRES.get(key));
+        } else {
+            return this.http.get(`${environment.mccapiUrl}/${this._questionnaireAllItemsUrl}?subject=${patientId}&code=${code}`, this.HTTP_OPTIONS).toPromise()
+                .then((res: SimpleQuestionnaireItem[]) => {
+                    this.QUESTIONNAIRES.set(key, res);
+                    return res;
+                });
+        }
+    }
 }

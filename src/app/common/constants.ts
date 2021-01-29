@@ -32,7 +32,7 @@ export class Constants {
                 type: "valueset"
             },
             {
-                name: "Serum phosphorus",
+                name: "Serum Phosphorus",
                 value: "2.16.840.1.113762.1.4.1222.123",
                 type: "valueset"
             },
@@ -102,7 +102,7 @@ export class Constants {
                 type: "valueset"
             },
             {
-                name: "Serum Biacarbonate",
+                name: "Serum Bicarbonate",
                 value: "2.16.840.1.113762.1.4.1222.130",
                 type: "valueset"
             },
