@@ -29,6 +29,10 @@ export function getInnerValue(value: GenericType): any {
                 rval = value.quantityValue.value;
                 break;
             }
+            case 'decimal': {
+                rval = parseFloat("0." + value.decimalValue);
+                break;
+            }
         }
     }
     return rval;
@@ -69,6 +73,10 @@ export function getDisplayValue(value: GenericType): any {
                 formatted = value.rangeValue.low.value
                     + ' - ' + value.rangeValue.high.value
                     + ' ' + value.rangeValue.high.unit;
+                break;
+            }
+            case "decimal": {
+                formatted = "0." + value.decimalValue;
                 break;
             }
         }
