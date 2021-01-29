@@ -85,7 +85,7 @@ export class GenericGraphComponent implements OnInit {
                 this.obsService.getObservationsByPanel(this.patientId, valueToCall.value, "descending", "50", this.key).then(this.processData);
                 break;
             case "question":
-                this.obsService.getQuestionnaireItem(this.patientId, valueToCall.value, this.key).then(this.processQuestionnaire);
+                this.obsService.getQuestionnaireItem(this.patientId, valueToCall.value).then(this.processQuestionnaire);
                 break;
         }
     }
