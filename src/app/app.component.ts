@@ -84,7 +84,9 @@ export class AppComponent implements OnInit {
                     // Load best careplan for the subject, then load subsequent data
                     this.store.dispatch(carePlansSummary.loadCareplansSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
                     this.store.select(fromRoot.getCarePlansSummary).subscribe(c => {
-                        if (c && c.length > 0) {
+                        if (c && c.length > 0 && !initialLoadDone) {
+                            initialLoadDone = true;
+                            
                             // Set default careplan
                             this.carePlanId = c[0].fhirid; // Should calls with optional careplan param have it passed in? 
 
@@ -114,7 +116,6 @@ export class AppComponent implements OnInit {
                             this.weightService.getPatientWotInfo(this.currentSubjectId);
                             this.uacrService.getPatientUacrInfo(this.currentSubjectId);
 
-                            initialLoadDone = true;
                         }
                     })
                 }
