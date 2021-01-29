@@ -30,9 +30,12 @@ export function getInnerValue(value: GenericType): any {
                 break;
             }
             case 'decimal': {
-                rval = parseFloat("0." + value.decimalValue);
+                rval = value.decimalValue;
                 break;
             }
+            case 'string':
+                rval = value.stringValue;
+                break;
         }
     }
     return rval;
@@ -76,9 +79,12 @@ export function getDisplayValue(value: GenericType): any {
                 break;
             }
             case "decimal": {
-                formatted = "0." + value.decimalValue;
+                formatted = value.decimalValue.toString();
                 break;
             }
+            case "string":
+                formatted = value.stringValue;
+                break;
         }
         return formatted;
     }

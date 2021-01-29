@@ -143,7 +143,7 @@ export class Constants {
             },
             {
                 name: "Fatigue",
-                value: "77834-0",
+                value: "77864-7",
                 type: "question"
             },
             {
