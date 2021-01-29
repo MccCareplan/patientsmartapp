@@ -25,7 +25,7 @@
       // launch            - Get the launch context
       // openid & fhirUser - Get the current user
       // patient/*.read    - Read patient data
-      scope: "launch/patient patient/*.read",
+      scope: "launch/patient launch patient/*.read openid fhirUser offline_access",
       // The fhir server to uses as the source of authentication points (Parameter iss)
       // iss: "https://launch.smarthealthit.org/v/r4/sim/eyJrIjoiMSJ9/fhir"
       //iss: "https://launch.smarthealthit.org/v/r4/sim/eyJrIjoiMSIsImIiOiI2ODk4OTJiZC1kY2JlLTQxZmMtODY1MS0zOGExZDA4OTM4NTQifQ/fhir"
