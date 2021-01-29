@@ -106,22 +106,15 @@ export class ObservationsService {
     }
 
     _questionnaireLatestItemUrl = "find/latest/questionnaireresponseitem";
-    getQuestionnaireItem(patientId: string, code: string, keyToStore?: string): Promise<any> {
-        const key = patientId + "-" + code + (keyToStore ? "-" + keyToStore : "");
+    getQuestionnaireItem(patientId: string, code: string): Promise<any> {
+        const key = patientId + "-" + code;
 
         if (this.QUESTIONNAIRES.has(key)) {
-            let returnVal = this.QUESTIONNAIRES.get(key);
-            if (returnVal.length > 0 && keyToStore) {
-                returnVal[0].key = keyToStore;
-            }
-            return Promise.resolve(returnVal);
+            return Promise.resolve(this.QUESTIONNAIRES.get(key));
         } else {
             return this.http.get(`${environment.mccapiUrl}/${this._questionnaireLatestItemUrl}?subject=${patientId}&code=${code}`, this.HTTP_OPTIONS).toPromise()
                 .then((res: SimpleQuestionnaireItem) => {
                     this.QUESTIONNAIRES.set(key, res);
-                    if (keyToStore) {
-                        res.key = keyToStore;
-                    }
                     return res;
                 });
         }

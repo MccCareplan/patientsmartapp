@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../ngrx/reducers';
 import { Constants } from 'src/app/common/constants';
-import { MccObservation } from 'src/app/generated-data-api';
+import { MccObservation, SimpleQuestionnaireItem } from 'src/app/generated-data-api';
 import { ObservationsService } from 'src/app/services/observations.service.new';
 import { Router, NavigationExtras, Params } from '@angular/router';
-import { getDisplayValue, formatEffectiveDate } from 'src/app/common/chart-utility-functions';
+import { getDisplayValue, formatEffectiveDate, formatMccDate } from 'src/app/common/chart-utility-functions';
 
 interface FormattedResult {
   name: string;
@@ -109,7 +109,7 @@ export class LabResultsComponent implements OnInit {
           promiseArray.push(this.obsService.getObservationsByPanel(this.patientId, v.value, "descending", "1", v.name));
           break;
         case "question":
-          promiseArray.push(this.obsService.getQuestionnaireItem(this.patientId, v.value, v.name));
+          promiseArray.push(this.obsService.getQuestionnaireItem(this.patientId, v.value));
           break;
       }
     })
@@ -132,6 +132,7 @@ export class LabResultsComponent implements OnInit {
               this.results.push({ name: correspondingCall.name, value: getDisplayValue((<MccObservation>res[0]).value), date: formatEffectiveDate((<MccObservation>res[0]).effective) });
               break;
             case "question":
+              this.results.push({ name: correspondingCall.name, value: getDisplayValue((<SimpleQuestionnaireItem>res).item.answers[0].value), date: formatMccDate((<SimpleQuestionnaireItem>res).authored) })
               break;
           }
         }
