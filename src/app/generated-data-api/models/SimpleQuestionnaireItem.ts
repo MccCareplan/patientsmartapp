@@ -9,4 +9,5 @@ export interface SimpleQuestionnaireItem {
     authored?: MccDate;
     item?: QuestionnaireResponseItem;
     fhirid?: string;
+    key?: string;
 }

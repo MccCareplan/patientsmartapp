@@ -1,4 +1,4 @@
-import { GenericType, GoalTarget } from "../generated-data-api";
+import { Effective, GenericType, GoalTarget, MccDate } from "../generated-data-api";
 
 export function getInnerValue(value: GenericType): any {
     let rval: any = 0;
@@ -241,6 +241,30 @@ export function formatGoalTargetValue(target: GoalTarget, mostRecentResultValue:
     }
 
     return [formatted, highlighted];
+}
+
+export function formatEffectiveDate(ef: Effective): string {
+    if (!ef) {
+        return "";
+    }
+    if (ef.dateTime && ef.dateTime.date) {
+        const date = new Date(ef.dateTime.date);
+        return new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
+            .toISOString()
+            .split('T')[0];
+    }
+}
+
+export function formatMccDate(mccDate: MccDate): string {
+    if (!mccDate) {
+        return "";
+    }
+    if (mccDate.date) {
+        const date = new Date(mccDate.date);
+        return new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
+            .toISOString()
+            .split('T')[0];
+    }
 }
 
 export function reformatYYYYMMDD(dt): string {

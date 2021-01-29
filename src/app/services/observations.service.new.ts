@@ -1,12 +1,13 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { MccObservation } from "../generated-data-api";
+import { MccObservation, SimpleQuestionnaireItem } from "../generated-data-api";
 
 @Injectable()
 export class ObservationsService {
     public HTTP_OPTIONS = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     public OBSERVATIONS: Map<string, any> = new Map<string, any>();
+    public QUESTIONNAIRES: Map<string, any> = new Map<string, any>();
 
     _defaultUrl = environment.mccapiUrl;
     constructor(
@@ -99,6 +100,21 @@ export class ObservationsService {
                     if (res.length > 0 && keyToStore) {
                         res[0].key = keyToStore;
                     }
+                    return res;
+                });
+        }
+    }
+
+    _questionnaireLatestItemUrl = "find/latest/questionnaireresponseitem";
+    getQuestionnaireItem(patientId: string, code: string): Promise<any> {
+        const key = patientId + "-" + code;
+
+        if (this.QUESTIONNAIRES.has(key)) {
+            return Promise.resolve(this.QUESTIONNAIRES.get(key));
+        } else {
+            return this.http.get(`${environment.mccapiUrl}/${this._questionnaireLatestItemUrl}?subject=${patientId}&code=${code}`, this.HTTP_OPTIONS).toPromise()
+                .then((res: SimpleQuestionnaireItem) => {
+                    this.QUESTIONNAIRES.set(key, res);
                     return res;
                 });
         }

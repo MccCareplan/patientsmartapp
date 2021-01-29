@@ -52,7 +52,7 @@ export class Constants {
                 type: "valueset"
             },
             {
-                name: "Transferrin Staturation",
+                name: "Transferrin Saturation",
                 value: "2.16.840.1.113762.1.4.1222.118",
                 type: "valueset"
             },
@@ -115,6 +115,11 @@ export class Constants {
                 name: "Chloride",
                 value: "2.16.840.1.113762.1.4.1222.132",
                 type: "valueset"
+            },
+            {
+                name: "PTH",
+                value: "2.16.840.1.113762.1.4.1222.129",
+                type: "valueset"
             }
         ]]
     ]);
@@ -130,6 +135,36 @@ export class Constants {
                 name: "Weight",
                 value: "29463-7",
                 type: "panel"
+            },
+            {
+                name: "Cognitive Status",
+                value: "72172-0",
+                type: "question"
+            },
+            {
+                name: "Fatigue",
+                value: "77834-0",
+                type: "question"
+            },
+            {
+                name: "Functional Status",
+                value: "77827-4",
+                type: "question"
+            },
+            {
+                name: "Pain Interference",
+                value: "77865-4",
+                type: "question"
+            },
+            {
+                name: "Pain Severity",
+                value: "38221-8",
+                type: "question"
+            },
+            {
+                name: "PHQ9",
+                value: "44261-6",
+                type: "question"
             }
         ]]
     ]);

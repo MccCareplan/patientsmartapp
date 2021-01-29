@@ -6,11 +6,17 @@ import { Store } from '@ngrx/store';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import * as moment from 'moment';
 import { Color, Label } from 'ng2-charts';
-import { getDisplayValue, getInnerValue, getValueHighlighted } from 'src/app/common/chart-utility-functions';
+import { formatMccDate, getDisplayValue, getInnerValue, getValueHighlighted } from 'src/app/common/chart-utility-functions';
 import { Constants } from 'src/app/common/constants';
-import { Effective, GenericType, MccCodeableConcept, MccReference, ObservationComponent, ReferenceRange } from 'src/app/generated-data-api';
+import { Effective, GenericType, MccCodeableConcept, MccReference, ObservationComponent, ReferenceRange, SimpleQuestionnaireItem } from 'src/app/generated-data-api';
 import { ObservationsService } from 'src/app/services/observations.service.new';
 import * as fromRoot from '../../../ngrx/reducers';
+
+interface FormattedResult {
+    name: string;
+    value: string;
+    date: any;
+}
 
 @Component({
     selector: 'generic-graph',
@@ -84,6 +90,9 @@ export class GenericGraphComponent implements OnInit {
             case "panel":
                 this.obsService.getObservationsByPanel(this.patientId, valueToCall.value, "descending", "50", this.key).then(this.processData);
                 break;
+            case "question":
+                this.obsService.getQuestionnaireItem(this.patientId, valueToCall.value).then(this.processQuestionnaire);
+                break;
         }
     }
 
@@ -105,6 +114,27 @@ export class GenericGraphComponent implements OnInit {
         this.tableData.paginator = this.paginator;
         this.showPaginator = this.data.length > 5;
         this.processChartData(key);
+    }
+
+    processQuestionnaire = (res: SimpleQuestionnaireItem[]): void => {
+        let formattedData = [];
+        res.forEach((res: SimpleQuestionnaireItem, index) => {
+            let formattedObject: any = {};
+            formattedObject.title = res.item.text;
+            formattedObject.date = formatMccDate(res.authored);
+            formattedObject.displayValue = getDisplayValue(res.item.answers[0].value);
+            formattedObject.value = getInnerValue(res.item.answers[0].value);
+            formattedObject.highlighted = getValueHighlighted(res.item.answers[0].value);
+            formattedData.push(formattedObject);
+        })
+        this.data = formattedData.sort((a, b) => { return a.date > b.date ? -1 : 1; });
+        this.tableData = new MatTableDataSource(this.data);
+        this.tableData.sort = this.sort;
+        this.tableData.paginator = this.paginator;
+        this.showPaginator = this.data.length > 5;
+        if (res && res.length > 0) {
+            this.processChartData(res[0].item.text);
+        }
     }
 
     processChartData = (key) => {
