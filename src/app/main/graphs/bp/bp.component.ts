@@ -42,7 +42,7 @@ export class BPGraphComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.matTableWorkaroud();
+        if (this.showTable) this.matTableWorkaroud();
         this.tableDataSource = this.bpService.vitalSignsDataSource;
         this.displayedColumns = ['date', 'systolic', 'diastolic'];
         this.lineChartLabels = ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May'];
