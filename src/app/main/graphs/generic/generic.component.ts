@@ -8,7 +8,7 @@ import * as moment from 'moment';
 import { Color, Label } from 'ng2-charts';
 import { getDisplayValue, getInnerValue, getValueHighlighted } from 'src/app/common/chart-utility-functions';
 import { Constants } from 'src/app/common/constants';
-import { Effective, GenericType, MccCodeableConcept, MccReference, ObservationComponent, ReferenceRange } from 'src/app/generated-data-api';
+import { Effective, GenericType, MccCodeableConcept, MccReference, ObservationComponent, ReferenceRange, SimpleQuestionnaireItem } from 'src/app/generated-data-api';
 import { ObservationsService } from 'src/app/services/observations.service.new';
 import * as fromRoot from '../../../ngrx/reducers';
 
@@ -84,6 +84,9 @@ export class GenericGraphComponent implements OnInit {
             case "panel":
                 this.obsService.getObservationsByPanel(this.patientId, valueToCall.value, "descending", "50", this.key).then(this.processData);
                 break;
+            case "question":
+                this.obsService.getQuestionnaireItem(this.patientId, valueToCall.value, this.key).then(this.processQuestionnaire);
+                break;
         }
     }
 
@@ -105,6 +108,10 @@ export class GenericGraphComponent implements OnInit {
         this.tableData.paginator = this.paginator;
         this.showPaginator = this.data.length > 5;
         this.processChartData(key);
+    }
+
+    processQuestionnaire = (res: SimpleQuestionnaireItem[]): void => {
+
     }
 
     processChartData = (key) => {

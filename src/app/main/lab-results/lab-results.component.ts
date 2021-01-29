@@ -5,6 +5,13 @@ import { Constants } from 'src/app/common/constants';
 import { MccObservation } from 'src/app/generated-data-api';
 import { ObservationsService } from 'src/app/services/observations.service.new';
 import { Router, NavigationExtras, Params } from '@angular/router';
+import { getDisplayValue, formatEffectiveDate } from 'src/app/common/chart-utility-functions';
+
+interface FormattedResult {
+  name: string;
+  value: string;
+  date: any;
+}
 
 interface PatientLabResultsMap {
   name: string;
@@ -18,7 +25,7 @@ interface PatientLabResultsMap {
   styleUrls: ['./lab-results.component.scss']
 })
 export class LabResultsComponent implements OnInit {
-  results: MccObservation[] = [];
+  results: FormattedResult[] = [];
   patientId: string;
   longTermCondition: string;
 
@@ -30,27 +37,28 @@ export class LabResultsComponent implements OnInit {
 
   }
 
-  navToGraph(res: MccObservation) {
-    switch (res.code.coding[0].code) {
-      case "85354-9":
+  navToGraph(res: FormattedResult) {
+    if (res.value == "No Data Available") return;
+    switch (res.name.toUpperCase()) {
+      case "BLOOD PRESSURE":
         this.router.navigate(["/lab-graph"], <NavigationExtras>{
           queryParams: <Params>{ key: "bp" },
           queryParamsHandling: "merge"
         });
         break;
-      case "29463-7":
+      case "WEIGHT":
         this.router.navigate(["/lab-graph"], <NavigationExtras>{
           queryParams: <Params>{ key: "weight" },
           queryParamsHandling: "merge"
         });
         break;
-      case "69405-9":
+      case "EGFR":
         this.router.navigate(["/lab-graph"], <NavigationExtras>{
           queryParams: <Params>{ key: "egfr" },
           queryParamsHandling: "merge"
         });
         break;
-      case "9318-7":
+      case "UACR":
         this.router.navigate(["/lab-graph"], <NavigationExtras>{
           queryParams: <Params>{ key: "uacr" },
           queryParamsHandling: "merge"
@@ -58,7 +66,7 @@ export class LabResultsComponent implements OnInit {
         break;
       default:
         this.router.navigate(["/lab-graph"], <NavigationExtras>{
-          queryParams: <Params>{ key: res.key },
+          queryParams: <Params>{ key: res.name },
           queryParamsHandling: "merge"
         });
         break;
@@ -88,6 +96,7 @@ export class LabResultsComponent implements OnInit {
     this.results = [];
     let callsToMake: PatientLabResultsMap[] = Constants.labResultsMap.get(this.longTermCondition);
     let promiseArray = [];
+
     callsToMake.forEach((v, i) => {
       switch (v.type) {
         case "code":
@@ -99,32 +108,34 @@ export class LabResultsComponent implements OnInit {
         case "panel":
           promiseArray.push(this.obsService.getObservationsByPanel(this.patientId, v.value, "descending", "1", v.name));
           break;
+        case "question":
+          promiseArray.push(this.obsService.getQuestionnaireItem(this.patientId, v.value, v.name));
+          break;
       }
     })
+
     Promise.all(promiseArray).then((resArr: any[]) => {
-      resArr.filter(x => this.filterOutBadValues(x)).forEach((res: any, index: number) => {
-        switch (true) {
-          case (res && !res.length): // code
-            this.results.push(res);
-            break;
-          case (res && res.length > 0): // valueset
-            this.results.push(res[0]);
-            break;
-          case (res && res.length > 1): // panel
-            this.results.push(res[0]);
-            break;
+      resArr.forEach((res: any, index: number) => {
+        let correspondingCall = callsToMake[index];
+        if (!res || res.length < 1 || res.status === "notfound") {
+          this.results.push({ name: correspondingCall.name, value: "No Data Available", date: "" })
+        }
+        else {
+          switch (correspondingCall.type) {
+            case "code":
+              this.results.push({ name: correspondingCall.name, value: getDisplayValue((<MccObservation>res).value), date: formatEffectiveDate((<MccObservation>res).effective) });
+              break;
+            case "valueset":
+              this.results.push({ name: correspondingCall.name, value: getDisplayValue((<MccObservation>res[0]).value), date: formatEffectiveDate((<MccObservation>res[0]).effective) });
+              break;
+            case "panel":
+              this.results.push({ name: correspondingCall.name, value: getDisplayValue((<MccObservation>res[0]).value), date: formatEffectiveDate((<MccObservation>res[0]).effective) });
+              break;
+            case "question":
+              break;
+          }
         }
       });
     });
-  }
-
-  filterOutBadValues = (res: any): boolean => {
-    if (res.status === "notfound")
-      return false;
-    if (!res)
-      return false;
-    if (res.length < 1)
-      return false;
-    return true;
   }
 }
