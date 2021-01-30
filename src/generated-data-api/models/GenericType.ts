@@ -18,16 +18,16 @@ import { MccTiming } from './MccTiming';
 
 export interface GenericType {
     valueType?: string;
-    stringValue?: string;
-    integerValue?: number;
-    booleanValue?: boolean;
-    codeableConceptValue?: MccCodeableConcept;
-    quantityValue?: MccQuantity;
-    rangeValue?: MccRange;
-    ratioValue?: MccRatio;
-    periodValue?: MccPeriod;
-    dateValue?: MccDate;
-    timeValue?: MccTime;
+    stringValue?: string; // 
+    integerValue?: number; // graph
+    booleanValue?: boolean; // 
+    codeableConceptValue?: MccCodeableConcept; // 
+    quantityValue?: MccQuantity; // graph
+    rangeValue?: MccRange; // graph
+    ratioValue?: MccRatio; // 
+    periodValue?: MccPeriod;  //
+    dateValue?: MccDate; //
+    timeValue?: MccTime; //
     dateTimeValue?: MccDateTime;
     sampledDataValue?: MccSampledData;
     durationValue?: MccDuration;

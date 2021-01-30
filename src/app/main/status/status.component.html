@@ -15,26 +15,37 @@
         </select>
     </div>
     <div class="graphs">
-        <span>EGFR</span>
-        <egfr-graph [showTable]="false"></egfr-graph>
-        <span>UACR</span>
-        <uacr-graph [showTable]="false"></uacr-graph>
-        <span>Blood Pressure</span>
-        <bp-graph [showTable]="false"></bp-graph>
-        <span>Weight</span>
-        <weight-graph [showTable]="false"></weight-graph>
-    </div>
-    <div class="key-information-and-buttons">
-        <div class="buttons">
-            <button class="mat-raised-button" routerLink="/vital-signs" queryParamsHandling="merge">
-                <img src="../../../assets/svg/stethscope.svg">
-                <span>Vital Signs</span>
-            </button>
-            <button class="mat-raised-button" routerLink="/lab-results" queryParamsHandling="merge">
-                <img src="../../../assets/svg/beaker.svg">
-                <span>Lab Results</span>
-                <div class="number-circle">2</div>
-            </button>
+        <div class="graph-wrapper" routerLink="/lab-graph" [queryParams]="{key:'egfr'}" queryParamsHandling="merge">
+            <div>
+                <span>
+                    EGFR
+                </span>
+            </div>
+            <egfr-graph [showTable]="false" [embedded]="true"></egfr-graph>
+        </div>
+        <div class="graph-wrapper" routerLink="/lab-graph" [queryParams]="{key:'uacr'}" queryParamsHandling="merge">
+            <div>
+                <span>
+                    UACR
+                </span>
+            </div>
+            <uacr-graph [showTable]="false" [embedded]="true"></uacr-graph>
+        </div>
+        <div class="graph-wrapper" routerLink="/lab-graph" [queryParams]="{key:'bp'}" queryParamsHandling="merge">
+            <div>
+                <span>
+                    Blood Pressure
+                </span>
+            </div>
+            <bp-graph [showTable]="false" [embedded]="true"></bp-graph>
+        </div>
+        <div class="graph-wrapper" routerLink="/lab-graph" [queryParams]="{key:'weight'}" queryParamsHandling="merge">
+            <div>
+                <span>
+                    Weight
+                </span>
+            </div>
+            <weight-graph [showTable]="false" [embedded]="true"></weight-graph>
         </div>
     </div>
 </div>

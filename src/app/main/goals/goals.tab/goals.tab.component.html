@@ -19,12 +19,15 @@
                 <li *ngIf="goal.expressedByType == 'Practitioner'">
                     <label>Practicioner: </label>{{ goal.expressedBy }}
                 </li>
+                <li *ngIf="goal.acceptance">
+                    <label>Accepted By: </label>{{ goal.acceptance }}
+                </li>
             </ul>
         </div>
     </li>
 </ul>
-<ul class="goals-items" *ngIf="displayFilter == 'targets'">
-    <li *ngFor="let target of (targetValues$ | async)" [class.caution]="target.highlighted">
+<ul class="goals-items" *ngIf="displayFilter == 'targets' && targetValues.length > 0">
+    <li *ngFor="let target of targetValues" [class.caution]="target.highlighted">
         <div class="goals-item">
             <h3 class="goals-title">{{ target.measure }}</h3>
             <hr />

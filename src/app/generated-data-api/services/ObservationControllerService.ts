@@ -10,26 +10,26 @@ export class ObservationControllerService {
     /**
      * @param subject
      * @param code
-     * @param max
-     * @param sort
+     * @param mode
+     * @param translate
      * @result any OK
      * @throws ApiError
      */
-    public static async getObservation(
+    public static async getLatestObservation(
         subject: string,
         code: string,
-        max: number = 100,
-        sort: string = 'ascending',
+        mode: string = 'code',
+        translate: string = 'false',
     ): Promise<any> {
 
         const result = await __request({
             method: 'get',
-            path: `/observations`,
+            path: `/find/latest/observation`,
             query: {
                 'subject': subject,
                 'code': code,
-                'max': max,
-                'sort': sort,
+                'mode': mode,
+                'translate': translate,
             },
         });
 
@@ -41,20 +41,29 @@ export class ObservationControllerService {
     /**
      * @param subject
      * @param code
+     * @param count
+     * @param sort
+     * @param mode
      * @result any OK
      * @throws ApiError
      */
-    public static async getLatestObservation(
+    public static async getObservation(
         subject: string,
         code: string,
+        count: number = 100,
+        sort: string = 'ascending',
+        mode: string = 'code',
     ): Promise<any> {
 
         const result = await __request({
             method: 'get',
-            path: `/find/latest/observation`,
+            path: `/observations`,
             query: {
                 'subject': subject,
                 'code': code,
+                'count': count,
+                'sort': sort,
+                'mode': mode,
             },
         });
 
@@ -68,6 +77,7 @@ export class ObservationControllerService {
      * @param valueset
      * @param max
      * @param sort
+     * @param mode
      * @result any OK
      * @throws ApiError
      */
@@ -76,6 +86,7 @@ export class ObservationControllerService {
         valueset: string,
         max: number = 100,
         sort: string = 'ascending',
+        mode: string = 'code',
     ): Promise<any> {
 
         const result = await __request({
@@ -86,6 +97,7 @@ export class ObservationControllerService {
                 'valueset': valueset,
                 'max': max,
                 'sort': sort,
+                'mode': mode,
             },
         });
 

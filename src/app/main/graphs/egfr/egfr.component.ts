@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
@@ -6,6 +6,8 @@ import { EgfrService } from 'src/app/services/egfr.service';
 import { formatEgfrResult } from 'src/app/common/utility-functions';
 import { EgfrTableData } from 'src/app/data-model/egfr';
 import { from } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
     selector: 'egfr-graph',
@@ -14,7 +16,10 @@ import { from } from 'rxjs';
 })
 export class EGFRGraphComponent implements OnInit {
     @Input()
-    showTable: boolean;
+    showTable: boolean = true;
+
+    @Input()
+    embedded: boolean = false;
 
     // chart
     lineChartAnnotations: any;
@@ -32,6 +37,9 @@ export class EGFRGraphComponent implements OnInit {
     tableDataSource: any;
     egfrRowMax = 7;
 
+    @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
     constructor(
         public egfrService: EgfrService
     ) {
@@ -43,6 +51,7 @@ export class EGFRGraphComponent implements OnInit {
     }
 
     chartInit = async (): Promise<void> => {
+        this.matTableWorkaroud();
         this.tableDataSource = this.egfrService.egfrDataSource;
         this.lineChartData = this.egfrService.egfr.chartData;
         this.lineChartOptions = this.egfrService.egfr.lineChartOptions;
@@ -82,5 +91,21 @@ export class EGFRGraphComponent implements OnInit {
             }
         }
         return cssClass;
+    }
+
+    tableReady: boolean = false;
+    matTableWorkaroud = (): void => {
+        let counter = 0;
+        let int = setInterval(() => {
+            if (this.tableDataSource && this.tableDataSource.filteredData && this.tableDataSource.filteredData.length > 0) {
+                this.tableDataSource.sort = this.sort;
+                this.tableDataSource.paginator = this.paginator;
+                this.tableReady = true;
+                clearInterval(int);
+            }
+            if (++counter > 20) {
+                clearInterval(int);
+            }
+        }, 250);
     }
 }

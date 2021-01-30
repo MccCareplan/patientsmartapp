@@ -8,12 +8,31 @@ import { request as __request } from '../core/request';
 export class ConditionControllerService {
 
     /**
+     * @param id
+     * @result any OK
+     * @throws ApiError
+     */
+    public static async getCondition(
+        id: string,
+    ): Promise<any> {
+
+        const result = await __request({
+            method: 'get',
+            path: `/condition/${id}`,
+        });
+
+        catchGenericError(result);
+
+        return result.body;
+    }
+
+    /**
      * @param subject
      * @param careplan
      * @result any OK
      * @throws ApiError
      */
-    public static async getConditionSummary1(
+    public static async getConditionSummaryOld(
         subject: string,
         careplan?: string,
     ): Promise<any> {
@@ -55,17 +74,23 @@ export class ConditionControllerService {
     }
 
     /**
-     * @param id
+     * @param subject
+     * @param careplan
      * @result any OK
      * @throws ApiError
      */
-    public static async getCodition(
-        id: string,
+    public static async getConditionSummary1(
+        subject: string,
+        careplan?: string,
     ): Promise<any> {
 
         const result = await __request({
             method: 'get',
-            path: `/condition/${id}`,
+            path: `/summary/conditions`,
+            query: {
+                'subject': subject,
+                'careplan': careplan,
+            },
         });
 
         catchGenericError(result);

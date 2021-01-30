@@ -18,12 +18,26 @@
             </div>
         </div>
 
-        <main class="container mat-app-background" [ngClass]="{offset:getOffSet()}" fxHide fxShow.lt-md>
+        <main class="container mat-app-background" fxHide fxShow.lt-md>
             <router-outlet></router-outlet>
         </main>
-
-        <app-footer-mobile (sidenavToggle)="sidenav.toggle()" fxHide fxShow.lt-md>
-        </app-footer-mobile>
+        <footer class="footer" (sidenavToggle)="sidenav.toggle()" *ngIf="showFooter()" fxHide fxShow.lt-md>
+            <mat-toolbar class="footer" color="background">
+                <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+                    <button mat-button routerLink="/vital-signs" routerLinkActive="active-menu-item"
+                        queryParamsHandling="merge">
+                        <img src="../../../assets/svg/stethscope.svg">
+                        <span>Vital Signs</span>
+                    </button>
+                    <div class="divider"></div>
+                    <button mat-button routerLink="/lab-results" routerLinkActive="active-menu-item"
+                        queryParamsHandling="merge">
+                        <img src="../../../assets/svg/beaker.svg">
+                        <span>Lab Results</span>
+                    </button>
+                </div>
+            </mat-toolbar>
+        </footer>
 
     </mat-sidenav-content>
 

@@ -38,10 +38,6 @@ export class WeightService extends DataService {
         super(`${environment.mccapiUrl}/observations`, http);
     }
 
-    getBloodPressureByPatientId(subjectId: string): Observable<MccObservation[]> {
-        return this.getBloodPressureById(subjectId);
-    }
-
     async getPatientWotInfo(patientId): Promise<boolean> {
         const wotChartData: ChartDataSets = { data: [], label: 'Wot', fill: false };
         const xAxisLabels: string[] = [];

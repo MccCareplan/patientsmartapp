@@ -10,8 +10,8 @@ import { ObservationComponent } from './ObservationComponent';
 import { ReferenceRange } from './ReferenceRange';
 
 export interface MccObservation {
-    code?: MccCodeableConcept;
-    status?: string;
+    code: MccCodeableConcept;
+    status: string;
     basedOn?: Array<MccReference>;
     effective?: Effective;
     value?: GenericType;
@@ -21,4 +21,5 @@ export interface MccObservation {
     category?: Array<MccCodeableConcept>;
     dataAbsentReason?: MccCodeableConcept;
     fhirid?: string;
+    key?: string;
 }

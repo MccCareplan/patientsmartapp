@@ -15,8 +15,8 @@ export interface MccCarePlan {
     id?: string;
     periodStarts?: string;
     periodEnds?: string;
-    status?: string;
-    intent?: string;
+    status: string;
+    intent: string;
     description?: string;
     notes?: string;
     dateResourceLastUpdated?: string;

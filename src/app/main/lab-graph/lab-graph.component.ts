@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { ObservationsService } from 'src/app/services/observations.service.new';
+import * as fromRoot from '../../ngrx/reducers';
 
 @Component({
   selector: 'lab-graph',
@@ -12,7 +15,9 @@ export class LabGraphComponent implements OnInit {
   description: string;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store<fromRoot.State>,
+    private obsService: ObservationsService
   ) { }
 
   ngOnInit(): void {
@@ -42,17 +47,24 @@ export class LabGraphComponent implements OnInit {
       case "uacr":
         this.uacr();
         return;
+      default:
+        this.generic(key);
+        break;
     }
+  }
+
+  generic = (key: string): void => {
+    this.title = key;
   }
 
   bp = (): void => {
     this.title = "My Blood Pressure";
-    this.description = "Systolic and Dystolic values over time";
+    this.description = "Systolic and Diastolic values over time";
   }
 
   egfr = (): void => {
-    this.title = "My GFR Results";
-    this.description = "GFR Tests how well your kidneys work";
+    this.title = "My EGFR Results";
+    this.description = "EGFR Tests how well your kidneys work";
   }
 
   uacr = (): void => {

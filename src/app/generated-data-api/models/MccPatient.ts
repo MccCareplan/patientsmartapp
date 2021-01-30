@@ -6,6 +6,7 @@
 export interface MccPatient {
     name?: string;
     id?: string;
+    age?: string;
     dateOfBirth?: string;
     gender?: string;
     race?: string;

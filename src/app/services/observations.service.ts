@@ -9,9 +9,7 @@ import { TargetValue } from '../main/goals/goals.tab/target-value';
 import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class ObservationsService extends DataService {
     constructor(http: HttpClient) {
         super(`${environment.mccapiUrl}/find/latest/observation`, http);

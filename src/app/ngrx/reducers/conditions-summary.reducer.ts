@@ -10,7 +10,12 @@ export interface State {
 }
 
 export const initialState: State = {
-    conditionsSummary: {},
+    conditionsSummary: {
+        activeConcerns: [],
+        activeConditions: [],
+        inactiveConcerns: [],
+        inactiveConditions: []
+    },
     failure: false
 };
 

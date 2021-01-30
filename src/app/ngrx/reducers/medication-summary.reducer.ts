@@ -10,7 +10,10 @@ export interface State {
 }
 
 export const initialState: State = {
-    medicationSummary: {},
+    medicationSummary: {
+        activeMedications: [],
+        inactiveMedications: []
+    },
     failure: false
 };
 
