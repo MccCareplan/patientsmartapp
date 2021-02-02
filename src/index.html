@@ -20,6 +20,14 @@
     const nosmart = urlParams.get('nosmart') == true;
     const code = urlParams.get('code')
 
+    if ( window["env"]["authdebug"]==="true") {
+      localStorage.debug = "FHIR.*";
+      console.log('Authentication debug on');
+    }
+    else {
+      console.log('Authentication debug off');
+    }
+
     if ((nosmart == false) && (code != null)) {
 
       FHIR.oauth2.ready((client) => {
