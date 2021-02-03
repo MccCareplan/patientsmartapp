@@ -12,6 +12,13 @@
   <script src="assets/env.js"></script>
   <script>
 
+    if ( window["env"]["authdebug"]==="true") {
+      localStorage.debug = "FHIR.*";
+      console.log('Authentication debug on');
+    }
+    else {
+      console.log('Authentication debug off');
+    }
 
     // console.log(environment .clientId)
     FHIR.oauth2.authorize({
