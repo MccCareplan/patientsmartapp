@@ -31,6 +31,9 @@ $ openapi -i https://mcc-niddk-backend.wl.r.appspot.com/api-docs -o src/app/gene
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
+## Public deployment
+ The application is publically deployed at https://mcc-niddk-patient-ab784.web.app/launch.html - Whihch is hooked to the Logica Sandbox MCC ECareplan Test
+
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
