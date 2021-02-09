@@ -20,7 +20,7 @@
     const nosmart = urlParams.get('nosmart') == true;
     const code = urlParams.get('code')
 
-    if ( window["env"]["authdebug"]==="true") {
+    if (window["env"]["authdebug"] === "true") {
       localStorage.debug = "FHIR.*";
       console.log('Authentication debug on');
     }
@@ -29,30 +29,26 @@
     }
 
     if ((nosmart == false) && (code != null)) {
-
-      FHIR.oauth2.ready((client) => {
-        function gotScope(scope) {
-          let scopes = client.tokenResponse.scope.split(' ');
-          return scopes.find((a) => a === scope);
-        }
-
-        if (gotScope('launch/patient')) {
+      FHIR.oauth2.ready(function (client) {
+        if (gotScope('launch/patient', client)) {
           console.log("Launched in Smart Mode - Standalone")
-        } else if (gotScope('launch')) {
+        } else if (gotScope('launch', client)) {
           console.log("Launched in Smart Mode - Embedded")
         }
-      }
-      )
-        .then(
-          console.log("Launched in Smart Mode")
-        )
-        .then(
-          console.log("Connected")
-        )
-        .catch(console.error)
+      }).then(function () {
+        console.log("Launched in Smart Mode");
+        console.log("Connected");
+      }).catch(console.error)
     }
     else {
       console.log("Not launching as SMART")
+    }
+
+    function gotScope(scope, client) {
+      if (client && client.tokenResponse && client.tokenResponse.scope) {
+        let scopes = client.tokenResponse.scope.split(' ');
+        return scopes.indexOf(scope) > -1;
+      }
     }
   </script>
 </head>
