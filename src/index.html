@@ -49,6 +49,7 @@
         let scopes = client.tokenResponse.scope.split(' ');
         return scopes.indexOf(scope) > -1;
       }
+      else return false;
     }
   </script>
 </head>
