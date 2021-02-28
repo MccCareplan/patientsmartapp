@@ -7,6 +7,7 @@
         <img class="back-arrow" src="../../../assets/svg/arrow_back_blue.svg" routerLink="/status"
             queryParamsHandling="merge" />
     </div>
+    <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="results.length === 0"></mat-spinner>
     <ul class="vital-sign-items">
         <li *ngFor="let res of results" (click)="navToGraph(res)">
             <div class="vital-sign-item">
