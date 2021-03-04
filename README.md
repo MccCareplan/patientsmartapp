@@ -59,3 +59,9 @@ The included file 'Dockerfle-prod' is a basic production build docker file. It w
 ### Running the image
 
  $ docker run -it -p 80:80 --rm mcccareplan/mccpatientapp
+
+#Changelog
+
+2021-03-04
+- Release ("1.0.1")
+- Individual Error handling for Labs/Vitals
