@@ -32,6 +32,8 @@ export class ObservationsService {
                     this.OBSERVATIONS.set(key, res);
                     if (keyToStore) res.key = keyToStore;
                     return res;
+                }).catch((reason) => {
+                    console.log("Error querying: " + code);
                 });
         }
     };
@@ -55,6 +57,8 @@ export class ObservationsService {
                         res[0].key = keyToStore;
                     }
                     return res;
+                }).catch((reason) => {
+                    console.log("Error querying: " + code);
                 });
         }
     };
@@ -78,6 +82,8 @@ export class ObservationsService {
                         res[0].key = keyToStore;
                     }
                     return res;
+                }).catch((reason) => {
+                    console.log("Error querying: " + url);
                 });
         }
     }
@@ -101,6 +107,8 @@ export class ObservationsService {
                         res[0].key = keyToStore;
                     }
                     return res;
+                }).catch((reason) => {
+                    console.log("Error querying: " + code);
                 });
         }
     }
@@ -116,6 +124,8 @@ export class ObservationsService {
                 .then((res: SimpleQuestionnaireItem) => {
                     this.QUESTIONNAIRES.set(key, res);
                     return res;
+                }).catch((reason) => {
+                    console.log("Error querying: " + code);
                 });
         }
     }
@@ -131,6 +141,8 @@ export class ObservationsService {
                 .then((res: SimpleQuestionnaireItem[]) => {
                     this.QUESTIONNAIRES.set(key, res);
                     return res;
+                }).catch((reason) => {
+                    console.log("Error querying: " + code);
                 });
         }
     }
