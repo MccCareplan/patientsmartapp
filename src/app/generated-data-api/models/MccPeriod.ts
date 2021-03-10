@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccDate } from './MccDate';
+import type { MccDate } from './MccDate';
 
-export interface MccPeriod {
+export type MccPeriod = {
     start?: MccDate;
     end?: MccDate;
 }

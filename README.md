@@ -20,8 +20,15 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 ## Generating updated models
 
-$ openapi -i https://mcc-niddk-backend.wl.r.appspot.com/api-docs
-$ openapi -i https://mcc-niddk-backend.wl.r.appspot.com/api-docs -o src/app/generated-data-api
+## Generating updated models
+- using: https://github.com/ferdikoomen/openapi-typescript-codegen
+- Installed via: npm install openapi-typescript-codegen -g
+
+$ openapi -i https://mcc-niddk-backend.wl.r.appspot.com/api -o src/app/generated-data-api
+
+or
+
+$ openapi -i http://localhost:8081/api-docs -o src/app/generated-data-api/
 
 
 ## Browse API

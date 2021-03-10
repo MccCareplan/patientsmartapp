@@ -2,13 +2,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Acceptance } from './Acceptance';
-import { GoalTarget } from './GoalTarget';
-import { MccCodeableConcept } from './MccCodeableConcept';
-import { MccDate } from './MccDate';
-import { MccReference } from './MccReference';
+import type { Acceptance } from './Acceptance';
+import type { GoalTarget } from './GoalTarget';
+import type { MccCodeableConcept } from './MccCodeableConcept';
+import type { MccDate } from './MccDate';
+import type { MccReference } from './MccReference';
 
-export interface MccGoal {
+export type MccGoal = {
     id: string;
     statusDate?: string;
     statusReason?: string;

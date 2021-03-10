@@ -2,13 +2,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { DoseAndRate } from './DoseAndRate';
-import { MccCodeableConcept } from './MccCodeableConcept';
-import { MccRatio } from './MccRatio';
-import { MccSimpleQuantity } from './MccSimpleQuantity';
-import { MccTiming } from './MccTiming';
+import type { DoseAndRate } from './DoseAndRate';
+import type { MccCodeableConcept } from './MccCodeableConcept';
+import type { MccRatio } from './MccRatio';
+import type { MccSimpleQuantity } from './MccSimpleQuantity';
+import type { MccTiming } from './MccTiming';
 
-export interface MccDosage {
+export type MccDosage = {
     sequence?: number;
     text?: string;
     patientInstructions?: string;

@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccSimpleQuantity } from './MccSimpleQuantity';
+import type { MccSimpleQuantity } from './MccSimpleQuantity';
 
-export interface MccSampledData {
+export type MccSampledData = {
     origin?: MccSimpleQuantity;
     period?: number;
     factor?: number;

@@ -2,11 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccCodeableConcept } from './MccCodeableConcept';
-import { MccDateTime } from './MccDateTime';
-import { Repeat } from './Repeat';
+import type { MccCodeableConcept } from './MccCodeableConcept';
+import type { MccDateTime } from './MccDateTime';
+import type { Repeat } from './Repeat';
 
-export interface MccTiming {
+export type MccTiming = {
     event?: Array<MccDateTime>;
     code?: MccCodeableConcept;
     repeat?: Repeat;

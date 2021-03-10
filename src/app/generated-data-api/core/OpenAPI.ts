@@ -1,19 +1,25 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+type Resolver<T> = () => Promise<T>;
+type Headers = Record<string, string>;
 
-interface Config {
+type Config = {
     BASE: string;
     VERSION: string;
-    CLIENT: 'fetch' | 'xhr';
     WITH_CREDENTIALS: boolean;
-    TOKEN: string;
+    TOKEN?: string | Resolver<string>;
+    USERNAME?: string | Resolver<string>;
+    PASSWORD?: string | Resolver<string>;
+    HEADERS?: Headers | Resolver<Headers>;
 }
 
 export const OpenAPI: Config = {
-    BASE: 'http://mcc-niddk-backend.wl.r.appspot.com',
+    BASE: 'http://localhost:8081',
     VERSION: '0',
-    CLIENT: 'fetch',
     WITH_CREDENTIALS: false,
-    TOKEN: '',
+    TOKEN: undefined,
+    USERNAME: undefined,
+    PASSWORD: undefined,
+    HEADERS: undefined,
 };

@@ -2,14 +2,14 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Effective } from './Effective';
-import { GenericType } from './GenericType';
-import { MccCodeableConcept } from './MccCodeableConcept';
-import { MccReference } from './MccReference';
-import { ObservationComponent } from './ObservationComponent';
-import { ReferenceRange } from './ReferenceRange';
+import type { Effective } from './Effective';
+import type { GenericType } from './GenericType';
+import type { MccCodeableConcept } from './MccCodeableConcept';
+import type { MccReference } from './MccReference';
+import type { ObservationComponent } from './ObservationComponent';
+import type { ReferenceRange } from './ReferenceRange';
 
-export interface MccObservation {
+export type MccObservation = {
     code: MccCodeableConcept;
     status: string;
     basedOn?: Array<MccReference>;
@@ -21,5 +21,4 @@ export interface MccObservation {
     category?: Array<MccCodeableConcept>;
     dataAbsentReason?: MccCodeableConcept;
     fhirid?: string;
-    key?: string;
 }

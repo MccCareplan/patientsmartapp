@@ -2,11 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { GenericType } from './GenericType';
-import { MccCodeableConcept } from './MccCodeableConcept';
-import { ReferenceRange } from './ReferenceRange';
+import type { GenericType } from './GenericType';
+import type { MccCodeableConcept } from './MccCodeableConcept';
+import type { ReferenceRange } from './ReferenceRange';
 
-export interface ObservationComponent {
+export type ObservationComponent = {
     code: MccCodeableConcept;
     value: GenericType;
     interpretation?: Array<MccCodeableConcept>;

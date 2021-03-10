@@ -2,11 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccCodeableConcept } from './MccCodeableConcept';
-import { MccPeriod } from './MccPeriod';
-import { MccReference } from './MccReference';
+import type { MccCodeableConcept } from './MccCodeableConcept';
+import type { MccPeriod } from './MccPeriod';
+import type { MccReference } from './MccReference';
 
-export interface MccIdentifer {
+export type MccIdentifer = {
     use?: string;
     type?: MccCodeableConcept;
     system?: string;

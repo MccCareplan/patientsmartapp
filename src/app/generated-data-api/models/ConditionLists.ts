@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ConditionSummary } from './ConditionSummary';
+import type { ConditionSummary } from './ConditionSummary';
 
-export interface ConditionLists {
+export type ConditionLists = {
     activeConditions: Array<ConditionSummary>;
     inactiveConditions: Array<ConditionSummary>;
     activeConcerns: Array<ConditionSummary>;

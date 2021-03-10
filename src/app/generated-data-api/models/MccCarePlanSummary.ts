@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccPeriod } from './MccPeriod';
+import type { MccPeriod } from './MccPeriod';
 
-export interface MccCarePlanSummary {
+export type MccCarePlanSummary = {
     profiles: Array<string>;
     created?: string;
     lastUpdated?: string;

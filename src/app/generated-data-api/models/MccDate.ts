@@ -2,8 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-
-export interface MccDate {
+export type MccDate = {
     rawDate: string;
     date: string;
 }

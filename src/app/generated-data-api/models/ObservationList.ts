@@ -2,12 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccCoding, MccObservation } from 'src/app/generated-data-api';
-import { GenericType } from './GenericType';
-import { MccCodeableConcept } from './MccCodeableConcept';
-import { ReferenceRange } from './ReferenceRange';
+import type { MccCoding } from './MccCoding';
+import type { MccObservation } from './MccObservation';
 
-export interface ObservationList {
+export type ObservationList = {
     primaryCode?: MccCoding;
     observations?: Array<MccObservation>;
 }

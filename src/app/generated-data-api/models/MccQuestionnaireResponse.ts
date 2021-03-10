@@ -2,10 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccDate } from './MccDate';
-import { QuestionnaireResponseItem } from './QuestionnaireResponseItem';
+import type { MccDate } from './MccDate';
+import type { QuestionnaireResponseItem } from './QuestionnaireResponseItem';
 
-export interface MccQuestionnaireResponse {
+export type MccQuestionnaireResponse = {
     id: string;
     status?: string;
     authored?: MccDate;

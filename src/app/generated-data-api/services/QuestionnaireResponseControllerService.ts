@@ -1,122 +1,127 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
-import { catchGenericError } from '../core/ApiError';
 import { request as __request } from '../core/request';
 
 export class QuestionnaireResponseControllerService {
 
     /**
      * @param subject
-     * @param code
-     * @result any OK
+     * @returns any OK
      * @throws ApiError
      */
-    public static async getLatestQuestionnaireResponse(
+    public static async getQuestionnaireResponseSummary(
         subject: string,
-        code: string,
     ): Promise<any> {
-
         const result = await __request({
-            method: 'get',
-            path: `/find/latest/questionnaireresponse`,
+            method: 'GET',
+            path: `/summary/questionnaireresponses`,
             query: {
                 'subject': subject,
-                'code': code,
             },
         });
+        return result.body;
+    }
 
-        catchGenericError(result);
+    /**
+     * @param subject
+     * @returns any OK
+     * @throws ApiError
+     */
+    public static async getQuestionnaireResponses(
+        subject: string,
+    ): Promise<any> {
+        const result = await __request({
+            method: 'GET',
+            path: `/questionnaireresponse`,
+            query: {
+                'subject': subject,
+            },
+        });
+        return result.body;
+    }
 
+    /**
+     * @param id
+     * @returns any OK
+     * @throws ApiError
+     */
+    public static async getQuestionnaireResponse(
+        id: string,
+    ): Promise<any> {
+        const result = await __request({
+            method: 'GET',
+            path: `/questionnaireresponse/${id}`,
+        });
         return result.body;
     }
 
     /**
      * @param subject
      * @param code
-     * @result any OK
+     * @returns any OK
      * @throws ApiError
      */
     public static async getLatestQuestionnaireResponseForItem(
         subject: string,
         code: string,
     ): Promise<any> {
-
         const result = await __request({
-            method: 'get',
+            method: 'GET',
             path: `/find/latest/questionnaireresponseitem`,
             query: {
                 'subject': subject,
                 'code': code,
             },
         });
-
-        catchGenericError(result);
-
         return result.body;
     }
 
     /**
      * @param subject
-     * @result any OK
+     * @param code
+     * @returns any OK
      * @throws ApiError
      */
-    public static async getQuestionnaireResponseSummary(
+    public static async getLatestQuestionnaireResponse(
         subject: string,
+        code: string,
     ): Promise<any> {
-
         const result = await __request({
-            method: 'get',
-            path: `/summary/questionnaireresponses`,
+            method: 'GET',
+            path: `/find/latest/questionnaireresponse`,
             query: {
                 'subject': subject,
+                'code': code,
             },
         });
-
-        catchGenericError(result);
-
-        return result.body;
-    }
-
-    /**
-     * @param id
-     * @result any OK
-     * @throws ApiError
-     */
-    public static async getQuestionnaireResponse(
-        id: string,
-    ): Promise<any> {
-
-        const result = await __request({
-            method: 'get',
-            path: `/questionnaireresponse/${id}`,
-        });
-
-        catchGenericError(result);
-
         return result.body;
     }
 
     /**
      * @param subject
-     * @result any OK
+     * @param code
+     * @param count
+     * @param sort
+     * @returns any OK
      * @throws ApiError
      */
-    public static async getQuestionnaireResponses(
+    public static async getLatestQuestionnaireResponsesForItem(
         subject: string,
+        code: string,
+        count: number = 100,
+        sort: string = 'descending',
     ): Promise<any> {
-
         const result = await __request({
-            method: 'get',
-            path: `/questionnaireresponse`,
+            method: 'GET',
+            path: `/find/all/questionnaireresponseitems`,
             query: {
                 'subject': subject,
+                'code': code,
+                'count': count,
+                'sort': sort,
             },
         });
-
-        catchGenericError(result);
-
         return result.body;
     }
 

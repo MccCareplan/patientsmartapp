@@ -1,56 +1,46 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
-import { catchGenericError } from '../core/ApiError';
 import { request as __request } from '../core/request';
 
 export class SocialConcernControllerService {
 
     /**
      * @param subject
-     * @result any OK
-     * @throws ApiError
-     */
-    public static async getCarePlans(
-        subject: string,
-    ): Promise<any> {
-
-        const result = await __request({
-            method: 'get',
-            path: `/socialconcerns`,
-            query: {
-                'subject': subject,
-            },
-        });
-
-        catchGenericError(result);
-
-        return result.body;
-    }
-
-    /**
-     * @param subject
      * @param careplan
-     * @result any OK
+     * @returns any OK
      * @throws ApiError
      */
-    public static async getConditionSummary(
+    public static async getConditionSummary1(
         subject: string,
         careplan?: string,
     ): Promise<any> {
-
         const result = await __request({
-            method: 'get',
+            method: 'GET',
             path: `/socialconcernsummary`,
             query: {
                 'subject': subject,
                 'careplan': careplan,
             },
         });
+        return result.body;
+    }
 
-        catchGenericError(result);
-
+    /**
+     * @param subject
+     * @returns any OK
+     * @throws ApiError
+     */
+    public static async getCarePlans(
+        subject: string,
+    ): Promise<any> {
+        const result = await __request({
+            method: 'GET',
+            path: `/socialconcerns`,
+            query: {
+                'subject': subject,
+            },
+        });
         return result.body;
     }
 

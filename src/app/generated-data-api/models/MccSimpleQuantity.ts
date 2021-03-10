@@ -2,8 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-
-export interface MccSimpleQuantity {
+export type MccSimpleQuantity = {
     unit?: string;
     value?: number;
     system?: string;

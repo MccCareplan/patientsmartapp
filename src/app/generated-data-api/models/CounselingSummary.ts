@@ -2,10 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { FuzzyDate } from './FuzzyDate';
-import { MccCodeableConcept } from './MccCodeableConcept';
+import type { FuzzyDate } from './FuzzyDate';
+import type { MccCodeableConcept } from './MccCodeableConcept';
 
-export interface CounselingSummary {
+export type CounselingSummary = {
     topic: MccCodeableConcept;
     type: string;
     displayDate?: string;

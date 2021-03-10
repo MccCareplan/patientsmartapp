@@ -1,74 +1,37 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
-import { catchGenericError } from '../core/ApiError';
 import { request as __request } from '../core/request';
 
 export class ObservationControllerService {
 
     /**
      * @param subject
-     * @param code
-     * @param mode
-     * @param translate
-     * @result any OK
-     * @throws ApiError
-     */
-    public static async getLatestObservation(
-        subject: string,
-        code: string,
-        mode: string = 'code',
-        translate: string = 'false',
-    ): Promise<any> {
-
-        const result = await __request({
-            method: 'get',
-            path: `/find/latest/observation`,
-            query: {
-                'subject': subject,
-                'code': code,
-                'mode': mode,
-                'translate': translate,
-            },
-        });
-
-        catchGenericError(result);
-
-        return result.body;
-    }
-
-    /**
-     * @param subject
-     * @param code
-     * @param count
+     * @param valueset
+     * @param max
      * @param sort
      * @param mode
-     * @result any OK
+     * @returns any OK
      * @throws ApiError
      */
-    public static async getObservation(
+    public static async getObservationsSegmented(
         subject: string,
-        code: string,
-        count: number = 100,
+        valueset: string,
+        max: number = 1000,
         sort: string = 'ascending',
         mode: string = 'code',
     ): Promise<any> {
-
         const result = await __request({
-            method: 'get',
-            path: `/observations`,
+            method: 'GET',
+            path: `/observationssegmented`,
             query: {
                 'subject': subject,
-                'code': code,
-                'count': count,
+                'valueset': valueset,
+                'max': max,
                 'sort': sort,
                 'mode': mode,
             },
         });
-
-        catchGenericError(result);
-
         return result.body;
     }
 
@@ -78,7 +41,7 @@ export class ObservationControllerService {
      * @param max
      * @param sort
      * @param mode
-     * @result any OK
+     * @returns any OK
      * @throws ApiError
      */
     public static async getObservationsByValueSet(
@@ -88,9 +51,8 @@ export class ObservationControllerService {
         sort: string = 'ascending',
         mode: string = 'code',
     ): Promise<any> {
-
         const result = await __request({
-            method: 'get',
+            method: 'GET',
             path: `/observationsbyvalueset`,
             query: {
                 'subject': subject,
@@ -100,9 +62,63 @@ export class ObservationControllerService {
                 'mode': mode,
             },
         });
+        return result.body;
+    }
 
-        catchGenericError(result);
+    /**
+     * @param subject
+     * @param code
+     * @param count
+     * @param sort
+     * @param mode
+     * @returns any OK
+     * @throws ApiError
+     */
+    public static async getObservation(
+        subject: string,
+        code: string,
+        count: number = 100,
+        sort: string = 'ascending',
+        mode: string = 'code',
+    ): Promise<any> {
+        const result = await __request({
+            method: 'GET',
+            path: `/observations`,
+            query: {
+                'subject': subject,
+                'code': code,
+                'count': count,
+                'sort': sort,
+                'mode': mode,
+            },
+        });
+        return result.body;
+    }
 
+    /**
+     * @param subject
+     * @param code
+     * @param mode
+     * @param translate
+     * @returns any OK
+     * @throws ApiError
+     */
+    public static async getLatestObservation(
+        subject: string,
+        code: string,
+        mode: string = 'code',
+        translate: string = 'false',
+    ): Promise<any> {
+        const result = await __request({
+            method: 'GET',
+            path: `/find/latest/observation`,
+            query: {
+                'subject': subject,
+                'code': code,
+                'mode': mode,
+                'translate': translate,
+            },
+        });
         return result.body;
     }
 

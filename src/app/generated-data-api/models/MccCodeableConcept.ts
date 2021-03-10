@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccCoding } from './MccCoding';
+import type { MccCoding } from './MccCoding';
 
-export interface MccCodeableConcept {
+export type MccCodeableConcept = {
     coding?: Array<MccCoding>;
     text: string;
 }

@@ -2,10 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccCodeableConcept } from './MccCodeableConcept';
-import { MccReference } from './MccReference';
+import type { MccCodeableConcept } from './MccCodeableConcept';
+import type { MccReference } from './MccReference';
 
-export interface Acceptance {
+export type Acceptance = {
     individual?: MccReference;
     code?: string;
     priority?: MccCodeableConcept;

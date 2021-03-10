@@ -2,8 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-
-export interface MccCoding {
+export type MccCoding = {
     system?: string;
     version?: string;
     code: string;

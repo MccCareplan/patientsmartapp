@@ -1,109 +1,91 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
-import { catchGenericError } from '../core/ApiError';
 import { request as __request } from '../core/request';
 
 export class MedicationControllerService {
 
     /**
-     * @param type
-     * @param id
-     * @result any OK
-     * @throws ApiError
-     */
-    public static async getMedication(
-        type: string,
-        id: string,
-    ): Promise<any> {
-
-        const result = await __request({
-            method: 'get',
-            path: `/medication`,
-            query: {
-                'type': type,
-                'id': id,
-            },
-        });
-
-        catchGenericError(result);
-
-        return result.body;
-    }
-
-    /**
      * @param subject
      * @param careplan
-     * @result any OK
-     * @throws ApiError
-     */
-    public static async getMedicationLists(
-        subject: string,
-        careplan?: string,
-    ): Promise<any> {
-
-        const result = await __request({
-            method: 'get',
-            path: `/medicationlists`,
-            query: {
-                'subject': subject,
-                'careplan': careplan,
-            },
-        });
-
-        catchGenericError(result);
-
-        return result.body;
-    }
-
-    /**
-     * @param subject
-     * @param careplan
-     * @result any OK
+     * @returns any OK
      * @throws ApiError
      */
     public static async getMedicationSummary(
         subject: string,
         careplan?: string,
     ): Promise<any> {
-
         const result = await __request({
-            method: 'get',
+            method: 'GET',
             path: `/summary/medications`,
             query: {
                 'subject': subject,
                 'careplan': careplan,
             },
         });
-
-        catchGenericError(result);
-
         return result.body;
     }
 
     /**
      * @param subject
      * @param careplan
-     * @result any OK
+     * @returns any OK
      * @throws ApiError
      */
     public static async getMedicationSummaryOld(
         subject: string,
         careplan?: string,
     ): Promise<any> {
-
         const result = await __request({
-            method: 'get',
+            method: 'GET',
             path: `/medicationsummary`,
             query: {
                 'subject': subject,
                 'careplan': careplan,
             },
         });
+        return result.body;
+    }
 
-        catchGenericError(result);
+    /**
+     * @param subject
+     * @param careplan
+     * @returns any OK
+     * @throws ApiError
+     */
+    public static async getMedicationLists(
+        subject: string,
+        careplan?: string,
+    ): Promise<any> {
+        const result = await __request({
+            method: 'GET',
+            path: `/medicationlists`,
+            query: {
+                'subject': subject,
+                'careplan': careplan,
+            },
+        });
+        return result.body;
+    }
 
+    /**
+     * @param type
+     * @param id
+     * @returns any OK
+     * @throws ApiError
+     */
+    public static async getMedication(
+        type: string,
+        id: string,
+    ): Promise<any> {
+        const result = await __request({
+            method: 'GET',
+            path: `/medication`,
+            query: {
+                'type': type,
+                'id': id,
+            },
+        });
         return result.body;
     }
 

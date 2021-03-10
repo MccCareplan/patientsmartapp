@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccCodeableConcept } from './MccCodeableConcept';
+import type { MccCodeableConcept } from './MccCodeableConcept';
 
-export interface ConditionHistory {
+export type ConditionHistory = {
     code: MccCodeableConcept;
     onset?: string;
     abatement?: string;
