@@ -2,10 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Bounds } from './Bounds';
-import { MccTime } from './MccTime';
+import type { Bounds } from './Bounds';
+import type { MccTime } from './MccTime';
 
-export interface Repeat {
+export type Repeat = {
     bounds?: Bounds;
     count?: number;
     countMax?: number;

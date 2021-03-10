@@ -2,8 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-
-export interface SocialConcern {
+export type SocialConcern = {
     name?: string;
     data?: string;
     description?: string;

@@ -2,10 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { GoalSummary } from './GoalSummary';
-import { GoalTarget } from './GoalTarget';
+import type { GoalSummary } from './GoalSummary';
+import type { GoalTarget } from './GoalTarget';
 
-export interface GoalLists {
+export type GoalLists = {
     allGoals?: Array<GoalSummary>;
     activeClinicalGoals?: Array<GoalSummary>;
     inactiveClinicalGoals?: Array<GoalSummary>;

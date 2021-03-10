@@ -2,8 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-
-export interface MccReference {
+export type MccReference = {
     reference?: string;
     display?: string;
     type?: string;

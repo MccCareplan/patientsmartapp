@@ -1,9 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export { ApiError } from './core/ApiError';
-export { isSuccess } from './core/isSuccess';
 export { OpenAPI } from './core/OpenAPI';
 
 export type { Acceptance } from './models/Acceptance';
@@ -50,7 +48,9 @@ export type { MccTiming } from './models/MccTiming';
 export type { MedicationLists } from './models/MedicationLists';
 export type { MedicationSummary } from './models/MedicationSummary';
 export type { MedicationSummaryList } from './models/MedicationSummaryList';
+export type { ObservationCollection } from './models/ObservationCollection';
 export type { ObservationComponent } from './models/ObservationComponent';
+export type { ObservationList } from './models/ObservationList';
 export type { QuestionnaireResponseItem } from './models/QuestionnaireResponseItem';
 export type { QuestionnaireResponseItemAnswer } from './models/QuestionnaireResponseItemAnswer';
 export type { QuestionnaireResponseSummary } from './models/QuestionnaireResponseSummary';

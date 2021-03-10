@@ -2,7 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 
-
-export interface MccId {
+export type MccId = {
     value: string;
 }

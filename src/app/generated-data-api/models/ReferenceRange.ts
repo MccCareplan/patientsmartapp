@@ -2,11 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccCodeableConcept } from './MccCodeableConcept';
-import { MccQuantity } from './MccQuantity';
-import { MccRange } from './MccRange';
+import type { MccCodeableConcept } from './MccCodeableConcept';
+import type { MccQuantity } from './MccQuantity';
+import type { MccRange } from './MccRange';
 
-export interface ReferenceRange {
+export type ReferenceRange = {
     low?: MccQuantity;
     high?: MccQuantity;
     type?: MccCodeableConcept;

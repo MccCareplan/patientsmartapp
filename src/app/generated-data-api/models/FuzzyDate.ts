@@ -2,6 +2,5 @@
 /* tslint:disable */
 /* eslint-disable */
 
-
-export interface FuzzyDate {
+export type FuzzyDate = {
 }

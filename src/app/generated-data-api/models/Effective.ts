@@ -2,12 +2,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccDateTime } from './MccDateTime';
-import { MccInstant } from './MccInstant';
-import { MccPeriod } from './MccPeriod';
-import { MccTiming } from './MccTiming';
+import type { MccDateTime } from './MccDateTime';
+import type { MccInstant } from './MccInstant';
+import type { MccPeriod } from './MccPeriod';
+import type { MccTiming } from './MccTiming';
 
-export interface Effective {
+export type Effective = {
     type?: string;
     dateTime?: MccDateTime;
     period?: MccPeriod;

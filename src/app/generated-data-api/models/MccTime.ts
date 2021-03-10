@@ -2,7 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 
-
-export interface MccTime {
+export type MccTime = {
     value?: string;
 }
