@@ -2,8 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-
-export interface MedicationSummary {
+export type MedicationSummary = {
     type: string;
     fhirId: string;
     inConflict?: boolean;

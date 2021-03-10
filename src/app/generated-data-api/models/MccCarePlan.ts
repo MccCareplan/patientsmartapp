@@ -2,10 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccCodeableConcept } from './MccCodeableConcept';
-import { MccCondition } from './MccCondition';
+import type { MccCodeableConcept } from './MccCodeableConcept';
+import type { MccCondition } from './MccCondition';
 
-export interface MccCarePlan {
+export type MccCarePlan = {
     title?: string;
     dateLastRevised?: string;
     addresses?: Array<MccCondition>;

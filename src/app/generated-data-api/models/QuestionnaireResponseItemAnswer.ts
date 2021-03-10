@@ -2,8 +2,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { GenericType } from './GenericType';
+import type { GenericType } from './GenericType';
 
-export interface QuestionnaireResponseItemAnswer {
+export type QuestionnaireResponseItemAnswer = {
     value?: GenericType;
 }

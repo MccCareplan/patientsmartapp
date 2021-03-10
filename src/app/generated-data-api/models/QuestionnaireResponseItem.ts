@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { QuestionnaireResponseItemAnswer } from './QuestionnaireResponseItemAnswer';
+import type { QuestionnaireResponseItemAnswer } from './QuestionnaireResponseItemAnswer';
 
-export interface QuestionnaireResponseItem {
+export type QuestionnaireResponseItem = {
     linkid: string;
     text?: string;
     answers?: Array<QuestionnaireResponseItemAnswer>;

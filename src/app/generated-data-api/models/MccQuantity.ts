@@ -2,8 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-
-export interface MccQuantity {
+export type MccQuantity = {
     unit?: string;
     comparator?: string;
     value?: number;

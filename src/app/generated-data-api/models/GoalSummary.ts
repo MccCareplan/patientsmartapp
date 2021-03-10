@@ -2,10 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { GoalTarget } from './GoalTarget';
-import { MccCodeableConcept } from './MccCodeableConcept';
+import type { GoalTarget } from './GoalTarget';
+import type { MccCodeableConcept } from './MccCodeableConcept';
 
-export interface GoalSummary {
+export type GoalSummary = {
     priority: string;
     expressedByType?: string;
     description: string;

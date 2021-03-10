@@ -2,10 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { GenericType } from './GenericType';
-import { MccCodeableConcept } from './MccCodeableConcept';
+import type { GenericType } from './GenericType';
+import type { MccCodeableConcept } from './MccCodeableConcept';
 
-export interface ReferralSummary {
+export type ReferralSummary = {
     purpose: MccCodeableConcept;
     date?: GenericType;
     displayDate: string;

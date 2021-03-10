@@ -2,8 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-
-export interface Contact {
+export type Contact = {
     type: string;
     role: string;
     name: string;

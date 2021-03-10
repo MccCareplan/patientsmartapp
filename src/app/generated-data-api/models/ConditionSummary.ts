@@ -2,10 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ConditionHistory } from './ConditionHistory';
-import { MccCodeableConcept } from './MccCodeableConcept';
+import type { ConditionHistory } from './ConditionHistory';
+import type { MccCodeableConcept } from './MccCodeableConcept';
 
-export interface ConditionSummary {
+export type ConditionSummary = {
     code: MccCodeableConcept;
     categories?: string;
     history: Array<ConditionHistory>;
