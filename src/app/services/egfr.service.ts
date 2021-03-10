@@ -19,7 +19,7 @@ export class EgfrService extends DataService {
     egfrDataSource: any;
 
     constructor(http: HttpClient) {
-        super(`${environment.mccapiUrl}/observationsbyvalueset`, http);
+        super(`${environment.mccapiUrl}/observationssegmented`, http);
     }
 
     async getPatientEgfrInfo(patientId): Promise<boolean> {
@@ -84,25 +84,27 @@ export class EgfrService extends DataService {
 
     getPatientEgfr(patientId: string): Observable<EgfrTableData> {
         return new Observable(observer => {
-            this.getObservationsByValueset(patientId, codes.observationValuesets.Egfr)
+            this.getSegementedObservationsByValueSet(patientId, codes.observationValuesets.Egfr)
                 .pipe(finalize(() => {
                     observer.complete();
                 }))
-                .subscribe(observations => {
-                    observations.map(obs => {
-                        switch (obs.code.coding[0].code) {
-                            case codes.observationCodes.Egfr:
-                                const egfr: EgfrTableData = {
-                                    date: obs.effective.dateTime.date,
-                                    egfr: obs.value.quantityValue.value,
-                                    unit: obs.value.quantityValue.unit,
-                                    test: obs.code.text
-                                };
-                                observer.next(egfr);
-                                break;
-                            default:
-                        }
-                    });
+                .subscribe(obsCollection => {
+                    obsCollection.observations.map(observations => {
+                        observations.observations.forEach(obs => {
+                            switch (obs.code.coding[0].code) {
+                                case codes.observationCodes.Egfr:
+                                    const egfr: EgfrTableData = {
+                                        date: obs.effective.dateTime.date,
+                                        egfr: obs.value.quantityValue.value,
+                                        unit: obs.value.quantityValue.unit,
+                                        test: obs.code.text
+                                    };
+                                    observer.next(egfr);
+                                    break;
+                                default:
+                            }
+                        });
+                    })
                 });
         });
     }
