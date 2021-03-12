@@ -55,6 +55,8 @@ export class EGFRGraphComponent implements OnInit {
         this.tableDataSource = this.egfrService.egfrDataSource;
         this.lineChartData = this.egfrService.egfr.chartData;
         this.lineChartOptions = this.egfrService.egfr.lineChartOptions;
+        this.lineChartOptions.responsive = true;
+        this.lineChartOptions.maintainAspectRatio = true;
         this.displayedColumns = ['date', 'result'];
         this.lineChartColors = [
             {
@@ -107,5 +109,10 @@ export class EGFRGraphComponent implements OnInit {
                 clearInterval(int);
             }
         }, 250);
+    }
+
+    ddlChange(indexStr: string): void {
+        const index: number =  parseInt(indexStr);
+        this.egfrService.filterDataSet(index);
     }
 }

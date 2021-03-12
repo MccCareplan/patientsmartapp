@@ -21,4 +21,5 @@ export type MccObservation = {
     category?: Array<MccCodeableConcept>;
     dataAbsentReason?: MccCodeableConcept;
     fhirid?: string;
+    key?: string;
 }

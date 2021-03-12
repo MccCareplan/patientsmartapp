@@ -35,7 +35,7 @@ export class GenericGraphComponent implements OnInit {
     chartDataSets: ChartDataSets[] = [{}];
     lineChartLabels: Label[] = [];
     lineChartOptions: ChartOptions = {
-        responsive: false,
+        responsive: true,
         maintainAspectRatio: true,
         elements: {
             line: {
@@ -64,7 +64,7 @@ export class GenericGraphComponent implements OnInit {
     ngOnInit() {
         this.store.select(fromRoot.getCarePlansSummary).subscribe(c => {
             if (c && c.length > 0) {
-                this.longTermCondition = c[0].fhirid.split("-")[3];
+                this.longTermCondition = "ckd";
                 if (this.patientId && this.longTermCondition) this.loadData();
             }
         });
