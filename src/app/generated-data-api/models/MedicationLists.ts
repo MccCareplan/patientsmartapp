@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccMedicationRecord } from './MccMedicationRecord';
+import type { MccMedicationRecord } from './MccMedicationRecord';
 
-export interface MedicationLists {
+export type MedicationLists = {
     activeMedications: Array<MccMedicationRecord>;
     inactiveMedications: Array<MccMedicationRecord>;
 }

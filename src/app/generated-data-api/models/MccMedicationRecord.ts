@@ -2,11 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccCodeableConcept } from './MccCodeableConcept';
-import { MccDosage } from './MccDosage';
-import { MccReference } from './MccReference';
+import type { MccCodeableConcept } from './MccCodeableConcept';
+import type { MccDosage } from './MccDosage';
+import type { MccReference } from './MccReference';
 
-export interface MccMedicationRecord {
+export type MccMedicationRecord = {
     type: string;
     fhirId: string;
     inConflict?: boolean;

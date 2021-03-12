@@ -8,15 +8,10 @@ import * as moment from 'moment';
 import { Color, Label } from 'ng2-charts';
 import { formatMccDate, getDisplayValue, getInnerValue, getValueHighlighted } from 'src/app/common/chart-utility-functions';
 import { Constants } from 'src/app/common/constants';
-import { Effective, GenericType, MccCodeableConcept, MccReference, ObservationComponent, ReferenceRange, SimpleQuestionnaireItem } from 'src/app/generated-data-api';
+import { Effective,  MccObservation, SimpleQuestionnaireItem } from 'src/app/generated-data-api';
 import { ObservationsService } from 'src/app/services/observations.service.new';
 import * as fromRoot from '../../../ngrx/reducers';
 
-interface FormattedResult {
-    name: string;
-    value: string;
-    date: any;
-}
 
 @Component({
     selector: 'generic-graph',
@@ -35,7 +30,7 @@ export class GenericGraphComponent implements OnInit {
     chartDataSets: ChartDataSets[] = [{}];
     lineChartLabels: Label[] = [];
     lineChartOptions: ChartOptions = {
-        responsive: false,
+        responsive: true,
         maintainAspectRatio: true,
         elements: {
             line: {
@@ -64,7 +59,7 @@ export class GenericGraphComponent implements OnInit {
     ngOnInit() {
         this.store.select(fromRoot.getCarePlansSummary).subscribe(c => {
             if (c && c.length > 0) {
-                this.longTermCondition = c[0].fhirid.split("-")[3];
+                this.longTermCondition = "ckd";
                 if (this.patientId && this.longTermCondition) this.loadData();
             }
         });
@@ -147,20 +142,4 @@ export class GenericGraphComponent implements OnInit {
     formatDate = (ef: Effective): Date => {
         return new Date(ef.dateTime.rawDate);
     }
-}
-
-
-interface MccObservation {
-    code?: MccCodeableConcept;
-    status?: string;
-    basedOn?: Array<MccReference>;
-    effective?: Effective;
-    value?: GenericType;
-    note?: string;
-    referenceRanges?: Array<ReferenceRange>;
-    components?: Array<ObservationComponent>;
-    category?: Array<MccCodeableConcept>;
-    dataAbsentReason?: MccCodeableConcept;
-    fhirid?: string;
-    key?: string;
 }

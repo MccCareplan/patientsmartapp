@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MedicationSummary } from './MedicationSummary';
+import type { MedicationSummary } from './MedicationSummary';
 
-export interface MedicationSummaryList {
+export type MedicationSummaryList = {
     activeMedications: Array<MedicationSummary>;
     inactiveMedications: Array<MedicationSummary>;
 }

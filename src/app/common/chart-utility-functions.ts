@@ -300,7 +300,7 @@ export function getLineChartOptionsObject(min: number, max: number, suggestedMin
                 tension: 0
             }
         },
-        responsive: false,
+        responsive: true,
         maintainAspectRatio: true,
         scales: {
             yAxes: [{

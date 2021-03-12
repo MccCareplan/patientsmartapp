@@ -25,3 +25,7 @@
 .active .mat-icon{
     color: inherit;
 }
+
+div[routerLinkActive], button[routerLinkActive] {
+    width: 20%;
+}

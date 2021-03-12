@@ -2,12 +2,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccCodeableConcept } from './MccCodeableConcept';
-import { MccDate } from './MccDate';
-import { MccIdentifer } from './MccIdentifer';
-import { MccReference } from './MccReference';
+import type { MccCodeableConcept } from './MccCodeableConcept';
+import type { MccDate } from './MccDate';
+import type { MccIdentifer } from './MccIdentifer';
+import type { MccReference } from './MccReference';
 
-export interface MccCondition {
+export type MccCondition = {
     clinicalStatus: MccCodeableConcept;
     verifiationStatus: MccCodeableConcept;
     categories?: Array<MccCodeableConcept>;

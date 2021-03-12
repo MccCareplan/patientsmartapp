@@ -2,8 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-
-export interface QuestionnaireResponseSummary {
+export type QuestionnaireResponseSummary = {
     status: string;
     authored?: string;
     questionnaire: string;

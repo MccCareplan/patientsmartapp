@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccQuantity } from './MccQuantity';
+import type { MccQuantity } from './MccQuantity';
 
-export interface MccRange {
+export type MccRange = {
     high?: MccQuantity;
     low?: MccQuantity;
 }

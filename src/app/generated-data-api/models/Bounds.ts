@@ -2,11 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccDuration } from './MccDuration';
-import { MccPeriod } from './MccPeriod';
-import { MccRange } from './MccRange';
+import type { MccDuration } from './MccDuration';
+import type { MccPeriod } from './MccPeriod';
+import type { MccRange } from './MccRange';
 
-export interface Bounds {
+export type Bounds = {
     type?: string;
     range?: MccRange;
     period?: MccPeriod;

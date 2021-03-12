@@ -2,8 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-
-export interface MccDuration {
+export type MccDuration = {
     unit?: string;
     comparator?: string;
     value?: number;

@@ -2,23 +2,23 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { MccCodeableConcept } from './MccCodeableConcept';
-import { MccCoding } from './MccCoding';
-import { MccDate } from './MccDate';
-import { MccDateTime } from './MccDateTime';
-import { MccDuration } from './MccDuration';
-import { MccId } from './MccId';
-import { MccIdentifer } from './MccIdentifer';
-import { MccInstant } from './MccInstant';
-import { MccPeriod } from './MccPeriod';
-import { MccQuantity } from './MccQuantity';
-import { MccRange } from './MccRange';
-import { MccRatio } from './MccRatio';
-import { MccSampledData } from './MccSampledData';
-import { MccTime } from './MccTime';
-import { MccTiming } from './MccTiming';
+import type { MccCodeableConcept } from './MccCodeableConcept';
+import type { MccCoding } from './MccCoding';
+import type { MccDate } from './MccDate';
+import type { MccDateTime } from './MccDateTime';
+import type { MccDuration } from './MccDuration';
+import type { MccId } from './MccId';
+import type { MccIdentifer } from './MccIdentifer';
+import type { MccInstant } from './MccInstant';
+import type { MccPeriod } from './MccPeriod';
+import type { MccQuantity } from './MccQuantity';
+import type { MccRange } from './MccRange';
+import type { MccRatio } from './MccRatio';
+import type { MccSampledData } from './MccSampledData';
+import type { MccTime } from './MccTime';
+import type { MccTiming } from './MccTiming';
 
-export interface GenericType {
+export type GenericType = {
     valueType: string;
     stringValue?: string;
     integerValue?: number;
