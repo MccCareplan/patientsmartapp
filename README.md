@@ -69,6 +69,13 @@ The included file 'Dockerfle-prod' is a basic production build docker file. It w
 
 #Changelog
 
+
+2021-03-12
+- Release ("1.0.2")
+- Removed aspect ratio limits
+- Modified header/graphs to be fully responsive
+- Changed eGFR to query/handle multiple datasets
+
 2021-03-04
 - Release ("1.0.1")
 - Individual Error handling for Labs/Vitals

@@ -1,5 +1,5 @@
 <select (change)="ddlChange($event.target.value)">
-    <option>Please select a dataset</option>
+    <option value="" disabled selected>Please select a dataset</option>
     <option *ngFor="let option of egfrService.aggregatedChartData; let i = index" [selected]="i === egfrService.selectedIndex" [value]="i">{{option.label}}
     </option>
 </select>

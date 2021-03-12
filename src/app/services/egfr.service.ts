@@ -105,6 +105,13 @@ export class EgfrService extends DataService {
         this.egfr.xAxisLabels = xAxisLabels;
     }
 
+    emptyChart(): void {
+        this.egfr.chartData = [];
+        this.egfr.tableData = [];
+        // @ts-ignore
+        this.egfr.lineChartOptions = {};
+    }
+
     getPatientEgfr(patientId: string): Observable<EgfrTableData> {
         return new Observable(observer => {
             this.getSegementedObservationsByValueSet(patientId, codes.observationValuesets.Egfr)
@@ -130,6 +137,14 @@ export class EgfrService extends DataService {
 
     formatEGFRCode(primaryCode: MccCoding): string {
         //"Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood"
-        return primaryCode.display.substr(0, primaryCode.display.indexOf("[")) + "[" + primaryCode.code + "]";
+        if (primaryCode.display && primaryCode.display.indexOf("1.73 sq M.") > -1) {
+            let formattedString = "";
+            formattedString = primaryCode.display.substr(primaryCode.display.indexOf("sq M.") + 5);
+            formattedString = formattedString.substr(0, formattedString.indexOf("["));
+            formattedString = formattedString + "[" + primaryCode.code + "]";
+            formattedString = formattedString.charAt(0).toUpperCase() + formattedString.slice(1);
+            return formattedString;
+        }
+        else return primaryCode.display;
     }
 }

@@ -111,7 +111,13 @@ export class EGFRGraphComponent implements OnInit {
     }
 
     ddlChange(indexStr: string): void {
-        const index: number = parseInt(indexStr);
-        this.egfrService.filterDataSet(index);
+        if (!indexStr) {
+            this.egfrService.emptyChart();
+            return;
+        }
+        else {
+            const index: number = parseInt(indexStr);
+            this.egfrService.filterDataSet(index);
+        }
     }
 }
