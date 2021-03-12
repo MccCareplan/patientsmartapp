@@ -30,7 +30,6 @@ export class ObservationsService {
             return this.http.get(`${environment.mccapiUrl}/${this._observationUrl}?subject=${patientId}&code=${code}&translate=${translate ? "true" : "false"}`).toPromise()
                 .then((res: MccObservation) => {
                     this.OBSERVATIONS.set(key, res);
-                    if (keyToStore) res.key = keyToStore;
                     return res;
                 }).catch((reason) => {
                     console.log("Error querying: " + code);
@@ -44,18 +43,12 @@ export class ObservationsService {
 
         if (this.OBSERVATIONS.has(key)) {
             let returnVal = this.OBSERVATIONS.get(key);
-            if (keyToStore) {
-                returnVal[0].key = keyToStore;
-            }
             return Promise.resolve(this.OBSERVATIONS.get(key));
         }
         else {
             return this.http.get(`${environment.mccapiUrl}/${this._observationsUrl}?subject=${patientId}&code=${code}&sort=descending`).toPromise()
                 .then((res: MccObservation[]) => {
                     this.OBSERVATIONS.set(key, res);
-                    if (res.length > 0 && keyToStore) {
-                        res[0].key = keyToStore;
-                    }
                     return res;
                 }).catch((reason) => {
                     console.log("Error querying: " + code);
@@ -69,18 +62,12 @@ export class ObservationsService {
 
         if (this.OBSERVATIONS.has(key)) {
             let returnVal = this.OBSERVATIONS.get(key);
-            if (returnVal.length > 0 && keyToStore) {
-                returnVal[0].key = keyToStore;
-            }
             return Promise.resolve(returnVal);
         }
         else {
             return this.http.get(url, this.HTTP_OPTIONS).toPromise()
                 .then((res: MccObservation[]) => {
                     this.OBSERVATIONS.set(key, res);
-                    if (res.length > 0 && keyToStore) {
-                        res[0].key = keyToStore;
-                    }
                     return res;
                 }).catch((reason) => {
                     console.log("Error querying: " + url);
@@ -94,18 +81,12 @@ export class ObservationsService {
 
         if (this.OBSERVATIONS.has(key)) {
             let returnVal = this.OBSERVATIONS.get(key);
-            if (returnVal.length > 0 && keyToStore) {
-                returnVal[0].key = keyToStore;
-            }
             return Promise.resolve(returnVal);
         }
         else {
             return this.http.get(`${environment.mccapiUrl}/${this._observationsByPanelUrl}?subject=${patientId}&code=${code}` + (sort ? `&sort=${sort}` : ``) + (max ? `&max=${max}` : ``) + `&mode=panel`, this.HTTP_OPTIONS).toPromise()
                 .then((res: MccObservation[]) => {
                     this.OBSERVATIONS.set(key, res);
-                    if (res.length > 0 && keyToStore) {
-                        res[0].key = keyToStore;
-                    }
                     return res;
                 }).catch((reason) => {
                     console.log("Error querying: " + code);

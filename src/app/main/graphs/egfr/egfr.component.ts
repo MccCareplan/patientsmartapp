@@ -5,7 +5,6 @@ import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { EgfrService } from 'src/app/services/egfr.service';
 import { formatEgfrResult } from 'src/app/common/utility-functions';
 import { EgfrTableData } from 'src/app/data-model/egfr';
-import { from } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
@@ -55,6 +54,8 @@ export class EGFRGraphComponent implements OnInit {
         this.tableDataSource = this.egfrService.egfrDataSource;
         this.lineChartData = this.egfrService.egfr.chartData;
         this.lineChartOptions = this.egfrService.egfr.lineChartOptions;
+        this.lineChartOptions.responsive = true;
+        this.lineChartOptions.maintainAspectRatio = true;
         this.displayedColumns = ['date', 'result'];
         this.lineChartColors = [
             {
@@ -107,5 +108,16 @@ export class EGFRGraphComponent implements OnInit {
                 clearInterval(int);
             }
         }, 250);
+    }
+
+    ddlChange(indexStr: string): void {
+        if (!indexStr) {
+            this.egfrService.emptyChart();
+            return;
+        }
+        else {
+            const index: number = parseInt(indexStr);
+            this.egfrService.filterDataSet(index);
+        }
     }
 }

@@ -81,6 +81,7 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
  $ docker run -it -p 80:80 --rm mcccareplan/mccpatientapp
 
 
+
 #Changelog
 
 2021-03-12
@@ -90,3 +91,10 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
 - Docker environment fixed to support environment variables
 - Environment Variable handle fixed
 - Multi-Aspect web launch now used as fall back.
+- Removed aspect ratio limits
+- Modified header/graphs to be fully responsive
+- Changed eGFR to query/handle multiple datasets
+
+2021-03-04
+- Release ("1.0.1")
+- Individual Error handling for Labs/Vitals

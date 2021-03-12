@@ -7,6 +7,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { MccObservation } from '../generated-data-api';
 import { VitalSignsTableData } from '../data-model/vitalSigns';
+import { ObservationCollection } from '../generated-data-api/models/ObservationCollection';
 
 enum observationCodes {
   Systolic = '8480-6',
@@ -111,6 +112,10 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
+  getSegementedObservationsByValueSet(patientId: string, valueSet: string): Observable<ObservationCollection> {
+    return this.http.get<ObservationCollection>(`${this.url}\\?subject=${patientId}&valueset=${valueSet}`)
+      .pipe(catchError(this.handleError));
+  }
 
   create(resource): Observable<any> {
     return this.http.post(this.url, JSON.stringify(resource))
