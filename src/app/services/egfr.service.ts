@@ -20,7 +20,7 @@ export class EgfrService extends DataService {
     egfrDataSource: any;
     aggregatedChartData: ChartDataSets[] = [];
     aggregatedTableData: any[] = [];
-    selectedIndex: number = 0;
+    selectedIndex: number;
 
     constructor(http: HttpClient) {
         super(`${environment.mccapiUrl}/observationssegmented`, http);
@@ -32,11 +32,6 @@ export class EgfrService extends DataService {
         this.egfr.tableData = [];
         this.egfr.chartData = [];
         this.getPatientEgfr(patientId)
-            .pipe(
-                finalize(() => {
-                    this.filterDataSet(this.selectedIndex);
-                })
-            )
             .subscribe(res => {
                 const egfr = {
                     x: new Date(res.date),
