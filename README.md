@@ -1,6 +1,11 @@
 # Patientsmartapp
 
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.7.
+
+## Launching the application:
+
+The Application is designed to run on a Mobile application and should be started by calling the slaunch.html file to initiate a smart-on-fhir standalone launch.
 
 ## Development server
 
@@ -14,11 +19,6 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-## Generating updated models
 
 ## Generating updated models
 - using: https://github.com/ferdikoomen/openapi-typescript-codegen
@@ -49,16 +49,29 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 https://api.logicahealth.org/MCCeCarePlanTest/open
 
 # Docker
-The included file 'Dockerfle-prod' is a basic production build docker file. It will build the app and containerize it in a node nginx server. 
+The included file 'Dockerfle-prod' is a basic production build docker file. It will build the app and containerize it in a node nginx server.
+In addtion if you have a built version you may dockerize using the simple Dockerfile, which will cause the image to be built based on your most recent compile.
 
-## Building a production docker image
+### Runtime Environment variabls
+| Variable name | Sample Value |
+| ------------- | ------------- | 
+| API_SERVER | http://localhost:8080 |
+| CLIENT_ID | 123456789abcdef |
+| LAUNCH_SERVER | https://api.logicahealth.org/MCCeCarePlanTest/data |
+| AUTH_DEBUG | false |
 
-### Updating client id
-- At the moment the clientId for smart-on-fhir launch is embedded in the launch.html file and must be updated manually there. Current plans are to update the launch framework and have environment variable that can prodive this. 
-- /environment/environment.prod.ts will also be used in the future to provide a default when environment variable is not present.
+### Via Docker
+$ docker run -it -e CLIENT_ID='xxxyyzzz123123" -e API_SERVER='http://localhost:8080' -p 80:80 --rm mcccareplan/mccproviderapp
+
+### Example of connecting to a local development docker instance and exposing the app on port 4200
+$ docker run -it -e CLIENT_ID='xxxyyzzz123123' -e API_SERVER='http://localhost:8080' -e LAUNCH_SERVER='https://mylaunch.com" -p 4200:80 --rm mcccareplan/mccproviderapp
+
+
+### Example of running locally against a local production MCC API from Logical
+$ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERVER='http://localhost:8080' -p 4200:80 --rm mcccareplan/mccproviderapp
+
   
-### Updating the API Backend Endpoint
-- At the moment the /environment/environment.prod.ts needs to be editted to point to MCC-API server, update the entry for mccapiUrl. In the future support for an environment variable override wi// be implemented. 
+## Building a production docker image
 
 ### Building the image
  $  docker build -f Dockerfile-prod -t mcccareplan/mccpatientapp .
@@ -67,11 +80,17 @@ The included file 'Dockerfle-prod' is a basic production build docker file. It w
 
  $ docker run -it -p 80:80 --rm mcccareplan/mccpatientapp
 
+
+
 #Changelog
 
-
 2021-03-12
-- Release ("1.0.2")
+- Release ("1.0.3")
+- New eGFR Model
+- Better Data fault tolerance
+- Docker environment fixed to support environment variables
+- Environment Variable handle fixed
+- Multi-Aspect web launch now used as fall back.
 - Removed aspect ratio limits
 - Modified header/graphs to be fully responsive
 - Changed eGFR to query/handle multiple datasets
