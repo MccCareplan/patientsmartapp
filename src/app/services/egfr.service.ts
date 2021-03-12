@@ -20,6 +20,7 @@ export class EgfrService extends DataService {
     egfrDataSource: any;
     aggregatedChartData: ChartDataSets[] = [];
     aggregatedTableData: any[] = [];
+    selectedIndex: number = 0;
 
     constructor(http: HttpClient) {
         super(`${environment.mccapiUrl}/observationssegmented`, http);
@@ -33,7 +34,7 @@ export class EgfrService extends DataService {
         this.getPatientEgfr(patientId)
             .pipe(
                 finalize(() => {
-                    this.filterDataSet(0);
+                    this.filterDataSet(this.selectedIndex);
                 })
             )
             .subscribe(res => {
@@ -63,16 +64,17 @@ export class EgfrService extends DataService {
     }
 
     filterDataSet(index: number): void {
+        this.selectedIndex = index;
         const xAxisLabels: string[] = [];
 
         this.egfr.chartData = [];
         this.egfr.chartData.push(this.aggregatedChartData[index]);
 
         this.egfr.tableData = [];
-        this.egfr.tableData.push(this.aggregatedTableData[index].data);
-        debugger;
+        this.egfr.tableData = (this.aggregatedTableData[index].data);
 
         this.egfrDataSource.data = this.egfr.tableData;
+
         const vsLowDateRow: EgfrTableData = (this.egfr.tableData.reduce((low, e) =>
             reformatYYYYMMDD(low.date) < reformatYYYYMMDD(e.date) ? low : e));
         const vsHighDateRow: EgfrTableData = (this.egfr.tableData.reduce((high, e) =>

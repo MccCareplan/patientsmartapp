@@ -1,5 +1,5 @@
 <select (change)="ddlChange($event.target.value)">
-    <option *ngFor="let option of egfrService.aggregatedChartData; let i = index" value="{{i}}">{{option.label}}
+    <option *ngFor="let option of egfrService.aggregatedChartData; let i = index" [selected]="i === egfrService.selectedIndex" [value]="i">{{option.label}}
     </option>
 </select>
 <div class="lab-graph-chart" [ngClass]="{'alt': !embedded}">

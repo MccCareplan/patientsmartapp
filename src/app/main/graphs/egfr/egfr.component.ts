@@ -5,7 +5,6 @@ import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { EgfrService } from 'src/app/services/egfr.service';
 import { formatEgfrResult } from 'src/app/common/utility-functions';
 import { EgfrTableData } from 'src/app/data-model/egfr';
-import { from } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
@@ -112,7 +111,7 @@ export class EGFRGraphComponent implements OnInit {
     }
 
     ddlChange(indexStr: string): void {
-        const index: number =  parseInt(indexStr);
+        const index: number = parseInt(indexStr);
         this.egfrService.filterDataSet(index);
     }
 }
