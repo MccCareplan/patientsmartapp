@@ -1,4 +1,5 @@
 export class Constants {
+    public static readonly customHeadersName: string = "custom-headers-patient-app-1";
     public static readonly labResultsMap: Map<string, PatientLabResultsMap[]> = new Map<string, PatientLabResultsMap[]>([
         ["ckd", [
             {

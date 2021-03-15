@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
+import { Constants } from "../common/constants";
 import { MccObservation, SimpleQuestionnaireItem } from "../generated-data-api";
 
 @Injectable()
@@ -15,6 +16,15 @@ export class ObservationsService {
     ) {
     }
 
+    getCustomHeaders(): { headers: HttpHeaders } {
+        if (window[Constants.customHeadersName]) {
+            return window[Constants.customHeadersName];
+        }
+        else {
+            return this.HTTP_OPTIONS;
+        }
+    }
+
     _observationUrl = "find/latest/observation";
     getObservation(patientId: string, code: string, keyToStore?: string, translate?: boolean): Promise<any> {
         const key = patientId + "-" + code;
@@ -27,7 +37,7 @@ export class ObservationsService {
             return Promise.resolve(returnVal);
         }
         else {
-            return this.http.get(`${environment.mccapiUrl}/${this._observationUrl}?subject=${patientId}&code=${code}&translate=${translate ? "true" : "false"}`, this.HTTP_OPTIONS).toPromise()
+            return this.http.get(`${environment.mccapiUrl}/${this._observationUrl}?subject=${patientId}&code=${code}&translate=${translate ? "true" : "false"}`, this.getCustomHeaders()).toPromise()
                 .then((res: MccObservation) => {
                     this.OBSERVATIONS.set(key, res);
                     return res;
@@ -46,7 +56,7 @@ export class ObservationsService {
             return Promise.resolve(this.OBSERVATIONS.get(key));
         }
         else {
-            return this.http.get(`${environment.mccapiUrl}/${this._observationsUrl}?subject=${patientId}&code=${code}&sort=descending`, this.HTTP_OPTIONS).toPromise()
+            return this.http.get(`${environment.mccapiUrl}/${this._observationsUrl}?subject=${patientId}&code=${code}&sort=descending`, this.getCustomHeaders()).toPromise()
                 .then((res: MccObservation[]) => {
                     this.OBSERVATIONS.set(key, res);
                     return res;
@@ -65,7 +75,7 @@ export class ObservationsService {
             return Promise.resolve(returnVal);
         }
         else {
-            return this.http.get(url, this.HTTP_OPTIONS).toPromise()
+            return this.http.get(url, this.getCustomHeaders()).toPromise()
                 .then((res: MccObservation[]) => {
                     this.OBSERVATIONS.set(key, res);
                     return res;
@@ -84,7 +94,7 @@ export class ObservationsService {
             return Promise.resolve(returnVal);
         }
         else {
-            return this.http.get(`${environment.mccapiUrl}/${this._observationsByPanelUrl}?subject=${patientId}&code=${code}` + (sort ? `&sort=${sort}` : ``) + (max ? `&max=${max}` : ``) + `&mode=panel`, this.HTTP_OPTIONS).toPromise()
+            return this.http.get(`${environment.mccapiUrl}/${this._observationsByPanelUrl}?subject=${patientId}&code=${code}` + (sort ? `&sort=${sort}` : ``) + (max ? `&max=${max}` : ``) + `&mode=panel`, this.getCustomHeaders()).toPromise()
                 .then((res: MccObservation[]) => {
                     this.OBSERVATIONS.set(key, res);
                     return res;
@@ -101,7 +111,7 @@ export class ObservationsService {
         if (this.QUESTIONNAIRES.has(key)) {
             return Promise.resolve(this.QUESTIONNAIRES.get(key));
         } else {
-            return this.http.get(`${environment.mccapiUrl}/${this._questionnaireLatestItemUrl}?subject=${patientId}&code=${code}`, this.HTTP_OPTIONS).toPromise()
+            return this.http.get(`${environment.mccapiUrl}/${this._questionnaireLatestItemUrl}?subject=${patientId}&code=${code}`, this.getCustomHeaders()).toPromise()
                 .then((res: SimpleQuestionnaireItem) => {
                     this.QUESTIONNAIRES.set(key, res);
                     return res;
@@ -118,7 +128,7 @@ export class ObservationsService {
         if (this.QUESTIONNAIRES.has(key)) {
             return Promise.resolve(this.QUESTIONNAIRES.get(key));
         } else {
-            return this.http.get(`${environment.mccapiUrl}/${this._questionnaireAllItemsUrl}?subject=${patientId}&code=${code}`, this.HTTP_OPTIONS).toPromise()
+            return this.http.get(`${environment.mccapiUrl}/${this._questionnaireAllItemsUrl}?subject=${patientId}&code=${code}`, this.getCustomHeaders()).toPromise()
                 .then((res: SimpleQuestionnaireItem[]) => {
                     this.QUESTIONNAIRES.set(key, res);
                     return res;
