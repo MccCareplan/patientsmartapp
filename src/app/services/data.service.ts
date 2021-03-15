@@ -39,34 +39,33 @@ export class DataService {
   }
 
   get(): Observable<any> {
-    return this.http.get(this.url)
+    return this.http.get(this.url, this.commonHttpOptions)
       .pipe(
         catchError(this.handleError));
   }
 
   getById(id: string): Observable<any> {
-    return this.http.get(`${this.url}\\${id}`)
+    return this.http.get(`${this.url}\\${id}`, this.commonHttpOptions)
       .pipe(catchError(this.handleError));
   }
 
   getBySubjectId(subjectId: string): Observable<any> {
-    return this.http.get(`${this.url}\\?subject=${subjectId}`)
+    return this.http.get(`${this.url}\\?subject=${subjectId}`, this.commonHttpOptions)
       .pipe(catchError(this.handleError));
   }
 
   getBySubjectIdAndCarePlanId(subjectId: string, carePlanId: string): Observable<any> {
-    return this.http.get(`${this.url}\\?subject=${subjectId}&careplan=${carePlanId}`)
+    return this.http.get(`${this.url}\\?subject=${subjectId}&careplan=${carePlanId}`, this.commonHttpOptions)
       .pipe(catchError(this.handleError));
   }
 
   getBySubjectIdAndCode(subjectId: string, code: string): Observable<any> {
-    return this.http.get(`${this.url}\\?subject=${subjectId}&code=${code}`)
+    return this.http.get(`${this.url}\\?subject=${subjectId}&code=${code}`, this.commonHttpOptions)
       .pipe(catchError(this.handleError));
   }
 
   getBloodPressureById(id: string): Observable<any> {
-    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), params: new HttpParams({ fromString: "subject=" + id }).set("code", "8480-6") };
-    return this.http.get(this.url, options).pipe(
+    return this.http.get(`${this.url}\\?subject=${id}&code=8480-6`, this.commonHttpOptions).pipe(
       catchError(this.handleError));
   }
 
@@ -103,17 +102,17 @@ export class DataService {
   }
 
   getObservationsByPanel(patientId: string, code: string): Observable<MccObservation[]> {
-    return this.http.get<MccObservation[]>(`${this.url}\\?subject=${patientId}&code=${code}&mode=panel`)
+    return this.http.get<MccObservation[]>(`${this.url}\\?subject=${patientId}&code=${code}&mode=panel`, this.commonHttpOptions)
       .pipe(catchError(this.handleError));
   }
 
   getObservationsByValueset(patientId: string, valueSet: string): Observable<MccObservation[]> {
-    return this.http.get<MccObservation[]>(`${this.url}\\?subject=${patientId}&valueset=${valueSet}`)
+    return this.http.get<MccObservation[]>(`${this.url}\\?subject=${patientId}&valueset=${valueSet}`, this.commonHttpOptions)
       .pipe(catchError(this.handleError));
   }
 
   getSegementedObservationsByValueSet(patientId: string, valueSet: string): Observable<ObservationCollection> {
-    return this.http.get<ObservationCollection>(`${this.url}\\?subject=${patientId}&valueset=${valueSet}`)
+    return this.http.get<ObservationCollection>(`${this.url}\\?subject=${patientId}&valueset=${valueSet}`, this.commonHttpOptions)
       .pipe(catchError(this.handleError));
   }
 

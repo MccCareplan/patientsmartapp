@@ -27,7 +27,7 @@ export class ObservationsService {
             return Promise.resolve(returnVal);
         }
         else {
-            return this.http.get(`${environment.mccapiUrl}/${this._observationUrl}?subject=${patientId}&code=${code}&translate=${translate ? "true" : "false"}`).toPromise()
+            return this.http.get(`${environment.mccapiUrl}/${this._observationUrl}?subject=${patientId}&code=${code}&translate=${translate ? "true" : "false"}`, this.HTTP_OPTIONS).toPromise()
                 .then((res: MccObservation) => {
                     this.OBSERVATIONS.set(key, res);
                     return res;
@@ -46,7 +46,7 @@ export class ObservationsService {
             return Promise.resolve(this.OBSERVATIONS.get(key));
         }
         else {
-            return this.http.get(`${environment.mccapiUrl}/${this._observationsUrl}?subject=${patientId}&code=${code}&sort=descending`).toPromise()
+            return this.http.get(`${environment.mccapiUrl}/${this._observationsUrl}?subject=${patientId}&code=${code}&sort=descending`, this.HTTP_OPTIONS).toPromise()
                 .then((res: MccObservation[]) => {
                     this.OBSERVATIONS.set(key, res);
                     return res;
