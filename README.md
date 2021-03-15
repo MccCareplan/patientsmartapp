@@ -84,6 +84,10 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
 
 #Changelog
 
+2021-03-15
+- Release ("1.0.4")
+- Fixed data calls to have custom headers containing fhir server
+
 2021-03-12
 - Release ("1.0.3")
 - New eGFR Model
