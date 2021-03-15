@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ObservationsService } from './observations.service.new';
+import { Constants } from '../common/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,7 @@ import { ObservationsService } from './observations.service.new';
 export class FhirService extends DataService {
 
   constructor(
-    http: HttpClient,
-    private obsService: ObservationsService
+    http: HttpClient
   ) {
     super(`${environment.mccapiUrl}/observationsbyvalueset`, http);
   }
@@ -22,8 +21,6 @@ export class FhirService extends DataService {
     this.mainfhirserver = server;
     let headersobj = new HttpHeaders();
     headersobj = headersobj.set('Content-Type', 'application/json').set('mcc-fhir-server', server).set('mcc-token', token);
-    this.commonHttpOptions = { headers: headersobj };
-    this.obsService.HTTP_OPTIONS = { headers: headersobj };
+    window[Constants.customHeadersName] = { headers: headersobj };
   }
-
 }

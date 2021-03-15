@@ -85,6 +85,10 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
 #Changelog
 
 2021-03-15
+- Release ("1.0.5")
+- Changed method of setting custom header to avoid state issues
+
+2021-03-15
 - Release ("1.0.4")
 - Fixed data calls to have custom headers containing fhir server
 
