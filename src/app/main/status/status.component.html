@@ -15,37 +15,49 @@
         </select>
     </div>
     <div class="graphs">
-        <div class="graph-wrapper">
-            <div routerLink="/lab-graph" [queryParams]="{key:'egfr'}" queryParamsHandling="merge">
-                <span>
-                    EGFR
-                </span>
+        <div class="graph-wrapper s-col-1 m-col-2 l-col-3" style="cursor: auto;">
+            <div class="graph-wrapper-inner">
+                <div routerLink="/lab-graph" [queryParams]="{key:'egfr'}" queryParamsHandling="merge"
+                    style="cursor: pointer;">
+                    <span>
+                        EGFR
+                    </span>
+                </div>
+                <egfr-graph [showTable]="false" [embedded]="true"></egfr-graph>
             </div>
-            <egfr-graph [showTable]="false" [embedded]="true"></egfr-graph>
         </div>
-        <div class="graph-wrapper" routerLink="/lab-graph" [queryParams]="{key:'uacr'}" queryParamsHandling="merge">
-            <div>
-                <span>
-                    UACR
-                </span>
+        <div class="graph-wrapper s-col-1 m-col-2 l-col-3" routerLink="/lab-graph" [queryParams]="{key:'uacr'}"
+            queryParamsHandling="merge">
+            <div class="graph-wrapper-inner">
+                <div>
+                    <span>
+                        UACR
+                    </span>
+                </div>
+                <uacr-graph [showTable]="false" [embedded]="true"></uacr-graph>
             </div>
-            <uacr-graph [showTable]="false" [embedded]="true"></uacr-graph>
         </div>
-        <div class="graph-wrapper" routerLink="/lab-graph" [queryParams]="{key:'bp'}" queryParamsHandling="merge">
-            <div>
-                <span>
-                    Blood Pressure
-                </span>
+        <div class="graph-wrapper s-col-1 m-col-2 l-col-3" routerLink="/lab-graph" [queryParams]="{key:'bp'}"
+            queryParamsHandling="merge">
+            <div class="graph-wrapper-inner">
+                <div>
+                    <span>
+                        Blood Pressure
+                    </span>
+                </div>
+                <bp-graph [showTable]="false" [embedded]="true"></bp-graph>
             </div>
-            <bp-graph [showTable]="false" [embedded]="true"></bp-graph>
         </div>
-        <div class="graph-wrapper" routerLink="/lab-graph" [queryParams]="{key:'weight'}" queryParamsHandling="merge">
-            <div>
-                <span>
-                    Weight
-                </span>
+        <div class="graph-wrapper s-col-1 m-col-2 l-col-3" routerLink="/lab-graph" [queryParams]="{key:'weight'}"
+            queryParamsHandling="merge">
+            <div class="graph-wrapper-inner">
+                <div>
+                    <span>
+                        Weight
+                    </span>
+                </div>
+                <weight-graph [showTable]="false" [embedded]="true"></weight-graph>
             </div>
-            <weight-graph [showTable]="false" [embedded]="true"></weight-graph>
         </div>
     </div>
 </div>

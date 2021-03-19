@@ -21,6 +21,8 @@ import { FhirService } from './services/fhir.service';
 import { UacrService } from './services/uacr.service';
 import { WeightService } from './services/weight.service';
 
+declare var window: any;
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -46,7 +48,7 @@ export class AppComponent implements OnInit {
     devmode = false;
 
     ngOnInit(): void {
-        const skey = sessionStorage.SMART_KEY;
+        const skey = window.sessionStorage.SMART_KEY;
         const key = skey ? skey.replace(/['"]+/g, '') : "";
         console.log('Ang: Smart Key is ' + key);
         if (key != null && key.length > 0) {
@@ -61,8 +63,8 @@ export class AppComponent implements OnInit {
         const urlToCheck = window.location.href.toLowerCase();
         const trusted_urls = ["/status", "/lab-results", "/vital-signs"]
         let checkPassed = false;
-        trusted_urls.forEach((v, i)=> { 
-            if (urlToCheck.indexOf(v) > -1){
+        trusted_urls.forEach((v, i) => {
+            if (urlToCheck.indexOf(v) > -1) {
                 checkPassed = true;
             }
         })
@@ -86,7 +88,7 @@ export class AppComponent implements OnInit {
                     this.store.select(fromRoot.getCarePlansSummary).subscribe(c => {
                         if (c && c.length > 0 && !initialLoadDone) {
                             initialLoadDone = true;
-                            
+
                             // Set default careplan
                             this.carePlanId = c[0].fhirid; // Should calls with optional careplan param have it passed in? 
 
@@ -133,7 +135,7 @@ export class AppComponent implements OnInit {
 
     async updateDataContext(key: string, count: number): Promise<void> {
         console.log('Updating Context');
-        const info = JSON.parse(sessionStorage.getItem(key));
+        const info = JSON.parse(window.sessionStorage.getItem(key));
         if (info != null) {
             console.log('server: ' + info.serverUrl);
             const tokenResp = info.tokenResponse;
