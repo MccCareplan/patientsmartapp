@@ -4,6 +4,8 @@ import { environment } from "src/environments/environment";
 import { Constants } from "../common/constants";
 import { MccObservation, SimpleQuestionnaireItem } from "../generated-data-api";
 
+declare var window: any;
+
 @Injectable()
 export class ObservationsService {
     public HTTP_OPTIONS = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };

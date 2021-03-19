@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Constants } from "src/app/common/constants";
-import { MccDate, MccObservation, QuestionnaireResponseItem, SimpleQuestionnaireItem } from "src/app/generated-data-api";
+import { MccObservation, SimpleQuestionnaireItem } from "src/app/generated-data-api";
 import { ObservationsService } from "src/app/services/observations.service.new";
 import * as fromRoot from '../../ngrx/reducers';
-import { Router, ActivatedRoute, ParamMap, NavigationExtras, Params } from '@angular/router';
+import { Router, NavigationExtras, Params } from '@angular/router';
 import { formatEffectiveDate, formatMccDate, getDisplayValue } from "src/app/common/chart-utility-functions";
 
 interface FormattedResult {

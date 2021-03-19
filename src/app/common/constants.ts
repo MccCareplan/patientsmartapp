@@ -1,6 +1,13 @@
 export class Constants {
     public static readonly customHeadersName: string = "custom-headers-patient-app-1";
-    public static readonly labResultsMap: Map<string, PatientLabResultsMap[]> = new Map<string, PatientLabResultsMap[]>([
+    public static readonly labResultsMap: Map<string, PatientLabResultsMap[]> = new Map<string, PatientLabResultsMap[]>(
+        [["general", [
+            {
+                name: "A1C",
+                value: "2.16.840.1.113762.1.4.1222.179",
+                type: "valueset"
+            },
+        ]],
         ["ckd", [
             {
                 name: "eGFR",
@@ -118,9 +125,16 @@ export class Constants {
                 type: "valueset"
             }
         ]]
-    ]);
+        ]);
 
-    public static readonly vitalSignsMap: Map<string, PatientLabResultsMap[]> = new Map<string, PatientLabResultsMap[]>([
+    public static readonly vitalSignsMap: Map<string, PatientLabResultsMap[]> = new Map<string, PatientLabResultsMap[]>(
+        [["general", [
+            {
+                name: "A1C",
+                value: "2.16.840.1.113762.1.4.1222.179",
+                type: "valueset"
+            },
+        ]],
         ["ckd", [
             {
                 name: "Blood Pressure",
@@ -163,7 +177,7 @@ export class Constants {
                 type: "question"
             }
         ]]
-    ]);
+        ]);
 }
 
 interface PatientLabResultsMap {
