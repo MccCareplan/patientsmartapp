@@ -8,7 +8,7 @@ import * as moment from 'moment';
 import { Color, Label } from 'ng2-charts';
 import { formatMccDate, getDisplayValue, getInnerValue, getValueHighlighted } from 'src/app/common/chart-utility-functions';
 import { Constants } from 'src/app/common/constants';
-import { Effective,  MccObservation, SimpleQuestionnaireItem } from 'src/app/generated-data-api';
+import { Effective, MccObservation, SimpleQuestionnaireItem } from 'src/app/generated-data-api';
 import { ObservationsService } from 'src/app/services/observations.service.new';
 import * as fromRoot from '../../../ngrx/reducers';
 
@@ -48,7 +48,7 @@ export class GenericGraphComponent implements OnInit {
 
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator: MatPaginator;
-    
+
     constructor(
         private store: Store<fromRoot.State>,
         private obsService: ObservationsService
@@ -58,15 +58,18 @@ export class GenericGraphComponent implements OnInit {
 
     ngOnInit() {
         this.store.select(fromRoot.getCarePlansSummary).subscribe(c => {
-            if (c && c.length > 0) {
+            if (c && c.length > 0)
                 this.longTermCondition = "ckd";
-                if (this.patientId && this.longTermCondition) this.loadData();
-            }
+            else if (c && c.length === 0)
+                this.longTermCondition = "general";
+            if (this.patientId && this.longTermCondition)
+                this.loadData();
         });
         this.store.select(fromRoot.getPatientProfile).subscribe(x => {
             if (x && x.fhirid) {
                 this.patientId = x.fhirid;
-                if (this.patientId && this.longTermCondition) this.loadData();
+                if (this.patientId && this.longTermCondition)
+                    this.loadData();
             }
         });
     }
