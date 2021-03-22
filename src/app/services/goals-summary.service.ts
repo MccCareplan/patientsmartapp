@@ -19,7 +19,6 @@ export class GoalsSummaryService extends DataService {
             return this.getBySubjectIdAndCarePlanId(subjectId, carePlanId);
         }
         else {
-            debugger;
             return this.getBySubjectId(subjectId);
         }
     }

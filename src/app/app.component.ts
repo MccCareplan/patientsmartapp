@@ -89,7 +89,8 @@ export class AppComponent implements OnInit {
                         if (c && c.length === 0 && !initialLoadDone) {
                             initialLoadDone = true;
 
-                            // Set default careplan
+                            // this.store.dispatch(contact.loadContactsForSubjectAndCarePlanAction({ subjectId: this.currentSubjectId}));
+                            this.store.dispatch(patient.SelectAction({ data: this.currentSubjectId }));
 
                             // CarePlan Screen
 

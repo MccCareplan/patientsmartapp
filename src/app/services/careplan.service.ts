@@ -17,6 +17,7 @@ export class CareplanService extends DataService {
 
   getCarePlansBySubject(subjectId: string): Observable<MccCarePlan> {
     // console.log('[careplan.service.ts]: getCarePlansBySubject() subjectID:', subjectId);  // todo : remove after testing
+    debugger;
     return this.getBySubjectId(subjectId);
   }
 

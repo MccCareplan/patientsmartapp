@@ -1,4 +1,4 @@
-import { ChartData, ChartDataSets, ChartOptions, ChartPoint } from 'chart.js';
+import { ChartDataSets, ChartOptions, ChartPoint } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { getLineChartOptionsObject } from '../common/utility-functions';
 

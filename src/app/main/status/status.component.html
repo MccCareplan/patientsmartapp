@@ -8,10 +8,13 @@
     </div>
     <!-- Health Status Blue Link Box (Diabetes etc.)-->
     <div class="health-status-link-box">
-        <select class="mat-raised-button" (change)="chronicConditionSelected($event.target.value)"
+        <select class="mat-raised-button" (change)="chronicConditionSelected($event.target.value)"  *ngIf="!noActiveCarePlan"
             aria-label="Link to Chronic Condition Hub">
             <option value='-1' *ngIf="!(ddlConditions$ | async)">Loading...</option>
             <option *ngFor="let item of ddlConditions$ | async; index as i" [value]="i">{{item.code.text}}</option>
+        </select>
+        <select class="mat-raised-button" *ngIf="noActiveCarePlan">
+            <option>No Active CarePlan</option>
         </select>
     </div>
     <div class="graphs">

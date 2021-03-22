@@ -40,6 +40,7 @@ export class BloodPresureService extends DataService {
         this.getPatientVitalSigns(patientId)
             .pipe(
                 finalize(() => {
+                    this.vitalSigns.chartData = [];
                     this.vitalSigns.chartData.push(systolicChartData);
                     this.vitalSigns.chartData.push(diastolicChartData);
                     this.vitalSignsDataSource.data = this.vitalSigns.tableData;
