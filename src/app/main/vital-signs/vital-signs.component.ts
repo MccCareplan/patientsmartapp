@@ -27,7 +27,7 @@ interface PatientLabResultsMap {
 export class VitalSignsComponent implements OnInit {
     results: FormattedResult[] = [];
     patientId: string;
-    longTermCondition: string = "ckd";
+    longTermCondition: string;
 
 
     constructor(
@@ -76,14 +76,19 @@ export class VitalSignsComponent implements OnInit {
 
     ngOnInit(): void {
         this.store.select(fromRoot.getCarePlansSummary).subscribe(c => {
-            if (c && c.length > 0) {
-                if (this.patientId && this.longTermCondition) this.loadData();
-            }
+            if (c && c.length > 0)
+                this.longTermCondition = "ckd";
+            else if (c && c.length === 0)
+                this.longTermCondition = "general";
+            if (this.patientId && this.longTermCondition)
+                this.loadData();
         });
+
         this.store.select(fromRoot.getPatientProfile).subscribe(x => {
             if (x && x.fhirid) {
                 this.patientId = x.fhirid;
-                if (this.patientId && this.longTermCondition) this.loadData();
+                if (this.patientId && this.longTermCondition)
+                    this.loadData();
             }
         });
     }

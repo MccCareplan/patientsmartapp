@@ -25,6 +25,7 @@ enum observationValuesets {
   Uacr = '2.16.840.1.113883.3.6929.2.1002'
 }
 
+declare var window: any;
 
 @Injectable({
   providedIn: 'root'
@@ -144,7 +145,7 @@ export class DataService {
         catchError(this.handleError));
   }
 
-  private handleError(error: Response) {
+  private handleError(error: any) {
     if (error.status === 400) {
       return throwError(new BadInput(error.json()));
     }

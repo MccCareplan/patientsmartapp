@@ -86,7 +86,37 @@ export class AppComponent implements OnInit {
                     // Load best careplan for the subject, then load subsequent data
                     this.store.dispatch(carePlansSummary.loadCareplansSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
                     this.store.select(fromRoot.getCarePlansSummary).subscribe(c => {
-                        if (c && c.length > 0 && !initialLoadDone) {
+                        if (c && c.length === 0 && !initialLoadDone) {
+                            initialLoadDone = true;
+
+                            // Set default careplan
+
+                            // CarePlan Screen
+
+                            // Health Status Screen
+                            this.store.dispatch(conditionsSummary.loadConditionSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
+
+                            // Interventions & Maintenance Screen
+                            this.store.dispatch(medicationSummary.loadMedicationSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
+                            this.store.dispatch(educationSummary.loadEducationSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
+                            this.store.dispatch(referralsSummary.loadReferralsSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
+                            this.store.dispatch(counselingSummary.loadCounselingSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
+
+                            // Goals & Preferences Screen
+                            this.store.dispatch(goalsSummary.loadGoalsSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
+                            this.store.select(fromRoot.getGoalsSummary);
+
+                            // Health Concerns Screen
+                            this.store.dispatch(socialConcerns.loadSocialConcernsForSubjectAction({ subjectId: this.currentSubjectId }));
+
+                            // Observations
+                            this.bpService.getPatientBPInfo(this.currentSubjectId);
+                            this.egfrService.getPatientEgfrInfo(this.currentSubjectId);
+                            this.weightService.getPatientWotInfo(this.currentSubjectId);
+                            this.uacrService.getPatientUacrInfo(this.currentSubjectId);
+
+                        }
+                        else if (c && c.length > 0 && !initialLoadDone) {
                             initialLoadDone = true;
 
                             // Set default careplan
