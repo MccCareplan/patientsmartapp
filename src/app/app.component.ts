@@ -89,10 +89,9 @@ export class AppComponent implements OnInit {
                         if (c && c.length === 0 && !initialLoadDone) {
                             initialLoadDone = true;
 
-                            // this.store.dispatch(contact.loadContactsForSubjectAndCarePlanAction({ subjectId: this.currentSubjectId}));
-                            this.store.dispatch(patient.SelectAction({ data: this.currentSubjectId }));
-
                             // CarePlan Screen
+                            this.store.dispatch(patient.SelectAction({ data: this.currentSubjectId }));
+                            this.store.dispatch(contact.loadContactsForSubjectAndCarePlanAction({ subjectId: this.currentSubjectId }));
 
                             // Health Status Screen
                             this.store.dispatch(conditionsSummary.loadConditionSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
