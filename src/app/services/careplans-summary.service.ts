@@ -15,7 +15,6 @@ export class CareplansSummaryService extends DataService {
     }
 
     getCarePlansByPatientId(subjectId: string): Observable<MccCarePlanSummary[]> {
-        return of([]);
         return this.getBySubjectId(subjectId);
     }
 }
