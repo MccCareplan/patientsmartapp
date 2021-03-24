@@ -18,7 +18,7 @@
         </select>
     </div>
     <div class="graphs">
-        <div class="graph-wrapper s-col-1 m-col-2 l-col-3" style="cursor: auto;">
+        <div *ngIf="!noActiveCarePlan" class="graph-wrapper s-col-1 m-col-2 l-col-3" style="cursor: auto;">
             <div class="graph-wrapper-inner">
                 <div routerLink="/lab-graph" [queryParams]="{key:'egfr'}" queryParamsHandling="merge"
                     style="cursor: pointer;">
@@ -29,7 +29,7 @@
                 <egfr-graph [showTable]="false" [embedded]="true"></egfr-graph>
             </div>
         </div>
-        <div class="graph-wrapper s-col-1 m-col-2 l-col-3" routerLink="/lab-graph" [queryParams]="{key:'uacr'}"
+        <div *ngIf="!noActiveCarePlan" class="graph-wrapper s-col-1 m-col-2 l-col-3" routerLink="/lab-graph" [queryParams]="{key:'uacr'}"
             queryParamsHandling="merge">
             <div class="graph-wrapper-inner">
                 <div>

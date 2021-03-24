@@ -14,7 +14,7 @@ export class StatusComponent implements OnInit {
   careplanid$: Observable<string>;
   conditionsList$: Observable<ConditionLists>;
   ddlConditions$: Observable<ConditionSummary[]>
-  noActiveCarePlan: boolean;
+  noActiveCarePlan: boolean = true;
   patient$: Observable<MccPatient>;
   selectedCondition: ConditionSummary;
 
@@ -30,7 +30,11 @@ export class StatusComponent implements OnInit {
 
   /* TODO: Choose the default condition by matching to the array of profiles of the best careplan */
   populateDropDownList = (conditionsList: ConditionLists): void => {
-    if (conditionsList.activeConditions && conditionsList.activeConditions.length > 0) {
+    if (!conditionsList.activeConditions || conditionsList.activeConditions.length == 0) {
+      this.noActiveCarePlan = true;
+    }
+    else if (conditionsList.activeConditions && conditionsList.activeConditions.length > 0) {
+      this.noActiveCarePlan = false;
       // Filter by those with a profile id
       let filteredActiveConditions = conditionsList.activeConditions.filter(x => x.profileId);
       // Sort alphabetically by code text
