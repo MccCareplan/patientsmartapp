@@ -69,6 +69,7 @@ export class EgfrService extends DataService {
         this.egfr.tableData = (this.aggregatedTableData[index].data);
 
         this.egfrDataSource.data = this.egfr.tableData;
+        if (!this.egfr.tableData || this.egfr.tableData.length === 0) return;
 
         const vsLowDateRow: EgfrTableData = (this.egfr.tableData.reduce((low, e) =>
             reformatYYYYMMDD(low.date) < reformatYYYYMMDD(e.date) ? low : e));

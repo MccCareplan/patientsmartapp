@@ -28,6 +28,7 @@ export class StatusComponent implements OnInit {
     this.conditionsList$.subscribe(this.populateDropDownList)
   }
 
+  /* TODO: Choose the default condition by matching to the array of profiles of the best careplan */
   populateDropDownList = (conditionsList: ConditionLists): void => {
     if (conditionsList.activeConditions && conditionsList.activeConditions.length > 0) {
       // Filter by those with a profile id

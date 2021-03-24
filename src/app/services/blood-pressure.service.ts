@@ -44,6 +44,8 @@ export class BloodPresureService extends DataService {
                     this.vitalSigns.chartData.push(systolicChartData);
                     this.vitalSigns.chartData.push(diastolicChartData);
                     this.vitalSignsDataSource.data = this.vitalSigns.tableData;
+                    if (!this.vitalSigns.tableData || this.vitalSigns.tableData.length === 0) return;
+
                     const vsLowDateRow: VitalSignsTableData = (this.vitalSigns.tableData.reduce((low, vs) =>
                         reformatYYYYMMDD(low.date) < reformatYYYYMMDD(vs.date) ? low : vs));
                     const vsHighDateRow: VitalSignsTableData = (this.vitalSigns.tableData.reduce((high, vs) =>
