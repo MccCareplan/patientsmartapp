@@ -53,6 +53,8 @@ import { WeightGraphComponent } from './main/graphs/weight/weight.component';
 import { UACRGraphComponent } from './main/graphs/uacr/uacr.component';
 import { ObservationsService } from './services/observations.service.new';
 import { GenericGraphComponent } from './main/graphs/generic/generic.component';
+import { QuestionnaireService } from './services/questionnaire.service';
+import { GenericQuestionnaireComponent } from './questionnaire/questionnaire.component';
 
 @NgModule({
         declarations: [
@@ -80,7 +82,8 @@ import { GenericGraphComponent } from './main/graphs/generic/generic.component';
                 EGFRGraphComponent,
                 WeightGraphComponent,
                 UACRGraphComponent,
-                GenericGraphComponent
+                GenericGraphComponent,
+                GenericQuestionnaireComponent
         ],
         imports: [
                 BrowserModule,
@@ -98,7 +101,7 @@ import { GenericGraphComponent } from './main/graphs/generic/generic.component';
                 SharedModule,
                 FormsModule
         ],
-        providers: [PatientLoadedGuard, SubjectDataServiceService, ObservationsService],
+        providers: [PatientLoadedGuard, SubjectDataServiceService, ObservationsService, QuestionnaireService],
         exports: [RouterModule],
         bootstrap: [AppComponent]
 })

@@ -14,6 +14,7 @@ import { DevModeGuard } from './guards/dev-mode.guard';
 import { LabResultsComponent } from './main/lab-results/lab-results.component';
 import { LabGraphComponent } from './main/lab-graph/lab-graph.component';
 import { VitalSignsComponent } from './main/vital-signs/vital-signs.component';
+import { GenericQuestionnaireComponent } from './questionnaire/questionnaire.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'status', pathMatch: 'full' },
@@ -27,7 +28,8 @@ const routes: Routes = [
     { path: 'goals', component: GoalsComponent },
     { path: 'health', component: HealthComponent },
     { path: 'careteam', component: CareteamComponent },
-    { path: 'devmode', component: SelectPatientComponent, canActivate: [DevModeGuard, PatientLoadedGuard] }
+    { path: 'devmode', component: SelectPatientComponent, canActivate: [DevModeGuard, PatientLoadedGuard] },
+    { path: 'questionnaire', component: GenericQuestionnaireComponent, }//canActivate: [DevModeGuard] }
 ];
 
 export const appRouting = RouterModule.forRoot(routes, { enableTracing: false });
