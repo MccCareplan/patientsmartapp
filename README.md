@@ -39,7 +39,7 @@ $ openapi -i http://localhost:8081/api-docs -o src/app/generated-data-api/
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 ## Public deployment
- The application is publically deployed at https://mcc-niddk-patient-ab784.web.app/launch.html - Whihch is hooked to the Logica Sandbox MCC ECareplan Test
+ The application is publically deployed at https://mcc-niddk-patient-ab784.web.app/launch.html - Which is hooked to the Logica Sandbox MCC ECareplan Test
 
 ## Further help
 
@@ -83,6 +83,11 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
 
 
 #Changelog
+2021-03-29
+- Release ("1.0.6")
+- Handling no careplans available
+- Better responsiveness
+- Crash fixes
 
 2021-03-15
 - Release ("1.0.5")

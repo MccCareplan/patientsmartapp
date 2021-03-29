@@ -49,6 +49,8 @@ export class WeightService extends DataService {
                 finalize(() => {
                     this.wot.chartData.push(wotChartData);
                     this.wotDataSource.data = this.wot.tableData;
+                    if (!this.wot.tableData || this.wot.tableData.length === 0) return;
+                    
                     const vsLowDateRow: WotTableData = (this.wot.tableData.reduce((low, e) =>
                         reformatYYYYMMDD(low.date) < reformatYYYYMMDD(e.date) ? low : e));
                     const vsHighDateRow: WotTableData = (this.wot.tableData.reduce((high, e) =>

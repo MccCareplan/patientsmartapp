@@ -1,6 +1,95 @@
 /* You can add global styles to this file, and also import other style files */
+
 /*@import '@angular/material/prebuilt-themes/indigo-pink.css';*/
+
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.mat-progress-spinner circle, .mat-spinner circle { stroke: #409fff !important; }
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #409fff !important;
+}
+
+@media (max-width: 768px) {
+    .s-col-1 {
+        width: 100%;
+    }
+    .s-col-2 {
+        width: 50%;
+        box-sizing: border-box;
+        float: left;
+    }
+    .s-col-3 {
+        width: 33%;
+        box-sizing: border-box;
+        float: left;
+    }
+    .s-col-4 {
+        width: 25%;
+        box-sizing: border-box;
+        float: left;
+    }
+    .s-col-5 {
+        width: 20%;
+        box-sizing: border-box;
+        float: left;
+    }
+}
+
+@media (min-width: 768px) {
+    .m-col-1 {
+        width: 100%;
+    }
+    .m-col-2 {
+        width: 50%;
+        box-sizing: border-box;
+        float: left;
+    }
+    .m-col-3 {
+        width: 33%;
+        box-sizing: border-box;
+        float: left;
+    }
+    .m-col-4 {
+        width: 25%;
+        box-sizing: border-box;
+        float: left;
+    }
+    .m-col-5 {
+        width: 20%;
+        box-sizing: border-box;
+        float: left;
+    }
+}
+
+@media (min-width: 1024px) {
+    .l-col-1 {
+        width: 100%;
+    }
+    .l-col-2 {
+        width: 50%;
+        box-sizing: border-box;
+        float: left;
+    }
+    .l-col-3 {
+        width: 33%;
+        box-sizing: border-box;
+        float: left;
+    }
+    .l-col-4 {
+        width: 25%;
+        box-sizing: border-box;
+        float: left;
+    }
+    .l-col-5 {
+        width: 20%;
+        box-sizing: border-box;
+        float: left;
+    }
+}

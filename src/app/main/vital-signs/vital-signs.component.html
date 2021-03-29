@@ -5,7 +5,7 @@
             Vital Signs
         </h2>
         <img class="back-arrow" src="../../../assets/svg/arrow_back_blue.svg" routerLink="/status"
-            queryParamsHandling="merge" />
+            style="cursor: pointer;" queryParamsHandling="merge" />
     </div>
     <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="results.length === 0"></mat-spinner>
     <ul class="vital-sign-items">

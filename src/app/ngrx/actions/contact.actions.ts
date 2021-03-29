@@ -24,7 +24,7 @@ export const SelectCarePlanFailAction = createAction(
 
 export const loadContactsForSubjectAndCarePlanAction = createAction(
     LOAD_FOR_SUBJECT_CAREPLAN,
-    props<{subjectId: string, carePlanId: string }>()
+    props<{subjectId: string, carePlanId?: string }>()
 );
 
 export const loadContactsForSubjectAndCarePlanSuccessAction = createAction(

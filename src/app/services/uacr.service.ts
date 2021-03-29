@@ -50,6 +50,7 @@ export class UacrService extends DataService {
                 finalize(() => {
                     this.uacr.chartData.push(uacrChartData);
                     this.uacrDataSource.data = this.uacr.tableData;
+                    if (!this.uacr.tableData || this.uacr.tableData.length === 0) return;
                     const vsLowDateRow: UacrTableData = (this.uacr.tableData.reduce((low, e) =>
                         reformatYYYYMMDD(low.date) < reformatYYYYMMDD(e.date) ? low : e));
                     const vsHighDateRow: UacrTableData = (this.uacr.tableData.reduce((high, e) =>

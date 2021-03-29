@@ -1,5 +1,5 @@
 <div class="lab-graph-chart" [ngClass]="{'alt': !embedded}">
-    <canvas baseChart height="200" [datasets]="uacrService.uacr.chartData" [labels]="lineChartLabels"
+    <canvas baseChart [datasets]="uacrService.uacr.chartData" [labels]="lineChartLabels"
         [options]="uacrService.uacr.lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
         [chartType]="lineChartType" [plugins]="lineChartPlugins">
     </canvas>
