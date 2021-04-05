@@ -1,17 +1,26 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable, OnInit } from "@angular/core";
-import { environment } from "src/environments/environment";
+import { Injectable } from "@angular/core";
+
 @Injectable()
 export class QuestionnaireService {
 
     constructor(public http: HttpClient) {
     }
 
-    getQuestionnaire(code: string): Promise<any> {
-        return this.http.get(environment.questionnaireEndpoint).toPromise();
+    getQuestionnaireResponsesForSubject(subject: string) {
+        return this.http.get("https://api.logicahealth.org/MCCeCarePlanTest/open/QuestionnaireResponse?subject=" + subject).toPromise();
     }
 
-    submit(arg0: any): any {
-        debugger;
+    getQuestionnaire(code?: string): Promise<any> {
+        return this.http.get("https://api.logicahealth.org/MCCeCarePlanTest/open/QuestionnaireResponse/" + code).toPromise();
+    }
+
+    submit(qrObject: any): any {
+        this.http.post("https://api.logicahealth.org/MCCeCarePlanTest/open/QuestionnaireResponse", qrObject).toPromise().then(x => {
+            debugger;
+        }).catch(x => {
+            debugger;
+        })
+
     }
 }
