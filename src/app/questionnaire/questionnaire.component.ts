@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Constants } from '../common/constants';
 import { QuestionnaireService } from '../services/questionnaire.service';
+import * as fromRoot from '../ngrx/reducers';
 declare var LForms: any;
 
 @Component({
@@ -10,8 +12,10 @@ declare var LForms: any;
 })
 export class GenericQuestionnaireComponent implements OnInit {
   @Input() code: string;
+  private patientId: string;
 
   constructor(
+    private store: Store<fromRoot.State>,
     protected questionnaireService: QuestionnaireService
   ) {
 
@@ -21,8 +25,15 @@ export class GenericQuestionnaireComponent implements OnInit {
     // @ts-ignore
     this.code = code;
     if (this.code) {
-      this.renderNewForm();
+      // this.renderNewForm();
+      this.findExistingResponses();
     }
+
+    this.store.select(fromRoot.getPatientProfile).subscribe(x => {
+      if (x && x.fhirid) {
+        this.patientId = x.fhirid;
+      }
+    });
   }
 
 
@@ -34,9 +45,13 @@ export class GenericQuestionnaireComponent implements OnInit {
     var qr = LForms.Util.getFormFHIRData('QuestionnaireResponse', 'R4');
     qr.questionnaire = "Questionnaire/loinc-" + this.code;
     qr.subject = {
-      "reference": "Patient/cc-pat-betsy"
+      "reference": "Patient/" + this.patientId
     }
-    this.questionnaireService.submit(qr);
+    this.questionnaireService.submit(qr).then(x => {
+      window.alert("Succesfully posted.");
+    }).catch(x => {
+      window.alert("Error: " + JSON.stringify(x));
+    });
   }
 
 
@@ -60,6 +75,8 @@ export class GenericQuestionnaireComponent implements OnInit {
 
   // TODO
   renderExistingForm(formData: any) {
-    //
+    let template = LForms.Util.convertFHIRQuestionnaireToLForms(Constants.questionnaireMap.get(this.code), "R4");
+    let formattedForm = LForms.Util.mergeFHIRDataIntoLForms("QuestionnaireResponse", formData, template, "R4");
+    LForms.Util.addFormToPage(formattedForm, "questionnaireFormContainer", { prepopulate: true });
   }
 }

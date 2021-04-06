@@ -9,7 +9,7 @@ export const environment = {
   mccapiUrl: window['env']['apiServer'] || 'http://localhost:8081',
   clientId: window['env']['clientId'] || '0950cf46-841c-466f-8bfb-19aa7d351b77',
   testPatients: ['cc-pat-betsy', 'cc-pat-pnoelle'],
-  questionnaireEndpoint: window['env']['questionnaireEndPoint'] || ''
+  questionnaireEndpoint: window['env']['questionnaireEndPoint'] || 'https://api.logicahealth.org/MCCeCarePlanTest/open/QuestionnaireResponse'
 };
 
 /*
