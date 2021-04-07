@@ -6,7 +6,6 @@ import { forkJoin, Observable, of, Subject } from 'rxjs';
 import { GoalTarget, MccObservation } from '../generated-data-api';
 import { formatGoalTargetValue } from '../common/chart-utility-functions';
 import { TargetValue } from '../main/goals/goals.tab/target-value';
-import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable()

@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ChartDataSets } from 'chart.js';
-import * as moment from 'moment';
+import moment from 'moment';
 import { finalize } from 'rxjs/operators';
 import { reformatYYYYMMDD, getLineChartOptionsObject } from '../common/chart-utility-functions';
 import { emptyVitalSigns, VitalSigns, VitalSignsTableData } from '../data-model/vitalSigns';
