@@ -20,6 +20,8 @@ import { EgfrService } from './services/egfr.service';
 import { FhirService } from './services/fhir.service';
 import { UacrService } from './services/uacr.service';
 import { WeightService } from './services/weight.service';
+import featureToggling from "../assets/json/feature-toggling.json";
+import { Constants } from './common/constants';
 
 declare var window: any;
 
@@ -48,6 +50,7 @@ export class AppComponent implements OnInit {
     devmode = false;
 
     ngOnInit(): void {
+        Constants.featureToggling = featureToggling;
         const skey = window.sessionStorage.SMART_KEY;
         const key = skey ? skey.replace(/['"]+/g, '') : "";
         console.log('Ang: Smart Key is ' + key);
