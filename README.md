@@ -88,6 +88,12 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
 
 
 #Changelog
+2021-04-08
+- Release ("1.0.7")
+- Fix for WoT graph
+- Labs/Vitals configurable via JSON
+- Features able to be toggled on/off via JSON
+
 2021-03-29
 - Release ("1.0.6")
 - Handling no careplans available
