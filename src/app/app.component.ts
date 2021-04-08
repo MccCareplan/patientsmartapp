@@ -31,6 +31,7 @@ declare var window: any;
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+    featureToggling: any = featureToggling;
     title = 'Patient Smart App';
     smartLaunch: boolean;
     currentSubjectId: string = '';

@@ -1,4 +1,5 @@
-<ul class="interventions-items" *ngIf="displayFilter=='maintenance'">
+<ul class="interventions-items"
+    *ngIf="displayFilter=='maintenance' && featureToggling.maintenanceAndInterventions.medications">
     <li *ngFor="let medication of medications$ | async">
         <div class="interventions-item">
             <h3 class="interventions-title">{{ medication.medication | titlecase }}</h3>
@@ -33,9 +34,10 @@
     </li>
 </ul>
 <ul class="interventions-items" *ngIf="displayFilter=='interventions'">
-    <h4 *ngIf="(educationSummaries$ | async).length > 0">Education</h4>
+    <h4 *ngIf="(educationSummaries$ | async).length > 0 && featureToggling.maintenanceAndInterventions.education">
+        Education</h4>
     <li *ngFor="let education of (educationSummaries$ | async)">
-        <div class="interventions-item">
+        <div class="interventions-item" *ngIf="featureToggling.maintenanceAndInterventions.education">
             <h3 class="interventions-title" *ngIf="education.topic">{{ education.topic.text | titlecase }}</h3>
             <hr />
             <ul>
@@ -72,9 +74,10 @@
             </ul>
         </div>
     </li>
-    <h4 *ngIf="(counselingSummaries$ | async).length > 0">Counseling</h4>
+    <h4 *ngIf="(counselingSummaries$ | async).length > 0 && featureToggling.maintenanceAndInterventions.counseling">
+        Counseling</h4>
     <li *ngFor="let counseling of counselingSummaries$ | async">
-        <div class="interventions-item">
+        <div class="interventions-item" *ngIf="featureToggling.maintenanceAndInterventions.counseling">
             <h3 class="interventions-title">{{ counseling.topic.text | titlecase }}</h3>
             <hr />
             <ul>
@@ -111,9 +114,9 @@
             </ul>
         </div>
     </li>
-    <h4>Referrals</h4>
+    <h4 *ngIf="featureToggling.maintenanceAndInterventions.referrals">Referrals</h4>
     <li *ngFor="let referral of referralSummaries$ | async">
-        <div class="interventions-item">
+        <div class="interventions-item" *ngIf="featureToggling.maintenanceAndInterventions.referrals">
             <h3 *ngIf="referral.purpose.text" class="interventions-title">{{ referral.purpose.text | titlecase }}</h3>
             <hr />
             <ul>

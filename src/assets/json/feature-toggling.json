@@ -1,6 +1,6 @@
 {
     "healthAndSocialConcerns": {
-        "activeDiagnoses": false,
+        "activeDiagnoses": true,
         "inactiveDiagnoses": true,
         "socialConcerns": true
     },
