@@ -7,10 +7,11 @@
     </div>
     <div class="health-tabs">
         <mat-tab-group mat-align-tabs="center">
-            <mat-tab label="Health Concerns">
+            <mat-tab label="Health Concerns"
+                *ngIf="featureToggling.healthAndSocialConcerns.activeDiagnoses || featureToggling.healthAndSocialConcerns.inactiveDiagnoses">
                 <app-health-tab displayFilter="health"></app-health-tab>
             </mat-tab>
-            <mat-tab label="Social Concerns">
+            <mat-tab label="Social Concerns" *ngIf="featureToggling.healthAndSocialConcerns.socialConcerns">
                 <app-health-tab displayFilter="social"></app-health-tab>
             </mat-tab>
         </mat-tab-group>

@@ -17,13 +17,13 @@
             <mat-toolbar class="footer" color="background">
                 <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
                     <button mat-button routerLink="/vital-signs" routerLinkActive="active-menu-item"
-                        queryParamsHandling="merge">
+                        *ngIf="featureToggling.status.clinicalResults" queryParamsHandling="merge">
                         <img src="../../../assets/svg/stethscope.svg">
                         <span>Vital Signs</span>
                     </button>
                     <div class="divider"></div>
                     <button mat-button routerLink="/lab-results" routerLinkActive="active-menu-item"
-                        queryParamsHandling="merge">
+                        *ngIf="featureToggling.status.labResults" queryParamsHandling="merge">
                         <img src="../../../assets/svg/beaker.svg">
                         <span>Lab Results</span>
                     </button>

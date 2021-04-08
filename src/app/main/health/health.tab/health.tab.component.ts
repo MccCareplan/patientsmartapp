@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../ngrx/reducers';
 import { Observable } from 'rxjs';
 import { ConditionLists, SocialConcern } from 'src/app/generated-data-api';
+import { Constants } from 'src/app/common/constants';
 
 @Component({
     selector: 'app-health-tab',
@@ -12,6 +13,8 @@ import { ConditionLists, SocialConcern } from 'src/app/generated-data-api';
 })
 
 export class HealthTabComponent implements OnInit {
+    featureToggling: any = Constants.featureToggling;
+
     @Input()
     displayFilter: string;
 
