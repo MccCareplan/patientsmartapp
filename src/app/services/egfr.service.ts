@@ -59,6 +59,7 @@ export class EgfrService extends DataService {
     }
 
     filterDataSet(index: number): void {
+        if (this.aggregatedChartData.length == 0 || this.aggregatedTableData.length == 0) return;
         this.selectedIndex = index;
         const xAxisLabels: string[] = [];
 
@@ -117,6 +118,7 @@ export class EgfrService extends DataService {
         return new Observable(observer => {
             this.getSegementedObservationsByValueSet(patientId, codes.observationValuesets.Egfr)
                 .pipe(finalize(() => {
+                    this.filterDataSet(0);
                     observer.complete();
                 }))
                 .subscribe(obsCollection => {
