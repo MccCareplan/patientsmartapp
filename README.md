@@ -52,13 +52,20 @@ https://api.logicahealth.org/MCCeCarePlanTest/open
 The included file 'Dockerfle-prod' is a basic production build docker file. It will build the app and containerize it in a node nginx server.
 In addtion if you have a built version you may dockerize using the simple Dockerfile, which will cause the image to be built based on your most recent compile.
 
-### Runtime Environment variabls
+### Runtime Environment variables
 | Variable name | Sample Value |
 | ------------- | ------------- | 
 | API_SERVER | http://localhost:8080 |
 | CLIENT_ID | 123456789abcdef |
 | LAUNCH_SERVER | https://api.logicahealth.org/MCCeCarePlanTest/data |
 | AUTH_DEBUG | false |
+
+## Environment variables to override after build
+| Path | File Name | Description |
+| ---- | --------- | ----------- |
+| /assets/json | lab-mappings.json | Defines the lab results to query on the "Health Status" screen | 
+| /assets/json | vital-mappings.json | Defines the vital signs to query on the "Health Status" screen |
+| /assets/json | feature-toggling.json | Toggle functionality on/off across the application |
 
 ### Via Docker
 $ docker run -it -e CLIENT_ID='xxxyyzzz123123" -e API_SERVER='http://localhost:8080' -p 80:80 --rm mcccareplan/mccproviderapp
@@ -77,12 +84,16 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
  $  docker build -f Dockerfile-prod -t mcccareplan/mccpatientapp .
 
 ### Running the image
-
  $ docker run -it -p 80:80 --rm mcccareplan/mccpatientapp
 
 
-
 #Changelog
+2021-04-08
+- Release ("1.0.7")
+- Fix for WoT graph
+- Labs/Vitals configurable via JSON
+- Features able to be toggled on/off via JSON
+
 2021-03-29
 - Release ("1.0.6")
 - Handling no careplans available

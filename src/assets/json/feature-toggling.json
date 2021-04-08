@@ -1,0 +1,22 @@
+{
+    "healthAndSocialConcerns": {
+        "activeDiagnoses": true,
+        "inactiveDiagnoses": true,
+        "socialConcerns": true
+    },
+    "goalsAndPreferences": {
+        "goals": true,
+        "targets": true,
+        "patientChoices": true
+    },
+    "maintenanceAndInterventions": {
+        "medications": true,
+        "education": true,
+        "counseling": true,
+        "referrals": true
+    },
+    "status": {
+        "clinicalResults": true,
+        "labResults": true
+    }
+}

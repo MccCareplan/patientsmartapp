@@ -7,6 +7,7 @@ import { MccMedicationRecord, MedicationLists } from 'src/app/generated-data-api
 import { EducationSummary } from 'src/generated-data-api/models/EducationSummary';
 import { ReferralSummary } from 'src/app/generated-data-api/models/ReferralSummary';
 import { CounselingSummary } from 'src/generated-data-api/models/CounselingSummary';
+import { Constants } from 'src/app/common/constants';
 
 @Component({
     selector: 'app-interventions-tab',
@@ -15,6 +16,8 @@ import { CounselingSummary } from 'src/generated-data-api/models/CounselingSumma
 })
 
 export class InterventionsTabComponent implements OnInit {
+    featureToggling: any = Constants.featureToggling;
+
     @Input()
     displayFilter: string;
 
