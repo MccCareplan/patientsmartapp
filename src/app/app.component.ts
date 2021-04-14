@@ -160,6 +160,7 @@ export class AppComponent implements OnInit {
                 this.subjectInfo = x;
             }
         })
+        
     }
 
     waitFor(time: number) {
