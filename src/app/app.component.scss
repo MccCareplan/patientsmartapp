@@ -10,6 +10,7 @@ mat-sidenav {
 
 .header {
     margin-bottom: 8px; /*Leave space at bottom of toolbar so elevation shadow effect will show*/
+    background-color: #eceff1 !important;
 }
 
 /*component content area*/
@@ -53,8 +54,46 @@ mat-sidenav {
         height: 33px;
         background-color: #939393;
     }
-    img { 
+    img {
         height: 20px;
         width: 20px;
     }
+}
+
+.patient-info-header {
+    width: 100%;
+    background-color: #eceff1 !important;
+    padding: 0 16px;
+    display: flex;
+    float: left;
+    box-sizing: border-box;
+    height: 36px;
+    margin: 5px 0;
+}
+.patient-info-header > div {
+    background-color: #eceff1 !important;
+    color: #828282;
+    float: left;
+    width: 20%;
+    text-align: center;
+    font-size: 0.8em;
+
+    @media (max-width: 768px) {
+        font-size: 0.75em;
+    }
+
+    @media (min-width: 768px) {
+    }
+    @media (min-width: 1024px) {
+    }
+}
+.patient-info-header > div > label {
+    text-decoration: underline;
+}
+
+.demo-info {
+    height: 48px;
+}
+
+.icon {
 }

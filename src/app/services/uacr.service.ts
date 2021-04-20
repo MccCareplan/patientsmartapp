@@ -107,18 +107,13 @@ export class UacrService extends DataService {
                 }))
                 .subscribe(observations => {
                     observations.map(obs => {
-                        switch (obs.code.coding[0].code) {
-                            case observationCodes.Uacr:
-                                const uacr: UacrTableData = {
-                                    date: obs.effective.dateTime.date,
-                                    uacr: obs.value.quantityValue.value,
-                                    unit: obs.value.quantityValue.unit,
-                                    test: obs.code.text
-                                };
-                                observer.next(uacr);
-                                break;
-                            default:
-                        }
+                        const uacr: UacrTableData = {
+                            date: obs.effective.dateTime.date,
+                            uacr: obs.value.quantityValue.value,
+                            unit: obs.value.quantityValue.unit,
+                            test: obs.code.text
+                        };
+                        observer.next(uacr);
                     });
                 });
         });

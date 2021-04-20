@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
     smartLaunch: boolean;
     currentSubjectId: string = '';
     carePlanId: string = '';
+    subjectInfo: any;
 
     constructor(
         private route: ActivatedRoute,
@@ -80,26 +81,21 @@ export class AppComponent implements OnInit {
 
         this.route.queryParams.subscribe(params => {
             if (!initialLoadDone) {
-                const dev = params.devmode;
-                this.devmode = (dev === 'true');
-                this.store.dispatch(devmode.EditAction({ data: this.devmode }));
-
                 if (params.subject != null) this.currentSubjectId = params.subject;
-
                 if (this.currentSubjectId && this.currentSubjectId.length > 0) {
                     // Load best careplan for the subject, then load subsequent data
                     this.store.dispatch(carePlansSummary.loadCareplansSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
                     this.store.select(fromRoot.getCarePlansSummary).subscribe(c => {
                         if (c && c.length === 0 && !initialLoadDone) {
                             initialLoadDone = true;
-
                             // CarePlan Screen
                             this.store.dispatch(patient.SelectAction({ data: this.currentSubjectId }));
                             this.store.dispatch(contact.loadContactsForSubjectAndCarePlanAction({ subjectId: this.currentSubjectId }));
 
                             // Health Status Screen
                             this.store.dispatch(conditionsSummary.loadConditionSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
-
+                            this.loadDemoInfo();
+                            
                             // Interventions & Maintenance Screen
                             this.store.dispatch(medicationSummary.loadMedicationSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
                             this.store.dispatch(educationSummary.loadEducationSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
@@ -151,12 +147,20 @@ export class AppComponent implements OnInit {
                             this.egfrService.getPatientEgfrInfo(this.currentSubjectId);
                             this.weightService.getPatientWotInfo(this.currentSubjectId);
                             this.uacrService.getPatientUacrInfo(this.currentSubjectId);
-
                         }
                     })
                 }
             }
         });
+    }
+
+    loadDemoInfo = (): void => {
+        this.store.select(fromRoot.getPatientProfile).subscribe(x => {
+            if (x && x.fhirid) {
+                this.subjectInfo = x;
+            }
+        })
+        
     }
 
     waitFor(time: number) {

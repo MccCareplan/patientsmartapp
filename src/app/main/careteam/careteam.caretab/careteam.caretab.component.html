@@ -7,7 +7,7 @@
             <span class="care-team-details">{{contact.role}}</span>
             <span *ngIf="contact.address" class="care-team-details">{{contact.address}}</span>
             <span class="care-team-details">{{contact.phone}}</span>
-            <span class="care-team-details">{{contact.email}}</span>
+            <span class="care-team-details" *ngIf="displayFilter === 'profile'">{{contact.email}}</span>
         </div>
 <!--        <span *ngIf="displayFilter === 'profile'" class="care-team-more-icon">&gt;</span> -->
     </li>
