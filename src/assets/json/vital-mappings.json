@@ -13,27 +13,27 @@
     ],
     "ckd": [
         {
-            "name": "Cognitive Status",
+            "name": "Cognitive Status (MoCA)",
             "value": "72172-0",
             "type": "question"
         },
         {
-            "name": "Fatigue",
+            "name": "Fatigue (PROMIS T-score)",
             "value": "77864-7",
             "type": "question"
         },
         {
-            "name": "Functional Status",
+            "name": "Functional Status (PROMIS raw score)",
             "value": "77827-4",
             "type": "question"
         },
         {
-            "name": "Pain Interference",
+            "name": "Pain Interference (PROMIS T-score)",
             "value": "77865-4",
             "type": "question"
         },
         {
-            "name": "Pain Severity",
+            "name": "Pain Severity (Wong-Baker)",
             "value": "38221-8",
             "type": "question"
         },
