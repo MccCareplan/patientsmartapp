@@ -7,6 +7,7 @@
     <mat-sidenav-content fxLayout="column">
         <div class="header">
             <div class="patient-info-header" *ngIf="subjectInfo">
+                <div></div>
                 <div class="name" *ngIf="subjectInfo.name">
                     <label>Name</label>
                     <div>{{ subjectInfo.name }}</div>
@@ -19,13 +20,8 @@
                     <label>Gender</label>
                     <div> {{ subjectInfo.gender }}</div>
                 </div>
-                <div class="race" *ngIf="subjectInfo.race">
-                    <label>Race</label>
-                    <div> {{ subjectInfo.race}}</div>
-                </div>
-                <div class="ethnicity" *ngIf="subjectInfo.ethnicity">
-                    <label>Ethnicity</label>
-                    <div> {{ subjectInfo.ethnicity }}</div>
+                <div class="icon">
+                    <img src="../assets/icons/logo.jpg" height="100%">
                 </div>
             </div>
             <app-header-mobile>

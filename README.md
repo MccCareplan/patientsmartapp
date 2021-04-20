@@ -66,6 +66,7 @@ In addtion if you have a built version you may dockerize using the simple Docker
 | /assets/json | lab-mappings.json | Defines the lab results to query on the "Health Status" screen | 
 | /assets/json | vital-mappings.json | Defines the vital signs to query on the "Health Status" screen |
 | /assets/json | feature-toggling.json | Toggle functionality on/off across the application |
+| /assets/icons | logo.jpg | Organizational Icon shown in the header
 
 ### Via Docker
 $ docker run -it -e CLIENT_ID='xxxyyzzz123123" -e API_SERVER='http://localhost:8080' -p 80:80 --rm mcccareplan/mccproviderapp
