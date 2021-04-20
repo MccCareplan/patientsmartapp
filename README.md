@@ -89,6 +89,14 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
 
 
 #Changelog
+2021-04-20
+- Release ("1.0.8")
+- Fix for Firefox session issues
+- Demographic header info
+- UACR graph not rendering fix
+- Hiding email on Care Team contacts
+- Better labels for questionnaires
+
 2021-04-08
 - Release ("1.0.7")
 - Fix for WoT graph
