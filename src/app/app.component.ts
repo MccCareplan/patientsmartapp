@@ -22,6 +22,7 @@ import { UacrService } from './services/uacr.service';
 import { WeightService } from './services/weight.service';
 import featureToggling from "../assets/json/feature-toggling.json";
 import { Constants } from './common/constants';
+import { FeatureTogglingService } from './services/feature-toggling.service';
 
 declare var window: any;
 
@@ -45,7 +46,8 @@ export class AppComponent implements OnInit {
         private egfrService: EgfrService,
         private fhirService: FhirService,
         private weightService: WeightService,
-        private uacrService: UacrService
+        private uacrService: UacrService,
+        private featureTogglingService: FeatureTogglingService
     ) {
     }
 
@@ -62,6 +64,8 @@ export class AppComponent implements OnInit {
         else {
             this.loadPatientData();
         }
+
+        this.test();
     }
 
     showFooter(): boolean {
@@ -95,7 +99,7 @@ export class AppComponent implements OnInit {
                             // Health Status Screen
                             this.store.dispatch(conditionsSummary.loadConditionSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
                             this.loadDemoInfo();
-                            
+
                             // Interventions & Maintenance Screen
                             this.store.dispatch(medicationSummary.loadMedicationSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
                             this.store.dispatch(educationSummary.loadEducationSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
@@ -160,7 +164,7 @@ export class AppComponent implements OnInit {
                 this.subjectInfo = x;
             }
         })
-        
+
     }
 
     waitFor(time: number) {
@@ -194,5 +198,9 @@ export class AppComponent implements OnInit {
         } else {
             console.log('No info for key ' + key + ' found');
         }
+    }
+
+    test() {
+        this.featureTogglingService.test();
     }
 }

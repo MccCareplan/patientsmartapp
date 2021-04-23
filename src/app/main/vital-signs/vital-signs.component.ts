@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { Constants } from "src/app/common/constants";
 import { MccObservation, SimpleQuestionnaireItem } from "src/app/generated-data-api";
 import { ObservationsService } from "src/app/services/observations.service.new";
 import * as fromRoot from '../../ngrx/reducers';

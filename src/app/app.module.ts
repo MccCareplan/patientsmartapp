@@ -53,6 +53,7 @@ import { WeightGraphComponent } from './main/graphs/weight/weight.component';
 import { UACRGraphComponent } from './main/graphs/uacr/uacr.component';
 import { ObservationsService } from './services/observations.service.new';
 import { GenericGraphComponent } from './main/graphs/generic/generic.component';
+import { FeatureTogglingService } from './services/feature-toggling.service';
 
 @NgModule({
         declarations: [
@@ -98,7 +99,7 @@ import { GenericGraphComponent } from './main/graphs/generic/generic.component';
                 SharedModule,
                 FormsModule
         ],
-        providers: [PatientLoadedGuard, SubjectDataServiceService, ObservationsService],
+        providers: [PatientLoadedGuard, SubjectDataServiceService, ObservationsService, FeatureTogglingService],
         exports: [RouterModule],
         bootstrap: [AppComponent]
 })
