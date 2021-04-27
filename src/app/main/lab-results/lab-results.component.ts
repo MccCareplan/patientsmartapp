@@ -5,7 +5,7 @@ import { MccObservation, SimpleQuestionnaireItem } from 'src/app/generated-data-
 import { ObservationsService } from 'src/app/services/observations.service.new';
 import { Router, NavigationExtras, Params } from '@angular/router';
 import { getDisplayValue, formatEffectiveDate, formatMccDate } from 'src/app/common/chart-utility-functions';
-import labMappingsJSON from "../../../assets/json/lab-mappings.json";
+import labMappingsJSON from "../../../assets/json/data/lab-mappings.json";
 
 interface FormattedResult {
   name: string;

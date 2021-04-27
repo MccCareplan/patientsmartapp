@@ -20,9 +20,8 @@ import { EgfrService } from './services/egfr.service';
 import { FhirService } from './services/fhir.service';
 import { UacrService } from './services/uacr.service';
 import { WeightService } from './services/weight.service';
-import featureToggling from "../assets/json/feature-toggling.json";
+import featureToggling from "../assets/json/data/feature-toggling.json";
 import { Constants } from './common/constants';
-import { FeatureTogglingService } from './services/feature-toggling.service';
 
 declare var window: any;
 
@@ -32,7 +31,7 @@ declare var window: any;
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    featureToggling: any = featureToggling;
+    featureToggling: any;
     title = 'Patient Smart App';
     smartLaunch: boolean;
     currentSubjectId: string = '';
@@ -46,8 +45,7 @@ export class AppComponent implements OnInit {
         private egfrService: EgfrService,
         private fhirService: FhirService,
         private weightService: WeightService,
-        private uacrService: UacrService,
-        private featureTogglingService: FeatureTogglingService
+        private uacrService: UacrService
     ) {
     }
 
@@ -55,6 +53,8 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         Constants.featureToggling = featureToggling;
+        this.featureToggling = featureToggling;
+        
         const skey = window.sessionStorage.SMART_KEY;
         const key = skey ? skey.replace(/['"]+/g, '') : "";
         console.log('Ang: Smart Key is ' + key);
@@ -64,8 +64,6 @@ export class AppComponent implements OnInit {
         else {
             this.loadPatientData();
         }
-
-        this.test();
     }
 
     showFooter(): boolean {
@@ -198,9 +196,5 @@ export class AppComponent implements OnInit {
         } else {
             console.log('No info for key ' + key + ' found');
         }
-    }
-
-    test() {
-        this.featureTogglingService.test();
     }
 }

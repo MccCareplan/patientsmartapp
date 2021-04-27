@@ -5,7 +5,7 @@ import { ObservationsService } from "src/app/services/observations.service.new";
 import * as fromRoot from '../../ngrx/reducers';
 import { Router, NavigationExtras, Params } from '@angular/router';
 import { formatEffectiveDate, formatMccDate, getDisplayValue } from "src/app/common/chart-utility-functions";
-import vitalMappingsJSON from "../../../assets/json/vital-mappings.json";
+import vitalMappingsJSON from "../../../assets/json/data/vital-mappings.json";
 
 interface FormattedResult {
     name: string;
