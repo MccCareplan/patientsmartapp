@@ -16,7 +16,7 @@
         "referrals": true
     },
     "status": {
-        "clinicalResults": false,
-        "labResults": false
+        "clinicalResults": true,
+        "labResults": true
     }
 }

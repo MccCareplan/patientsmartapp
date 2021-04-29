@@ -5,7 +5,7 @@ import { ObservationsService } from "src/app/services/observations.service.new";
 import * as fromRoot from '../../ngrx/reducers';
 import { Router, NavigationExtras, Params } from '@angular/router';
 import { formatEffectiveDate, formatMccDate, getDisplayValue } from "src/app/common/chart-utility-functions";
-import vitalMappingsJSON from "../../../assets/json/data/vital-mappings.json";
+import { Constants } from "src/app/common/constants";
 
 interface FormattedResult {
     name: string;
@@ -95,10 +95,10 @@ export class VitalSignsComponent implements OnInit {
 
     loadData = (): void => {
         this.results = [];
-        if (!vitalMappingsJSON[this.longTermCondition]) {
+        if (!Constants.vitalMappings[this.longTermCondition]) {
             return;
         }
-        let callsToMake: PatientLabResultsMap[] = vitalMappingsJSON[this.longTermCondition];
+        let callsToMake: PatientLabResultsMap[] = Constants.vitalMappings[this.longTermCondition];
         let promiseArray = [];
         callsToMake.forEach((v, i) => {
             switch (v.type) {

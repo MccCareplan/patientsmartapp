@@ -1,7 +1,8 @@
+var labMappings =
 {
     "general": [
         {
-            "name": "Serum Creatinine",
+            "name": "Serum Creatinine Test",
             "value": "2.16.840.1.113762.1.4.1222.111",
             "type": "valueset"
         },
@@ -83,7 +84,7 @@
     ],
     "ckd": [
         {
-            "name": "UACR",
+            "name": "UACR Test",
             "value": "2.16.840.1.113883.3.6929.2.1002",
             "type": "valueset"
         },

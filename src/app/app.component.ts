@@ -21,6 +21,8 @@ import { FhirService } from './services/fhir.service';
 import { UacrService } from './services/uacr.service';
 import { WeightService } from './services/weight.service';
 import featureToggling from "../assets/json/data/feature-toggling.json";
+import labMappings from "../assets/json/data/lab-mappings.json";
+import vitalMappings from "../assets/json/data/vital-mappings.json";
 import { Constants } from './common/constants';
 
 declare var window: any;
@@ -31,7 +33,7 @@ declare var window: any;
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    featureToggling: any;
+    featureToggling: any = featureToggling;
     title = 'Patient Smart App';
     smartLaunch: boolean;
     currentSubjectId: string = '';
@@ -51,10 +53,18 @@ export class AppComponent implements OnInit {
 
     devmode = false;
 
+    parseOverrides() {
+        if (window.featureToggling) Constants.featureToggling = window.featureToggling;
+        else Constants.featureToggling = featureToggling;
+        if (window.labMappings) Constants.labMappings = window.labMappings;
+        else Constants.labMappings = labMappings;
+        if (window.vitalMappings) Constants.vitalMappings = window.vitalMappings;
+        else Constants.vitalMappings = vitalMappings;
+    }
+
     ngOnInit(): void {
-        Constants.featureToggling = featureToggling;
-        this.featureToggling = featureToggling;
-        
+        this.parseOverrides();
+        this.featureToggling = Constants.featureToggling;
         const skey = window.sessionStorage.SMART_KEY;
         const key = skey ? skey.replace(/['"]+/g, '') : "";
         console.log('Ang: Smart Key is ' + key);

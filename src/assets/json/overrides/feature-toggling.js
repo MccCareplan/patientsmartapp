@@ -1,3 +1,4 @@
+var featureToggling =
 {
     "healthAndSocialConcerns": {
         "activeDiagnoses": true,
