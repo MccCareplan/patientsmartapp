@@ -68,7 +68,9 @@ In addtion if you have a built version you may dockerize using the simple Docker
 | /assets/json/data | feature-toggling.json | Toggle functionality on/off across the application  Use the file found in  folder [/assets/json/data-backups](src/assets/json/data-backups) | 
 | /assets/icons/logo | logo.jpg | Organizational Icon shown in the header |
 
-Use docker -v command to overwrite the "json/data" and "logo" folders with folders of your own.  The file names and types must match exactly.  Also, you must include all json files even if you are only modifying one.
+Use docker -v command to overwrite the "json/data" and "logo" folders with folders of your own.  
+The file names and types must match exactly.  Also, you must include all json files even if you are only modifying one.
+
 $ docker run -v {Full 'json/data' Directory Path}:/usr/share/nginx/html/assets/json/data -v {Full 'logo' Directory Path}:/usr/share/nginx/html/assets/icons/logo -d -p 80:80 --rm mcccareplan/mccpatientapp
 
 ### Via Docker
