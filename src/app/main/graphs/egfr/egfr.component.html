@@ -10,7 +10,7 @@
     </canvas>
 </div>
 <div class="lab-graph-table" [ngClass]="{'hidden':  !(showTable && tableReady)}">
-    <table mat-table matSort [dataSource]="tableDataSource" width="100%">
+    <table mat-table matSort [dataSource]="tableDataSource" width="100%" matSortActive="date" matSortDirection="desc">
         <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef mat-sort-header="date">Date</th>
             <td mat-cell *matCellDef="let egfr"> {{egfr.date | date: 'MM/dd/yyyy'}} </td>

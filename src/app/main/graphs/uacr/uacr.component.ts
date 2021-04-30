@@ -7,6 +7,7 @@ import { UacrTableData } from 'src/app/data-model/uacr';
 import { UacrService } from 'src/app/services/uacr.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import moment from 'moment';
 
 @Component({
     selector: 'uacr-graph',
@@ -91,6 +92,19 @@ export class UACRGraphComponent implements OnInit {
         let int = setInterval(() => {
             if (this.tableDataSource.filteredData.length > 0) {
                 this.tableDataSource.sort = this.sort;
+                this.tableDataSource.sortingDataAccessor = (data: UacrTableData, header: string) => {
+                    switch (header) {
+                        case ('result'): {
+                            return data.uacr;
+                        }
+                        case ('date'): {
+                            return moment(data.date);
+                        }
+                        default: {
+                            return data[header];
+                        }
+                    }
+                };
                 this.tableDataSource.paginator = this.paginator;
                 this.tableReady = true;
                 clearInterval(int);

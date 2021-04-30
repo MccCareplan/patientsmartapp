@@ -7,6 +7,7 @@ import { formatEgfrResult } from 'src/app/common/utility-functions';
 import { EgfrTableData } from 'src/app/data-model/egfr';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import moment from 'moment';
 
 @Component({
     selector: 'egfr-graph',
@@ -100,6 +101,22 @@ export class EGFRGraphComponent implements OnInit {
         let int = setInterval(() => {
             if (this.tableDataSource && this.tableDataSource.filteredData && this.tableDataSource.filteredData.length > 0) {
                 this.tableDataSource.sort = this.sort;
+                this.tableDataSource.sortingDataAccessor = (data: EgfrTableData, header: string) => {
+                    switch (header) {
+                        case ('result'): {
+                            return data.egfr;
+                        }
+
+                        case ('date'): {
+                            return moment(data.date);
+                        }
+
+                        default: {
+                            return data[header];
+                        }
+                    }
+                };
+
                 this.tableDataSource.paginator = this.paginator;
                 this.tableReady = true;
                 clearInterval(int);
