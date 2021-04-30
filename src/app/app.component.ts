@@ -54,17 +54,14 @@ export class AppComponent implements OnInit {
     devmode = false;
 
     parseOverrides() {
-        if (window.featureToggling) Constants.featureToggling = window.featureToggling;
-        else Constants.featureToggling = featureToggling;
-        if (window.labMappings) Constants.labMappings = window.labMappings;
-        else Constants.labMappings = labMappings;
-        if (window.vitalMappings) Constants.vitalMappings = window.vitalMappings;
-        else Constants.vitalMappings = vitalMappings;
+        Constants.featureToggling = featureToggling;
+        Constants.labMappings = labMappings;
+        Constants.vitalMappings = vitalMappings;
+        this.featureToggling = Constants.featureToggling;
     }
 
     ngOnInit(): void {
         this.parseOverrides();
-        this.featureToggling = Constants.featureToggling;
         const skey = window.sessionStorage.SMART_KEY;
         const key = skey ? skey.replace(/['"]+/g, '') : "";
         console.log('Ang: Smart Key is ' + key);

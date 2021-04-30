@@ -1,8 +1,7 @@
-var vitalMappings =
 {
     "general": [
         {
-            "name": "Blood Pressure Test",
+            "name": "Blood Pressure",
             "value": "85354-9",
             "type": "panel"
         },
@@ -14,7 +13,7 @@ var vitalMappings =
     ],
     "ckd": [
         {
-            "name": "Cognitive Status (MoCA) Test",
+            "name": "Cognitive Status (MoCA)",
             "value": "72172-0",
             "type": "question"
         },

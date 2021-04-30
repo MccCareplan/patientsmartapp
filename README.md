@@ -63,10 +63,13 @@ In addtion if you have a built version you may dockerize using the simple Docker
 ## Environment variables to override after build
 | Path | File Name | Description |
 | ---- | --------- | ----------- |
-| /assets/json | lab-mappings.json | Defines the lab results to query on the "Health Status" screen | 
-| /assets/json | vital-mappings.json | Defines the vital signs to query on the "Health Status" screen |
-| /assets/json | feature-toggling.json | Toggle functionality on/off across the application |
-| /assets/icons | logo.jpg | Organizational Icon shown in the header
+| /assets/json/data | lab-mappings.json | Defines the lab results to query on the "Health Status" screen.  Use the file found in  folder [/assets/json/data-backups](src/assets/json/data-backups) | 
+| /assets/json/data | vital-mappings.json | Defines the vital signs to query on the "Health Status" screen  Use the file found in  folder [/assets/json/data-backups](src/assets/json/data-backups) | 
+| /assets/json/data | feature-toggling.json | Toggle functionality on/off across the application  Use the file found in  folder [/assets/json/data-backups](src/assets/json/data-backups) | 
+| /assets/icons/logo | logo.jpg | Organizational Icon shown in the header |
+
+Use docker -v command to overwrite the "json/data" and "logo" folders with folders of your own.  The file names and types must match exactly.  Also, you must include all json files even if you are only modifying one.
+$ docker run -v {Full 'json/data' Directory Path}:/usr/share/nginx/html/assets/json/data -v {Full 'logo' Directory Path}:/usr/share/nginx/html/assets/icons/logo -d -p 80:80 --rm mcccareplan/mccpatientapp
 
 ### Via Docker
 $ docker run -it -e CLIENT_ID='xxxyyzzz123123" -e API_SERVER='http://localhost:8080' -p 80:80 --rm mcccareplan/mccproviderapp
