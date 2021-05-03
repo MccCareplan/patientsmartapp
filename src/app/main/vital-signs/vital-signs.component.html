@@ -9,7 +9,7 @@
     </div>
     <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="results.length === 0"></mat-spinner>
     <ul class="vital-sign-items">
-        <li *ngFor="let res of results" (click)="navToGraph(res)">
+        <li *ngFor="let res of results" (click)="navToGraph(res)" [ngClass]="{'cursor-pointer':  res.value !== 'No Data Available'}">
             <div class="vital-sign-item">
                 <h3 class="vital-sign-title">{{res.name}}</h3>
                 <span class="vital-sign-details vital-sign-details-2">{{res.date}}</span>

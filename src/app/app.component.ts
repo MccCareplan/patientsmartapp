@@ -20,7 +20,9 @@ import { EgfrService } from './services/egfr.service';
 import { FhirService } from './services/fhir.service';
 import { UacrService } from './services/uacr.service';
 import { WeightService } from './services/weight.service';
-import featureToggling from "../assets/json/feature-toggling.json";
+import featureToggling from "../assets/json/data/feature-toggling.json";
+import labMappings from "../assets/json/data/lab-mappings.json";
+import vitalMappings from "../assets/json/data/vital-mappings.json";
 import { Constants } from './common/constants';
 
 declare var window: any;
@@ -51,8 +53,15 @@ export class AppComponent implements OnInit {
 
     devmode = false;
 
-    ngOnInit(): void {
+    parseOverrides() {
         Constants.featureToggling = featureToggling;
+        Constants.labMappings = labMappings;
+        Constants.vitalMappings = vitalMappings;
+        this.featureToggling = Constants.featureToggling;
+    }
+
+    ngOnInit(): void {
+        this.parseOverrides();
         const skey = window.sessionStorage.SMART_KEY;
         const key = skey ? skey.replace(/['"]+/g, '') : "";
         console.log('Ang: Smart Key is ' + key);
@@ -95,7 +104,7 @@ export class AppComponent implements OnInit {
                             // Health Status Screen
                             this.store.dispatch(conditionsSummary.loadConditionSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
                             this.loadDemoInfo();
-                            
+
                             // Interventions & Maintenance Screen
                             this.store.dispatch(medicationSummary.loadMedicationSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
                             this.store.dispatch(educationSummary.loadEducationSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
@@ -160,7 +169,7 @@ export class AppComponent implements OnInit {
                 this.subjectInfo = x;
             }
         })
-        
+
     }
 
     waitFor(time: number) {
