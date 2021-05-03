@@ -65,7 +65,7 @@ export function getDisplayValue(value: GenericType): any {
                 break;
             }
             case 'CodeableConcept': {
-                // todo:  formatTargetValue CodeableConcept
+                formatted = value.codeableConceptValue.text;
                 break;
             }
             case 'Quantity': {

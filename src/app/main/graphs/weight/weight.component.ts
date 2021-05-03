@@ -7,6 +7,7 @@ import { WeightService } from 'src/app/services/weight.service';
 import { WotTableData } from 'src/app/data-model/weight-over-time';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import moment from 'moment';
 
 @Component({
     selector: 'weight-graph',
@@ -91,6 +92,19 @@ export class WeightGraphComponent implements OnInit {
         let int = setInterval(() => {
             if (this.tableDataSource.filteredData.length > 0) {
                 this.tableDataSource.sort = this.sort;
+                this.tableDataSource.sortingDataAccessor = (data: WotTableData, header: string) => {
+                    switch (header) {
+                        case ('result'): {
+                            return data.value;
+                        }
+                        case ('date'): {
+                            return moment(data.date);
+                        }
+                        default: {
+                            return data[header];
+                        }
+                    }
+                };
                 this.tableDataSource.paginator = this.paginator;
                 this.tableReady = true;
                 clearInterval(int);

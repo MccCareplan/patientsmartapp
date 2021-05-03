@@ -10,8 +10,8 @@ import { formatMccDate, getDisplayValue, getInnerValue, getValueHighlighted } fr
 import { Effective, MccObservation, SimpleQuestionnaireItem } from 'src/app/generated-data-api';
 import { ObservationsService } from 'src/app/services/observations.service.new';
 import * as fromRoot from '../../../ngrx/reducers';
-import labMappingsJSON from "../../../../assets/json/lab-mappings.json";
-import vitalMappingsJSON from "../../../../assets/json/vital-mappings.json";
+import labMappingsJSON from "../../../../assets/json/data/lab-mappings.json";
+import vitalMappingsJSON from "../../../../assets/json/data/vital-mappings.json";
 
 
 @Component({

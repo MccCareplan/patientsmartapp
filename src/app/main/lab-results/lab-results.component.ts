@@ -5,7 +5,7 @@ import { MccObservation, SimpleQuestionnaireItem } from 'src/app/generated-data-
 import { ObservationsService } from 'src/app/services/observations.service.new';
 import { Router, NavigationExtras, Params } from '@angular/router';
 import { getDisplayValue, formatEffectiveDate, formatMccDate } from 'src/app/common/chart-utility-functions';
-import labMappingsJSON from "../../../assets/json/lab-mappings.json";
+import { Constants } from 'src/app/common/constants';
 
 interface FormattedResult {
   name: string;
@@ -97,10 +97,10 @@ export class LabResultsComponent implements OnInit {
 
   loadData = (): void => {
     this.results = [];
-    if (!labMappingsJSON[this.longTermCondition]) {
+    if (!Constants.labMappings[this.longTermCondition]) {
       return;
     }
-    let callsToMake: PatientLabResultsMap[] = labMappingsJSON[this.longTermCondition];
+    let callsToMake: PatientLabResultsMap[] = Constants.labMappings[this.longTermCondition];
     let promiseArray = [];
 
     callsToMake.forEach((v, i) => {

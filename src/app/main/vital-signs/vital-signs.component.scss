@@ -2,7 +2,7 @@
     .vital-signs-header {
         position: relative;
 
-        h2 { 
+        h2 {
             padding-left: 30px;
         }
 
@@ -68,4 +68,8 @@
             }
         }
     }
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
