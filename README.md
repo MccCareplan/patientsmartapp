@@ -94,6 +94,14 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
 
 
 #Changelog
+2021-05-03
+- Release ("1.0.9")
+- Fix specific table sorting
+- Converted customize-able features into docker commands (see readme)
+- Fixed custom table sorting
+- Fixed cursor not indicating clickable events in labs/vitals
+- Added a "launch.html"
+
 2021-04-20
 - Release ("1.0.8")
 - Fix for Firefox session issues
