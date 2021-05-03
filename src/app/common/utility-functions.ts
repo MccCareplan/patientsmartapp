@@ -29,7 +29,7 @@ export function formatGoalTargetValue(target: GoalTarget, mostRecentResultValue:
                 break;
             }
             case 'CodeableConcept': {
-                // todo:  formatTargetValue CodeableConcept
+                formatted = target.value.codeableConceptValue.text;
                 break;
             }
             case 'Quantity': {
