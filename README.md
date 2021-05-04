@@ -66,7 +66,7 @@ In addtion if you have a built version you may dockerize using the simple Docker
 | /assets/json/data | lab-mappings.json | Defines the lab results to query on the "Health Status" screen.  Use the file found in  folder [/assets/json/data-backups](src/assets/json/data-backups) | 
 | /assets/json/data | vital-mappings.json | Defines the vital signs to query on the "Health Status" screen  Use the file found in  folder [/assets/json/data-backups](src/assets/json/data-backups) | 
 | /assets/json/data | feature-toggling.json | Toggle functionality on/off across the application  Use the file found in  folder [/assets/json/data-backups](src/assets/json/data-backups) | 
-| /assets/icons/logo | logo.jpg | Organizational Icon shown in the header |
+| /assets/icons/logo | logo.jpg | Organizational Icon shown in the header (suggested aspect ratio is 4:7 or something close to this) | 
 
 Use docker -v command to overwrite the "json/data" and "logo" folders with folders of your own.  
 The file names and types must match exactly.  Also, you must include all json files even if you are only modifying one.
@@ -94,6 +94,12 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
 
 
 #Changelog
+2021-05-4
+- Release ("1.1.0")
+- Remove default logo
+- Patient banner restyling
+- Attempted fix for UACR/EGFR lifecycle issues
+
 2021-05-03
 - Release ("1.0.9")
 - Fix specific table sorting

@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Egfr, emptyEgfr, EgfrTableData } from '../data-model/egfr';
 import { codes } from '../data-model/codes';
 import { MccCoding } from 'src/generated-data-api';
+import { Constants } from '../common/constants';
 
 @Injectable({
     providedIn: 'root'
@@ -59,7 +60,10 @@ export class EgfrService extends DataService {
     }
 
     filterDataSet(index: number): void {
-        if (this.aggregatedChartData.length == 0 || this.aggregatedTableData.length == 0) return;
+        if (this.aggregatedChartData.length == 0 || this.aggregatedTableData.length == 0) {
+            setTimeout(() => { window[Constants.EGFRisLoaded] = true; }, 1000);
+            return;
+        }
         this.selectedIndex = index;
         const xAxisLabels: string[] = [];
 
@@ -105,6 +109,7 @@ export class EgfrService extends DataService {
             );
         });
         this.egfr.xAxisLabels = xAxisLabels;
+        setTimeout(() => { window[Constants.EGFRisLoaded] = true; }, 1000);
     }
 
     emptyChart(): void {
