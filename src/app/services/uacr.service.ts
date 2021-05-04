@@ -11,6 +11,7 @@ import { reformatYYYYMMDD, getLineChartOptionsObject, formatWotResult, getWotLin
 import { MatTableDataSource } from '@angular/material/table';
 import { Wot, emptyWot, WotTableData } from '../data-model/weight-over-time';
 import { emptyUacr, Uacr, UacrTableData } from '../data-model/uacr';
+import { Constants } from '../common/constants';
 
 enum observationCodes {
     Systolic = '8480-6',
@@ -84,6 +85,7 @@ export class UacrService extends DataService {
                         );
                     });
                     this.uacr.xAxisLabels = xAxisLabels;
+                    setTimeout(() => { window[Constants.UACRisLoaded] = true; }, 1000);
                 })
             )
             .subscribe(res => {
