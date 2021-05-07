@@ -61,7 +61,7 @@ export class EgfrService extends DataService {
 
     filterDataSet(index: number): void {
         if (this.aggregatedChartData.length == 0 || this.aggregatedTableData.length == 0) {
-            setTimeout(() => { window[Constants.EGFRisLoaded] = true; }, 1000);
+            window[Constants.EGFRisLoaded] = true;
             return;
         }
         this.selectedIndex = index;
@@ -109,7 +109,7 @@ export class EgfrService extends DataService {
             );
         });
         this.egfr.xAxisLabels = xAxisLabels;
-        setTimeout(() => { window[Constants.EGFRisLoaded] = true; }, 1000);
+        window[Constants.EGFRisLoaded] = true;
     }
 
     emptyChart(): void {

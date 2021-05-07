@@ -85,7 +85,7 @@ export class UacrService extends DataService {
                         );
                     });
                     this.uacr.xAxisLabels = xAxisLabels;
-                    setTimeout(() => { window[Constants.UACRisLoaded] = true; }, 1000);
+                    window[Constants.UACRisLoaded] = true;
                 })
             )
             .subscribe(res => {
