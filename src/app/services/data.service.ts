@@ -61,22 +61,22 @@ export class DataService {
   }
 
   getBySubjectId(subjectId: string): Observable<any> {
-    return this.http.get(`${this.url}\\?subject=${subjectId}`, this.getCustomHeaders())
+    return this.http.get(`${this.url}?subject=${subjectId}`, this.getCustomHeaders())
       .pipe(catchError(this.handleError));
   }
 
   getBySubjectIdAndCarePlanId(subjectId: string, carePlanId: string): Observable<any> {
-    return this.http.get(`${this.url}\\?subject=${subjectId}&careplan=${carePlanId}`, this.getCustomHeaders())
+    return this.http.get(`${this.url}?subject=${subjectId}&careplan=${carePlanId}`, this.getCustomHeaders())
       .pipe(catchError(this.handleError));
   }
 
   getBySubjectIdAndCode(subjectId: string, code: string): Observable<any> {
-    return this.http.get(`${this.url}\\?subject=${subjectId}&code=${code}`, this.getCustomHeaders())
+    return this.http.get(`${this.url}?subject=${subjectId}&code=${code}`, this.getCustomHeaders())
       .pipe(catchError(this.handleError));
   }
 
   getBloodPressureById(id: string): Observable<any> {
-    return this.http.get(`${this.url}\\?subject=${id}&code=8480-6`, this.getCustomHeaders()).pipe(
+    return this.http.get(`${this.url}?subject=${id}&code=8480-6`, this.getCustomHeaders()).pipe(
       catchError(this.handleError));
   }
 
@@ -113,17 +113,17 @@ export class DataService {
   }
 
   getObservationsByPanel(patientId: string, code: string): Observable<MccObservation[]> {
-    return this.http.get<MccObservation[]>(`${this.url}\\?subject=${patientId}&code=${code}&mode=panel`, this.getCustomHeaders())
+    return this.http.get<MccObservation[]>(`${this.url}?subject=${patientId}&code=${code}&mode=panel`, this.getCustomHeaders())
       .pipe(catchError(this.handleError));
   }
 
   getObservationsByValueset(patientId: string, valueSet: string): Observable<MccObservation[]> {
-    return this.http.get<MccObservation[]>(`${this.url}\\?subject=${patientId}&valueset=${valueSet}`, this.getCustomHeaders())
+    return this.http.get<MccObservation[]>(`${this.url}?subject=${patientId}&valueset=${valueSet}`, this.getCustomHeaders())
       .pipe(catchError(this.handleError));
   }
 
-  getSegementedObservationsByValueSet(patientId: string, valueSet: string): Observable<ObservationCollection> {
-    return this.http.get<ObservationCollection>(`${this.url}\\?subject=${patientId}&valueset=${valueSet}`, this.getCustomHeaders())
+  getSegmentedObservationsByValueSet(patientId: string, valueSet: string): Observable<ObservationCollection> {
+    return this.http.get<ObservationCollection>(`${this.url}?subject=${patientId}&valueset=${valueSet}`, this.getCustomHeaders())
       .pipe(catchError(this.handleError));
   }
 

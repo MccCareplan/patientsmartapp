@@ -121,7 +121,7 @@ export class EgfrService extends DataService {
 
     getPatientEgfr(patientId: string): Observable<EgfrTableData> {
         return new Observable(observer => {
-            this.getSegementedObservationsByValueSet(patientId, codes.observationValuesets.Egfr)
+            this.getSegmentedObservationsByValueSet(patientId, codes.observationValuesets.Egfr)
                 .pipe(finalize(() => {
                     this.filterDataSet(0);
                     observer.complete();
