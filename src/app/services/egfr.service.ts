@@ -151,7 +151,7 @@ export class EgfrService extends DataService {
             formattedString = formattedString.substr(0, formattedString.indexOf("["));
             formattedString = formattedString + "[" + primaryCode.code + "]";
             formattedString = formattedString.charAt(0).toUpperCase() + formattedString.slice(1);
-            return formattedString;
+            return "EGFR" + " " + formattedString;
         }
         else return primaryCode.display;
     }
