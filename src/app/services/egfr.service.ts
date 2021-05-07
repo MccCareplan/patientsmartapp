@@ -61,7 +61,7 @@ export class EgfrService extends DataService {
 
     filterDataSet(index: number): void {
         if (this.aggregatedChartData.length == 0 || this.aggregatedTableData.length == 0) {
-            setTimeout(() => { window[Constants.EGFRisLoaded] = true; }, 1000);
+            window[Constants.EGFRisLoaded] = true;
             return;
         }
         this.selectedIndex = index;
@@ -109,7 +109,7 @@ export class EgfrService extends DataService {
             );
         });
         this.egfr.xAxisLabels = xAxisLabels;
-        setTimeout(() => { window[Constants.EGFRisLoaded] = true; }, 1000);
+        window[Constants.EGFRisLoaded] = true;
     }
 
     emptyChart(): void {
@@ -121,7 +121,7 @@ export class EgfrService extends DataService {
 
     getPatientEgfr(patientId: string): Observable<EgfrTableData> {
         return new Observable(observer => {
-            this.getSegementedObservationsByValueSet(patientId, codes.observationValuesets.Egfr)
+            this.getSegmentedObservationsByValueSet(patientId, codes.observationValuesets.Egfr)
                 .pipe(finalize(() => {
                     this.filterDataSet(0);
                     observer.complete();
@@ -151,7 +151,7 @@ export class EgfrService extends DataService {
             formattedString = formattedString.substr(0, formattedString.indexOf("["));
             formattedString = formattedString + "[" + primaryCode.code + "]";
             formattedString = formattedString.charAt(0).toUpperCase() + formattedString.slice(1);
-            return formattedString;
+            return "EGFR" + " " + formattedString;
         }
         else return primaryCode.display;
     }
