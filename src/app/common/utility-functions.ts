@@ -317,6 +317,9 @@ export function formatEgfrResult(egfr: number, unit: string): string {
             + unit.substring(0, unit.length - 1)
             + '<sup>' + unit.substring(unit.length - 1) + '</sup>';
     }
+    else if (egfr && !unit) {
+        ret = egfr.toString() + ' ' + 'mL/min/1.73m<sup>2</sup>';
+    }
     return ret;
 }
 
