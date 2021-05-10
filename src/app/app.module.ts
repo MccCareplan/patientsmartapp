@@ -30,7 +30,7 @@ import { LabGraphComponent } from './main/lab-graph/lab-graph.component';
 import { LabResultsComponent } from './main/lab-results/lab-results.component';
 import { VitalSignsComponent } from './main/vital-signs/vital-signs.component';
 import { SubjectDataServiceService } from './services/subject-data-service.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './common/shared.module';
 import { CareteamCaretabComponent } from './main/careteam/careteam.caretab/careteam.caretab.component';
 import { CareplanEffects } from './ngrx/effects/careplan.effects';
@@ -99,7 +99,7 @@ import { RetryInterceptor } from './interceptors/404.retry.interceptor';
                 SharedModule,
                 FormsModule
         ],
-        providers: [PatientLoadedGuard, SubjectDataServiceService, ObservationsService, RetryInterceptor],
+        providers: [PatientLoadedGuard, SubjectDataServiceService, ObservationsService, { provide: HTTP_INTERCEPTORS, useClass: RetryInterceptor, multi: true }],
         exports: [RouterModule],
         bootstrap: [AppComponent]
 })
