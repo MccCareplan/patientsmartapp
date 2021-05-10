@@ -94,6 +94,12 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
 
 
 #Changelog
+2021-05-10
+- Release ("1.1.1")
+- 404 Retry handler
+- Handling EGFR values without a unit type
+- Added "EGFR" label to EGFR dropdown values
+
 2021-05-4
 - Release ("1.1.0")
 - Remove default logo
