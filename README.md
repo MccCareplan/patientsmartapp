@@ -98,6 +98,13 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
 
 
 #Changelog
+2021-05-11
+- Release ("1.1.2")
+- New nginx config file added to docker build process to fix intermittent 404 routing issues
+- Change default logo to NIDDK
+- Whitelisting the launch.html file (will hopefully resolve the firefox/safari persistent user issue)
+- Updated readme for simpler instructions on deploying custom image
+
 2021-05-10
 - Release ("1.1.1")
 - 404 Retry handler
