@@ -31,6 +31,7 @@
               "src/favicon.ico",
               "src/assets",
               "src/manifest.webmanifest",
+              "src/launch.html",
               "src/slaunch.html"
             ],
             "styles": [
@@ -50,6 +51,7 @@
               ],
               "assets": [
                 "src/manifest.webmanifest",
+                "src/launch.html",
                 "src/slaunch.html",
                 "src/favicon.ico",
                 "src/assets",
