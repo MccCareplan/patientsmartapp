@@ -98,6 +98,11 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
 
 
 #Changelog
+2021-05-14
+- Release ("1.1.3")
+- New EGFR unit types api param utilized
+- Added "firstRecorded" as field to display for active/inactive conditions
+
 2021-05-11
 - Release ("1.1.2")
 - New nginx config file added to docker build process to fix intermittent 404 routing issues
