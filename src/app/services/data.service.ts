@@ -122,8 +122,8 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
-  getSegmentedObservationsByValueSet(patientId: string, valueSet: string): Observable<ObservationCollection> {
-    return this.http.get<ObservationCollection>(`${this.url}?subject=${patientId}&valueset=${valueSet}`, this.getCustomHeaders())
+  getSegmentedObservationsByValueSet(patientId: string, valueSet: string, unitTypes?: string): Observable<ObservationCollection> {
+    return this.http.get<ObservationCollection>(`${this.url}?subject=${patientId}&valueset=${valueSet}&requiredunit=${unitTypes}`, this.getCustomHeaders())
       .pipe(catchError(this.handleError));
   }
 
