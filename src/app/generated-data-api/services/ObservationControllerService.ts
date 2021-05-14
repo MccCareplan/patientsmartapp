@@ -11,6 +11,7 @@ export class ObservationControllerService {
      * @param max
      * @param sort
      * @param mode
+     * @param requiredunit
      * @returns any OK
      * @throws ApiError
      */
@@ -20,6 +21,7 @@ export class ObservationControllerService {
         max: number = 1000,
         sort: string = 'ascending',
         mode: string = 'code',
+        requiredunit?: string,
     ): Promise<any> {
         const result = await __request({
             method: 'GET',
@@ -30,6 +32,7 @@ export class ObservationControllerService {
                 'max': max,
                 'sort': sort,
                 'mode': mode,
+                'requiredunit': requiredunit,
             },
         });
         return result.body;
@@ -41,6 +44,7 @@ export class ObservationControllerService {
      * @param max
      * @param sort
      * @param mode
+     * @param requiredunit
      * @returns any OK
      * @throws ApiError
      */
@@ -50,6 +54,7 @@ export class ObservationControllerService {
         max: number = 100,
         sort: string = 'ascending',
         mode: string = 'code',
+        requiredunit?: string,
     ): Promise<any> {
         const result = await __request({
             method: 'GET',
@@ -60,6 +65,7 @@ export class ObservationControllerService {
                 'max': max,
                 'sort': sort,
                 'mode': mode,
+                'requiredunit': requiredunit,
             },
         });
         return result.body;
@@ -71,6 +77,7 @@ export class ObservationControllerService {
      * @param count
      * @param sort
      * @param mode
+     * @param requiredunit
      * @returns any OK
      * @throws ApiError
      */
@@ -80,6 +87,7 @@ export class ObservationControllerService {
         count: number = 100,
         sort: string = 'ascending',
         mode: string = 'code',
+        requiredunit?: string,
     ): Promise<any> {
         const result = await __request({
             method: 'GET',
@@ -90,6 +98,7 @@ export class ObservationControllerService {
                 'count': count,
                 'sort': sort,
                 'mode': mode,
+                'requiredunit': requiredunit,
             },
         });
         return result.body;
@@ -100,6 +109,7 @@ export class ObservationControllerService {
      * @param code
      * @param mode
      * @param translate
+     * @param requiredunit
      * @returns any OK
      * @throws ApiError
      */
@@ -108,6 +118,7 @@ export class ObservationControllerService {
         code: string,
         mode: string = 'code',
         translate: string = 'false',
+        requiredunit?: string,
     ): Promise<any> {
         const result = await __request({
             method: 'GET',
@@ -117,6 +128,7 @@ export class ObservationControllerService {
                 'code': code,
                 'mode': mode,
                 'translate': translate,
+                'requiredunit': requiredunit,
             },
         });
         return result.body;
