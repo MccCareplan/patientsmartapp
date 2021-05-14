@@ -29,6 +29,9 @@
                 <li *ngIf="healthConcern.firstOnset">
                     <label>First Onset:</label> {{healthConcern.firstOnset | titlecase }}
                 </li>
+                <li *ngIf="healthConcern.firstRecordedAsText">
+                    <label>First Recorded:</label> {{healthConcern.firstRecordedAsText }}
+                </li>
             </ul>
         </div>
     </li>
@@ -42,6 +45,9 @@
             <ul>
                 <li *ngIf="healthConcern.firstOnset">
                     <label>First Onset:</label> {{healthConcern.firstOnset | titlecase }}
+                </li>
+                <li *ngIf="healthConcern.firstRecordedAsText">
+                    <label>First Recorded:</label> {{healthConcern.firstRecordedAsText }}
                 </li>
             </ul>
         </div>
