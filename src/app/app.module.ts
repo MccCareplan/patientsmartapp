@@ -30,7 +30,7 @@ import { LabGraphComponent } from './main/lab-graph/lab-graph.component';
 import { LabResultsComponent } from './main/lab-results/lab-results.component';
 import { VitalSignsComponent } from './main/vital-signs/vital-signs.component';
 import { SubjectDataServiceService } from './services/subject-data-service.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './common/shared.module';
 import { CareteamCaretabComponent } from './main/careteam/careteam.caretab/careteam.caretab.component';
 import { CareplanEffects } from './ngrx/effects/careplan.effects';
@@ -55,6 +55,7 @@ import { ObservationsService } from './services/observations.service.new';
 import { GenericGraphComponent } from './main/graphs/generic/generic.component';
 import { QuestionnaireService } from './services/questionnaire.service';
 import { GenericQuestionnaireComponent } from './questionnaire/questionnaire.component';
+import { RetryInterceptor } from './interceptors/404.retry.interceptor';
 
 @NgModule({
         declarations: [
@@ -101,7 +102,7 @@ import { GenericQuestionnaireComponent } from './questionnaire/questionnaire.com
                 SharedModule,
                 FormsModule
         ],
-        providers: [PatientLoadedGuard, SubjectDataServiceService, ObservationsService, QuestionnaireService],
+        providers: [PatientLoadedGuard, SubjectDataServiceService, ObservationsService, QuestionnaireService, { provide: HTTP_INTERCEPTORS, useClass: RetryInterceptor, multi: true }],
         exports: [RouterModule],
         bootstrap: [AppComponent]
 })

@@ -4,13 +4,14 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ChartDataSets } from 'chart.js';
-import * as moment from 'moment';
+import moment from 'moment';
 import { finalize } from 'rxjs/operators';
 import { reformatYYYYMMDD, getLineChartOptionsObject, formatEgfrResult, getEgrLineChartAnnotationsObject } from '../common/chart-utility-functions';
 import { MatTableDataSource } from '@angular/material/table';
 import { Egfr, emptyEgfr, EgfrTableData } from '../data-model/egfr';
 import { codes } from '../data-model/codes';
 import { MccCoding } from 'src/generated-data-api';
+import { Constants } from '../common/constants';
 
 @Injectable({
     providedIn: 'root'
@@ -59,6 +60,10 @@ export class EgfrService extends DataService {
     }
 
     filterDataSet(index: number): void {
+        if (this.aggregatedChartData.length == 0 || this.aggregatedTableData.length == 0) {
+            window[Constants.EGFRisLoaded] = true;
+            return;
+        }
         this.selectedIndex = index;
         const xAxisLabels: string[] = [];
 
@@ -104,6 +109,7 @@ export class EgfrService extends DataService {
             );
         });
         this.egfr.xAxisLabels = xAxisLabels;
+        window[Constants.EGFRisLoaded] = true;
     }
 
     emptyChart(): void {
@@ -115,8 +121,9 @@ export class EgfrService extends DataService {
 
     getPatientEgfr(patientId: string): Observable<EgfrTableData> {
         return new Observable(observer => {
-            this.getSegementedObservationsByValueSet(patientId, codes.observationValuesets.Egfr)
+            this.getSegmentedObservationsByValueSet(patientId, codes.observationValuesets.Egfr, "mL/min/1.73m2,mL/min")
                 .pipe(finalize(() => {
+                    this.filterDataSet(0);
                     observer.complete();
                 }))
                 .subscribe(obsCollection => {
@@ -144,7 +151,7 @@ export class EgfrService extends DataService {
             formattedString = formattedString.substr(0, formattedString.indexOf("["));
             formattedString = formattedString + "[" + primaryCode.code + "]";
             formattedString = formattedString.charAt(0).toUpperCase() + formattedString.slice(1);
-            return formattedString;
+            return "EGFR" + " " + formattedString;
         }
         else return primaryCode.display;
     }

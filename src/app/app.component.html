@@ -5,8 +5,19 @@
     </mat-sidenav>
 
     <mat-sidenav-content fxLayout="column">
-
         <div class="header">
+            <div class="patient-info-header" *ngIf="subjectInfo">
+                <div></div>
+                <div style="font-size: 1em; width: 60%; padding-top: 7px;">
+                    <b>Patient: </b>
+                    <span *ngIf="subjectInfo.name">{{ subjectInfo.name }}</span>
+                    <span *ngIf="subjectInfo.age">, {{ subjectInfo.age}}</span>
+                    <span *ngIf="subjectInfo.gender">, {{ subjectInfo.gender }}</span>
+                </div>
+                <div class="icon">
+                    <img src="../assets/icons/logo/logo.jpg" height="100%" onerror="this.style.display='none'">
+                </div>
+            </div>
             <app-header-mobile>
             </app-header-mobile>
         </div>
@@ -17,13 +28,13 @@
             <mat-toolbar class="footer" color="background">
                 <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
                     <button mat-button routerLink="/vital-signs" routerLinkActive="active-menu-item"
-                        queryParamsHandling="merge">
+                        *ngIf="featureToggling.status.clinicalResults" queryParamsHandling="merge">
                         <img src="../../../assets/svg/stethscope.svg">
                         <span>Vital Signs</span>
                     </button>
                     <div class="divider"></div>
                     <button mat-button routerLink="/lab-results" routerLinkActive="active-menu-item"
-                        queryParamsHandling="merge">
+                        *ngIf="featureToggling.status.labResults" queryParamsHandling="merge">
                         <img src="../../../assets/svg/beaker.svg">
                         <span>Lab Results</span>
                     </button>

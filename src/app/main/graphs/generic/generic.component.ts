@@ -4,13 +4,14 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { ChartDataSets, ChartOptions } from 'chart.js';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Color, Label } from 'ng2-charts';
 import { formatMccDate, getDisplayValue, getInnerValue, getValueHighlighted } from 'src/app/common/chart-utility-functions';
-import { Constants } from 'src/app/common/constants';
 import { Effective, MccObservation, SimpleQuestionnaireItem } from 'src/app/generated-data-api';
 import { ObservationsService } from 'src/app/services/observations.service.new';
 import * as fromRoot from '../../../ngrx/reducers';
+import labMappingsJSON from "../../../../assets/json/data/lab-mappings.json";
+import vitalMappingsJSON from "../../../../assets/json/data/vital-mappings.json";
 
 
 @Component({
@@ -75,8 +76,7 @@ export class GenericGraphComponent implements OnInit {
     }
 
     loadData = (): void => {
-        let valueToCall = Constants.labResultsMap.get(this.longTermCondition).find(x => x.name === this.key);
-        if (!valueToCall) valueToCall = Constants.vitalSignsMap.get(this.longTermCondition).find(x => x.name === this.key);
+        let valueToCall = this.parseMaps();
         if (!valueToCall) return;
         switch (valueToCall.type) {
             case "valueset":
@@ -92,6 +92,23 @@ export class GenericGraphComponent implements OnInit {
                 this.obsService.getQuestionnaireItems(this.patientId, valueToCall.value).then(this.processQuestionnaire);
                 break;
         }
+    }
+
+    parseMaps = (): any => {
+        let valueToCall: any;
+        for (const property in labMappingsJSON) {
+            if (labMappingsJSON[property] && labMappingsJSON[property].length > 0 && labMappingsJSON[property].find(x => x.name === this.key)) {
+                valueToCall = labMappingsJSON[property].find(x => x.name === this.key);
+            }
+        }
+        if (!valueToCall) {
+            for (const property in vitalMappingsJSON) {
+                if (vitalMappingsJSON[property] && vitalMappingsJSON[property].length > 0 && vitalMappingsJSON[property].find(x => x.name === this.key)) {
+                    valueToCall = vitalMappingsJSON[property].find(x => x.name === this.key);
+                }
+            }
+        }
+        return valueToCall;
     }
 
     processData = (res: MccObservation[]): void => {

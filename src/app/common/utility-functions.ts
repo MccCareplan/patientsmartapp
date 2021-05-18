@@ -29,7 +29,7 @@ export function formatGoalTargetValue(target: GoalTarget, mostRecentResultValue:
                 break;
             }
             case 'CodeableConcept': {
-                // todo:  formatTargetValue CodeableConcept
+                formatted = target.value.codeableConceptValue.text;
                 break;
             }
             case 'Quantity': {
@@ -316,6 +316,9 @@ export function formatEgfrResult(egfr: number, unit: string): string {
         ret = egfr.toString() + ' '
             + unit.substring(0, unit.length - 1)
             + '<sup>' + unit.substring(unit.length - 1) + '</sup>';
+    }
+    else if (egfr && !unit) {
+        ret = egfr.toString() + ' ' + 'mL/min/1.73m<sup>2</sup>';
     }
     return ret;
 }

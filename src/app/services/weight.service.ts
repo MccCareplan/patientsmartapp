@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ChartDataSets } from 'chart.js';
-import * as moment from 'moment';
+import moment from 'moment';
 import { finalize } from 'rxjs/operators';
 import { reformatYYYYMMDD, getLineChartOptionsObject, formatWotResult, getWotLineChartAnnotationsObject } from '../common/chart-utility-functions';
 import { MatTableDataSource } from '@angular/material/table';
@@ -50,7 +50,7 @@ export class WeightService extends DataService {
                     this.wot.chartData.push(wotChartData);
                     this.wotDataSource.data = this.wot.tableData;
                     if (!this.wot.tableData || this.wot.tableData.length === 0) return;
-                    
+
                     const vsLowDateRow: WotTableData = (this.wot.tableData.reduce((low, e) =>
                         reformatYYYYMMDD(low.date) < reformatYYYYMMDD(e.date) ? low : e));
                     const vsHighDateRow: WotTableData = (this.wot.tableData.reduce((high, e) =>
@@ -107,18 +107,13 @@ export class WeightService extends DataService {
                 }))
                 .subscribe(observations => {
                     observations.map(obs => {
-                        switch (obs.code.coding[0].code) {
-                            case observationCodes.Wot:
-                                const wot: WotTableData = {
-                                    date: obs.effective.dateTime.date,
-                                    value: obs.value.quantityValue.value,
-                                    unit: obs.value.quantityValue.unit,
-                                    test: obs.code.text
-                                };
-                                observer.next(wot);
-                                break;
-                            default:
-                        }
+                        const wot: WotTableData = {
+                            date: obs.effective.dateTime.date,
+                            value: obs.value.quantityValue.value,
+                            unit: obs.value.quantityValue.unit,
+                            test: obs.code.text
+                        };
+                        observer.next(wot);
                     });
                 });
         });

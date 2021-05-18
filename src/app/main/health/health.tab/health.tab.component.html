@@ -2,7 +2,7 @@
     <li *ngFor="let socialConcern of socialConcerns$ | async">
         <div class="health-item">
             <h3 class="health-title">{{ socialConcern.name }}</h3>
-            <hr/>
+            <hr />
             <ul>
                 <li *ngIf="socialConcern.data">
                     <label>Value:</label> {{socialConcern.data | titlecase }}
@@ -18,26 +18,36 @@
     </li>
 </ul>
 <ul class="health-items" *ngIf="displayFilter=='health'">
-    <h4 *ngIf="(conditionsList$ | async).activeConditions && (conditionsList$ | async).activeConditions.length > 0">Active Conditions</h4>
+    <h4
+        *ngIf="(conditionsList$ | async).activeConditions && (conditionsList$ | async).activeConditions.length > 0 && featureToggling.healthAndSocialConcerns.activeDiagnoses">
+        Active Conditions</h4>
     <li *ngFor="let healthConcern of (conditionsList$ | async).activeConditions">
-        <div class="health-item">
+        <div class="health-item" *ngIf="featureToggling.healthAndSocialConcerns.activeDiagnoses">
             <h3 class="health-title">{{ healthConcern.code.text }}</h3>
-            <hr/>
+            <hr />
             <ul>
                 <li *ngIf="healthConcern.firstOnset">
                     <label>First Onset:</label> {{healthConcern.firstOnset | titlecase }}
                 </li>
+                <li *ngIf="healthConcern.firstRecordedAsText">
+                    <label>First Recorded:</label> {{healthConcern.firstRecordedAsText }}
+                </li>
             </ul>
         </div>
     </li>
-    <h4 *ngIf="(conditionsList$ | async).inactiveConditions && (conditionsList$ | async).inactiveConditions.length > 0">Inactive Conditions</h4>
+    <h4
+        *ngIf="(conditionsList$ | async).inactiveConditions && (conditionsList$ | async).inactiveConditions.length > 0 && featureToggling.healthAndSocialConcerns.inactiveDiagnoses">
+        Inactive Conditions</h4>
     <li *ngFor="let healthConcern of (conditionsList$ | async).inactiveConditions">
-        <div class="health-item">
+        <div class="health-item" *ngIf="featureToggling.healthAndSocialConcerns.inactiveDiagnoses">
             <h3 class="health-title">{{ healthConcern.code.text }}</h3>
-            <hr/>
+            <hr />
             <ul>
                 <li *ngIf="healthConcern.firstOnset">
                     <label>First Onset:</label> {{healthConcern.firstOnset | titlecase }}
+                </li>
+                <li *ngIf="healthConcern.firstRecordedAsText">
+                    <label>First Recorded:</label> {{healthConcern.firstRecordedAsText }}
                 </li>
             </ul>
         </div>

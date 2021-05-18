@@ -20,6 +20,10 @@ import { EgfrService } from './services/egfr.service';
 import { FhirService } from './services/fhir.service';
 import { UacrService } from './services/uacr.service';
 import { WeightService } from './services/weight.service';
+import featureToggling from "../assets/json/data/feature-toggling.json";
+import labMappings from "../assets/json/data/lab-mappings.json";
+import vitalMappings from "../assets/json/data/vital-mappings.json";
+import { Constants } from './common/constants';
 
 declare var window: any;
 
@@ -29,10 +33,12 @@ declare var window: any;
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+    featureToggling: any = featureToggling;
     title = 'Patient Smart App';
     smartLaunch: boolean;
     currentSubjectId: string = '';
     carePlanId: string = '';
+    subjectInfo: any;
 
     constructor(
         private route: ActivatedRoute,
@@ -47,7 +53,15 @@ export class AppComponent implements OnInit {
 
     devmode = false;
 
+    parseOverrides() {
+        Constants.featureToggling = featureToggling;
+        Constants.labMappings = labMappings;
+        Constants.vitalMappings = vitalMappings;
+        this.featureToggling = Constants.featureToggling;
+    }
+
     ngOnInit(): void {
+        this.parseOverrides();
         const skey = window.sessionStorage.SMART_KEY;
         const key = skey ? skey.replace(/['"]+/g, '') : "";
         console.log('Ang: Smart Key is ' + key);
@@ -76,25 +90,20 @@ export class AppComponent implements OnInit {
 
         this.route.queryParams.subscribe(params => {
             if (!initialLoadDone) {
-                const dev = params.devmode;
-                this.devmode = (dev === 'true');
-                this.store.dispatch(devmode.EditAction({ data: this.devmode }));
-
                 if (params.subject != null) this.currentSubjectId = params.subject;
-
                 if (this.currentSubjectId && this.currentSubjectId.length > 0) {
                     // Load best careplan for the subject, then load subsequent data
                     this.store.dispatch(carePlansSummary.loadCareplansSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
                     this.store.select(fromRoot.getCarePlansSummary).subscribe(c => {
                         if (c && c.length === 0 && !initialLoadDone) {
                             initialLoadDone = true;
-
                             // CarePlan Screen
                             this.store.dispatch(patient.SelectAction({ data: this.currentSubjectId }));
                             this.store.dispatch(contact.loadContactsForSubjectAndCarePlanAction({ subjectId: this.currentSubjectId }));
 
                             // Health Status Screen
                             this.store.dispatch(conditionsSummary.loadConditionSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
+                            this.loadDemoInfo();
 
                             // Interventions & Maintenance Screen
                             this.store.dispatch(medicationSummary.loadMedicationSummaryForSubjectAction({ subjectId: this.currentSubjectId }));
@@ -147,12 +156,20 @@ export class AppComponent implements OnInit {
                             this.egfrService.getPatientEgfrInfo(this.currentSubjectId);
                             this.weightService.getPatientWotInfo(this.currentSubjectId);
                             this.uacrService.getPatientUacrInfo(this.currentSubjectId);
-
                         }
                     })
                 }
             }
         });
+    }
+
+    loadDemoInfo = (): void => {
+        this.store.select(fromRoot.getPatientProfile).subscribe(x => {
+            if (x && x.fhirid) {
+                this.subjectInfo = x;
+            }
+        })
+
     }
 
     waitFor(time: number) {

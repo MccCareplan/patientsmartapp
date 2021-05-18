@@ -2,7 +2,9 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ChartDataSets } from 'chart.js';
+import moment from 'moment';
 import { Color, Label } from 'ng2-charts';
+import { VitalSignsTableData } from 'src/app/data-model/vitalSigns';
 import { BloodPresureService } from 'src/app/services/blood-pressure.service';
 
 @Component({
@@ -77,6 +79,22 @@ export class BPGraphComponent implements OnInit {
         let int = setInterval(() => {
             if (this.tableDataSource.filteredData.length > 0) {
                 this.tableDataSource.sort = this.sort;
+                this.tableDataSource.sortingDataAccessor = (data: VitalSignsTableData, header: string) => {
+                    switch (header) {
+                        case ('systolic'): {
+                            return data.systolic;
+                        }
+                        case ('diastolic'): {
+                            return data.diastolic;
+                        }
+                        case ('date'): {
+                            return moment(data[header]);
+                        }
+                        default: {
+                            return data[header];
+                        }
+                    }
+                };
                 this.tableDataSource.paginator = this.paginator;
                 this.tableReady = true;
                 clearInterval(int);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
+import { Constants } from 'src/app/common/constants';
 import { ConditionLists, ConditionSummary } from 'src/app/generated-data-api';
 import { MccPatient } from 'src/generated-data-api';
 import * as fromRoot from '../../ngrx/reducers';
@@ -63,5 +64,13 @@ export class StatusComponent implements OnInit {
 
   filterAvailableButtons = (): void => {
 
+  }
+
+  getEGFRisLoaded = (): boolean => {
+    return window[Constants.EGFRisLoaded];
+  }
+
+  getUACRisLoaded(): boolean {
+    return window[Constants.UACRisLoaded];
   }
 }

@@ -5,12 +5,13 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ChartDataSets } from 'chart.js';
-import * as moment from 'moment';
+import moment from 'moment';
 import { finalize } from 'rxjs/operators';
 import { reformatYYYYMMDD, getLineChartOptionsObject, formatWotResult, getWotLineChartAnnotationsObject, formatUacrResult, getUacrLineChartAnnotationsObject } from '../common/chart-utility-functions';
 import { MatTableDataSource } from '@angular/material/table';
 import { Wot, emptyWot, WotTableData } from '../data-model/weight-over-time';
 import { emptyUacr, Uacr, UacrTableData } from '../data-model/uacr';
+import { Constants } from '../common/constants';
 
 enum observationCodes {
     Systolic = '8480-6',
@@ -84,6 +85,7 @@ export class UacrService extends DataService {
                         );
                     });
                     this.uacr.xAxisLabels = xAxisLabels;
+                    window[Constants.UACRisLoaded] = true;
                 })
             )
             .subscribe(res => {
@@ -107,18 +109,13 @@ export class UacrService extends DataService {
                 }))
                 .subscribe(observations => {
                     observations.map(obs => {
-                        switch (obs.code.coding[0].code) {
-                            case observationCodes.Uacr:
-                                const uacr: UacrTableData = {
-                                    date: obs.effective.dateTime.date,
-                                    uacr: obs.value.quantityValue.value,
-                                    unit: obs.value.quantityValue.unit,
-                                    test: obs.code.text
-                                };
-                                observer.next(uacr);
-                                break;
-                            default:
-                        }
+                        const uacr: UacrTableData = {
+                            date: obs.effective.dateTime.date,
+                            uacr: obs.value.quantityValue.value,
+                            unit: obs.value.quantityValue.unit,
+                            test: obs.code.text
+                        };
+                        observer.next(uacr);
                     });
                 });
         });

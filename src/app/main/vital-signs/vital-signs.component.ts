@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { Constants } from "src/app/common/constants";
 import { MccObservation, SimpleQuestionnaireItem } from "src/app/generated-data-api";
 import { ObservationsService } from "src/app/services/observations.service.new";
 import * as fromRoot from '../../ngrx/reducers';
 import { Router, NavigationExtras, Params } from '@angular/router';
 import { formatEffectiveDate, formatMccDate, getDisplayValue } from "src/app/common/chart-utility-functions";
+import { Constants } from "src/app/common/constants";
 
 interface FormattedResult {
     name: string;
@@ -95,7 +95,10 @@ export class VitalSignsComponent implements OnInit {
 
     loadData = (): void => {
         this.results = [];
-        let callsToMake: PatientLabResultsMap[] = Constants.vitalSignsMap.get(this.longTermCondition);
+        if (!Constants.vitalMappings[this.longTermCondition]) {
+            return;
+        }
+        let callsToMake: PatientLabResultsMap[] = Constants.vitalMappings[this.longTermCondition];
         let promiseArray = [];
         callsToMake.forEach((v, i) => {
             switch (v.type) {

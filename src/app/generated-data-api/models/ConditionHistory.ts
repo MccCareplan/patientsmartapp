@@ -11,5 +11,7 @@ export type ConditionHistory = {
     clinicalStatus: string;
     verificationStatus: string;
     categories?: string;
+    recorded?: string;
     fhirid?: string;
+    recordedAsText?: string;
 }

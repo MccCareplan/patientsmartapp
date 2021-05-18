@@ -52,13 +52,30 @@ https://api.logicahealth.org/MCCeCarePlanTest/open
 The included file 'Dockerfle-prod' is a basic production build docker file. It will build the app and containerize it in a node nginx server.
 In addtion if you have a built version you may dockerize using the simple Dockerfile, which will cause the image to be built based on your most recent compile.
 
-### Runtime Environment variabls
+### Runtime Environment variables
 | Variable name | Sample Value |
 | ------------- | ------------- | 
 | API_SERVER | http://localhost:8080 |
 | CLIENT_ID | 123456789abcdef |
 | LAUNCH_SERVER | https://api.logicahealth.org/MCCeCarePlanTest/data |
 | AUTH_DEBUG | false |
+
+## Environment variables to override after build
+| Path | File Name | Description |
+| ---- | --------- | ----------- |
+| /assets/json/data | lab-mappings.json | Defines the lab results to query on the "Health Status" screen.  Use the file found in  folder [/assets/json/data-backups](src/assets/json/data-backups) | 
+| /assets/json/data | vital-mappings.json | Defines the vital signs to query on the "Health Status" screen  Use the file found in  folder [/assets/json/data-backups](src/assets/json/data-backups) | 
+| /assets/json/data | feature-toggling.json | Toggle functionality on/off across the application  Use the file found in  folder [/assets/json/data-backups](src/assets/json/data-backups) | 
+| /assets/icons/logo | logo.jpg | Organizational Icon shown in the header (suggested aspect ratio is 4:7 or something close to this) | 
+
+The file names and types must match exactly.  Also, you must include all json files even if you are only modifying one.
+
+Running with a custom logo
+$ docker run -v {Path to folder with logo.jpg}:/usr/share/nginx/html/assets/icons/logo -d -p 80:80 --rm mcccareplan/mccpatientapp
+
+Running with custom json files
+$ docker run -v {Path to folder with .json files}:/usr/share/nginx/html/assets/json/data -d -p 80:80 --rm mcccareplan/mccpatientapp
+
 
 ### Via Docker
 $ docker run -it -e CLIENT_ID='xxxyyzzz123123" -e API_SERVER='http://localhost:8080' -p 80:80 --rm mcccareplan/mccproviderapp
@@ -77,12 +94,56 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
  $  docker build -f Dockerfile-prod -t mcccareplan/mccpatientapp .
 
 ### Running the image
-
  $ docker run -it -p 80:80 --rm mcccareplan/mccpatientapp
 
 
-
 #Changelog
+2021-05-14
+- Release ("1.1.3")
+- New EGFR unit types api param utilized
+- Added "firstRecorded" as field to display for active/inactive conditions
+
+2021-05-11
+- Release ("1.1.2")
+- New nginx config file added to docker build process to fix intermittent 404 routing issues
+- Change default logo to NIDDK
+- Whitelisting the launch.html file (will hopefully resolve the firefox/safari persistent user issue)
+- Updated readme for simpler instructions on deploying custom image
+
+2021-05-10
+- Release ("1.1.1")
+- 404 Retry handler
+- Handling EGFR values without a unit type
+- Added "EGFR" label to EGFR dropdown values
+
+2021-05-4
+- Release ("1.1.0")
+- Remove default logo
+- Patient banner restyling
+- Attempted fix for UACR/EGFR lifecycle issues
+
+2021-05-03
+- Release ("1.0.9")
+- Fix specific table sorting
+- Converted customize-able features into docker commands (see readme)
+- Fixed custom table sorting
+- Fixed cursor not indicating clickable events in labs/vitals
+- Added a "launch.html"
+
+2021-04-20
+- Release ("1.0.8")
+- Fix for Firefox session issues
+- Demographic header info
+- UACR graph not rendering fix
+- Hiding email on Care Team contacts
+- Better labels for questionnaires
+
+2021-04-08
+- Release ("1.0.7")
+- Fix for WoT graph
+- Labs/Vitals configurable via JSON
+- Features able to be toggled on/off via JSON
+
 2021-03-29
 - Release ("1.0.6")
 - Handling no careplans available

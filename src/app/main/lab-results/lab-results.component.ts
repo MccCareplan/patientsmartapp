@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../ngrx/reducers';
-import { Constants } from 'src/app/common/constants';
 import { MccObservation, SimpleQuestionnaireItem } from 'src/app/generated-data-api';
 import { ObservationsService } from 'src/app/services/observations.service.new';
 import { Router, NavigationExtras, Params } from '@angular/router';
 import { getDisplayValue, formatEffectiveDate, formatMccDate } from 'src/app/common/chart-utility-functions';
+import { Constants } from 'src/app/common/constants';
 
 interface FormattedResult {
   name: string;
@@ -97,7 +97,10 @@ export class LabResultsComponent implements OnInit {
 
   loadData = (): void => {
     this.results = [];
-    let callsToMake: PatientLabResultsMap[] = Constants.labResultsMap.get(this.longTermCondition);
+    if (!Constants.labMappings[this.longTermCondition]) {
+      return;
+    }
+    let callsToMake: PatientLabResultsMap[] = Constants.labMappings[this.longTermCondition];
     let promiseArray = [];
 
     callsToMake.forEach((v, i) => {

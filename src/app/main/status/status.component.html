@@ -8,7 +8,7 @@
     </div>
     <!-- Health Status Blue Link Box (Diabetes etc.)-->
     <div class="health-status-link-box">
-        <select class="mat-raised-button" (change)="chronicConditionSelected($event.target.value)"  *ngIf="!noActiveCarePlan"
+        <select class="mat-raised-button" (change)="chronicConditionSelected($event.target.value)" *ngIf="!noActiveCarePlan"
             aria-label="Link to Chronic Condition Hub">
             <option value='-1' *ngIf="!(ddlConditions$ | async)">Loading...</option>
             <option *ngFor="let item of ddlConditions$ | async; index as i" [value]="i">{{item.code.text}}</option>
@@ -18,7 +18,7 @@
         </select>
     </div>
     <div class="graphs">
-        <div *ngIf="!noActiveCarePlan" class="graph-wrapper s-col-1 m-col-2 l-col-3" style="cursor: auto;">
+        <div *ngIf="!noActiveCarePlan && getEGFRisLoaded()" class="graph-wrapper s-col-1 m-col-2 l-col-3" style="cursor: auto;">
             <div class="graph-wrapper-inner">
                 <div routerLink="/lab-graph" [queryParams]="{key:'egfr'}" queryParamsHandling="merge"
                     style="cursor: pointer;">
@@ -29,7 +29,7 @@
                 <egfr-graph [showTable]="false" [embedded]="true"></egfr-graph>
             </div>
         </div>
-        <div *ngIf="!noActiveCarePlan" class="graph-wrapper s-col-1 m-col-2 l-col-3" routerLink="/lab-graph" [queryParams]="{key:'uacr'}"
+        <div *ngIf="!noActiveCarePlan && getUACRisLoaded()" class="graph-wrapper s-col-1 m-col-2 l-col-3" routerLink="/lab-graph" [queryParams]="{key:'uacr'}"
             queryParamsHandling="merge">
             <div class="graph-wrapper-inner">
                 <div>
