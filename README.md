@@ -98,6 +98,10 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
 
 
 #Changelog
+2021-05-21
+- Release ("1.1.4")
+- Experimental fix for caching issues
+
 2021-05-14
 - Release ("1.1.3")
 - New EGFR unit types api param utilized
