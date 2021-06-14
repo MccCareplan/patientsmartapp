@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { ObservationsService } from 'src/app/services/observations.service.new';
-import * as fromRoot from '../../ngrx/reducers';
 
 @Component({
   selector: 'lab-graph',
@@ -15,9 +12,7 @@ export class LabGraphComponent implements OnInit {
   description: string;
 
   constructor(
-    private route: ActivatedRoute,
-    private store: Store<fromRoot.State>,
-    private obsService: ObservationsService
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
