@@ -12,6 +12,8 @@ import * as fromRoot from '../../ngrx/reducers';
   styleUrls: ['./status.component.scss']
 })
 export class StatusComponent implements OnInit {
+  Constants = Constants;
+
   careplanid$: Observable<string>;
   conditionsList$: Observable<ConditionLists>;
   ddlConditions$: Observable<ConditionSummary[]>

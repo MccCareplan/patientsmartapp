@@ -292,7 +292,7 @@ export function reformatYYYYMMDD(dt): string {
     }
 }
 
-export function getLineChartOptionsObject(min: number, max: number, suggestedMinDate: Date, suggestedMaxDate: Date): {} {
+export function getLineChartOptionsObject(min?: number, max?: number, suggestedMinDate?: Date, suggestedMaxDate?: Date): {} {
     const opts =
     {
         elements: {
@@ -303,12 +303,13 @@ export function getLineChartOptionsObject(min: number, max: number, suggestedMin
         responsive: true,
         maintainAspectRatio: true,
         scales: {
-            yAxes: [{
-                ticks: {
-                    suggestedMax: max,
-                    suggestedMin: min
-                }
-            }],
+            yAxes: [
+                (min && max) ? ({
+                    ticks: {
+                        suggestedMax: max,
+                        suggestedMin: min
+                    }
+                }) : {}],
             xAxes: [{
                 type: 'time',
                 distribution: 'linear',
