@@ -435,39 +435,40 @@ export function getUacrLineChartAnnotationsObject() {
 
 export function getWotLineChartAnnotationsObject() {
     const annotations = {
-        annotations: [{
-            drawTime: 'beforeDatasetsDraw',
-            type: 'box',
-            id: 'wot-warning',
-            xScaleID: 'x-axis-0',
-            yScaleID: 'y-axis-0',
-            borderWidth: 0,
-            yMin: 50,
-            yMax: 105,
-            backgroundColor: 'rgba(128, 204, 113,0.3)'
-        },
-        {
-            drawTime: 'beforeDatasetsDraw',
-            type: 'box',
-            id: 'wot-ok',
-            xScaleID: 'x-axis-0',
-            yScaleID: 'y-axis-0',
-            borderWidth: 0,
-            yMin: 105,
-            yMax: 260,
-            backgroundColor: 'rgba(247, 245, 116,0.3)'
-        },
-        {
-            drawTime: 'beforeDatasetsDraw',
-            type: 'box',
-            id: 'wot-critical',
-            xScaleID: 'x-axis-0',
-            yScaleID: 'y-axis-0',
-            borderWidth: 0,
-            yMin: 260,
-            yMax: 300,
-            backgroundColor: 'rgba(227, 127, 104,0.3)'
-        }
+        annotations: [
+            // {
+            //     drawTime: 'beforeDatasetsDraw',
+            //     type: 'box',
+            //     id: 'wot-warning',
+            //     xScaleID: 'x-axis-0',
+            //     yScaleID: 'y-axis-0',
+            //     borderWidth: 0,
+            //     yMin: 50,
+            //     yMax: 105,
+            //     backgroundColor: 'rgba(128, 204, 113,0.3)'
+            // },
+            // {
+            //     drawTime: 'beforeDatasetsDraw',
+            //     type: 'box',
+            //     id: 'wot-ok',
+            //     xScaleID: 'x-axis-0',
+            //     yScaleID: 'y-axis-0',
+            //     borderWidth: 0,
+            //     yMin: 105,
+            //     yMax: 260,
+            //     backgroundColor: 'rgba(247, 245, 116,0.3)'
+            // },
+            // {
+            //     drawTime: 'beforeDatasetsDraw',
+            //     type: 'box',
+            //     id: 'wot-critical',
+            //     xScaleID: 'x-axis-0',
+            //     yScaleID: 'y-axis-0',
+            //     borderWidth: 0,
+            //     yMin: 260,
+            //     yMax: 300,
+            //     backgroundColor: 'rgba(227, 127, 104,0.3)'
+            // }
         ]
     };
     return annotations;
