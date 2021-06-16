@@ -55,6 +55,15 @@
         .graph-wrapper {
             position: relative;
 
+            @media screen and (min-width: 768px) and (max-width: 1024px) {
+                min-height: 280px;
+                max-height: 317px;
+            }
+
+            @media screen and (min-width: 1024px) {
+                min-height: 260px;
+            }
+
             .graph-wrapper-inner {
                 margin: 8px;
                 padding: 5px;
@@ -63,6 +72,15 @@
                 background-color: #ffffff;
                 border-radius: 10px;
                 cursor: pointer;
+
+                @media screen and (min-width: 768px) and (max-width: 1024px) {
+                    min-height: 280px;
+                    max-height: 317px;
+                }
+                @media screen and (min-width: 1024px) {
+                    min-height: 260px;
+                }
+
                 > div {
                     overflow: hidden;
                     > span {
