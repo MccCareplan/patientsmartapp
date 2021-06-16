@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Constants } from 'src/app/common/constants';
 import { ObservationsService } from 'src/app/services/observations.service.new';
 import * as fromRoot from '../../ngrx/reducers';
 
@@ -73,7 +74,7 @@ export class LabGraphComponent implements OnInit {
   }
 
   weight = (): void => {
-    this.title = "My Weight Results";
+    this.title = "My Weight Results (" + Constants.featureToggling.preferredUnits.wot + "s)";
     this.description = "Your weight over time"
   }
 }
