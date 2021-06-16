@@ -10,6 +10,7 @@ import { finalize } from 'rxjs/operators';
 import { reformatYYYYMMDD, getLineChartOptionsObject, formatWotResult, getWotLineChartAnnotationsObject } from '../common/chart-utility-functions';
 import { MatTableDataSource } from '@angular/material/table';
 import { Wot, emptyWot, WotTableData } from '../data-model/weight-over-time';
+import { Constants } from '../common/constants';
 
 enum observationCodes {
     Systolic = '8480-6',
@@ -64,7 +65,7 @@ export class WeightService extends DataService {
                     this.wot.suggestedMin = minDate;
                     const maxDate = new Date(moment(vsHighDateRow.date.toString()).add(1, 'M').startOf('month').format('YYYY-MM-DD hh:mm:ss'));
                     this.wot.suggestedMax = maxDate;
-                    const lineChartOptions = getLineChartOptionsObject(50, 280, this.wot.suggestedMin, this.wot.suggestedMax);
+                    const lineChartOptions = getLineChartOptionsObject(null, null, this.wot.suggestedMin, this.wot.suggestedMax);
                     const lineChartAnnotations = getWotLineChartAnnotationsObject();
                     this.wot.lineChartOptions = { ...lineChartOptions, annotation: lineChartAnnotations };
                     this.wot.xAxisLabels = [];
@@ -107,6 +108,20 @@ export class WeightService extends DataService {
                 }))
                 .subscribe(observations => {
                     observations.map(obs => {
+                        switch (Constants.featureToggling.preferredUnits.wot) {
+                            case "kg":
+                                if (obs.value.quantityValue.unit === "lb") {
+                                    obs.value.quantityValue.value = +(obs.value.quantityValue.value * 0.453592).toFixed(1);
+                                    obs.value.quantityValue.unit = "kg";
+                                }
+                                break;
+                            case "lb":
+                                if (obs.value.quantityValue.unit === "kg") {
+                                    obs.value.quantityValue.value = +(obs.value.quantityValue.value * 2.20462).toFixed(0);
+                                    obs.value.quantityValue.unit = "lb";
+                                }
+                                break;
+                        };
                         const wot: WotTableData = {
                             date: obs.effective.dateTime.date,
                             value: obs.value.quantityValue.value,

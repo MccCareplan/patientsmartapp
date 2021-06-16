@@ -65,7 +65,7 @@ In addtion if you have a built version you may dockerize using the simple Docker
 | ---- | --------- | ----------- |
 | /assets/json/data | lab-mappings.json | Defines the lab results to query on the "Health Status" screen.  Use the file found in  folder [/assets/json/data-backups](src/assets/json/data-backups) | 
 | /assets/json/data | vital-mappings.json | Defines the vital signs to query on the "Health Status" screen  Use the file found in  folder [/assets/json/data-backups](src/assets/json/data-backups) | 
-| /assets/json/data | feature-toggling.json | Toggle functionality on/off across the application  Use the file found in  folder [/assets/json/data-backups](src/assets/json/data-backups) | 
+| /assets/json/data | feature-toggling.json | Toggle functionality on/off across the application.  Also configure preferred units.  Use the file found in  folder [/assets/json/data-backups](src/assets/json/data-backups) | 
 | /assets/icons/logo | logo.jpg | Organizational Icon shown in the header (suggested aspect ratio is 4:7 or something close to this) | 
 
 The file names and types must match exactly.  Also, you must include all json files even if you are only modifying one.
@@ -98,6 +98,13 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
 
 
 #Changelog
+2021-06-15
+- Release ("1.1.6")
+- Updated WoT to have configurable preferred units
+- Updated WoT to have dynamic y-axis range
+- Updated WoT to render preferred units in title and data
+- Updated CSS to account for odd responsive behavior in status screen
+
 2021-06-14
 - Release ("1.1.5")
 - Removed color coding for Weight Over Time
