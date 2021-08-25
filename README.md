@@ -98,6 +98,11 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
 
 
 #Changelog
+2021-08-25
+- Release ("1.1.7")
+- Restored UACR & EGFR Table Color Coding
+- Better value handling for the care team to avoid IE specific bug
+
 2021-06-15
 - Release ("1.1.6")
 - Updated WoT to have configurable preferred units
