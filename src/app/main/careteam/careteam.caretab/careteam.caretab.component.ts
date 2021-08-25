@@ -1,11 +1,11 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {SharedModule} from '../../../common/shared.module';
-import {CharPipe} from '../../../common/char.pipe';
-import {Store} from '@ngrx/store';
+import { Component, OnInit, Input } from '@angular/core';
+import { SharedModule } from '../../../common/shared.module';
+import { CharPipe } from '../../../common/char.pipe';
+import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../ngrx/reducers';
-import {Contact} from '../../../generated-data-api';
-import {Observable, of, combineLatest} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { Contact } from '../../../generated-data-api';
+import { Observable, of, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -30,21 +30,21 @@ export class CareteamCaretabComponent implements OnInit {
     iconNames = {
         types:
             [
-                {type: 'person', icon: 'person'},
-                {type: 'organization', icon: 'group'}
+                { type: 'person', icon: 'person' },
+                { type: 'organization', icon: 'group' }
             ],
         roles:
             [
-                {role: 'attorney', icon: 'icons:scales'},
-                {role: 'patient', icon: 'person'},
-                {role: 'catering', icon: 'food_bank'},
-                {role: 'physician', icon: 'icons:dr_circle_blue'},
-                {role: 'nurse', icon: 'medical_services'},
-                {role: 'caregiver', icon: 'icons:twopeople_money'},
-                {role: 'ologist', icon: 'icons:dr_circle_blue'},
-                {role: 'dietician', icon: 'fastfood'},
-                {role: 'social worker', icon: 'psychology'},
-                {role: 'pharmacist', icon: 'medical_services'},
+                { role: 'attorney', icon: 'icons:scales' },
+                { role: 'patient', icon: 'person' },
+                { role: 'catering', icon: 'food_bank' },
+                { role: 'physician', icon: 'icons:dr_circle_blue' },
+                { role: 'nurse', icon: 'medical_services' },
+                { role: 'caregiver', icon: 'icons:twopeople_money' },
+                { role: 'ologist', icon: 'icons:dr_circle_blue' },
+                { role: 'dietician', icon: 'fastfood' },
+                { role: 'social worker', icon: 'psychology' },
+                { role: 'pharmacist', icon: 'medical_services' },
             ]
     };
 
@@ -66,13 +66,15 @@ export class CareteamCaretabComponent implements OnInit {
                     map(([contacts, filterString]) => contacts.filter(c => c.role.toLowerCase() === filterString))
                 );
         } else {
-           this.filteredContacts$ = this.contacts$;
+            this.filteredContacts$ = this.contacts$;
         }
     }
 
     getTypeIcon(type): string {
-        const icon = this.iconNames.types.filter( t => type.toLowerCase().includes(t.type.toLowerCase()));
-        if (icon.length >  0) {
+        if (!type)
+            return "";
+        const icon = this.iconNames.types.filter(t => type.toLowerCase().includes(t.type.toLowerCase()));
+        if (icon.length > 0) {
             return icon[0].icon;
         } else {
             return '';
@@ -80,7 +82,9 @@ export class CareteamCaretabComponent implements OnInit {
     }
 
     getRoleIcon(role): string {
-        const icon = this.iconNames.roles.filter( r => role.toLowerCase().includes(r.role.toLowerCase()));
+        if (!role)
+            return "";
+        const icon = this.iconNames.roles.filter(r => role.toLowerCase().includes(r.role.toLowerCase()));
         if (icon.length > 0) {
             return icon[0].icon;
         } else {

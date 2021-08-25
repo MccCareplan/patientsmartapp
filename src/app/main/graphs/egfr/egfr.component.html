@@ -20,7 +20,7 @@
             <td mat-cell *matCellDef="let egfr" [innerHTML]="EgfrResult(egfr)"></td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="getEgfrRowCssClass(row)"></tr>
     </table>
     <mat-paginator [pageSizeOptions]="[5, 15, 30]" showFirstLastButtons
         [ngClass]="{'hidden':  !(tableDataSource && tableDataSource.filteredData && tableDataSource.filteredData.length > 5)}">

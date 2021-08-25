@@ -74,16 +74,17 @@ export class EGFRGraphComponent implements OnInit {
         return formatEgfrResult(egfr.egfr, egfr.unit);
     }
 
+
     getEgfrRowCssClass(egfr: EgfrTableData): string {
         let cssClass = '';
         const val = egfr.egfr;
         if (val) {
             switch (true) {
                 case (val >= 60):
-                    cssClass = 'resultBorderline';
+                    cssClass = 'resultGood';
                     break;
                 case (val < 60 && val >= 15):
-                    cssClass = 'resultGood';
+                    cssClass = 'resultBorderline';
                     break;
                 case (val < 15):
                     cssClass = 'resultCritical';

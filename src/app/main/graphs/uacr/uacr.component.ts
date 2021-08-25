@@ -73,10 +73,10 @@ export class UACRGraphComponent implements OnInit {
                 case (val >= 300):
                     cssClass = 'resultCritical';
                     break;
-                case (val < 300 && val >= 25):
+                case (val < 300 && val >= 30):
                     cssClass = 'resultBorderline';
                     break;
-                case (val < 25):
+                case (val < 30):
                     cssClass = 'resultGood';
                     break;
                 default:

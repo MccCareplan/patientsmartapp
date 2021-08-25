@@ -17,3 +17,15 @@
 .hidden {
     display: none;
 }
+
+tr.mat-row.resultGood {
+    background-color: rgba(128, 204, 113, 0.3);
+}
+
+tr.mat-row.resultBorderline {
+    background-color: rgba(247, 245, 116, 0.3);
+}
+
+tr.mat-row.resultCritical {
+    background-color: rgba(227, 127, 104, 0.3);
+}
