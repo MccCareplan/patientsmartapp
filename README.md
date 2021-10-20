@@ -98,6 +98,10 @@ $ docker run -it -e CLIENT_ID='1491aa24-3b5b-42e8-b532-63707c359493' -e API_SERV
 
 
 #Changelog
+2021-10-19
+- Release ("1.1.8")
+- Updated Docker to use latest nginx
+
 2021-08-25
 - Release ("1.1.7")
 - Restored UACR & EGFR Table Color Coding
